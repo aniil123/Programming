@@ -17,6 +17,11 @@ namespace Programming
         {
             InitializeComponent();
             EnumsListBox.SelectedIndex = 0;
+            foreach (var i in Enum.GetValues(typeof(Season)))
+            {
+                SeasonComboBox.Items.Add(i);
+            }
+            SeasonComboBox.SelectedIndex = 0;
         }
 
         private void EnumsListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -25,7 +30,7 @@ namespace Programming
             {
                 case 0:
                     ValueListBox.Items.Clear();
-                    foreach(var i in Enum.GetValues(typeof(Color)))
+                    foreach(var i in Enum.GetValues(typeof(ColorEnum)))
                     {
                         ValueListBox.Items.Add(i);
                     }
@@ -79,7 +84,7 @@ namespace Programming
             {
                 if(Convert.ToString(i) == ParseWeekDayTextBox.Text)
                 {
-                    ParseResultLabel.Text = "Это день недели(" + Convert.ToString(i) + " = " + Convert.ToString(Convert.ToInt32(i)) + ")";
+                    ParseResultLabel.Text = $"Это день недели({i} = {Convert.ToInt32(i)})";
                     flag = false;
                 }
             }
@@ -88,6 +93,29 @@ namespace Programming
                 ParseResultLabel.Text = "Нет такого дня недели";
             }
             flag = true;
+        }
+
+        private void SeasonButton_Click(object sender, EventArgs e)
+        {
+            switch(SeasonComboBox.SelectedIndex)
+            {
+                case 0:
+                    SeasonResultLabel.Text = "";
+                    this.BackColor = Color.Orange;
+                    break;
+                case 1:
+                    this.BackColor = Color.White;
+                    SeasonResultLabel.Text = "Ура! Солнце!";
+                    break;
+                case 2:
+                    this.BackColor = Color.White;
+                    SeasonResultLabel.Text = "Бррр! Холодно!";
+                    break;
+                case 3:
+                    SeasonResultLabel.Text = "";
+                    this.BackColor = Color.Green;
+                    break;
+            }
         }
     }
 }

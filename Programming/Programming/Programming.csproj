@@ -47,7 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Color.cs" />
+    <Compile Include="Model\ColorEnum.cs" />
     <Compile Include="Model\Form_edu.cs" />
     <Compile Include="Model\Genre.cs" />
     <Compile Include="Model\Season.cs" />
