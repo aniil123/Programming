@@ -13,15 +13,29 @@ namespace Programming
     public partial class MainForm : Form
     {
         bool flag = true;
+        Model.Rectangle[] _rectangles = new Model.Rectangle[5];
+        Model.Rectangle _currentRectangle = new Model.Rectangle(25, 16);
+        public static MainForm forma;
         public MainForm()
         {
             InitializeComponent();
+            forma = this;
+            Random rand = new Random();
             EnumsListBox.SelectedIndex = 0;
             foreach (var i in Enum.GetValues(typeof(Season)))
             {
                 SeasonComboBox.Items.Add(i);
             }
-            SeasonComboBox.SelectedIndex = 0;
+            SeasonComboBox.SelectedIndex = 0; 
+            for(int i = 0;i<5;i++)
+            {
+                _rectangles[i] = new Model.Rectangle(rand.Next(100),rand.Next(100));
+            }
+            for (int i = 1; i <= 5; i++)
+            {
+                RectangleListBox.Items.Add($"Rectangle {i}");
+            }
+            RectangleListBox.SelectedIndex = 0;
         }
 
         private void EnumsListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -116,6 +130,87 @@ namespace Programming
                     this.BackColor = Color.Green;
                     break;
             }
+        }
+
+        private void RectangleListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _currentRectangle.Length = _rectangles[RectangleListBox.SelectedIndex].Length;
+            _currentRectangle.Width = _rectangles[RectangleListBox.SelectedIndex].Width;
+            _currentRectangle.color = _rectangles[RectangleListBox.SelectedIndex].color;
+            LengthTextBox.Text = Convert.ToString(_currentRectangle.Length);
+            WidthTextBox.Text = Convert.ToString(_currentRectangle.Width);
+            ColorTextBox.Text = _currentRectangle.color;
+        }
+        public void MessageError()
+        {
+            this.BackColor = Color.LightPink;
+        }
+        public void MessageErrorNo()
+        {
+            this.BackColor = Color.White;
+        }
+
+        private void LengthTextBox_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (int.TryParse(LengthTextBox.Text, out int a) && Convert.ToInt32(LengthTextBox.Text) > 0)
+                {
+                    _rectangles[RectangleListBox.SelectedIndex].Length = Convert.ToInt32(LengthTextBox.Text);
+                    MessageErrorNo();
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+            catch
+            {
+                MessageError();
+            }
+        }
+
+        private void WidthTextBox_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (int.TryParse(WidthTextBox.Text, out int a) && Convert.ToInt32(WidthTextBox.Text) > 0)
+                {
+                    _rectangles[RectangleListBox.SelectedIndex].Width = Convert.ToInt32(WidthTextBox.Text);
+                    MessageErrorNo();
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+            catch
+            {
+                MessageError();
+            }
+        }
+
+        private void ColorTextBox_TextChanged(object sender, EventArgs e)
+        {
+            _rectangles[RectangleListBox.SelectedIndex].color = ColorTextBox.Text;
+        }
+        private int FindRectangleWithMaxWidth(Model.Rectangle[] _rectangle_mas)
+        {
+            int MaxWidth = 0, index_max = 0;
+            for(int i = 0;i<_rectangle_mas.Length;i++)
+            {
+                if(MaxWidth < _rectangle_mas[i].Width)
+                {
+                    MaxWidth = _rectangle_mas[i].Width;
+                    index_max = i; 
+                }
+            }
+            return index_max;
+        }
+
+        private void FindButton_Click(object sender, EventArgs e)
+        {
+            RectangleListBox.SelectedIndex = FindRectangleWithMaxWidth(_rectangles);
         }
     }
 }

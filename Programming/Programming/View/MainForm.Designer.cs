@@ -31,6 +31,11 @@ namespace Programming
         {
             this.EnumTabControl = new System.Windows.Forms.TabControl();
             this.Enums = new System.Windows.Forms.TabPage();
+            this.ThirdStageGroundBox = new System.Windows.Forms.GroupBox();
+            this.SeasonResultLabel = new System.Windows.Forms.Label();
+            this.SeasonButton = new System.Windows.Forms.Button();
+            this.SesonLabel = new System.Windows.Forms.Label();
+            this.SeasonComboBox = new System.Windows.Forms.ComboBox();
             this.SecondStageGroundBox = new System.Windows.Forms.GroupBox();
             this.ParseResultLabel = new System.Windows.Forms.Label();
             this.ParseLabel = new System.Windows.Forms.Label();
@@ -43,21 +48,29 @@ namespace Programming
             this.EnumsListBox = new System.Windows.Forms.ListBox();
             this.ValueListBox = new System.Windows.Forms.ListBox();
             this.ValueLabel = new System.Windows.Forms.Label();
-            this.ThirdStageGroundBox = new System.Windows.Forms.GroupBox();
-            this.SeasonComboBox = new System.Windows.Forms.ComboBox();
-            this.SesonLabel = new System.Windows.Forms.Label();
-            this.SeasonButton = new System.Windows.Forms.Button();
-            this.SeasonResultLabel = new System.Windows.Forms.Label();
+            this.Classes = new System.Windows.Forms.TabPage();
+            this.RectanglesGroupBox = new System.Windows.Forms.GroupBox();
+            this.RectangleListBox = new System.Windows.Forms.ListBox();
+            this.FindButton = new System.Windows.Forms.Button();
+            this.ColorLabel = new System.Windows.Forms.Label();
+            this.WidthLabel = new System.Windows.Forms.Label();
+            this.LengthLabel = new System.Windows.Forms.Label();
+            this.ColorTextBox = new System.Windows.Forms.TextBox();
+            this.WidthTextBox = new System.Windows.Forms.TextBox();
+            this.LengthTextBox = new System.Windows.Forms.TextBox();
             this.EnumTabControl.SuspendLayout();
             this.Enums.SuspendLayout();
+            this.ThirdStageGroundBox.SuspendLayout();
             this.SecondStageGroundBox.SuspendLayout();
             this.FirstStageGroudBox.SuspendLayout();
-            this.ThirdStageGroundBox.SuspendLayout();
+            this.Classes.SuspendLayout();
+            this.RectanglesGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // EnumTabControl
             // 
             this.EnumTabControl.Controls.Add(this.Enums);
+            this.EnumTabControl.Controls.Add(this.Classes);
             this.EnumTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.EnumTabControl.Location = new System.Drawing.Point(0, 0);
             this.EnumTabControl.Name = "EnumTabControl";
@@ -77,6 +90,54 @@ namespace Programming
             this.Enums.TabIndex = 0;
             this.Enums.Text = "Enums";
             this.Enums.UseVisualStyleBackColor = true;
+            // 
+            // ThirdStageGroundBox
+            // 
+            this.ThirdStageGroundBox.Controls.Add(this.SeasonResultLabel);
+            this.ThirdStageGroundBox.Controls.Add(this.SeasonButton);
+            this.ThirdStageGroundBox.Controls.Add(this.SesonLabel);
+            this.ThirdStageGroundBox.Controls.Add(this.SeasonComboBox);
+            this.ThirdStageGroundBox.Location = new System.Drawing.Point(618, 397);
+            this.ThirdStageGroundBox.Name = "ThirdStageGroundBox";
+            this.ThirdStageGroundBox.Size = new System.Drawing.Size(357, 217);
+            this.ThirdStageGroundBox.TabIndex = 8;
+            this.ThirdStageGroundBox.TabStop = false;
+            this.ThirdStageGroundBox.Text = "Season Handle";
+            // 
+            // SeasonResultLabel
+            // 
+            this.SeasonResultLabel.AutoSize = true;
+            this.SeasonResultLabel.Location = new System.Drawing.Point(55, 145);
+            this.SeasonResultLabel.Name = "SeasonResultLabel";
+            this.SeasonResultLabel.Size = new System.Drawing.Size(0, 13);
+            this.SeasonResultLabel.TabIndex = 3;
+            // 
+            // SeasonButton
+            // 
+            this.SeasonButton.Location = new System.Drawing.Point(230, 103);
+            this.SeasonButton.Name = "SeasonButton";
+            this.SeasonButton.Size = new System.Drawing.Size(75, 23);
+            this.SeasonButton.TabIndex = 2;
+            this.SeasonButton.Text = "Go!";
+            this.SeasonButton.UseVisualStyleBackColor = true;
+            this.SeasonButton.Click += new System.EventHandler(this.SeasonButton_Click);
+            // 
+            // SesonLabel
+            // 
+            this.SesonLabel.AutoSize = true;
+            this.SesonLabel.Location = new System.Drawing.Point(52, 87);
+            this.SesonLabel.Name = "SesonLabel";
+            this.SesonLabel.Size = new System.Drawing.Size(80, 13);
+            this.SesonLabel.TabIndex = 1;
+            this.SesonLabel.Text = "Choose season";
+            // 
+            // SeasonComboBox
+            // 
+            this.SeasonComboBox.FormattingEnabled = true;
+            this.SeasonComboBox.Location = new System.Drawing.Point(55, 106);
+            this.SeasonComboBox.Name = "SeasonComboBox";
+            this.SeasonComboBox.Size = new System.Drawing.Size(137, 21);
+            this.SeasonComboBox.TabIndex = 0;
             // 
             // SecondStageGroundBox
             // 
@@ -202,53 +263,102 @@ namespace Programming
             this.ValueLabel.TabIndex = 3;
             this.ValueLabel.Text = "Choose value:";
             // 
-            // ThirdStageGroundBox
+            // Classes
             // 
-            this.ThirdStageGroundBox.Controls.Add(this.SeasonResultLabel);
-            this.ThirdStageGroundBox.Controls.Add(this.SeasonButton);
-            this.ThirdStageGroundBox.Controls.Add(this.SesonLabel);
-            this.ThirdStageGroundBox.Controls.Add(this.SeasonComboBox);
-            this.ThirdStageGroundBox.Location = new System.Drawing.Point(618, 397);
-            this.ThirdStageGroundBox.Name = "ThirdStageGroundBox";
-            this.ThirdStageGroundBox.Size = new System.Drawing.Size(357, 217);
-            this.ThirdStageGroundBox.TabIndex = 8;
-            this.ThirdStageGroundBox.TabStop = false;
-            this.ThirdStageGroundBox.Text = "Season Handle";
+            this.Classes.Controls.Add(this.RectanglesGroupBox);
+            this.Classes.Location = new System.Drawing.Point(4, 22);
+            this.Classes.Name = "Classes";
+            this.Classes.Size = new System.Drawing.Size(1226, 685);
+            this.Classes.TabIndex = 1;
+            this.Classes.Text = "Classes";
+            this.Classes.UseVisualStyleBackColor = true;
             // 
-            // SeasonComboBox
+            // RectanglesGroupBox
             // 
-            this.SeasonComboBox.FormattingEnabled = true;
-            this.SeasonComboBox.Location = new System.Drawing.Point(55, 106);
-            this.SeasonComboBox.Name = "SeasonComboBox";
-            this.SeasonComboBox.Size = new System.Drawing.Size(137, 21);
-            this.SeasonComboBox.TabIndex = 0;
+            this.RectanglesGroupBox.Controls.Add(this.RectangleListBox);
+            this.RectanglesGroupBox.Controls.Add(this.FindButton);
+            this.RectanglesGroupBox.Controls.Add(this.ColorLabel);
+            this.RectanglesGroupBox.Controls.Add(this.WidthLabel);
+            this.RectanglesGroupBox.Controls.Add(this.LengthLabel);
+            this.RectanglesGroupBox.Controls.Add(this.ColorTextBox);
+            this.RectanglesGroupBox.Controls.Add(this.WidthTextBox);
+            this.RectanglesGroupBox.Controls.Add(this.LengthTextBox);
+            this.RectanglesGroupBox.Location = new System.Drawing.Point(20, 19);
+            this.RectanglesGroupBox.Name = "RectanglesGroupBox";
+            this.RectanglesGroupBox.Size = new System.Drawing.Size(275, 227);
+            this.RectanglesGroupBox.TabIndex = 0;
+            this.RectanglesGroupBox.TabStop = false;
+            this.RectanglesGroupBox.Text = "Rectangles";
             // 
-            // SesonLabel
+            // RectangleListBox
             // 
-            this.SesonLabel.AutoSize = true;
-            this.SesonLabel.Location = new System.Drawing.Point(52, 87);
-            this.SesonLabel.Name = "SesonLabel";
-            this.SesonLabel.Size = new System.Drawing.Size(80, 13);
-            this.SesonLabel.TabIndex = 1;
-            this.SesonLabel.Text = "Choose season";
+            this.RectangleListBox.FormattingEnabled = true;
+            this.RectangleListBox.Location = new System.Drawing.Point(7, 32);
+            this.RectangleListBox.Name = "RectangleListBox";
+            this.RectangleListBox.Size = new System.Drawing.Size(126, 121);
+            this.RectangleListBox.TabIndex = 8;
+            this.RectangleListBox.SelectedIndexChanged += new System.EventHandler(this.RectangleListBox_SelectedIndexChanged);
             // 
-            // SeasonButton
+            // FindButton
             // 
-            this.SeasonButton.Location = new System.Drawing.Point(230, 103);
-            this.SeasonButton.Name = "SeasonButton";
-            this.SeasonButton.Size = new System.Drawing.Size(75, 23);
-            this.SeasonButton.TabIndex = 2;
-            this.SeasonButton.Text = "Go!";
-            this.SeasonButton.UseVisualStyleBackColor = true;
-            this.SeasonButton.Click += new System.EventHandler(this.SeasonButton_Click);
+            this.FindButton.Location = new System.Drawing.Point(152, 178);
+            this.FindButton.Name = "FindButton";
+            this.FindButton.Size = new System.Drawing.Size(75, 23);
+            this.FindButton.TabIndex = 7;
+            this.FindButton.Text = "Find";
+            this.FindButton.UseVisualStyleBackColor = true;
+            this.FindButton.Click += new System.EventHandler(this.FindButton_Click);
             // 
-            // SeasonResultLabel
+            // ColorLabel
             // 
-            this.SeasonResultLabel.AutoSize = true;
-            this.SeasonResultLabel.Location = new System.Drawing.Point(55, 145);
-            this.SeasonResultLabel.Name = "SeasonResultLabel";
-            this.SeasonResultLabel.Size = new System.Drawing.Size(0, 13);
-            this.SeasonResultLabel.TabIndex = 3;
+            this.ColorLabel.AutoSize = true;
+            this.ColorLabel.Location = new System.Drawing.Point(149, 111);
+            this.ColorLabel.Name = "ColorLabel";
+            this.ColorLabel.Size = new System.Drawing.Size(31, 13);
+            this.ColorLabel.TabIndex = 6;
+            this.ColorLabel.Text = "Color";
+            // 
+            // WidthLabel
+            // 
+            this.WidthLabel.AutoSize = true;
+            this.WidthLabel.Location = new System.Drawing.Point(149, 63);
+            this.WidthLabel.Name = "WidthLabel";
+            this.WidthLabel.Size = new System.Drawing.Size(35, 13);
+            this.WidthLabel.TabIndex = 5;
+            this.WidthLabel.Text = "Width";
+            // 
+            // LengthLabel
+            // 
+            this.LengthLabel.AutoSize = true;
+            this.LengthLabel.Location = new System.Drawing.Point(149, 16);
+            this.LengthLabel.Name = "LengthLabel";
+            this.LengthLabel.Size = new System.Drawing.Size(40, 13);
+            this.LengthLabel.TabIndex = 4;
+            this.LengthLabel.Text = "Length";
+            // 
+            // ColorTextBox
+            // 
+            this.ColorTextBox.Location = new System.Drawing.Point(152, 127);
+            this.ColorTextBox.Name = "ColorTextBox";
+            this.ColorTextBox.Size = new System.Drawing.Size(100, 20);
+            this.ColorTextBox.TabIndex = 3;
+            this.ColorTextBox.TextChanged += new System.EventHandler(this.ColorTextBox_TextChanged);
+            // 
+            // WidthTextBox
+            // 
+            this.WidthTextBox.Location = new System.Drawing.Point(152, 79);
+            this.WidthTextBox.Name = "WidthTextBox";
+            this.WidthTextBox.Size = new System.Drawing.Size(100, 20);
+            this.WidthTextBox.TabIndex = 2;
+            this.WidthTextBox.TextChanged += new System.EventHandler(this.WidthTextBox_TextChanged);
+            // 
+            // LengthTextBox
+            // 
+            this.LengthTextBox.Location = new System.Drawing.Point(152, 32);
+            this.LengthTextBox.Name = "LengthTextBox";
+            this.LengthTextBox.Size = new System.Drawing.Size(100, 20);
+            this.LengthTextBox.TabIndex = 1;
+            this.LengthTextBox.TextChanged += new System.EventHandler(this.LengthTextBox_TextChanged);
             // 
             // MainForm
             // 
@@ -260,12 +370,15 @@ namespace Programming
             this.Text = "Form1";
             this.EnumTabControl.ResumeLayout(false);
             this.Enums.ResumeLayout(false);
+            this.ThirdStageGroundBox.ResumeLayout(false);
+            this.ThirdStageGroundBox.PerformLayout();
             this.SecondStageGroundBox.ResumeLayout(false);
             this.SecondStageGroundBox.PerformLayout();
             this.FirstStageGroudBox.ResumeLayout(false);
             this.FirstStageGroudBox.PerformLayout();
-            this.ThirdStageGroundBox.ResumeLayout(false);
-            this.ThirdStageGroundBox.PerformLayout();
+            this.Classes.ResumeLayout(false);
+            this.RectanglesGroupBox.ResumeLayout(false);
+            this.RectanglesGroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -291,6 +404,16 @@ namespace Programming
         private System.Windows.Forms.ComboBox SeasonComboBox;
         private System.Windows.Forms.Button SeasonButton;
         private System.Windows.Forms.Label SeasonResultLabel;
+        private System.Windows.Forms.TabPage Classes;
+        private System.Windows.Forms.GroupBox RectanglesGroupBox;
+        private System.Windows.Forms.Label ColorLabel;
+        private System.Windows.Forms.Label WidthLabel;
+        private System.Windows.Forms.Label LengthLabel;
+        private System.Windows.Forms.TextBox ColorTextBox;
+        private System.Windows.Forms.TextBox WidthTextBox;
+        private System.Windows.Forms.TextBox LengthTextBox;
+        private System.Windows.Forms.Button FindButton;
+        private System.Windows.Forms.ListBox RectangleListBox;
     }
 }
 
