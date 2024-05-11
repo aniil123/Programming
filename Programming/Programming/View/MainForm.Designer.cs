@@ -727,6 +727,7 @@ namespace Programming
             this.DeleteRectangleButton.TabIndex = 3;
             this.DeleteRectangleButton.Text = "Delete";
             this.DeleteRectangleButton.UseVisualStyleBackColor = false;
+            this.DeleteRectangleButton.Click += new System.EventHandler(this.DeleteRectangleButton_Click);
             // 
             // AddRectangleButton
             // 
@@ -738,6 +739,7 @@ namespace Programming
             this.AddRectangleButton.TabIndex = 2;
             this.AddRectangleButton.Text = "Add";
             this.AddRectangleButton.UseVisualStyleBackColor = false;
+            this.AddRectangleButton.Click += new System.EventHandler(this.AddRectangleButton_Click);
             // 
             // PanelForRectangles
             // 

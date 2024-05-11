@@ -105,7 +105,6 @@ namespace Programming.Model
         }
         public Rectangle(int length, int width , double x, double y)
         {
-            Random rand = new Random();
             Length = length;
             Width = width;
             color = "blue";

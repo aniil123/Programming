@@ -39,12 +39,11 @@ namespace Programming
             FilmListBox.SelectedIndex = 0;
             for(int i = 0;i<5;i++)
             {
-                _rectangles.Add(new Model.Rectangle(rand.Next(50,150),rand.Next(50,150), rand.Next(0,500), rand.Next(0,500)));
+                _rectangles.Add(new Model.Rectangle(rand.Next(50,150),rand.Next(50,150), rand.Next(0,600), rand.Next(0,320)));
                 PanelList.Add(new Panel());
                 PanelForRectangles.Controls.Add(PanelList[i]);
                 PanelList[i].Size =  new Size(_rectangles[i].Length, _rectangles[i].Width);
                 PanelList[i].Location = new Point(Convert.ToInt32(Math.Round(_rectangles[i].X)), Convert.ToInt32(Math.Round(_rectangles[i].Y)));
-                PanelList[i].BackColor = Color.LightGreen;
             }
             for (int i = 1; i <= 5; i++)
             {
@@ -59,6 +58,7 @@ namespace Programming
             yTextBox.ReadOnly = true;
             IDTextBox.ReadOnly = true;
             IDSelectedTextBox.ReadOnly = true;
+            FindCollisions();
         }
 
         private void EnumsListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -341,6 +341,10 @@ namespace Programming
                 YSelectedTextBox.Text = "";
                 WidthSelectedTextBox.Text = "";
                 HeightSelectedTextBox.Text = "";
+                MessageErrorTextBoxNo(XSelectedTextBox);
+                MessageErrorTextBoxNo(YSelectedTextBox);
+                MessageErrorTextBoxNo(WidthSelectedTextBox);
+                MessageErrorTextBoxNo(HeightSelectedTextBox);
             }
             else
             {
@@ -370,6 +374,7 @@ namespace Programming
                 RectanglesListBoxPage3.Items[RectanglesListBoxPage3.SelectedIndex] = $"{RectanglesListBoxPage3.SelectedIndex + 1}: (X={_rectangles[RectanglesListBoxPage3.SelectedIndex].X}, Y={_rectangles[RectanglesListBoxPage3.SelectedIndex].Y}, W={_rectangles[RectanglesListBoxPage3.SelectedIndex].Length}, H={_rectangles[RectanglesListBoxPage3.SelectedIndex].Width})";
                 PanelList[RectanglesListBoxPage3.SelectedIndex].Location = new Point(Convert.ToInt32(Math.Round(_rectangles[RectanglesListBoxPage3.SelectedIndex].X)), PanelList[RectanglesListBoxPage3.SelectedIndex].Location.Y);
                 XSelectedTextBox.SelectionStart = XSelectedTextBox.TextLength;
+                FindCollisions();
                 MessageErrorTextBoxNo(XSelectedTextBox);
             }
             catch
@@ -386,6 +391,7 @@ namespace Programming
                 RectanglesListBoxPage3.Items[RectanglesListBoxPage3.SelectedIndex] = $"{RectanglesListBoxPage3.SelectedIndex + 1}: (X={_rectangles[RectanglesListBoxPage3.SelectedIndex].X}, Y={_rectangles[RectanglesListBoxPage3.SelectedIndex].Y}, W={_rectangles[RectanglesListBoxPage3.SelectedIndex].Length}, H={_rectangles[RectanglesListBoxPage3.SelectedIndex].Width})";
                 PanelList[RectanglesListBoxPage3.SelectedIndex].Location = new Point(PanelList[RectanglesListBoxPage3.SelectedIndex].Location.X, Convert.ToInt32(Math.Round(_rectangles[RectanglesListBoxPage3.SelectedIndex].Y)));
                 YSelectedTextBox.SelectionStart = YSelectedTextBox.TextLength;
+                FindCollisions();
                 MessageErrorTextBoxNo(YSelectedTextBox);
             }
             catch
@@ -402,6 +408,7 @@ namespace Programming
                 RectanglesListBoxPage3.Items[RectanglesListBoxPage3.SelectedIndex] = $"{RectanglesListBoxPage3.SelectedIndex + 1}: (X={_rectangles[RectanglesListBoxPage3.SelectedIndex].X}, Y={_rectangles[RectanglesListBoxPage3.SelectedIndex].Y}, W={_rectangles[RectanglesListBoxPage3.SelectedIndex].Length}, H={_rectangles[RectanglesListBoxPage3.SelectedIndex].Width})";
                 PanelList[RectanglesListBoxPage3.SelectedIndex].Size = new Size(_rectangles[RectanglesListBoxPage3.SelectedIndex].Length, PanelList[RectanglesListBoxPage3.SelectedIndex].Size.Height);
                 WidthSelectedTextBox.SelectionStart = WidthSelectedTextBox.TextLength;
+                FindCollisions();
                 MessageErrorTextBoxNo(WidthSelectedTextBox);
             }
             catch
@@ -418,11 +425,54 @@ namespace Programming
                 RectanglesListBoxPage3.Items[RectanglesListBoxPage3.SelectedIndex] = $"{RectanglesListBoxPage3.SelectedIndex + 1}: (X={_rectangles[RectanglesListBoxPage3.SelectedIndex].X}, Y={_rectangles[RectanglesListBoxPage3.SelectedIndex].Y}, W={_rectangles[RectanglesListBoxPage3.SelectedIndex].Length}, H={_rectangles[RectanglesListBoxPage3.SelectedIndex].Width})";
                 PanelList[RectanglesListBoxPage3.SelectedIndex].Size = new Size(PanelList[RectanglesListBoxPage3.SelectedIndex].Size.Width, _rectangles[RectanglesListBoxPage3.SelectedIndex].Width);
                 HeightSelectedTextBox.SelectionStart = HeightSelectedTextBox.TextLength;
+                FindCollisions();
                 MessageErrorTextBoxNo(HeightSelectedTextBox);
             }
             catch
             {
                 MessageErrorTextBox(HeightSelectedTextBox);
+            }
+        }
+
+        private void DeleteRectangleButton_Click(object sender, EventArgs e)
+        {
+            if (RectanglesListBoxPage3.SelectedIndex != -1)
+            {
+                _rectangles.RemoveAt(RectanglesListBoxPage3.SelectedIndex);
+                PanelForRectangles.Controls.Remove(PanelList[RectanglesListBoxPage3.SelectedIndex]);
+                PanelList.RemoveAt(RectanglesListBoxPage3.SelectedIndex);
+                RectanglesListBoxPage3.Items.RemoveAt(RectanglesListBoxPage3.SelectedIndex);
+                FindCollisions();
+            }
+        }
+
+        private void AddRectangleButton_Click(object sender, EventArgs e)
+        {
+            Random rand = new Random();
+            _rectangles.Add(new Model.Rectangle(rand.Next(50, 150), rand.Next(50, 150), rand.Next(0, 600), rand.Next(0, 320)));
+            PanelList.Add(new Panel());
+            PanelForRectangles.Controls.Add(PanelList[PanelList.Count-1]);
+            PanelList[PanelList.Count - 1].Size = new Size(_rectangles[PanelList.Count - 1].Length, _rectangles[PanelList.Count - 1].Width);
+            PanelList[PanelList.Count - 1].Location = new Point(Convert.ToInt32(Math.Round(_rectangles[PanelList.Count - 1].X)), Convert.ToInt32(Math.Round(_rectangles[PanelList.Count - 1].Y)));
+            RectanglesListBoxPage3.Items.Add($"{RectanglesListBoxPage3.Items.Count + 1}: (X={_rectangles[_rectangles.Count-1].X}, Y={_rectangles[_rectangles.Count - 1].Y}, W={_rectangles[_rectangles.Count - 1].Length}, H={_rectangles[_rectangles.Count - 1].Width})");
+            FindCollisions();
+        }
+        private void FindCollisions()
+        {
+            foreach(var i in PanelList)
+            {
+                i.BackColor = Color.FromArgb(127, 127, 255, 127);
+            }
+            for(int i = 0;i < _rectangles.Count - 1;i++)
+            {
+                for(int j = i + 1;j < _rectangles.Count;j++)
+                {
+                    if(Model.CollisionManager.IsCollision(_rectangles[i], _rectangles[j]))
+                    {
+                        PanelList[i].BackColor = Color.FromArgb(127, 255, 127, 127);
+                        PanelList[j].BackColor = Color.FromArgb(127, 255, 127, 127);
+                    }
+                }
             }
         }
     }
