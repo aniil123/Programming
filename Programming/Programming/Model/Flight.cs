@@ -19,14 +19,8 @@ namespace Programming.Model
             }
             set
             {
-                if (value > 0)
-                {
-                    minuts = value;
-                }
-                else
-                {
-                    throw new Exception("Неверная продолжительность полета");
-                }
+                Validator.AssertOnPositiveValue(value);
+                minuts = value;
             }
         }
         public Flight()

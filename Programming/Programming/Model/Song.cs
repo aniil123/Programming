@@ -19,14 +19,8 @@ namespace Programming.Model
             }
             set
             {
-                if (value <= 0)
-                {
-                    throw new Exception("Продолжительность песни не может быть меньше или равна нулю");
-                }
-                else
-                {
-                    duration = value;
-                }
+                Validator.AssertOnPositiveValue(value);
+                duration = value;
             }
         }
         public Song()

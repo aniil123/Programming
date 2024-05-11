@@ -21,14 +21,8 @@ namespace Programming.Model
             }
             set
             {
-                if(value <= 0)
-                {
-                    throw new Exception("Продолжительность фильма не может быть меньше или равна нулю");
-                }
-                else
-                {
-                    duration = value;
-                }
+                Validator.AssertOnPositiveValue(value);
+                duration = value;
             }
         }
         public int Date
@@ -57,14 +51,8 @@ namespace Programming.Model
             }
             set
             {
-                if (value >= 0 && value <= 10)
-                {
-                    rating = value;
-                }
-                else
-                {
-                    throw new Exception("Неверный рейтинг фильма");
-                }
+                Validator.AssertValueInRange(value, 0, 10);
+                rating = value;
             }
         }
         public Film()

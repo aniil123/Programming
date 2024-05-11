@@ -19,14 +19,8 @@ namespace Programming.Model
             }
             set
             {
-                if (value <= 0)
-                {
-                    throw new Exception("Количество пар не может быть меньше единицы");
-                }
-                else
-                {
-                    number_of_pairs = value;
-                }
+                Validator.AssertOnPositiveValue(value);
+                number_of_pairs = value;
             }
         }
         public AcademicSubject()

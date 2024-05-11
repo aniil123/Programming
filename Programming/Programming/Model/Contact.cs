@@ -9,8 +9,33 @@ namespace Programming.Model
     class Contact
     {
         private string phone_number;
-        public string name { get; set; }
+        private string name;
+        private string sur_name;
         private int kol_prop;
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                AssertStringContainsOnlyLetters(value);
+                name = value;
+            }
+        }
+        public string SurName
+        {
+            get
+            {
+                return sur_name;
+            }
+            set
+            {
+                AssertStringContainsOnlyLetters(value);
+                sur_name = value;
+            }
+        }
         public string PhoneNumber
         {
             get
@@ -19,7 +44,7 @@ namespace Programming.Model
             }
             set
             {
-                if(value[0] == '8' && value.Length == 11 && int.TryParse(value, out int a) == true)
+                if (value[0] == '8' && value.Length == 11 && long.TryParse(value, out long a) == true)
                 {
                     phone_number = value;
                 }
@@ -37,27 +62,34 @@ namespace Programming.Model
             }
             set
             {
-                if(value>=0)
-                {
-                    kol_prop = value;
-                }
-                else
-                {
-                    throw new Exception("Количество пропущенных звонков не может быть меньше 0");
-                }
+                Validator.AssertOnPositiveValue(value);
+                kol_prop = value;
             }
         }
         public Contact()
         {
             PhoneNumber = "89001233219";
-            name = "Саша";
+            Name = "Sasha";
+            SurName = "Gaberu";
             KolProp = 3;
         }
-        public Contact(string phone_number, string name, int kol_prop)
+        public Contact(string phone_number, string name, string sur_name, int kol_prop)
         {
             PhoneNumber = phone_number;
-            this.name = name;
+            Name = name;
             KolProp = kol_prop;
+            SurName = sur_name;
         }
+        private void AssertStringContainsOnlyLetters(string value, [System.Runtime.CompilerServices.CallerMemberName] string memberName = "")
+        {
+            foreach(var i in value)
+            {
+                if((Convert.ToInt32(i)<65 || Convert.ToInt32(i)>90) && (Convert.ToInt32(i)<97 || Convert.ToInt32(i)>122))
+                {
+                    throw new Exception("При вызове метода " + memberName + " произошла ошибка");
+                }
+            }
+        }
+
     }
 }

@@ -19,14 +19,7 @@ namespace Programming.Model
             }
             set
             {
-                if (value >= 0 && value <= 23)
-                {
-                    hour = value;
-                }
-                else
-                {
-                    throw new Exception("Количество часов не может быть меньше 0 и больше 23");
-                }
+                Validator.AssertValueInRange(value, 0, 23);
             }
         }
         public int Minut
@@ -37,14 +30,7 @@ namespace Programming.Model
             }
             set
             {
-                if (value >= 0 && value <= 59)
-                {
-                    minut = value;
-                }
-                else
-                {
-                    throw new Exception("Количество минут не может быть меньше 0 и больше 59");
-                }
+                Validator.AssertValueInRange(value, 0, 59);
             }
         }
         public int Second
@@ -55,14 +41,7 @@ namespace Programming.Model
             }
             set
             {
-                if (value >= 0 && value <= 23)
-                {
-                    second = value;
-                }
-                else
-                {
-                    throw new Exception("Количество секунд не может быть меньше 0 и больше 59");
-                }
+                Validator.AssertValueInRange(value, 0, 59);
             }
         }
         public Time()
