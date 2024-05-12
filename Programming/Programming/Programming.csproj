@@ -48,22 +48,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\AcademicSubject.cs" />
-    <Compile Include="Model\CollisionManager.cs" />
-    <Compile Include="Model\ColorEnum.cs" />
+    <Compile Include="Model\Geometry\CollisionManager.cs" />
+    <Compile Include="Model\Enums\ColorEnum.cs" />
     <Compile Include="Model\Contact.cs" />
     <Compile Include="Model\Film.cs" />
     <Compile Include="Model\Flight.cs" />
-    <Compile Include="Model\Form_edu.cs" />
-    <Compile Include="Model\Genre.cs" />
-    <Compile Include="Model\Point2D.cs" />
-    <Compile Include="Model\Rectangle.cs" />
-    <Compile Include="Model\Ring.cs" />
-    <Compile Include="Model\Season.cs" />
-    <Compile Include="Model\Smartphones.cs" />
+    <Compile Include="Model\Enums\Form_edu.cs" />
+    <Compile Include="Model\Enums\Genre.cs" />
+    <Compile Include="Model\Geometry\Point2D.cs" />
+    <Compile Include="Model\Geometry\Rectangle.cs" />
+    <Compile Include="Model\Geometry\RectangleFactory.cs" />
+    <Compile Include="Model\Geometry\Ring.cs" />
+    <Compile Include="Model\Enums\Season.cs" />
+    <Compile Include="Model\Enums\Smartphones.cs" />
     <Compile Include="Model\Song.cs" />
     <Compile Include="Model\Time.cs" />
     <Compile Include="Model\Validator.cs" />
-    <Compile Include="Model\Weekday.cs" />
+    <Compile Include="Model\Enums\Weekday.cs" />
     <Compile Include="View\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,6 +97,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Model\Resources\Add.bmp" />
+    <Content Include="Model\Resources\AddClick.png" />
+    <Content Include="Model\Resources\AddNavodka.bmp" />
+    <Content Include="Model\Resources\Delete.bmp" />
+    <Content Include="Model\Resources\DeleteClick.bmp" />
+    <Content Include="Model\Resources\DeleteNavodka.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

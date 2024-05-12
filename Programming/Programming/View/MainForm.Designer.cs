@@ -78,6 +78,7 @@ namespace Programming
             this.WidthTextBox = new System.Windows.Forms.TextBox();
             this.LengthTextBox = new System.Windows.Forms.TextBox();
             this.RectanglesTabPage = new System.Windows.Forms.TabPage();
+            this.AddPictureBox = new System.Windows.Forms.PictureBox();
             this.RectanglesLabel = new System.Windows.Forms.Label();
             this.RectanglesListBoxPage3 = new System.Windows.Forms.ListBox();
             this.SelectedRectangelLabel = new System.Windows.Forms.Label();
@@ -91,9 +92,8 @@ namespace Programming
             this.YSelectedTextBox = new System.Windows.Forms.TextBox();
             this.XSelectedTextBox = new System.Windows.Forms.TextBox();
             this.IDSelectedTextBox = new System.Windows.Forms.TextBox();
-            this.DeleteRectangleButton = new System.Windows.Forms.Button();
-            this.AddRectangleButton = new System.Windows.Forms.Button();
             this.PanelForRectangles = new System.Windows.Forms.Panel();
+            this.DeletePictureBox = new System.Windows.Forms.PictureBox();
             this.EnumTabControl.SuspendLayout();
             this.Enums.SuspendLayout();
             this.ThirdStageGroundBox.SuspendLayout();
@@ -103,6 +103,8 @@ namespace Programming
             this.LilmGroupBox.SuspendLayout();
             this.RectanglesGroupBox.SuspendLayout();
             this.RectanglesTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.AddPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DeletePictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // EnumTabControl
@@ -581,6 +583,8 @@ namespace Programming
             // 
             // RectanglesTabPage
             // 
+            this.RectanglesTabPage.Controls.Add(this.DeletePictureBox);
+            this.RectanglesTabPage.Controls.Add(this.AddPictureBox);
             this.RectanglesTabPage.Controls.Add(this.RectanglesLabel);
             this.RectanglesTabPage.Controls.Add(this.RectanglesListBoxPage3);
             this.RectanglesTabPage.Controls.Add(this.SelectedRectangelLabel);
@@ -594,8 +598,6 @@ namespace Programming
             this.RectanglesTabPage.Controls.Add(this.YSelectedTextBox);
             this.RectanglesTabPage.Controls.Add(this.XSelectedTextBox);
             this.RectanglesTabPage.Controls.Add(this.IDSelectedTextBox);
-            this.RectanglesTabPage.Controls.Add(this.DeleteRectangleButton);
-            this.RectanglesTabPage.Controls.Add(this.AddRectangleButton);
             this.RectanglesTabPage.Controls.Add(this.PanelForRectangles);
             this.RectanglesTabPage.Location = new System.Drawing.Point(4, 22);
             this.RectanglesTabPage.Name = "RectanglesTabPage";
@@ -603,6 +605,14 @@ namespace Programming
             this.RectanglesTabPage.TabIndex = 2;
             this.RectanglesTabPage.Text = "Rectangles";
             this.RectanglesTabPage.UseVisualStyleBackColor = true;
+            // 
+            // AddPictureBox
+            // 
+            this.AddPictureBox.Location = new System.Drawing.Point(29, 215);
+            this.AddPictureBox.Name = "AddPictureBox";
+            this.AddPictureBox.Size = new System.Drawing.Size(55, 50);
+            this.AddPictureBox.TabIndex = 17;
+            this.AddPictureBox.TabStop = false;
             // 
             // RectanglesLabel
             // 
@@ -717,30 +727,6 @@ namespace Programming
             this.IDSelectedTextBox.Size = new System.Drawing.Size(100, 20);
             this.IDSelectedTextBox.TabIndex = 4;
             // 
-            // DeleteRectangleButton
-            // 
-            this.DeleteRectangleButton.BackColor = System.Drawing.Color.White;
-            this.DeleteRectangleButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.DeleteRectangleButton.Location = new System.Drawing.Point(158, 215);
-            this.DeleteRectangleButton.Name = "DeleteRectangleButton";
-            this.DeleteRectangleButton.Size = new System.Drawing.Size(75, 23);
-            this.DeleteRectangleButton.TabIndex = 3;
-            this.DeleteRectangleButton.Text = "Delete";
-            this.DeleteRectangleButton.UseVisualStyleBackColor = false;
-            this.DeleteRectangleButton.Click += new System.EventHandler(this.DeleteRectangleButton_Click);
-            // 
-            // AddRectangleButton
-            // 
-            this.AddRectangleButton.BackColor = System.Drawing.Color.White;
-            this.AddRectangleButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.AddRectangleButton.Location = new System.Drawing.Point(29, 215);
-            this.AddRectangleButton.Name = "AddRectangleButton";
-            this.AddRectangleButton.Size = new System.Drawing.Size(75, 23);
-            this.AddRectangleButton.TabIndex = 2;
-            this.AddRectangleButton.Text = "Add";
-            this.AddRectangleButton.UseVisualStyleBackColor = false;
-            this.AddRectangleButton.Click += new System.EventHandler(this.AddRectangleButton_Click);
-            // 
             // PanelForRectangles
             // 
             this.PanelForRectangles.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -748,6 +734,14 @@ namespace Programming
             this.PanelForRectangles.Name = "PanelForRectangles";
             this.PanelForRectangles.Size = new System.Drawing.Size(925, 583);
             this.PanelForRectangles.TabIndex = 1;
+            // 
+            // DeletePictureBox
+            // 
+            this.DeletePictureBox.Location = new System.Drawing.Point(178, 215);
+            this.DeletePictureBox.Name = "DeletePictureBox";
+            this.DeletePictureBox.Size = new System.Drawing.Size(55, 50);
+            this.DeletePictureBox.TabIndex = 20;
+            this.DeletePictureBox.TabStop = false;
             // 
             // MainForm
             // 
@@ -772,6 +766,8 @@ namespace Programming
             this.RectanglesGroupBox.PerformLayout();
             this.RectanglesTabPage.ResumeLayout(false);
             this.RectanglesTabPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.AddPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DeletePictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -837,12 +833,12 @@ namespace Programming
         private System.Windows.Forms.TextBox YSelectedTextBox;
         private System.Windows.Forms.TextBox XSelectedTextBox;
         private System.Windows.Forms.TextBox IDSelectedTextBox;
-        private System.Windows.Forms.Button DeleteRectangleButton;
-        private System.Windows.Forms.Button AddRectangleButton;
         private System.Windows.Forms.Panel PanelForRectangles;
         private System.Windows.Forms.Label SelectedRectangelLabel;
         private System.Windows.Forms.Label RectanglesLabel;
         private System.Windows.Forms.ListBox RectanglesListBoxPage3;
+        private System.Windows.Forms.PictureBox AddPictureBox;
+        private System.Windows.Forms.PictureBox DeletePictureBox;
     }
 }
 

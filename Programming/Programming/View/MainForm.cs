@@ -18,9 +18,21 @@ namespace Programming
         Model.Film[] _films = new Model.Film[5];
         Model.Film _currentFilm = new Model.Film("ASD", 153, 1996, "Comedy", 7);
         List<Panel> PanelList = new List<Panel>();
+        bool FlagMouseAdd = false;
+        bool FlagMouseDelete = false;
         public MainForm()
         {
             InitializeComponent();
+            AddPictureBox.Click += AddPictureBox_Click;
+            AddPictureBox.MouseMove += AddPictureBox_MouseMove;
+            AddPictureBox.MouseLeave += AddPictureBox_MouseLeave;
+            AddPictureBox.MouseDown += AddPictureBox_MouseDown;
+            AddPictureBox.MouseUp += AddPictureBox_MouseUp;
+            DeletePictureBox.Click += DeletePictureBox_Click;
+            DeletePictureBox.MouseMove += DeletePictureBox_MouseMove;
+            DeletePictureBox.MouseLeave += DeletePictureBox_MouseLeave;
+            DeletePictureBox.MouseDown += DeletePictureBox_MouseDown;
+            DeletePictureBox.MouseUp += DeletePictureBox_MouseUp;
             Random rand = new Random();
             EnumsListBox.SelectedIndex = 0;
             foreach (var i in Enum.GetValues(typeof(Season)))
@@ -59,6 +71,10 @@ namespace Programming
             IDTextBox.ReadOnly = true;
             IDSelectedTextBox.ReadOnly = true;
             FindCollisions();
+            AddPictureBox.Image = Image.FromFile("D:/Папка для локального репозитория/Programming/Programming/Model/Resources/Add.bmp");
+            DeletePictureBox.Image = Image.FromFile("D:/Папка для локального репозитория/Programming/Programming/Model/Resources/Delete.bmp");
+            AddPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            DeletePictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
         private void EnumsListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -434,7 +450,7 @@ namespace Programming
             }
         }
 
-        private void DeleteRectangleButton_Click(object sender, EventArgs e)
+        private void DeletePictureBox_Click(object sender, EventArgs e)
         {
             if (RectanglesListBoxPage3.SelectedIndex != -1)
             {
@@ -446,7 +462,7 @@ namespace Programming
             }
         }
 
-        private void AddRectangleButton_Click(object sender, EventArgs e)
+        private void AddPictureBox_Click(object sender, EventArgs e)
         {
             Random rand = new Random();
             _rectangles.Add(new Model.Rectangle(rand.Next(50, 150), rand.Next(50, 150), rand.Next(0, 600), rand.Next(0, 320)));
@@ -474,6 +490,66 @@ namespace Programming
                     }
                 }
             }
+        }
+        private void UpdateRectangleInfo(Model.Rectangle rectangle)
+        {
+            IDSelectedTextBox.Text = Convert.ToString(rectangle._id);
+            XSelectedTextBox.Text = Convert.ToString(rectangle.X);
+            YSelectedTextBox.Text = Convert.ToString(rectangle.Y);
+            WidthSelectedTextBox.Text = Convert.ToString(rectangle.Length);
+            HeightSelectedTextBox.Text = Convert.ToString(rectangle.Width);
+        }
+        private void ClearRectangleInfo()
+        {
+            IDSelectedTextBox.Text = "";
+            XSelectedTextBox.Text = "";
+            YSelectedTextBox.Text = "";
+            WidthSelectedTextBox.Text = "";
+            HeightSelectedTextBox.Text = "";
+        }
+        private void AddPictureBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (FlagMouseAdd == false)
+            {
+                AddPictureBox.Image = Image.FromFile("D:/Папка для локального репозитория/Programming/Programming/Model/Resources/AddNavodka.bmp");
+            }
+        }
+        private void AddPictureBox_MouseLeave(object sender, System.EventArgs e)
+        {
+            AddPictureBox.Image = Image.FromFile("D:/Папка для локального репозитория/Programming/Programming/Model/Resources/Add.bmp");
+            FlagMouseAdd = false;
+        }
+        private void AddPictureBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            AddPictureBox.Image = Image.FromFile("D:/Папка для локального репозитория/Programming/Programming/Model/Resources/AddClick.png");
+            FlagMouseAdd = true;
+        }
+        private void AddPictureBox_MouseUp(object sender, MouseEventArgs e)
+        {
+            AddPictureBox.Image = Image.FromFile("D:/Папка для локального репозитория/Programming/Programming/Model/Resources/AddNavodka.bmp");
+            FlagMouseAdd = false;
+        }
+        private void DeletePictureBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (FlagMouseDelete == false)
+            {
+                DeletePictureBox.Image = Image.FromFile("D:/Папка для локального репозитория/Programming/Programming/Model/Resources/DeleteNavodka.bmp");
+            }
+        }
+        private void DeletePictureBox_MouseLeave(object sender, System.EventArgs e)
+        {
+            DeletePictureBox.Image = Image.FromFile("D:/Папка для локального репозитория/Programming/Programming/Model/Resources/Delete.bmp");
+            FlagMouseDelete = false;
+        }
+        private void DeletePictureBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            DeletePictureBox.Image = Image.FromFile("D:/Папка для локального репозитория/Programming/Programming/Model/Resources/DeleteClick.bmp");
+            FlagMouseDelete = true;
+        }
+        private void DeletePictureBox_MouseUp(object sender, MouseEventArgs e)
+        {
+            DeletePictureBox.Image = Image.FromFile("D:/Папка для локального репозитория/Programming/Programming/Model/Resources/deleteNavodka.bmp");
+            FlagMouseDelete = false;
         }
     }
 }
