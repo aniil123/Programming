@@ -51,7 +51,9 @@ namespace Programming
             FilmListBox.SelectedIndex = 0;
             for(int i = 0;i<5;i++)
             {
-                _rectangles.Add(new Model.Rectangle(rand.Next(50,150),rand.Next(50,150), rand.Next(0,600), rand.Next(0,320)));
+                int L = rand.Next(50, 150);
+                int W = rand.Next(50, 150);
+                _rectangles.Add(new Model.Rectangle(L, W, rand.Next(15, PanelForRectangles.Width - 15 - L), rand.Next(15, PanelForRectangles.Height - 15 - W)));
                 PanelList.Add(new Panel());
                 PanelForRectangles.Controls.Add(PanelList[i]);
                 PanelList[i].Size =  new Size(_rectangles[i].Length, _rectangles[i].Width);
@@ -385,7 +387,8 @@ namespace Programming
         private void XSelectedTextBox_TextChanged(object sender, EventArgs e)
         {
             try
-            {   
+            {
+                Model.Validator.AssertValueInRange(int.Parse(XSelectedTextBox.Text), 15, PanelForRectangles.Width - 15 - _rectangles[RectanglesListBoxPage3.SelectedIndex].Length);
                 _rectangles[RectanglesListBoxPage3.SelectedIndex].X = int.Parse(XSelectedTextBox.Text);
                 RectanglesListBoxPage3.Items[RectanglesListBoxPage3.SelectedIndex] = $"{RectanglesListBoxPage3.SelectedIndex + 1}: (X={_rectangles[RectanglesListBoxPage3.SelectedIndex].X}, Y={_rectangles[RectanglesListBoxPage3.SelectedIndex].Y}, W={_rectangles[RectanglesListBoxPage3.SelectedIndex].Length}, H={_rectangles[RectanglesListBoxPage3.SelectedIndex].Width})";
                 PanelList[RectanglesListBoxPage3.SelectedIndex].Location = new Point(Convert.ToInt32(Math.Round(_rectangles[RectanglesListBoxPage3.SelectedIndex].X)), PanelList[RectanglesListBoxPage3.SelectedIndex].Location.Y);
@@ -403,6 +406,7 @@ namespace Programming
         {
             try
             {
+                Model.Validator.AssertValueInRange(int.Parse(YSelectedTextBox.Text), 15, PanelForRectangles.Height - 15 - _rectangles[RectanglesListBoxPage3.SelectedIndex].Width);
                 _rectangles[RectanglesListBoxPage3.SelectedIndex].Y = int.Parse(YSelectedTextBox.Text);
                 RectanglesListBoxPage3.Items[RectanglesListBoxPage3.SelectedIndex] = $"{RectanglesListBoxPage3.SelectedIndex + 1}: (X={_rectangles[RectanglesListBoxPage3.SelectedIndex].X}, Y={_rectangles[RectanglesListBoxPage3.SelectedIndex].Y}, W={_rectangles[RectanglesListBoxPage3.SelectedIndex].Length}, H={_rectangles[RectanglesListBoxPage3.SelectedIndex].Width})";
                 PanelList[RectanglesListBoxPage3.SelectedIndex].Location = new Point(PanelList[RectanglesListBoxPage3.SelectedIndex].Location.X, Convert.ToInt32(Math.Round(_rectangles[RectanglesListBoxPage3.SelectedIndex].Y)));
@@ -420,6 +424,7 @@ namespace Programming
         {
             try
             {
+                Model.Validator.AssertValueInRange(int.Parse(WidthSelectedTextBox.Text) + _rectangles[RectanglesListBoxPage3.SelectedIndex].X, 15, PanelForRectangles.Width - 15);
                 _rectangles[RectanglesListBoxPage3.SelectedIndex].Length = int.Parse(WidthSelectedTextBox.Text);
                 RectanglesListBoxPage3.Items[RectanglesListBoxPage3.SelectedIndex] = $"{RectanglesListBoxPage3.SelectedIndex + 1}: (X={_rectangles[RectanglesListBoxPage3.SelectedIndex].X}, Y={_rectangles[RectanglesListBoxPage3.SelectedIndex].Y}, W={_rectangles[RectanglesListBoxPage3.SelectedIndex].Length}, H={_rectangles[RectanglesListBoxPage3.SelectedIndex].Width})";
                 PanelList[RectanglesListBoxPage3.SelectedIndex].Size = new Size(_rectangles[RectanglesListBoxPage3.SelectedIndex].Length, PanelList[RectanglesListBoxPage3.SelectedIndex].Size.Height);
@@ -437,6 +442,7 @@ namespace Programming
         {
             try
             {
+                Model.Validator.AssertValueInRange(int.Parse(HeightSelectedTextBox.Text) + _rectangles[RectanglesListBoxPage3.SelectedIndex].Y, 15, PanelForRectangles.Height - 15);
                 _rectangles[RectanglesListBoxPage3.SelectedIndex].Width = int.Parse(HeightSelectedTextBox.Text);
                 RectanglesListBoxPage3.Items[RectanglesListBoxPage3.SelectedIndex] = $"{RectanglesListBoxPage3.SelectedIndex + 1}: (X={_rectangles[RectanglesListBoxPage3.SelectedIndex].X}, Y={_rectangles[RectanglesListBoxPage3.SelectedIndex].Y}, W={_rectangles[RectanglesListBoxPage3.SelectedIndex].Length}, H={_rectangles[RectanglesListBoxPage3.SelectedIndex].Width})";
                 PanelList[RectanglesListBoxPage3.SelectedIndex].Size = new Size(PanelList[RectanglesListBoxPage3.SelectedIndex].Size.Width, _rectangles[RectanglesListBoxPage3.SelectedIndex].Width);
@@ -465,7 +471,9 @@ namespace Programming
         private void AddPictureBox_Click(object sender, EventArgs e)
         {
             Random rand = new Random();
-            _rectangles.Add(new Model.Rectangle(rand.Next(50, 150), rand.Next(50, 150), rand.Next(0, 600), rand.Next(0, 320)));
+            int L = rand.Next(50, 150);
+            int W = rand.Next(50, 150);
+            _rectangles.Add(new Model.Rectangle(L, W, rand.Next(15, PanelForRectangles.Width - 15 - L), rand.Next(15, PanelForRectangles.Height - 15 - W)));
             PanelList.Add(new Panel());
             PanelForRectangles.Controls.Add(PanelList[PanelList.Count-1]);
             PanelList[PanelList.Count - 1].Size = new Size(_rectangles[PanelList.Count - 1].Length, _rectangles[PanelList.Count - 1].Width);
