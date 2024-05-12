@@ -533,7 +533,7 @@ namespace Programming
         {
             if (FlagMouseDelete == false)
             {
-                DeletePictureBox.Image = Image.FromFile("D:/Папка для локального репозитория/Programming/Programming/Model/Resources/DeleteNavodka.bmp");
+                DeletePictureBox.Image = Image.FromFile("D:/Папка для локального репозитория/Programming/Programming/Model/Resources/DeleteNavodka.png");
             }
         }
         private void DeletePictureBox_MouseLeave(object sender, System.EventArgs e)
@@ -548,7 +548,7 @@ namespace Programming
         }
         private void DeletePictureBox_MouseUp(object sender, MouseEventArgs e)
         {
-            DeletePictureBox.Image = Image.FromFile("D:/Папка для локального репозитория/Programming/Programming/Model/Resources/deleteNavodka.bmp");
+            DeletePictureBox.Image = Image.FromFile("D:/Папка для локального репозитория/Programming/Programming/Model/Resources/deleteNavodka.png");
             FlagMouseDelete = false;
         }
     }

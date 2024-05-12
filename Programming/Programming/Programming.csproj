@@ -105,7 +105,7 @@
     <Content Include="Model\Resources\AddNavodka.bmp" />
     <Content Include="Model\Resources\Delete.bmp" />
     <Content Include="Model\Resources\DeleteClick.bmp" />
-    <Content Include="Model\Resources\DeleteNavodka.bmp" />
+    <Content Include="Model\Resources\DeleteNavodka.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
