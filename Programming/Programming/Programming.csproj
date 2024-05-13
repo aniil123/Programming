@@ -73,6 +73,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\Panels\EnumsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\Panels\EnumsControl.Designer.cs">
+      <DependentUpon>EnumsControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Panels\RectangleCollisionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -90,6 +96,9 @@
     </Compile>
     <EmbeddedResource Include="View\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Panels\EnumsControl.resx">
+      <DependentUpon>EnumsControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Panels\RectangleCollisionControl.resx">
       <DependentUpon>RectangleCollisionControl.cs</DependentUpon>

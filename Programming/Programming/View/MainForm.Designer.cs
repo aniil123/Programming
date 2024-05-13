@@ -41,13 +41,6 @@ namespace Programming
             this.ParseLabel = new System.Windows.Forms.Label();
             this.ParseWeekDayTextBox = new System.Windows.Forms.TextBox();
             this.ParseButton = new System.Windows.Forms.Button();
-            this.FirstStageGroudBox = new System.Windows.Forms.GroupBox();
-            this.IntTextBox = new System.Windows.Forms.TextBox();
-            this.IntLabel = new System.Windows.Forms.Label();
-            this.EnumsLabel = new System.Windows.Forms.Label();
-            this.EnumsListBox = new System.Windows.Forms.ListBox();
-            this.ValueListBox = new System.Windows.Forms.ListBox();
-            this.ValueLabel = new System.Windows.Forms.Label();
             this.Classes = new System.Windows.Forms.TabPage();
             this.LilmGroupBox = new System.Windows.Forms.GroupBox();
             this.RatingLabel = new System.Windows.Forms.Label();
@@ -79,11 +72,11 @@ namespace Programming
             this.LengthTextBox = new System.Windows.Forms.TextBox();
             this.RectanglesTabPage = new System.Windows.Forms.TabPage();
             this.rectangleCollisionControl1 = new Programming.View.Panels.RectangleCollisionControl();
+            this.enumsControl1 = new Programming.View.Panels.EnumsControl();
             this.EnumTabControl.SuspendLayout();
             this.Enums.SuspendLayout();
             this.ThirdStageGroundBox.SuspendLayout();
             this.SecondStageGroundBox.SuspendLayout();
-            this.FirstStageGroudBox.SuspendLayout();
             this.Classes.SuspendLayout();
             this.LilmGroupBox.SuspendLayout();
             this.RectanglesGroupBox.SuspendLayout();
@@ -104,9 +97,9 @@ namespace Programming
             // 
             // Enums
             // 
+            this.Enums.Controls.Add(this.enumsControl1);
             this.Enums.Controls.Add(this.ThirdStageGroundBox);
             this.Enums.Controls.Add(this.SecondStageGroundBox);
-            this.Enums.Controls.Add(this.FirstStageGroudBox);
             this.Enums.Location = new System.Drawing.Point(4, 22);
             this.Enums.Name = "Enums";
             this.Enums.Padding = new System.Windows.Forms.Padding(3);
@@ -209,83 +202,6 @@ namespace Programming
             this.ParseButton.Text = "Parse";
             this.ParseButton.UseVisualStyleBackColor = true;
             this.ParseButton.Click += new System.EventHandler(this.ParseButton_Click);
-            // 
-            // FirstStageGroudBox
-            // 
-            this.FirstStageGroudBox.Controls.Add(this.IntTextBox);
-            this.FirstStageGroudBox.Controls.Add(this.IntLabel);
-            this.FirstStageGroudBox.Controls.Add(this.EnumsLabel);
-            this.FirstStageGroudBox.Controls.Add(this.EnumsListBox);
-            this.FirstStageGroudBox.Controls.Add(this.ValueListBox);
-            this.FirstStageGroudBox.Controls.Add(this.ValueLabel);
-            this.FirstStageGroudBox.Location = new System.Drawing.Point(8, 20);
-            this.FirstStageGroudBox.Name = "FirstStageGroudBox";
-            this.FirstStageGroudBox.Size = new System.Drawing.Size(504, 306);
-            this.FirstStageGroudBox.TabIndex = 6;
-            this.FirstStageGroudBox.TabStop = false;
-            this.FirstStageGroudBox.Text = "Enumerations";
-            // 
-            // IntTextBox
-            // 
-            this.IntTextBox.Location = new System.Drawing.Point(324, 46);
-            this.IntTextBox.Name = "IntTextBox";
-            this.IntTextBox.Size = new System.Drawing.Size(100, 20);
-            this.IntTextBox.TabIndex = 4;
-            // 
-            // IntLabel
-            // 
-            this.IntLabel.AutoSize = true;
-            this.IntLabel.Location = new System.Drawing.Point(321, 30);
-            this.IntLabel.Name = "IntLabel";
-            this.IntLabel.Size = new System.Drawing.Size(51, 13);
-            this.IntLabel.TabIndex = 5;
-            this.IntLabel.Text = "Int value:";
-            // 
-            // EnumsLabel
-            // 
-            this.EnumsLabel.AutoSize = true;
-            this.EnumsLabel.Location = new System.Drawing.Point(16, 30);
-            this.EnumsLabel.Name = "EnumsLabel";
-            this.EnumsLabel.Size = new System.Drawing.Size(107, 13);
-            this.EnumsLabel.TabIndex = 1;
-            this.EnumsLabel.Text = "Choose enumeration:";
-            // 
-            // EnumsListBox
-            // 
-            this.EnumsListBox.FormattingEnabled = true;
-            this.EnumsListBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.EnumsListBox.Items.AddRange(new object[] {
-            "Color",
-            "Form_edu",
-            "Genre",
-            "Saeson",
-            "Smartphones",
-            "Weekday"});
-            this.EnumsListBox.Location = new System.Drawing.Point(19, 46);
-            this.EnumsListBox.Name = "EnumsListBox";
-            this.EnumsListBox.ScrollAlwaysVisible = true;
-            this.EnumsListBox.Size = new System.Drawing.Size(130, 199);
-            this.EnumsListBox.TabIndex = 0;
-            this.EnumsListBox.SelectedIndexChanged += new System.EventHandler(this.EnumsListBox_SelectedIndexChanged);
-            // 
-            // ValueListBox
-            // 
-            this.ValueListBox.FormattingEnabled = true;
-            this.ValueListBox.Location = new System.Drawing.Point(171, 46);
-            this.ValueListBox.Name = "ValueListBox";
-            this.ValueListBox.ScrollAlwaysVisible = true;
-            this.ValueListBox.Size = new System.Drawing.Size(130, 199);
-            this.ValueListBox.TabIndex = 2;
-            this.ValueListBox.SelectedIndexChanged += new System.EventHandler(this.ValueListBox_SelectedIndexChanged);
-            // 
-            // ValueLabel
-            // 
-            this.ValueLabel.AutoSize = true;
-            this.ValueLabel.Location = new System.Drawing.Point(168, 30);
-            this.ValueLabel.Name = "ValueLabel";
-            this.ValueLabel.Size = new System.Drawing.Size(75, 13);
-            this.ValueLabel.TabIndex = 3;
-            this.ValueLabel.Text = "Choose value:";
             // 
             // Classes
             // 
@@ -582,6 +498,13 @@ namespace Programming
             this.rectangleCollisionControl1.Size = new System.Drawing.Size(1226, 685);
             this.rectangleCollisionControl1.TabIndex = 0;
             // 
+            // enumsControl1
+            // 
+            this.enumsControl1.Location = new System.Drawing.Point(9, 17);
+            this.enumsControl1.Name = "enumsControl1";
+            this.enumsControl1.Size = new System.Drawing.Size(514, 313);
+            this.enumsControl1.TabIndex = 9;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -596,8 +519,6 @@ namespace Programming
             this.ThirdStageGroundBox.PerformLayout();
             this.SecondStageGroundBox.ResumeLayout(false);
             this.SecondStageGroundBox.PerformLayout();
-            this.FirstStageGroudBox.ResumeLayout(false);
-            this.FirstStageGroudBox.PerformLayout();
             this.Classes.ResumeLayout(false);
             this.LilmGroupBox.ResumeLayout(false);
             this.LilmGroupBox.PerformLayout();
@@ -612,13 +533,6 @@ namespace Programming
 
         private System.Windows.Forms.TabControl EnumTabControl;
         private System.Windows.Forms.TabPage Enums;
-        private System.Windows.Forms.Label EnumsLabel;
-        private System.Windows.Forms.ListBox EnumsListBox;
-        private System.Windows.Forms.Label ValueLabel;
-        private System.Windows.Forms.ListBox ValueListBox;
-        private System.Windows.Forms.Label IntLabel;
-        private System.Windows.Forms.TextBox IntTextBox;
-        private System.Windows.Forms.GroupBox FirstStageGroudBox;
         private System.Windows.Forms.GroupBox SecondStageGroundBox;
         private System.Windows.Forms.Label ParseResultLabel;
         private System.Windows.Forms.Label ParseLabel;
@@ -660,6 +574,7 @@ namespace Programming
         private System.Windows.Forms.TextBox IDTextBox;
         private System.Windows.Forms.TabPage RectanglesTabPage;
         private View.Panels.RectangleCollisionControl rectangleCollisionControl1;
+        private View.Panels.EnumsControl enumsControl1;
     }
 }
 
