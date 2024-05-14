@@ -182,6 +182,9 @@ namespace Programming.View.Panels
             RectanglesListBoxPage3.Items.Add($"{RectanglesListBoxPage3.Items.Count + 1}: (X={_rectangles[_rectangles.Count - 1].X}, Y={_rectangles[_rectangles.Count - 1].Y}, W={_rectangles[_rectangles.Count - 1].Length}, H={_rectangles[_rectangles.Count - 1].Width})");
             FindCollisions();
         }
+        /// <summary>
+        /// Находит прямоугольники, которые пересекаются, и меняет их цвет на красный. 
+        /// </summary>
         private void FindCollisions()
         {
             foreach (var i in PanelList)
@@ -200,6 +203,10 @@ namespace Programming.View.Panels
                 }
             }
         }
+        /// <summary>
+        /// Обновляет информацию о выбранном прямоугольнике в текстовых полях.
+        /// </summary>
+        /// <param name="rectangle">Прямоугольник, информация о котором обновляется. Объект типа <see cref="Model.Rectangle"/></param>
         private void UpdateRectangleInfo(Model.Rectangle rectangle)
         {
             IDSelectedTextBox.Text = Convert.ToString(rectangle._id);
@@ -208,6 +215,9 @@ namespace Programming.View.Panels
             WidthSelectedTextBox.Text = Convert.ToString(rectangle.Length);
             HeightSelectedTextBox.Text = Convert.ToString(rectangle.Width);
         }
+        /// <summary>
+        /// Очищает текстовые поля.
+        /// </summary>
         private void ClearRectangleInfo()
         {
             IDSelectedTextBox.Text = "";
@@ -260,10 +270,18 @@ namespace Programming.View.Panels
             DeletePictureBox.Image = Image.FromFile("D:/Папка для локального репозитория/Programming/Programming/Model/Resources/deleteNavodka.png");
             FlagMouseDelete = false;
         }
+        /// <summary>
+        /// Меняет цвет передаваемого текстового поля на красный.
+        /// </summary>
+        /// <param name="textbox">Текстовое поле цвет, которого меняется.</param>
         public void MessageErrorTextBox(TextBox textbox)
         {
             textbox.BackColor = Color.Red;
         }
+        /// <summary>
+        /// Меняет цвет передаваемого текстового поля на белый.
+        /// </summary>
+        /// <param name="textbox">Текстовое поле цвет, которого меняется.</param>
         public void MessageErrorTextBoxNo(TextBox textbox)
         {
             textbox.BackColor = Color.White;

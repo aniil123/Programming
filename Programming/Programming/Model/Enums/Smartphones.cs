@@ -1,4 +1,7 @@
-﻿public enum Smartphones
+﻿/// <summary>
+/// Хранит названия производителей смартфонов.
+/// </summary>
+public enum Smartphones
 {
     Xiaomi,
     Realme,

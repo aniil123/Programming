@@ -79,11 +79,35 @@
     <Compile Include="View\Panels\EnumsControl.Designer.cs">
       <DependentUpon>EnumsControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\Panels\FilmsInfoControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\Panels\FilmsInfoControl.Designer.cs">
+      <DependentUpon>FilmsInfoControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Panels\RectangleCollisionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="View\Panels\RectangleCollisionControl.Designer.cs">
       <DependentUpon>RectangleCollisionControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Panels\RectangleInfoControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\Panels\RectangleInfoControl.Designer.cs">
+      <DependentUpon>RectangleInfoControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Panels\SeasonControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\Panels\SeasonControl.Designer.cs">
+      <DependentUpon>SeasonControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Panels\WeekDayControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\Panels\WeekDayControl.Designer.cs">
+      <DependentUpon>WeekDayControl.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -100,8 +124,20 @@
     <EmbeddedResource Include="View\Panels\EnumsControl.resx">
       <DependentUpon>EnumsControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\Panels\FilmsInfoControl.resx">
+      <DependentUpon>FilmsInfoControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\Panels\RectangleCollisionControl.resx">
       <DependentUpon>RectangleCollisionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Panels\RectangleInfoControl.resx">
+      <DependentUpon>RectangleInfoControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Panels\SeasonControl.resx">
+      <DependentUpon>SeasonControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Panels\WeekDayControl.resx">
+      <DependentUpon>WeekDayControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

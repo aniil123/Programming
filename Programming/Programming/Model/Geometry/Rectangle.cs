@@ -6,17 +6,32 @@ using System.Threading.Tasks;
 
 namespace Programming.Model
 {
+    /// <summary>
+    /// Хранит информацию о прямоугольниках
+    /// </summary>
     public class Rectangle
     {
+        //Хранит длину прямоугольника.
         private int length;
+        //Хранит ширину прямоугольника.
         private int width;
+        //Хранит цвет прямоугольника.
         public string color { get; set; }
+        //Хранит координату х центра прямоугльника.
         public double xCenter { get; private set; }
+        //Хранит координату у центра прямоугольника.
         public double yCenter { get; private set; }
+        //Хранит координату х левого верхнего угла прямоугольника.
         private double x;
+        //Хранит координату у левого верхнего угла прямоугольника.
         private double y;
+        //Хранит количество созданных прямоугольников.
         private static int _allRectanglesCount = 0;
+        //Уникальный идентификатор для всех объектов данного класса.
         public int _id { get; private set; }
+        /// <summary>
+        /// Возвращает и задает длину прямоугольника. Должна быть числом больше нуля.
+        /// </summary>
         public int Length
         {
             get
@@ -31,6 +46,9 @@ namespace Programming.Model
                 Center = point;
             }
         }
+        /// <summary>
+        /// Возвращает и задает ширину прямоугольника. Должна быть числом больше нуля.
+        /// </summary>
         public int Width
         {
             get
@@ -45,6 +63,9 @@ namespace Programming.Model
                 Center = point;
             }
         }
+        /// <summary>
+        /// Задает значение координатам центра прямоугольника. Принимает объект типа <see cref="Point2D"/>
+        /// </summary>
         private Point2D Center
         {
             set
@@ -53,6 +74,9 @@ namespace Programming.Model
                 yCenter = value.y + Width / 2;
             }
         }
+        /// <summary>
+        /// Возвращает и задает значение координате х левого верхнего угла прямоугольника. Должна быть числом.
+        /// </summary>
         public double X
         {
             get
@@ -66,6 +90,9 @@ namespace Programming.Model
                 Center = point;
             }
         }
+        /// <summary>
+        /// Возвращает и задает значение координате у левого верхнего угла прямоугольника. Должна быть числом.
+        /// </summary>
         public double Y
         {
             get
@@ -79,6 +106,9 @@ namespace Programming.Model
                 Center = point;
             }
         }
+        /// <summary>
+        /// Возвращает количество созданных прямоугольников.
+        /// </summary>
         public static int AllRectanglesCount
         {
             get
@@ -86,6 +116,9 @@ namespace Programming.Model
                 return _allRectanglesCount;
             }
         }
+        /// <summary>
+        /// Задает значение id прямоугольника. Должно быть числом.
+        /// </summary>
         private int ID
         {
             set
@@ -93,6 +126,9 @@ namespace Programming.Model
                 _id = value;
             }
         }
+        /// <summary>
+        /// Заполняет поля класса константами.
+        /// </summary>
         public Rectangle()
         {
             length = 10;
@@ -103,6 +139,13 @@ namespace Programming.Model
             _allRectanglesCount += 1;
             ID = AllRectanglesCount;
         }
+        /// <summary>
+        /// Заполняет поля класса передаваемыми значениями.
+        /// </summary>
+        /// <param name="length">Длина. Должна быть числом больше нуля.</param>
+        /// <param name="width">Ширина. Должна быть числом больше нуля.</param>
+        /// <param name="x">Координата х левого верхнего угла прямоугольника. Должна быть числом.</param>
+        /// <param name="y">Координата у левого верхнего угла прямоугольника. Должна быть числом.</param>
         public Rectangle(int length, int width , double x, double y)
         {
             Length = length;

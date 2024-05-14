@@ -6,13 +6,22 @@ using System.Threading.Tasks;
 
 namespace Programming.Model
 {
+    /// <summary>
+    /// Хранит информацию об кольце.
+    /// </summary>
     class Ring
     {
-        private Point2D centre;
+        //Хранит радиус внешней окружности кольца.
         private double bol_r = -1;
+        //Хранит радиус внутренней окружности кольца.
         private double mal_r = -1;
+        //Хранит координату у центра кольца.
         public double xCenter { get; private set; }
+        //Хранит координату х центра кольца.
         public double yCenter { get; private set; }
+        /// <summary>
+        /// Вохвращает и задает радиус внешней окружности кольца. Должен быть числом больше нуля.
+        /// </summary>
         public double Bol_r
         {
             get
@@ -32,6 +41,9 @@ namespace Programming.Model
                 bol_r = value;
             }
         }
+        /// <summary>
+        /// Возвращает и задает радиус внутренней окружности кольца. Должен быть числом больше нуля.
+        /// </summary>
         public double Mal_r
         {
             get
@@ -51,6 +63,9 @@ namespace Programming.Model
                 mal_r = value;
             }
         }
+        /// <summary>
+        /// Задает координаты центра кольца. Принимает объект типа <see cref="Point2D"/>
+        /// </summary>
         private Point2D Center
         {
             set
@@ -59,6 +74,9 @@ namespace Programming.Model
                 yCenter = value.y + bol_r;
             }
         }
+        /// <summary>
+        /// Возвращает площадь кольца.
+        /// </summary>
         public double Area
         {
             get
@@ -66,22 +84,27 @@ namespace Programming.Model
                 return 3.14*Bol_r*Bol_r - 3.14*Mal_r*Mal_r;
             }
         }
+        /// <summary>
+        /// Заполняет все поля класса константами.
+        /// </summary>
         public Ring()
         {
-            centre = new Point2D();
             Bol_r = 20;
             Mal_r = 15;
             Point2D point = new Point2D(123,-123);
             Center = point;
         }
-        public Ring(double mal_r, double bol_r, Point2D centre)
+        /// <summary>
+        /// Заполняет все поля класса передаваемыми значениями.
+        /// </summary>
+        /// <param name="mal_r">Радиус внутренней окуружности кольца. Должен быть числом больше нуля.</param>
+        /// <param name="bol_r">Радиус внешней окружности кольца. Должен быть числом больше нуля.</param>
+        /// <param name="center">Точка с координатами центра кольца. Объект типа <see cref="Point2D"/></param>
+        public Ring(double mal_r, double bol_r, Point2D center)
         {
-            Random rand = new Random();
-            this.centre = centre;
             Bol_r = bol_r;
             Mal_r = mal_r;
-            Point2D point = new Point2D(rand.Next(-200,200), rand.Next(-200,200));
-            Center = point;
+            Center = center;
         }
     }
 }

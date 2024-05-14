@@ -1,4 +1,7 @@
-﻿public enum Season
+﻿/// <summary>
+/// Хранит названия времен года.
+/// </summary>
+public enum Season
 {
     autumn,
     summer,

@@ -1,4 +1,7 @@
-﻿public enum Weekday
+﻿/// <summary>
+/// Хранит названия дней недели.
+/// </summary>
+public enum Weekday
 {
     Monday,
     Tuesday,

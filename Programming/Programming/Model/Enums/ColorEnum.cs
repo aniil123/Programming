@@ -1,4 +1,7 @@
-﻿public enum ColorEnum
+﻿/// <summary>
+/// Хранит названия цветов.
+/// </summary>
+public enum ColorEnum
 {
     blue,
     red,
