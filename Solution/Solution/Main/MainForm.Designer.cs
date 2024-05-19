@@ -29,22 +29,23 @@ namespace Solution
         /// </summary>
         private void InitializeComponent()
         {
-            this.workersControls1 = new Solution.Main.Controls.WorkersControls();
+            this.WorkersControls = new Solution.Main.Controls.WorkersControls();
             this.SuspendLayout();
             // 
-            // workersControls1
+            // WorkersControls
             // 
-            this.workersControls1.Location = new System.Drawing.Point(13, 13);
-            this.workersControls1.Name = "workersControls1";
-            this.workersControls1.Size = new System.Drawing.Size(874, 611);
-            this.workersControls1.TabIndex = 0;
+            this.WorkersControls.Location = new System.Drawing.Point(13, 13);
+            this.WorkersControls.Name = "WorkersControls";
+            this.WorkersControls.Size = new System.Drawing.Size(874, 611);
+            this.WorkersControls.TabIndex = 0;
+            this.WorkersControls.Load += new System.EventHandler(this.WorkersControls_Load);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(895, 644);
-            this.Controls.Add(this.workersControls1);
+            this.Controls.Add(this.WorkersControls);
             this.Name = "MainForm";
             this.Text = "Workers app";
             this.ResumeLayout(false);
@@ -53,7 +54,7 @@ namespace Solution
 
         #endregion
 
-        private Main.Controls.WorkersControls workersControls1;
+        private Main.Controls.WorkersControls WorkersControls;
     }
 }
 

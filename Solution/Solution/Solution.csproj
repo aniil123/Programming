@@ -58,6 +58,8 @@
     <Compile Include="Main\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Other\AssertString.cs" />
+    <Compile Include="Other\Worker.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Main\Controls\WorkersControls.resx">
@@ -68,17 +70,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -89,7 +92,18 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Other\" />
+    <Content Include="Images\Add.jpeg" />
+    <Content Include="Images\AddClick.jpeg" />
+    <Content Include="Images\AddNavodka.jpg" />
+    <Content Include="Images\Delete.jpeg" />
+    <Content Include="Images\DeleteClick.jpeg" />
+    <Content Include="Images\DeleteNavodka.jpg" />
+    <Content Include="Images\RedactClick.jpeg" />
+    <Content Include="Images\Redact.jpeg" />
+    <Content Include="Images\RedactMode.png" />
+    <Content Include="Images\RedactModeClick.png" />
+    <Content Include="Images\RedactModeNavodka.png" />
+    <Content Include="Images\RedactNavodka.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
