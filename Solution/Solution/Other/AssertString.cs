@@ -15,8 +15,7 @@ namespace Solution.Other
         /// Проверяет строку на наличие символов отличных от символов русского алфавита.
         /// </summary>
         /// <param name="word">Проверяемая строка.</param>
-        /// <param name="MemberName"></param>
-        public static void CheckingCharacters(string word, [System.Runtime.CompilerServices.CallerMemberName] string MemberName = "")
+        public static void CheckingCharacters(string word)
         {
             bool MainFlag = true, flag;
             string alf = "йцукенгшщзхъфывапролджэячсмитьбюЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ";
@@ -39,10 +38,15 @@ namespace Solution.Other
             }
             if(MainFlag == false)
             {
-                throw new Exception("Произошла ошибка при работе метода " + MemberName);
+                throw new Exception("Вы ввели неверный символ или недописали полное имя");
             }
         }
-        public static void CheckingCharactersWithExceptions(string word, string exceptions,[System.Runtime.CompilerServices.CallerMemberName] string MemberName = "")
+        /// <summary>
+        /// Проверяет строку на наличие символов отличных от символов русского алфавита, но допускает символы переданные в качестве аргумента.
+        /// </summary>
+        /// <param name="word">Проверяемая строка.</param>
+        /// <param name="exceptions">Строка содержащая символы, которые допускаются.</param>
+        public static void CheckingCharactersWithExceptions(string word, string exceptions)
         {
             bool MainFlag = true, flag;
             string alf = "йцукенгшщзхъфывапролджэячсмитьбюЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ" + exceptions;
@@ -65,7 +69,7 @@ namespace Solution.Other
             }
             if (MainFlag == false)
             {
-                throw new Exception("Произошла ошибка при работе метода " + MemberName);
+                throw new Exception("Вы ввели неверный символ или недописали должность");
             }
         }
     }

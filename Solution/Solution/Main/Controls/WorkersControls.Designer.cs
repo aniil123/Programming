@@ -31,8 +31,10 @@ namespace Solution.Main.Controls
         {
             this.WorkersListBox = new System.Windows.Forms.ListBox();
             this.SelectedWorkerGroupBox = new System.Windows.Forms.GroupBox();
-            this.DateOfEmploymentDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.SalaryTextBox = new System.Windows.Forms.TextBox();
+            this.ErrorCalendarPanel = new System.Windows.Forms.Panel();
+            this.ErrorCalendarLabel = new System.Windows.Forms.Label();
+            this.DateOfEmploymentDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.PostTextBox = new System.Windows.Forms.TextBox();
             this.FullNameTextBox = new System.Windows.Forms.TextBox();
             this.SalaryLabel = new System.Windows.Forms.Label();
@@ -42,13 +44,12 @@ namespace Solution.Main.Controls
             this.AddPictureBox = new System.Windows.Forms.PictureBox();
             this.RedactPictureBox = new System.Windows.Forms.PictureBox();
             this.DeletePictureBox = new System.Windows.Forms.PictureBox();
-            this.ErrorCalendarPanel = new System.Windows.Forms.Panel();
-            this.ErrorCalendarLabel = new System.Windows.Forms.Label();
+            this.ExceptionLabel = new System.Windows.Forms.Label();
             this.SelectedWorkerGroupBox.SuspendLayout();
+            this.ErrorCalendarPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AddPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RedactPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DeletePictureBox)).BeginInit();
-            this.ErrorCalendarPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // WorkersListBox
@@ -64,6 +65,7 @@ namespace Solution.Main.Controls
             // 
             this.SelectedWorkerGroupBox.BackColor = System.Drawing.SystemColors.Window;
             this.SelectedWorkerGroupBox.Controls.Add(this.SalaryTextBox);
+            this.SelectedWorkerGroupBox.Controls.Add(this.DateOfEmploymentDateTimePicker);
             this.SelectedWorkerGroupBox.Controls.Add(this.ErrorCalendarPanel);
             this.SelectedWorkerGroupBox.Controls.Add(this.PostTextBox);
             this.SelectedWorkerGroupBox.Controls.Add(this.FullNameTextBox);
@@ -78,17 +80,6 @@ namespace Solution.Main.Controls
             this.SelectedWorkerGroupBox.TabStop = false;
             this.SelectedWorkerGroupBox.Text = "Selected worker";
             // 
-            // DateOfEmploymentDateTimePicker
-            // 
-            this.DateOfEmploymentDateTimePicker.Location = new System.Drawing.Point(0, 0);
-            this.DateOfEmploymentDateTimePicker.MaxDate = new System.DateTime(2799, 11, 26, 0, 0, 0, 0);
-            this.DateOfEmploymentDateTimePicker.MinDate = new System.DateTime(1925, 12, 31, 0, 0, 0, 0);
-            this.DateOfEmploymentDateTimePicker.Name = "DateOfEmploymentDateTimePicker";
-            this.DateOfEmploymentDateTimePicker.Size = new System.Drawing.Size(200, 20);
-            this.DateOfEmploymentDateTimePicker.TabIndex = 2;
-            this.DateOfEmploymentDateTimePicker.Value = new System.DateTime(2001, 1, 1, 0, 0, 0, 0);
-            this.DateOfEmploymentDateTimePicker.ValueChanged += new System.EventHandler(this.DateOfEmploymentDateTimePicker_ValueChanged);
-            // 
             // SalaryTextBox
             // 
             this.SalaryTextBox.Location = new System.Drawing.Point(125, 156);
@@ -96,6 +87,33 @@ namespace Solution.Main.Controls
             this.SalaryTextBox.Size = new System.Drawing.Size(188, 20);
             this.SalaryTextBox.TabIndex = 7;
             this.SalaryTextBox.TextChanged += new System.EventHandler(this.SalaryTextBox_TextChanged);
+            // 
+            // ErrorCalendarPanel
+            // 
+            this.ErrorCalendarPanel.Controls.Add(this.ErrorCalendarLabel);
+            this.ErrorCalendarPanel.Location = new System.Drawing.Point(120, 108);
+            this.ErrorCalendarPanel.Name = "ErrorCalendarPanel";
+            this.ErrorCalendarPanel.Size = new System.Drawing.Size(210, 30);
+            this.ErrorCalendarPanel.TabIndex = 8;
+            // 
+            // ErrorCalendarLabel
+            // 
+            this.ErrorCalendarLabel.AutoSize = true;
+            this.ErrorCalendarLabel.Location = new System.Drawing.Point(207, 4);
+            this.ErrorCalendarLabel.Name = "ErrorCalendarLabel";
+            this.ErrorCalendarLabel.Size = new System.Drawing.Size(0, 13);
+            this.ErrorCalendarLabel.TabIndex = 3;
+            // 
+            // DateOfEmploymentDateTimePicker
+            // 
+            this.DateOfEmploymentDateTimePicker.Location = new System.Drawing.Point(125, 113);
+            this.DateOfEmploymentDateTimePicker.MaxDate = new System.DateTime(2799, 11, 26, 0, 0, 0, 0);
+            this.DateOfEmploymentDateTimePicker.MinDate = new System.DateTime(1925, 12, 31, 0, 0, 0, 0);
+            this.DateOfEmploymentDateTimePicker.Name = "DateOfEmploymentDateTimePicker";
+            this.DateOfEmploymentDateTimePicker.Size = new System.Drawing.Size(200, 20);
+            this.DateOfEmploymentDateTimePicker.TabIndex = 2;
+            this.DateOfEmploymentDateTimePicker.Value = new System.DateTime(2001, 1, 1, 0, 0, 0, 0);
+            this.DateOfEmploymentDateTimePicker.ValueChanged += new System.EventHandler(this.DateOfEmploymentDateTimePicker_ValueChanged);
             // 
             // PostTextBox
             // 
@@ -183,28 +201,20 @@ namespace Solution.Main.Controls
             this.DeletePictureBox.TabStop = false;
             this.DeletePictureBox.Click += new System.EventHandler(this.DeletePictureBox_Click);
             // 
-            // ErrorCalendarPanel
+            // ExceptionLabel
             // 
-            this.ErrorCalendarPanel.Controls.Add(this.ErrorCalendarLabel);
-            this.ErrorCalendarPanel.Controls.Add(this.DateOfEmploymentDateTimePicker);
-            this.ErrorCalendarPanel.Location = new System.Drawing.Point(125, 113);
-            this.ErrorCalendarPanel.Name = "ErrorCalendarPanel";
-            this.ErrorCalendarPanel.Size = new System.Drawing.Size(296, 20);
-            this.ErrorCalendarPanel.TabIndex = 8;
-            // 
-            // ErrorCalendarLabel
-            // 
-            this.ErrorCalendarLabel.AutoSize = true;
-            this.ErrorCalendarLabel.Location = new System.Drawing.Point(207, 4);
-            this.ErrorCalendarLabel.Name = "ErrorCalendarLabel";
-            this.ErrorCalendarLabel.Size = new System.Drawing.Size(0, 13);
-            this.ErrorCalendarLabel.TabIndex = 3;
+            this.ExceptionLabel.AutoSize = true;
+            this.ExceptionLabel.Location = new System.Drawing.Point(344, 199);
+            this.ExceptionLabel.Name = "ExceptionLabel";
+            this.ExceptionLabel.Size = new System.Drawing.Size(0, 13);
+            this.ExceptionLabel.TabIndex = 5;
             // 
             // WorkersControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
+            this.Controls.Add(this.ExceptionLabel);
             this.Controls.Add(this.DeletePictureBox);
             this.Controls.Add(this.RedactPictureBox);
             this.Controls.Add(this.AddPictureBox);
@@ -214,12 +224,13 @@ namespace Solution.Main.Controls
             this.Size = new System.Drawing.Size(874, 611);
             this.SelectedWorkerGroupBox.ResumeLayout(false);
             this.SelectedWorkerGroupBox.PerformLayout();
+            this.ErrorCalendarPanel.ResumeLayout(false);
+            this.ErrorCalendarPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AddPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.RedactPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DeletePictureBox)).EndInit();
-            this.ErrorCalendarPanel.ResumeLayout(false);
-            this.ErrorCalendarPanel.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -240,5 +251,6 @@ namespace Solution.Main.Controls
         private System.Windows.Forms.PictureBox DeletePictureBox;
         private System.Windows.Forms.Panel ErrorCalendarPanel;
         private System.Windows.Forms.Label ErrorCalendarLabel;
+        private System.Windows.Forms.Label ExceptionLabel;
     }
 }

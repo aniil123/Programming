@@ -34,11 +34,11 @@ namespace Solution
             // 
             // WorkersControls
             // 
-            this.WorkersControls.Location = new System.Drawing.Point(13, 13);
+            this.WorkersControls.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.WorkersControls.Location = new System.Drawing.Point(0, 0);
             this.WorkersControls.Name = "WorkersControls";
-            this.WorkersControls.Size = new System.Drawing.Size(874, 611);
+            this.WorkersControls.Size = new System.Drawing.Size(1226, 685);
             this.WorkersControls.TabIndex = 0;
-            this.WorkersControls.Load += new System.EventHandler(this.WorkersControls_Load);
             // 
             // MainForm
             // 
@@ -49,7 +49,6 @@ namespace Solution
             this.Name = "MainForm";
             this.Text = "Workers app";
             this.ResumeLayout(false);
-
         }
 
         #endregion

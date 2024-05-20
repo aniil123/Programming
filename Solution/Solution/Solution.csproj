@@ -12,6 +12,22 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\Users\HOME\Desktop\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -31,6 +47,18 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>2AC9A704D404330CCE2FEA52C7A9BCE472043ADF</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Solution_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -87,23 +115,25 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Solution_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\Add.jpeg" />
-    <Content Include="Images\AddClick.jpeg" />
-    <Content Include="Images\AddNavodka.jpg" />
-    <Content Include="Images\Delete.jpeg" />
-    <Content Include="Images\DeleteClick.jpeg" />
-    <Content Include="Images\DeleteNavodka.jpg" />
-    <Content Include="Images\RedactClick.jpeg" />
-    <Content Include="Images\Redact.jpeg" />
-    <Content Include="Images\RedactMode.png" />
-    <Content Include="Images\RedactModeClick.png" />
-    <Content Include="Images\RedactModeNavodka.png" />
-    <Content Include="Images\RedactNavodka.jpg" />
+    <Content Include="Resource\Add.jpeg" />
+    <Content Include="Resource\AddClick.jpeg" />
+    <Content Include="Resource\AddNavodka.jpg" />
+    <Content Include="Resource\Delete.jpeg" />
+    <Content Include="Resource\DeleteClick.jpeg" />
+    <Content Include="Resource\DeleteNavodka.jpg" />
+    <Content Include="Resource\RedactClick.jpeg" />
+    <Content Include="Resource\Redact.jpeg" />
+    <Content Include="Resource\RedactMode.png" />
+    <Content Include="Resource\RedactModeClick.png" />
+    <Content Include="Resource\RedactModeNavodka.png" />
+    <Content Include="Resource\RedactNavodka.jpg" />
+    <Content Include="Resource\workersData.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

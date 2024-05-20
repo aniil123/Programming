@@ -16,10 +16,5 @@ namespace Solution
         {
             InitializeComponent();
         }
-
-        private void WorkersControls_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

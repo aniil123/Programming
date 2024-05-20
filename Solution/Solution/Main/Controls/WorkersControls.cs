@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Solution.Main.Controls
 {
@@ -18,6 +19,23 @@ namespace Solution.Main.Controls
         public WorkersControls()
         {
             InitializeComponent();
+            using (StreamReader sr = new StreamReader("workersData.txt", true))
+            {
+                int kolWorkers = -1;
+                string[] workerData = new string[4];
+                workerData[0] = sr.ReadLine();
+                while(workerData[0] != null)
+                {
+                    kolWorkers += 1;
+                    for(int i = 1;i < 4;i++)
+                    {
+                        workerData[i] = sr.ReadLine();
+                    }
+                    WorkersList.Add(new Other.Worker(workerData[0], workerData[1], Convert.ToDateTime(workerData[2]), Convert.ToInt32(workerData[3])));
+                    WorkersListBox.Items.Add(WorkersList[kolWorkers].FullName);
+                    workerData[0] = sr.ReadLine();
+                }
+            }
             Application.ApplicationExit += new EventHandler(SaveData);
             DateOfEmploymentDateTimePicker.Value = DateTime.Now;
             AddPictureBox.Image = Properties.Resources.Add;
@@ -48,10 +66,27 @@ namespace Solution.Main.Controls
                 WorkersListBox.Items[WorkersListBox.SelectedIndex] = WorkersList[WorkersListBox.SelectedIndex].FullName;
                 FullNameTextBox.BackColor = Color.White;
                 FullNameTextBox.SelectionStart = FullNameTextBox.Text.Length;
+                ExceptionLabel.Text = "";
                 SortWorkersListBox();
             }
-            catch
+            catch(Exception ex)
             {
+                char[] CharException = Convert.ToString(ex).ToCharArray();
+                string exi = "";
+                bool flag = false;
+                foreach(var i in CharException)
+                {
+                    if(i == ' ' || flag == true)
+                    {
+                        exi += i;
+                        flag = true;
+                    }
+                    if(i == '\n')
+                    {
+                        break;
+                    }
+                }
+                ExceptionLabel.Text = exi;
                 FullNameTextBox.BackColor = Color.LightPink;
             }
         }
@@ -61,9 +96,26 @@ namespace Solution.Main.Controls
             {
                 WorkersList[WorkersListBox.SelectedIndex].Post = PostTextBox.Text;
                 PostTextBox.BackColor = Color.White;
+                ExceptionLabel.Text = "";
             }
-            catch
+            catch (Exception ex)
             {
+                char[] CharException = Convert.ToString(ex).ToCharArray();
+                string exi = "";
+                bool flag = false;
+                foreach (var i in CharException)
+                {
+                    if (i == ' ' || flag == true)
+                    {
+                        exi += i;
+                        flag = true;
+                    }
+                    if (i == '\n')
+                    {
+                        break;
+                    }
+                }
+                ExceptionLabel.Text = exi;
                 PostTextBox.BackColor = Color.LightPink;
             }
         }
@@ -75,12 +127,27 @@ namespace Solution.Main.Controls
                 {
                     WorkersList[WorkersListBox.SelectedIndex].Date = DateOfEmploymentDateTimePicker.Value;
                     ErrorCalendarPanel.BackColor = Color.White;
-                    ErrorCalendarLabel.Text = "";
+                    ExceptionLabel.Text = "";
                 }
-                catch
+                catch (Exception ex)
                 {
+                    char[] CharException = Convert.ToString(ex).ToCharArray();
+                    string exi = "";
+                    bool flag = false;
+                    foreach (var i in CharException)
+                    {
+                        if (i == ' ' || flag == true)
+                        {
+                            exi += i;
+                            flag = true;
+                        }
+                        if (i == '\n')
+                        {
+                            break;
+                        }
+                    }
+                    ExceptionLabel.Text = exi;
                     ErrorCalendarPanel.BackColor = Color.LightPink;
-                    ErrorCalendarLabel.Text = "Неверная дата";
                 }
             }
         }
@@ -90,9 +157,33 @@ namespace Solution.Main.Controls
             {
                 WorkersList[WorkersListBox.SelectedIndex].Salary = Convert.ToInt32(SalaryTextBox.Text);
                 SalaryTextBox.BackColor = Color.White;
+                ExceptionLabel.Text = "";
             }
-            catch
+            catch (Exception ex)
             {
+                if (!int.TryParse(SalaryTextBox.Text, out int a))
+                {
+                    ExceptionLabel.Text = "Вы ввели неверный символ.";
+                }
+                else
+                {
+                    char[] CharException = Convert.ToString(ex).ToCharArray();
+                    string exi = "";
+                    bool flag = false;
+                    foreach (var i in CharException)
+                    {
+                        if (i == ' ' || flag == true)
+                        {
+                            exi += i;
+                            flag = true;
+                        }
+                        if (i == '\n')
+                        {
+                            break;
+                        }
+                    }
+                    ExceptionLabel.Text = exi;
+                }
                 SalaryTextBox.BackColor = Color.LightPink;
             }
         }
@@ -427,7 +518,16 @@ namespace Solution.Main.Controls
         }
         private void SaveData(object sender, EventArgs e)
         {
-            MessageBox.Show("Конец");
+            using (StreamWriter sw = new StreamWriter("workersData.txt"))
+            {
+                foreach(var i in WorkersList)
+                {
+                    sw.WriteLine(i.FullName);
+                    sw.WriteLine(i.Post);
+                    sw.WriteLine(Convert.ToString(i.Date));
+                    sw.WriteLine(Convert.ToString(i.Salary));
+                }
+            }
         }
     }
 }
