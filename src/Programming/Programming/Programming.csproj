@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{452B3B96-7603-42E1-9762-F99E55CC10B1}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Programming</RootNamespace>
+    <AssemblyName>Programming</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Model\AcademicSubject.cs" />
+    <Compile Include="Model\Geometry\CollisionManager.cs" />
+    <Compile Include="Model\Enums\ColorEnum.cs" />
+    <Compile Include="Model\Contact.cs" />
+    <Compile Include="Model\Film.cs" />
+    <Compile Include="Model\Flight.cs" />
+    <Compile Include="Model\Enums\Form_edu.cs" />
+    <Compile Include="Model\Enums\Genre.cs" />
+    <Compile Include="Model\Geometry\Point2D.cs" />
+    <Compile Include="Model\Geometry\Rectangle.cs" />
+    <Compile Include="Model\Geometry\RectangleFactory.cs" />
+    <Compile Include="Model\Geometry\Ring.cs" />
+    <Compile Include="Model\Enums\Season.cs" />
+    <Compile Include="Model\Enums\Smartphones.cs" />
+    <Compile Include="Model\Song.cs" />
+    <Compile Include="Model\Time.cs" />
+    <Compile Include="Model\Validator.cs" />
+    <Compile Include="Model\Enums\Weekday.cs" />
+    <Compile Include="View\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\Panels\EnumsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\Panels\EnumsControl.Designer.cs">
+      <DependentUpon>EnumsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Panels\FilmsInfoControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\Panels\FilmsInfoControl.Designer.cs">
+      <DependentUpon>FilmsInfoControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Panels\RectangleCollisionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\Panels\RectangleCollisionControl.Designer.cs">
+      <DependentUpon>RectangleCollisionControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Panels\RectangleInfoControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\Panels\RectangleInfoControl.Designer.cs">
+      <DependentUpon>RectangleInfoControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Panels\SeasonControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\Panels\SeasonControl.Designer.cs">
+      <DependentUpon>SeasonControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Panels\WeekDayControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\Panels\WeekDayControl.Designer.cs">
+      <DependentUpon>WeekDayControl.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="View\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Panels\EnumsControl.resx">
+      <DependentUpon>EnumsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Panels\FilmsInfoControl.resx">
+      <DependentUpon>FilmsInfoControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Panels\RectangleCollisionControl.resx">
+      <DependentUpon>RectangleCollisionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Panels\RectangleInfoControl.resx">
+      <DependentUpon>RectangleInfoControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Panels\SeasonControl.resx">
+      <DependentUpon>SeasonControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Panels\WeekDayControl.resx">
+      <DependentUpon>WeekDayControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Model\Resources\Add.bmp" />
+    <Content Include="Model\Resources\AddClick.png" />
+    <Content Include="Model\Resources\AddNavodka.bmp" />
+    <Content Include="Model\Resources\Delete.bmp" />
+    <Content Include="Model\Resources\DeleteClick.bmp" />
+    <Content Include="Model\Resources\DeleteNavodka.png" />
+    <Content Include="Resources\AddNavodka.jpg" />
+    <None Include="Resources\RedactNavodka.jpg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
