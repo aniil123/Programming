@@ -86,6 +86,8 @@ namespace ObjectOrientedPractics.View.Tabs
                     throw new Exception();
                 }
                 _customers[CustomersListBox.SelectedIndex].FullName = FullNameTextBox.Text;
+                CustomersListBox.Items[CustomersListBox.SelectedIndex] = _customers[CustomersListBox.SelectedIndex].FullName;
+                FullNameTextBox.SelectionStart = FullNameTextBox.Text.Length;
                 FullNameTextBox.BackColor = Color.White;
             }
             catch

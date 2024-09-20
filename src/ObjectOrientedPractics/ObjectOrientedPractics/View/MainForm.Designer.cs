@@ -29,10 +29,11 @@ namespace ObjectOrientedPractics
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.ItemTabPage = new System.Windows.Forms.TabPage();
-            this.itemsTab1 = new ObjectOrientedPractics.View.Tabs.ItemsTab();
             this.CustomerTabPage = new System.Windows.Forms.TabPage();
+            this.itemsTab1 = new ObjectOrientedPractics.View.Tabs.ItemsTab();
             this.customersTab1 = new ObjectOrientedPractics.View.Tabs.CustomersTab();
             this.tabControl1.SuspendLayout();
             this.ItemTabPage.SuspendLayout();
@@ -61,14 +62,6 @@ namespace ObjectOrientedPractics
             this.ItemTabPage.Text = "Item";
             this.ItemTabPage.UseVisualStyleBackColor = true;
             // 
-            // itemsTab1
-            // 
-            this.itemsTab1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.itemsTab1.Location = new System.Drawing.Point(3, 3);
-            this.itemsTab1.Name = "itemsTab1";
-            this.itemsTab1.Size = new System.Drawing.Size(751, 644);
-            this.itemsTab1.TabIndex = 0;
-            // 
             // CustomerTabPage
             // 
             this.CustomerTabPage.Controls.Add(this.customersTab1);
@@ -78,6 +71,14 @@ namespace ObjectOrientedPractics
             this.CustomerTabPage.TabIndex = 1;
             this.CustomerTabPage.Text = "Customer";
             this.CustomerTabPage.UseVisualStyleBackColor = true;
+            // 
+            // itemsTab1
+            // 
+            this.itemsTab1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.itemsTab1.Location = new System.Drawing.Point(3, 3);
+            this.itemsTab1.Name = "itemsTab1";
+            this.itemsTab1.Size = new System.Drawing.Size(751, 644);
+            this.itemsTab1.TabIndex = 0;
             // 
             // customersTab1
             // 
@@ -93,8 +94,9 @@ namespace ObjectOrientedPractics
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(765, 676);
             this.Controls.Add(this.tabControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
-            this.Text = "MainForm";
+            this.Text = "Object Oriented Practics";
             this.tabControl1.ResumeLayout(false);
             this.ItemTabPage.ResumeLayout(false);
             this.CustomerTabPage.ResumeLayout(false);

@@ -40,16 +40,16 @@ namespace ObjectOrientedPractics.Services
         /// <summary>
         /// Проверяет строку на наличие недопустимых символов.
         /// </summary>
-        /// <param name="StringToCheck">Проверяемая строка.</param>
-        /// <param name="ValidCharacters">Строка содержащая допустимые символы.</param>
-        public static void CheckingString(string StringToCheck, string ValidCharacters, [System.Runtime.CompilerServices.CallerMemberName] string propertyName = "")
+        /// <param name="stringToCheck">Проверяемая строка.</param>
+        /// <param name="validCharacters">Строка содержащая допустимые символы.</param>
+        public static void CheckingString(string stringToCheck, string validCharacters, [System.Runtime.CompilerServices.CallerMemberName] string propertyName = "")
         {
             a++;
             bool flag;
-            foreach(var i in StringToCheck.ToCharArray())
+            foreach(var i in stringToCheck.ToCharArray())
             {
                 flag = false;
-                foreach(var j in ValidCharacters.ToCharArray())
+                foreach(var j in validCharacters.ToCharArray())
                 {
                     if(i == j)
                     {
