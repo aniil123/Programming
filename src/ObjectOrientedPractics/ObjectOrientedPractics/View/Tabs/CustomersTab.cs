@@ -21,6 +21,7 @@ namespace ObjectOrientedPractics.View.Tabs
             AddressTextBox.ReadOnly = true;
             AddCustomerButton.Click += AddCustomerButton_Click;
             RemoveCustomerButton.Click += RemoveCustomerButton_Click;
+            RandomCustomerButton.Click += RandomCustomerButton_Click;
             CustomersListBox.SelectedIndexChanged += CustomersListBox_SelectedIndexChanged;
             FullNameTextBox.TextChanged += FullNameTextBox_TextChanged;
             AddressTextBox.TextChanged += AddressTextBox_TextChanged;
@@ -39,6 +40,14 @@ namespace ObjectOrientedPractics.View.Tabs
                 _customers.RemoveAt(index);
                 FullNameTextBox.BackColor = IDTextBox.BackColor;
                 AddressTextBox.BackColor = IDTextBox.BackColor;
+            }
+        }
+        private void RandomCustomerButton_Click(object sender, EventArgs e)
+        {
+            foreach(var i in Services.CustomerFactory.CreateCustomers())
+            {
+                _customers.Add(i);
+                CustomersListBox.Items.Add(i.FullName);
             }
         }
         private void CustomersListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -99,6 +108,10 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             try
             {
+                if(AddressTextBox.Text == "")
+                {
+                    throw new Exception();
+                }
                 _customers[CustomersListBox.SelectedIndex].Address = AddressTextBox.Text;
                 AddressTextBox.BackColor = Color.White;
             }

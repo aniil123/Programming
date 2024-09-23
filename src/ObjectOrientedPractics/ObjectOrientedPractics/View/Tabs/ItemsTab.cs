@@ -22,6 +22,7 @@ namespace ObjectOrientedPractics.View.Tabs
             DescriptionTextBox.ReadOnly = true;
             AddItemButton.Click += AddItemButton_Click;
             RemoveItemButton.Click += RemoveItemButton_Click;
+            RandomItemButton.Click += RandomItemButton_Click;
             ItemsListBox.SelectedIndexChanged += ItemsListBox_SelectedIndexChanged;
             CostTextBox.TextChanged += CostTextBox_TextChanged;
             NameTextBox.TextChanged += NameTextBox_TextChanged;
@@ -42,6 +43,14 @@ namespace ObjectOrientedPractics.View.Tabs
                 CostTextBox.BackColor = IDTextBox.BackColor;
                 NameTextBox.BackColor = IDTextBox.BackColor;
                 DescriptionTextBox.BackColor = IDTextBox.BackColor;
+            }
+        }
+        private void RandomItemButton_Click(object sender, EventArgs e)
+        {
+            foreach(var i in Services.ItemFactory.CreateItems())
+            {
+                _items.Add(i);
+                ItemsListBox.Items.Add(i.Name);
             }
         }
         private void ItemsListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -87,10 +96,13 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             try
             {
+                if(NameTextBox.Text == "")
+                {
+                    throw new Exception();
+                }
                 _items[ItemsListBox.SelectedIndex].Name = NameTextBox.Text;
                 ItemsListBox.Items[ItemsListBox.SelectedIndex] = _items[ItemsListBox.SelectedIndex].Name;
                 NameTextBox.SelectionStart = NameTextBox.Text.Length;
-
                 NameTextBox.BackColor = Color.White;
             }
             catch
@@ -102,6 +114,10 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             try
             {
+                if(DescriptionTextBox.Text == "")
+                {
+                    throw new Exception();
+                }
                 _items[ItemsListBox.SelectedIndex].Info = DescriptionTextBox.Text;
                 DescriptionTextBox.BackColor = Color.White;
             }

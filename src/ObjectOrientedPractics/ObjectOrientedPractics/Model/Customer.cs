@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 namespace ObjectOrientedPractics.Model
 {
     /// <summary>
-    /// Содержит информацию о покупателе.
+    /// Покупатель.
     /// </summary>
     class Customer
     {
-        private static int counter = 0;
+        private static int _counter = 0;
         //Уникальный номер покупателя.
         private int _id;
         //Полное имя покупателя.
@@ -19,7 +19,7 @@ namespace ObjectOrientedPractics.Model
         //Адрес доставки товара покупателю.
         private string _address;
         /// <summary>
-        /// Присваивает уникальный номер покупателю.
+        /// Возвращает уникальный номер покупателя.
         /// </summary>
         public int ID
         {
@@ -69,12 +69,12 @@ namespace ObjectOrientedPractics.Model
         /// </summary>
         /// <param name="_fullname">Значение должно быть строковым с количеством символов меньше 200.</param>
         /// <param name="_address">Значение должно быть строковым с количеством символов меньше 500.</param>
-        public Customer(string _fullname, string _address)
+        public Customer(string fullname, string address)
         {
-            counter++;
-            ID = counter;
-            FullName = _fullname;
-            Address = _address;
+            _counter++;
+            ID = _counter;
+            FullName = fullname;
+            Address = address;
         }
     }
 }

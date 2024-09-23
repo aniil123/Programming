@@ -40,6 +40,7 @@ namespace ObjectOrientedPractics.View.Tabs
             this.RemoveCustomerButton = new System.Windows.Forms.Button();
             this.AddCustomerButton = new System.Windows.Forms.Button();
             this.CustomersListBox = new System.Windows.Forms.ListBox();
+            this.RandomCustomerButton = new System.Windows.Forms.Button();
             this.SelectedCustomerGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -142,10 +143,20 @@ namespace ObjectOrientedPractics.View.Tabs
             this.CustomersListBox.Size = new System.Drawing.Size(350, 563);
             this.CustomersListBox.TabIndex = 10;
             // 
+            // RandomCustomerButton
+            // 
+            this.RandomCustomerButton.Location = new System.Drawing.Point(246, 596);
+            this.RandomCustomerButton.Name = "RandomCustomerButton";
+            this.RandomCustomerButton.Size = new System.Drawing.Size(108, 46);
+            this.RandomCustomerButton.TabIndex = 15;
+            this.RandomCustomerButton.Text = "Random";
+            this.RandomCustomerButton.UseVisualStyleBackColor = true;
+            // 
             // CustomersTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.RandomCustomerButton);
             this.Controls.Add(this.SelectedCustomerGroupBox);
             this.Controls.Add(this.ItemsLabel);
             this.Controls.Add(this.RemoveCustomerButton);
@@ -173,5 +184,6 @@ namespace ObjectOrientedPractics.View.Tabs
         private System.Windows.Forms.Button RemoveCustomerButton;
         private System.Windows.Forms.Button AddCustomerButton;
         private System.Windows.Forms.ListBox CustomersListBox;
+        private System.Windows.Forms.Button RandomCustomerButton;
     }
 }

@@ -13,7 +13,6 @@ namespace ObjectOrientedPractics.Services
     {
         //Строка, содержащая символы русского алфавита.
         private static string _alphobet = "йцукенгшщзхъфывапролджэячсмитьбюёЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮЁ";
-        public static int a = 0;
         /// <summary>
         /// Возвращаяет строку, содержащую символы русского алфавита.
         /// </summary>
@@ -44,7 +43,6 @@ namespace ObjectOrientedPractics.Services
         /// <param name="validCharacters">Строка содержащая допустимые символы.</param>
         public static void CheckingString(string stringToCheck, string validCharacters, [System.Runtime.CompilerServices.CallerMemberName] string propertyName = "")
         {
-            a++;
             bool flag;
             foreach(var i in stringToCheck.ToCharArray())
             {

@@ -46,8 +46,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\ForCustomers\PatronymicsOfCustomers.cs" />
+    <Compile Include="Enums\ForCustomers\SecondNamesOfCustomers.cs" />
+    <Compile Include="Enums\ForItems\InfoOfItems.cs" />
+    <Compile Include="Enums\ForItems\NamesOfItems.cs" />
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\Item.cs" />
+    <Compile Include="Enums\ForCustomers\NamesOfCustomers.cs" />
+    <Compile Include="Services\CustomerFactory.cs" />
+    <Compile Include="Services\ItemFactory.cs" />
     <Compile Include="Services\ValueValidator.cs" />
     <Compile Include="View\MainForm.cs">
       <SubType>Form</SubType>
@@ -100,8 +107,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="NewFolder1\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

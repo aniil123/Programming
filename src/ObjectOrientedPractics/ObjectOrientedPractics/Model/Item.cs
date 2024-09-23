@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 namespace ObjectOrientedPractics.Model
 {
     /// <summary>
-    /// Содержит информацию о товаре.
+    /// Товар.
     /// </summary>
     class Item
     {
-        private static int counter = 0;
+        private static int _counter = 0;
         //Уникальный номер товара.
         private int _id;
         //Название товара.
@@ -21,7 +21,7 @@ namespace ObjectOrientedPractics.Model
         //Цена товара.
         private double _cost;
         /// <summary>
-        /// Присваивает текущему товару уникальный номер.
+        /// Возвращает уникальный номер товара.
         /// </summary>
         public int ID
         {
@@ -89,13 +89,13 @@ namespace ObjectOrientedPractics.Model
         /// <param name="_name">Значение должно быть строковым с количеством символов меньше 200.</param>
         /// <param name="_info">Значение должно быть строковым с количеством символов меньше 1000.</param>
         /// <param name="_cost">Значение должно быть вещественным не меньше 0 и не больше 100000.</param>
-        public Item(string _name, string _info, double _cost)
+        public Item(string name, string info, double cost)
         {
-            counter++;
-            ID = counter;
-            Name = _name;
-            Info = _info;
-            Cost = _cost;
+            _counter++;
+            ID = _counter;
+            Name = name;
+            Info = info;
+            Cost = cost;
         }
     }
 }
