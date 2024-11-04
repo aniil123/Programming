@@ -27,10 +27,19 @@ namespace ObjectOrientedPractics.View.Tabs
             CostTextBox.TextChanged += CostTextBox_TextChanged;
             NameTextBox.TextChanged += NameTextBox_TextChanged;
             DescriptionTextBox.TextChanged += DescriptionTextBox_TextChanged;
+            CategoryComboBox.SelectedIndexChanged += CategoryComboBox_SelectedIndexChanged;
+            foreach (var i in Enum.GetValues(typeof(Category)))
+            {
+                CategoryComboBox.Items.Add(i);
+            }
         }
         private void AddItemButton_Click(object sender, EventArgs e)
         {
-            _items.Add(new Model.Item("Помидор", "Вкусный, красный", 100));
+            Type[] TypesOfEnums = { typeof(NamesForAutoParts), typeof(NamesForChemistry), typeof(NamesForClothes), typeof(NamesForElectronics), typeof(NamesForFood), typeof(NamesForFurniture), typeof(NamesForPetSupplies) };
+            int numCategory = new Random().Next(0, Enum.GetValues(typeof(Category)).Length);
+            string[] infoOfItems = Enum.GetNames(typeof(InfoOfItems));
+            string[] namesForItems = Enum.GetNames(TypesOfEnums[numCategory]);
+            _items.Add(new Model.Item(namesForItems[new Random().Next(0, namesForItems.Length)], infoOfItems[new Random().Next(0, Enum.GetValues(typeof(InfoOfItems)).Length)], new Random().Next(73, 12032), (Category)numCategory));
             ItemsListBox.Items.Add(_items[_items.Count - 1].Name);
         }
         private void RemoveItemButton_Click(object sender, EventArgs e)
@@ -64,6 +73,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 CostTextBox.Text = _items[ItemsListBox.SelectedIndex].Cost.ToString();
                 NameTextBox.Text = _items[ItemsListBox.SelectedIndex].Name;
                 DescriptionTextBox.Text = _items[ItemsListBox.SelectedIndex].Info;
+                CategoryComboBox.SelectedItem = _items[ItemsListBox.SelectedIndex].Category;
             }
             else
             {
@@ -71,6 +81,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 CostTextBox.Text = "";
                 NameTextBox.Text = "";
                 DescriptionTextBox.Text = "";
+                CategoryComboBox.SelectedIndex = -1;
                 CostTextBox.ReadOnly = true;
                 NameTextBox.ReadOnly = true;
                 DescriptionTextBox.ReadOnly = true;
@@ -124,6 +135,13 @@ namespace ObjectOrientedPractics.View.Tabs
             catch
             {
                 DescriptionTextBox.BackColor = Color.Red;
+            }
+        }
+        private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(ItemsListBox.SelectedIndex != -1)
+            {
+                _items[ItemsListBox.SelectedIndex].Category = (Category)CategoryComboBox.SelectedIndex;
             }
         }
     }

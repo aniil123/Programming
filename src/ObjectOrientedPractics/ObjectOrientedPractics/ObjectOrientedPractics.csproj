@@ -46,10 +46,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\Category.cs" />
     <Compile Include="Enums\ForCustomers\PatronymicsOfCustomers.cs" />
     <Compile Include="Enums\ForCustomers\SecondNamesOfCustomers.cs" />
     <Compile Include="Enums\ForItems\InfoOfItems.cs" />
-    <Compile Include="Enums\ForItems\NamesOfItems.cs" />
+    <Compile Include="Enums\ForItems\Names\NamesForFurniture.cs" />
+    <Compile Include="Enums\ForItems\Names\NamesForPetSupplies.cs" />
+    <Compile Include="Enums\ForItems\Names\NamesForAutoParts.cs" />
+    <Compile Include="Enums\ForItems\Names\NamesForElectronics.cs" />
+    <Compile Include="Enums\ForItems\Names\NamesForChemistry.cs" />
+    <Compile Include="Enums\ForItems\Names\NamesForClothes.cs" />
+    <Compile Include="Enums\ForItems\Names\NamesForFood.cs" />
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\Item.cs" />
     <Compile Include="Enums\ForCustomers\NamesOfCustomers.cs" />

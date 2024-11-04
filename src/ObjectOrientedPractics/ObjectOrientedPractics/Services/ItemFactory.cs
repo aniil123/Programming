@@ -18,12 +18,16 @@ namespace ObjectOrientedPractics.Services
         /// <returns>Список экземпляров класса <see cref="Model.Item"/>.</returns>
         public static List<Model.Item> CreateItems()
         {
+            string[] information = Enum.GetNames(typeof(InfoOfItems));
+            string[] namesForItems = {"AutoParts", "Chemistry", "Clothes", "Electronics", "Food", "Furniture", "PetSupplies"};
             List<Model.Item> itemsList = new List<Model.Item>();
             for(int i = 0;i < rand.Next(3,6);i++)
             {
-                string nameOfItem = Convert.ToString((NamesOfItems)System.Enum.GetValues(typeof(NamesOfItems)).GetValue(rand.Next(0, 10)));
-                string infoOfItem = Convert.ToString((InfoOfItems)System.Enum.GetValues(typeof(InfoOfItems)).GetValue(rand.Next(0, 10)));
-                itemsList.Add(new Model.Item(nameOfItem, infoOfItem, rand.Next(0, 100000)));
+                //int randomIndex = new Random().Next(0, namesForItems.Length);
+
+                //string nameOfItem = Convert.ToString(()System.Enum.GetValues(typeof(NamesForFood)).GetValue(rand.Next(0, 10)));
+                //string infoOfItem = information[new Random().Next(0, information.Length)];
+                //itemsList.Add(new Model.Item(nameOfItem, infoOfItem, rand.Next(0, 100000)));
             }
             return itemsList;
         }

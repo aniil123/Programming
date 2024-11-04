@@ -1,7 +1,7 @@
 ﻿/// <summary>
-/// Названия товаров.
+/// Названия товаров категории "Питание".
 /// </summary>
-public enum NamesOfItems
+public enum NamesForFood
 {
     Огурец,
     Помидор,

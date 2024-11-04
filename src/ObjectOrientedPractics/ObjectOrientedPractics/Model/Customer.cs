@@ -67,8 +67,8 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Заполняет поля с полным именем и адресом доставки товара покупателя.
         /// </summary>
-        /// <param name="_fullname">Значение должно быть строковым с количеством символов меньше 200.</param>
-        /// <param name="_address">Значение должно быть строковым с количеством символов меньше 500.</param>
+        /// <param name="fullname">Значение должно быть строковым с количеством символов меньше 200.</param>
+        /// <param name="address">Значение должно быть строковым с количеством символов меньше 500.</param>
         public Customer(string fullname, string address)
         {
             _counter++;
