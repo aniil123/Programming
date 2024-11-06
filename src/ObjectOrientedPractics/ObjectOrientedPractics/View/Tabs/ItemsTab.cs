@@ -12,7 +12,21 @@ namespace ObjectOrientedPractics.View.Tabs
 {
     public partial class ItemsTab : UserControl
     {
-        List<Model.Item> _items = new List<Model.Item>();
+        List<Model.Item> _items;
+        /// <summary>
+        /// Возвращает и присваивает список товаров.
+        /// </summary>
+        public List<Model.Item> Items
+        {
+            get
+            {
+                return _items;
+            }
+            set
+            {
+                _items = value;
+            }
+        }
         public ItemsTab()
         {
             InitializeComponent();
@@ -22,7 +36,6 @@ namespace ObjectOrientedPractics.View.Tabs
             DescriptionTextBox.ReadOnly = true;
             AddItemButton.Click += AddItemButton_Click;
             RemoveItemButton.Click += RemoveItemButton_Click;
-            RandomItemButton.Click += RandomItemButton_Click;
             ItemsListBox.SelectedIndexChanged += ItemsListBox_SelectedIndexChanged;
             CostTextBox.TextChanged += CostTextBox_TextChanged;
             NameTextBox.TextChanged += NameTextBox_TextChanged;
@@ -49,14 +62,6 @@ namespace ObjectOrientedPractics.View.Tabs
                 CostTextBox.BackColor = IDTextBox.BackColor;
                 NameTextBox.BackColor = IDTextBox.BackColor;
                 DescriptionTextBox.BackColor = IDTextBox.BackColor;
-            }
-        }
-        private void RandomItemButton_Click(object sender, EventArgs e)
-        {
-            foreach(var i in Services.ItemFactory.CreateItems())
-            {
-                _items.Add(i);
-                ItemsListBox.Items.Add(i.Name);
             }
         }
         private void ItemsListBox_SelectedIndexChanged(object sender, EventArgs e)

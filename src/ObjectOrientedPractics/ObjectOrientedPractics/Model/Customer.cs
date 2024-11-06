@@ -9,7 +9,7 @@ namespace ObjectOrientedPractics.Model
     /// <summary>
     /// Покупатель.
     /// </summary>
-    class Customer
+    public class Customer
     {
         private static int _counter = 0;
         //Уникальный номер покупателя.

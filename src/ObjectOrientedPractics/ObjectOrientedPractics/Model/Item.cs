@@ -9,7 +9,7 @@ namespace ObjectOrientedPractics.Model
     /// <summary>
     /// Товар.
     /// </summary>
-    class Item
+    public class Item
     {
         /// <summary>
         /// Категория товара.

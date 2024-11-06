@@ -30,6 +30,7 @@ namespace ObjectOrientedPractics.View.Tabs
         private void InitializeComponent()
         {
             this.SelectedCustomerGroupBox = new System.Windows.Forms.GroupBox();
+            this.AddressControl = new ObjectOrientedPractics.View.Controls.AddressControl();
             this.IDLabel = new System.Windows.Forms.Label();
             this.FullNameLabel = new System.Windows.Forms.Label();
             this.IDTextBox = new System.Windows.Forms.TextBox();
@@ -38,8 +39,6 @@ namespace ObjectOrientedPractics.View.Tabs
             this.RemoveCustomerButton = new System.Windows.Forms.Button();
             this.AddCustomerButton = new System.Windows.Forms.Button();
             this.CustomersListBox = new System.Windows.Forms.ListBox();
-            this.RandomCustomerButton = new System.Windows.Forms.Button();
-            this.AddressControl = new ObjectOrientedPractics.View.Controls.AddressControl();
             this.SelectedCustomerGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,6 +55,14 @@ namespace ObjectOrientedPractics.View.Tabs
             this.SelectedCustomerGroupBox.TabIndex = 14;
             this.SelectedCustomerGroupBox.TabStop = false;
             this.SelectedCustomerGroupBox.Text = "Selected Customer";
+            // 
+            // AddressControl
+            // 
+            //this.AddressControl.Address = null;
+            this.AddressControl.Location = new System.Drawing.Point(0, 94);
+            this.AddressControl.Name = "AddressControl";
+            this.AddressControl.Size = new System.Drawing.Size(365, 182);
+            this.AddressControl.TabIndex = 5;
             // 
             // IDLabel
             // 
@@ -124,28 +131,10 @@ namespace ObjectOrientedPractics.View.Tabs
             this.CustomersListBox.Size = new System.Drawing.Size(350, 563);
             this.CustomersListBox.TabIndex = 10;
             // 
-            // RandomCustomerButton
-            // 
-            this.RandomCustomerButton.Location = new System.Drawing.Point(246, 596);
-            this.RandomCustomerButton.Name = "RandomCustomerButton";
-            this.RandomCustomerButton.Size = new System.Drawing.Size(108, 46);
-            this.RandomCustomerButton.TabIndex = 15;
-            this.RandomCustomerButton.Text = "Random";
-            this.RandomCustomerButton.UseVisualStyleBackColor = true;
-            // 
-            // AddressControl
-            // 
-            //this.AddressControl.Address = null;
-            this.AddressControl.Location = new System.Drawing.Point(0, 94);
-            this.AddressControl.Name = "AddressControl";
-            this.AddressControl.Size = new System.Drawing.Size(365, 182);
-            this.AddressControl.TabIndex = 5;
-            // 
             // CustomersTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.RandomCustomerButton);
             this.Controls.Add(this.SelectedCustomerGroupBox);
             this.Controls.Add(this.ItemsLabel);
             this.Controls.Add(this.RemoveCustomerButton);
@@ -171,7 +160,6 @@ namespace ObjectOrientedPractics.View.Tabs
         private System.Windows.Forms.Button RemoveCustomerButton;
         private System.Windows.Forms.Button AddCustomerButton;
         private System.Windows.Forms.ListBox CustomersListBox;
-        private System.Windows.Forms.Button RandomCustomerButton;
         private Controls.AddressControl AddressControl;
     }
 }

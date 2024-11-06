@@ -12,7 +12,21 @@ namespace ObjectOrientedPractics.View.Tabs
 {
     public partial class CustomersTab : UserControl
     {
-        List<Model.Customer> _customers = new List<Model.Customer>();
+        List<Model.Customer> _customers;
+        /// <summary>
+        /// Возвращает и присваивает список покупателей.
+        /// </summary>
+        public List<Model.Customer> Customers
+        {
+            get
+            {
+                return _customers;
+            }
+            set
+            {
+                _customers = value;
+            }
+        }
         public CustomersTab()
         {
             InitializeComponent();
@@ -20,7 +34,6 @@ namespace ObjectOrientedPractics.View.Tabs
             FullNameTextBox.ReadOnly = true;
             AddCustomerButton.Click += AddCustomerButton_Click;
             RemoveCustomerButton.Click += RemoveCustomerButton_Click;
-            RandomCustomerButton.Click += RandomCustomerButton_Click;
             CustomersListBox.SelectedIndexChanged += CustomersListBox_SelectedIndexChanged;
             FullNameTextBox.TextChanged += FullNameTextBox_TextChanged;
         }
@@ -38,14 +51,6 @@ namespace ObjectOrientedPractics.View.Tabs
                 _customers.RemoveAt(index);
                 FullNameTextBox.BackColor = IDTextBox.BackColor;
                 AddressControl.Address = new Model.Address();
-            }
-        }
-        private void RandomCustomerButton_Click(object sender, EventArgs e)
-        {
-            foreach(var i in Services.CustomerFactory.CreateCustomers())
-            {
-                _customers.Add(i);
-                CustomersListBox.Items.Add(i.FullName);
             }
         }
         private void CustomersListBox_SelectedIndexChanged(object sender, EventArgs e)

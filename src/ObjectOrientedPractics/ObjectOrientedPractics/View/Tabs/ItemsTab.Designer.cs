@@ -44,7 +44,6 @@ namespace ObjectOrientedPractics.View.Tabs
             this.CategoryLabel = new System.Windows.Forms.Label();
             this.DescriptionTextBox = new System.Windows.Forms.TextBox();
             this.NameTextBox = new System.Windows.Forms.TextBox();
-            this.RandomItemButton = new System.Windows.Forms.Button();
             this.SelectedItemGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -185,20 +184,10 @@ namespace ObjectOrientedPractics.View.Tabs
             this.NameTextBox.Size = new System.Drawing.Size(375, 112);
             this.NameTextBox.TabIndex = 10;
             // 
-            // RandomItemButton
-            // 
-            this.RandomItemButton.Location = new System.Drawing.Point(246, 595);
-            this.RandomItemButton.Name = "RandomItemButton";
-            this.RandomItemButton.Size = new System.Drawing.Size(108, 46);
-            this.RandomItemButton.TabIndex = 10;
-            this.RandomItemButton.Text = "Random";
-            this.RandomItemButton.UseVisualStyleBackColor = true;
-            // 
             // ItemsTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.RandomItemButton);
             this.Controls.Add(this.SelectedItemGroupBox);
             this.Controls.Add(this.ItemsLabel);
             this.Controls.Add(this.RemoveItemButton);
@@ -226,7 +215,6 @@ namespace ObjectOrientedPractics.View.Tabs
         private System.Windows.Forms.Label NameLabel;
         private System.Windows.Forms.GroupBox SelectedItemGroupBox;
         private System.Windows.Forms.TextBox DescriptionTextBox;
-        private System.Windows.Forms.Button RandomItemButton;
         private System.Windows.Forms.ComboBox CategoryComboBox;
         private System.Windows.Forms.Label CategoryLabel;
         private System.Windows.Forms.TextBox NameTextBox;

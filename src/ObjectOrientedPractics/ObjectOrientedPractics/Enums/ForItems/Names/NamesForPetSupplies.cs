@@ -5,6 +5,5 @@ public enum NamesForPetSupplies
 {
     Корм,
     Игрушки,
-    Когтеточки,
-    Лекарства,
+    Когтеточка
 }

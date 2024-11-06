@@ -13,16 +13,6 @@ namespace ObjectOrientedPractics.View.Controls
     public partial class AddressControl : UserControl
     {
         private Model.Address _address;
-        public AddressControl()
-        {
-            InitializeComponent();
-            PostIndexTextBox.TextChanged += PostIndexTextBox_TextChanged;
-            CountryTextBox.TextChanged += CountryTextBox_TextChanged;
-            CityTextBox.TextChanged += CityTextBox_TextChanged;
-            StreetTextBox.TextChanged += StreetTextBox_TextChanged;
-            BuildingTextBox.TextChanged += BuildingTextBox_TextChanged;
-            ApartmentTextBox.TextChanged += ApartmentTextBox_TextChanged;
-        }
         public Model.Address Address
         {
             get
@@ -39,6 +29,16 @@ namespace ObjectOrientedPractics.View.Controls
                 BuildingTextBox.Text = _address.Building;
                 ApartmentTextBox.Text = _address.Apartment;
             }
+        }
+        public AddressControl()
+        {
+            InitializeComponent();
+            PostIndexTextBox.TextChanged += PostIndexTextBox_TextChanged;
+            CountryTextBox.TextChanged += CountryTextBox_TextChanged;
+            CityTextBox.TextChanged += CityTextBox_TextChanged;
+            StreetTextBox.TextChanged += StreetTextBox_TextChanged;
+            BuildingTextBox.TextChanged += BuildingTextBox_TextChanged;
+            ApartmentTextBox.TextChanged += ApartmentTextBox_TextChanged;
         }
         private void PostIndexTextBox_TextChanged(object sender, EventArgs e)
         {
