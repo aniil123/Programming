@@ -25,7 +25,7 @@ namespace ObjectOrientedPractics.Services
                 string secondNameOfCustomer = Convert.ToString((SecondNamesOfCustomers)System.Enum.GetValues(typeof(SecondNamesOfCustomers)).GetValue(rand.Next(0, 10)));
                 string patronymicOfCustomer = Convert.ToString((PatronymicsOfCustomers)System.Enum.GetValues(typeof(PatronymicsOfCustomers)).GetValue(rand.Next(0, 10)));
                 string fullName = nameOfCustomer + " " + secondNameOfCustomer + " " + patronymicOfCustomer;
-                customersList.Add(new Model.Customer(fullName, "ул. Ленина " + Convert.ToString(rand.Next(40,50))));
+                customersList.Add(new Model.Customer(fullName, new Random().Next(100000, 999999), "Россия", "Томск", "Ленина", "40", "1000"));
             }
             return customersList;
         }

@@ -30,26 +30,26 @@ namespace ObjectOrientedPractics
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.TabControl = new System.Windows.Forms.TabControl();
             this.ItemTabPage = new System.Windows.Forms.TabPage();
             this.CustomerTabPage = new System.Windows.Forms.TabPage();
             this.itemsTab1 = new ObjectOrientedPractics.View.Tabs.ItemsTab();
             this.customersTab1 = new ObjectOrientedPractics.View.Tabs.CustomersTab();
-            this.tabControl1.SuspendLayout();
+            this.TabControl.SuspendLayout();
             this.ItemTabPage.SuspendLayout();
             this.CustomerTabPage.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // TabControl
             // 
-            this.tabControl1.Controls.Add(this.ItemTabPage);
-            this.tabControl1.Controls.Add(this.CustomerTabPage);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(765, 676);
-            this.tabControl1.TabIndex = 0;
+            this.TabControl.Controls.Add(this.ItemTabPage);
+            this.TabControl.Controls.Add(this.CustomerTabPage);
+            this.TabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TabControl.Location = new System.Drawing.Point(0, 0);
+            this.TabControl.Name = "TabControl";
+            this.TabControl.SelectedIndex = 0;
+            this.TabControl.Size = new System.Drawing.Size(765, 676);
+            this.TabControl.TabIndex = 0;
             // 
             // ItemTabPage
             // 
@@ -93,11 +93,11 @@ namespace ObjectOrientedPractics
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(765, 676);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.TabControl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Text = "Object Oriented Practics";
-            this.tabControl1.ResumeLayout(false);
+            this.TabControl.ResumeLayout(false);
             this.ItemTabPage.ResumeLayout(false);
             this.CustomerTabPage.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -106,7 +106,7 @@ namespace ObjectOrientedPractics
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl TabControl;
         private System.Windows.Forms.TabPage ItemTabPage;
         private View.Tabs.ItemsTab itemsTab1;
         private System.Windows.Forms.TabPage CustomerTabPage;

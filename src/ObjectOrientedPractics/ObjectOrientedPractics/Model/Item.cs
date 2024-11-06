@@ -88,6 +88,22 @@ namespace ObjectOrientedPractics.Model
             }
         }
         /// <summary>
+        /// Присваивает случайные значения полням с названием, информацией, и ценой товара.
+        /// </summary>
+        public Item()
+        {
+            _counter++;
+            ID = _counter;
+            Type[] TypesOfEnums = { typeof(NamesForAutoParts), typeof(NamesForChemistry), typeof(NamesForClothes), typeof(NamesForElectronics), typeof(NamesForFood), typeof(NamesForFurniture), typeof(NamesForPetSupplies) };
+            int numCategory = new Random().Next(0, Enum.GetValues(typeof(Category)).Length);
+            string[] infoOfItems = Enum.GetNames(typeof(InfoOfItems));
+            string[] namesForItems = Enum.GetNames(TypesOfEnums[numCategory]);
+            Name = namesForItems[new Random().Next(0, namesForItems.Length)];
+            Info = infoOfItems[new Random().Next(0, infoOfItems.Length)];
+            Cost = new Random().Next(234, 21355);
+            Category = (Category)numCategory;
+        }
+        /// <summary>
         /// Присваивает значения полям с названием, информацией и ценой товара.
         /// </summary>
         /// <param name="name">Значение должно быть строковым с количеством символов меньше 200.</param>

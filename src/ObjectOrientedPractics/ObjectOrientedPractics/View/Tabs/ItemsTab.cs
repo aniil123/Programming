@@ -35,11 +35,8 @@ namespace ObjectOrientedPractics.View.Tabs
         }
         private void AddItemButton_Click(object sender, EventArgs e)
         {
-            Type[] TypesOfEnums = { typeof(NamesForAutoParts), typeof(NamesForChemistry), typeof(NamesForClothes), typeof(NamesForElectronics), typeof(NamesForFood), typeof(NamesForFurniture), typeof(NamesForPetSupplies) };
-            int numCategory = new Random().Next(0, Enum.GetValues(typeof(Category)).Length);
-            string[] infoOfItems = Enum.GetNames(typeof(InfoOfItems));
-            string[] namesForItems = Enum.GetNames(TypesOfEnums[numCategory]);
-            _items.Add(new Model.Item(namesForItems[new Random().Next(0, namesForItems.Length)], infoOfItems[new Random().Next(0, Enum.GetValues(typeof(InfoOfItems)).Length)], new Random().Next(73, 12032), (Category)numCategory));
+            
+            _items.Add(new Model.Item());
             ItemsListBox.Items.Add(_items[_items.Count - 1].Name);
         }
         private void RemoveItemButton_Click(object sender, EventArgs e)

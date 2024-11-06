@@ -30,27 +30,25 @@ namespace ObjectOrientedPractics.View.Tabs
         private void InitializeComponent()
         {
             this.SelectedCustomerGroupBox = new System.Windows.Forms.GroupBox();
-            this.AddressTextBox = new System.Windows.Forms.TextBox();
             this.IDLabel = new System.Windows.Forms.Label();
             this.FullNameLabel = new System.Windows.Forms.Label();
             this.IDTextBox = new System.Windows.Forms.TextBox();
-            this.AddressLabel = new System.Windows.Forms.Label();
             this.FullNameTextBox = new System.Windows.Forms.TextBox();
             this.ItemsLabel = new System.Windows.Forms.Label();
             this.RemoveCustomerButton = new System.Windows.Forms.Button();
             this.AddCustomerButton = new System.Windows.Forms.Button();
             this.CustomersListBox = new System.Windows.Forms.ListBox();
             this.RandomCustomerButton = new System.Windows.Forms.Button();
+            this.AddressControl = new ObjectOrientedPractics.View.Controls.AddressControl();
             this.SelectedCustomerGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // SelectedCustomerGroupBox
             // 
-            this.SelectedCustomerGroupBox.Controls.Add(this.AddressTextBox);
+            this.SelectedCustomerGroupBox.Controls.Add(this.AddressControl);
             this.SelectedCustomerGroupBox.Controls.Add(this.IDLabel);
             this.SelectedCustomerGroupBox.Controls.Add(this.FullNameLabel);
             this.SelectedCustomerGroupBox.Controls.Add(this.IDTextBox);
-            this.SelectedCustomerGroupBox.Controls.Add(this.AddressLabel);
             this.SelectedCustomerGroupBox.Controls.Add(this.FullNameTextBox);
             this.SelectedCustomerGroupBox.Location = new System.Drawing.Point(360, 5);
             this.SelectedCustomerGroupBox.Name = "SelectedCustomerGroupBox";
@@ -58,14 +56,6 @@ namespace ObjectOrientedPractics.View.Tabs
             this.SelectedCustomerGroupBox.TabIndex = 14;
             this.SelectedCustomerGroupBox.TabStop = false;
             this.SelectedCustomerGroupBox.Text = "Selected Customer";
-            // 
-            // AddressTextBox
-            // 
-            this.AddressTextBox.Location = new System.Drawing.Point(6, 108);
-            this.AddressTextBox.Multiline = true;
-            this.AddressTextBox.Name = "AddressTextBox";
-            this.AddressTextBox.Size = new System.Drawing.Size(375, 112);
-            this.AddressTextBox.TabIndex = 10;
             // 
             // IDLabel
             // 
@@ -91,15 +81,6 @@ namespace ObjectOrientedPractics.View.Tabs
             this.IDTextBox.Name = "IDTextBox";
             this.IDTextBox.Size = new System.Drawing.Size(179, 20);
             this.IDTextBox.TabIndex = 3;
-            // 
-            // AddressLabel
-            // 
-            this.AddressLabel.AutoSize = true;
-            this.AddressLabel.Location = new System.Drawing.Point(6, 92);
-            this.AddressLabel.Name = "AddressLabel";
-            this.AddressLabel.Size = new System.Drawing.Size(48, 13);
-            this.AddressLabel.TabIndex = 7;
-            this.AddressLabel.Text = "Address:";
             // 
             // FullNameTextBox
             // 
@@ -152,6 +133,14 @@ namespace ObjectOrientedPractics.View.Tabs
             this.RandomCustomerButton.Text = "Random";
             this.RandomCustomerButton.UseVisualStyleBackColor = true;
             // 
+            // AddressControl
+            // 
+            //this.AddressControl.Address = null;
+            this.AddressControl.Location = new System.Drawing.Point(0, 94);
+            this.AddressControl.Name = "AddressControl";
+            this.AddressControl.Size = new System.Drawing.Size(365, 182);
+            this.AddressControl.TabIndex = 5;
+            // 
             // CustomersTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -174,16 +163,15 @@ namespace ObjectOrientedPractics.View.Tabs
         #endregion
 
         private System.Windows.Forms.GroupBox SelectedCustomerGroupBox;
-        private System.Windows.Forms.TextBox AddressTextBox;
         private System.Windows.Forms.Label IDLabel;
         private System.Windows.Forms.Label FullNameLabel;
         private System.Windows.Forms.TextBox IDTextBox;
-        private System.Windows.Forms.Label AddressLabel;
         private System.Windows.Forms.TextBox FullNameTextBox;
         private System.Windows.Forms.Label ItemsLabel;
         private System.Windows.Forms.Button RemoveCustomerButton;
         private System.Windows.Forms.Button AddCustomerButton;
         private System.Windows.Forms.ListBox CustomersListBox;
         private System.Windows.Forms.Button RandomCustomerButton;
+        private Controls.AddressControl AddressControl;
     }
 }
