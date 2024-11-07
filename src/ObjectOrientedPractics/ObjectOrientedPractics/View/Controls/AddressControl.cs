@@ -22,7 +22,14 @@ namespace ObjectOrientedPractics.View.Controls
             set
             {
                 _address = value;
-                PostIndexTextBox.Text = _address.Index.ToString();
+                if (_address.Index != 0)
+                {
+                    PostIndexTextBox.Text = _address.Index.ToString();
+                }
+                else
+                {
+                    PostIndexTextBox.Text = "";
+                }
                 CountryTextBox.Text = _address.Country;
                 CityTextBox.Text = _address.City;
                 StreetTextBox.Text = _address.Street;

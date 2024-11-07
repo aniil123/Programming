@@ -11,7 +11,11 @@ namespace ObjectOrientedPractics.Model
     /// </summary>
     public class Cart
     {
+        //Список товаров в корзине.
         private List<Item> _items;
+        //Суммарная стоимость товаров.
+        private double _amount;
+        private bool flagAmountChange = true;
         /// <summary>
         /// Возвращает и задает список товаров в корзине.
         /// </summary>
@@ -24,6 +28,7 @@ namespace ObjectOrientedPractics.Model
             set
             {
                 _items = value;
+                flagAmountChange = true;
             }
         }
         /// <summary>
@@ -35,12 +40,20 @@ namespace ObjectOrientedPractics.Model
             {
                 if (Items != null)
                 {
-                    double sumCost = 0;
-                    foreach (var i in _items)
+                    if (flagAmountChange)
                     {
-                        sumCost += i.Cost;
+                        _amount = 0;
+                        foreach (var i in _items)
+                        {
+                            _amount += i.Cost;
+                        }
+                        flagAmountChange = false;
+                        return _amount;
                     }
-                    return sumCost;
+                    else
+                    {
+                        return _amount;
+                    }
                 }
                 else
                 {

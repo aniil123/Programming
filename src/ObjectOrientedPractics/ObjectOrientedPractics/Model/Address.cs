@@ -151,7 +151,18 @@ namespace ObjectOrientedPractics.Model
                 }
             }
         }
-        public Address(){}
+        /// <summary>
+        /// Заполняет поля с почтовым индексом, страной, городом, улицей, номером улицы, номером квартиры константами.
+        /// </summary>
+        public Address()
+        {
+            Index = 0;
+            Country = "";
+            City = "";
+            Street = "";
+            Building = "";
+            Apartment = "";
+        }
         /// <summary>
         /// Заполняет поля класса полученными значениями.
         /// </summary>

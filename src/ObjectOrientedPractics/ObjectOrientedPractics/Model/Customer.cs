@@ -20,6 +20,8 @@ namespace ObjectOrientedPractics.Model
         public Address Address;
         //Корзина покупателя.
         private Cart _cart;
+        //Список заказов покупателя.
+        private List<Order> _orders;
         /// <summary>
         /// Возвращает уникальный номер покупателя.
         /// </summary>
@@ -65,6 +67,20 @@ namespace ObjectOrientedPractics.Model
             }
         }
         /// <summary>
+        /// Возвращает и задает список заказов покупателя.
+        /// </summary>
+        public List<Order> Orders
+        {
+            get
+            {
+                return _orders;
+            }
+            set
+            {
+                _orders = value;
+            }
+        }
+        /// <summary>
         /// Заполняет поля с полным именем и адресом доставки товара покупателя случайными значениями.
         /// </summary>
         public Customer()
@@ -77,6 +93,7 @@ namespace ObjectOrientedPractics.Model
             FullName = name + " " + secondName + " " + patronymic;
             Address = new Address(new Random().Next(100000, 999999), "Россия", "Томск", "Ленина", "40", "1000");
             Cart = new Cart();
+            Orders = new List<Order>();
         }
         /// <summary>
         /// Заполняет поля с полным именем и адресом доставки товара покупателя.
@@ -96,6 +113,7 @@ namespace ObjectOrientedPractics.Model
             FullName = fullname;
             Address = new Address(index, country, city, street, building, apartment);
             Cart = new Cart(items);
+            Orders = new List<Order>();
         }
     }
 }
