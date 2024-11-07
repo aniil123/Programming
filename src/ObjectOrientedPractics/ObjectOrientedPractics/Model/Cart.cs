@@ -61,7 +61,10 @@ namespace ObjectOrientedPractics.Model
                 }
             }
         }
-        public Cart() { }
+        public Cart() 
+        {
+            Items = new List<Item>();
+        }
         /// <summary>
         /// Зполняет корзину товарами.
         /// </summary>
