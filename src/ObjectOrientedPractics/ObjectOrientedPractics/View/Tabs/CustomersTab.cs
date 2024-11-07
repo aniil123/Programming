@@ -12,23 +12,34 @@ namespace ObjectOrientedPractics.View.Tabs
 {
     public partial class CustomersTab : UserControl
     {
-        List<Model.Customer> _customers = new List<Model.Customer>();
+        List<Model.Customer> _customers;
+        /// <summary>
+        /// Возвращает и присваивает список покупателей.
+        /// </summary>
+        public List<Model.Customer> Customers
+        {
+            get
+            {
+                return _customers;
+            }
+            set
+            {
+                _customers = value;
+            }
+        }
         public CustomersTab()
         {
             InitializeComponent();
             IDTextBox.ReadOnly = true;
             FullNameTextBox.ReadOnly = true;
-            AddressTextBox.ReadOnly = true;
             AddCustomerButton.Click += AddCustomerButton_Click;
             RemoveCustomerButton.Click += RemoveCustomerButton_Click;
-            RandomCustomerButton.Click += RandomCustomerButton_Click;
             CustomersListBox.SelectedIndexChanged += CustomersListBox_SelectedIndexChanged;
             FullNameTextBox.TextChanged += FullNameTextBox_TextChanged;
-            AddressTextBox.TextChanged += AddressTextBox_TextChanged;
         }
         private void AddCustomerButton_Click(object sender, EventArgs e)
         {
-            _customers.Add(new Model.Customer("Владимир Владимиров Владимирович", "ул. Ленина 40"));
+            _customers.Add(new Model.Customer());
             CustomersListBox.Items.Add(_customers[_customers.Count - 1].FullName);
         }
         private void RemoveCustomerButton_Click(object sender, EventArgs e)
@@ -39,15 +50,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 CustomersListBox.Items.RemoveAt(index);
                 _customers.RemoveAt(index);
                 FullNameTextBox.BackColor = IDTextBox.BackColor;
-                AddressTextBox.BackColor = IDTextBox.BackColor;
-            }
-        }
-        private void RandomCustomerButton_Click(object sender, EventArgs e)
-        {
-            foreach(var i in Services.CustomerFactory.CreateCustomers())
-            {
-                _customers.Add(i);
-                CustomersListBox.Items.Add(i.FullName);
+                AddressControl.Address = new Model.Address();
             }
         }
         private void CustomersListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -55,18 +58,15 @@ namespace ObjectOrientedPractics.View.Tabs
             if(CustomersListBox.SelectedIndex != -1)
             {
                 FullNameTextBox.ReadOnly = false;
-                AddressTextBox.ReadOnly = false;
                 IDTextBox.Text = _customers[CustomersListBox.SelectedIndex].ID.ToString();
                 FullNameTextBox.Text = _customers[CustomersListBox.SelectedIndex].FullName;
-                AddressTextBox.Text = _customers[CustomersListBox.SelectedIndex].Address;
+                AddressControl.Address = _customers[CustomersListBox.SelectedIndex].Address;
             }
             else
             {
                 FullNameTextBox.ReadOnly = true;
-                AddressTextBox.ReadOnly = true;
                 IDTextBox.Text = "";
                 FullNameTextBox.Text = "";
-                AddressTextBox.Text = "";
             }
         }
         private void FullNameTextBox_TextChanged(object sender, EventArgs e)
@@ -102,22 +102,6 @@ namespace ObjectOrientedPractics.View.Tabs
             catch
             {
                 FullNameTextBox.BackColor = Color.Red;
-            }
-        }
-        private void AddressTextBox_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if(AddressTextBox.Text == "")
-                {
-                    throw new Exception();
-                }
-                _customers[CustomersListBox.SelectedIndex].Address = AddressTextBox.Text;
-                AddressTextBox.BackColor = Color.White;
-            }
-            catch
-            {
-                AddressTextBox.BackColor = Color.Red;
             }
         }
     }

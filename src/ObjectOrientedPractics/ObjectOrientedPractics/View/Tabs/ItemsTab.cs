@@ -12,7 +12,21 @@ namespace ObjectOrientedPractics.View.Tabs
 {
     public partial class ItemsTab : UserControl
     {
-        List<Model.Item> _items = new List<Model.Item>();
+        List<Model.Item> _items;
+        /// <summary>
+        /// Возвращает и присваивает список товаров.
+        /// </summary>
+        public List<Model.Item> Items
+        {
+            get
+            {
+                return _items;
+            }
+            set
+            {
+                _items = value;
+            }
+        }
         public ItemsTab()
         {
             InitializeComponent();
@@ -22,15 +36,20 @@ namespace ObjectOrientedPractics.View.Tabs
             DescriptionTextBox.ReadOnly = true;
             AddItemButton.Click += AddItemButton_Click;
             RemoveItemButton.Click += RemoveItemButton_Click;
-            RandomItemButton.Click += RandomItemButton_Click;
             ItemsListBox.SelectedIndexChanged += ItemsListBox_SelectedIndexChanged;
             CostTextBox.TextChanged += CostTextBox_TextChanged;
             NameTextBox.TextChanged += NameTextBox_TextChanged;
             DescriptionTextBox.TextChanged += DescriptionTextBox_TextChanged;
+            CategoryComboBox.SelectedIndexChanged += CategoryComboBox_SelectedIndexChanged;
+            foreach (var i in Enum.GetValues(typeof(Category)))
+            {
+                CategoryComboBox.Items.Add(i);
+            }
         }
         private void AddItemButton_Click(object sender, EventArgs e)
         {
-            _items.Add(new Model.Item("Помидор", "Вкусный, красный", 100));
+            
+            _items.Add(new Model.Item());
             ItemsListBox.Items.Add(_items[_items.Count - 1].Name);
         }
         private void RemoveItemButton_Click(object sender, EventArgs e)
@@ -45,14 +64,6 @@ namespace ObjectOrientedPractics.View.Tabs
                 DescriptionTextBox.BackColor = IDTextBox.BackColor;
             }
         }
-        private void RandomItemButton_Click(object sender, EventArgs e)
-        {
-            foreach(var i in Services.ItemFactory.CreateItems())
-            {
-                _items.Add(i);
-                ItemsListBox.Items.Add(i.Name);
-            }
-        }
         private void ItemsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ItemsListBox.SelectedIndex != -1)
@@ -64,6 +75,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 CostTextBox.Text = _items[ItemsListBox.SelectedIndex].Cost.ToString();
                 NameTextBox.Text = _items[ItemsListBox.SelectedIndex].Name;
                 DescriptionTextBox.Text = _items[ItemsListBox.SelectedIndex].Info;
+                CategoryComboBox.SelectedItem = _items[ItemsListBox.SelectedIndex].Category;
             }
             else
             {
@@ -71,6 +83,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 CostTextBox.Text = "";
                 NameTextBox.Text = "";
                 DescriptionTextBox.Text = "";
+                CategoryComboBox.SelectedIndex = -1;
                 CostTextBox.ReadOnly = true;
                 NameTextBox.ReadOnly = true;
                 DescriptionTextBox.ReadOnly = true;
@@ -124,6 +137,13 @@ namespace ObjectOrientedPractics.View.Tabs
             catch
             {
                 DescriptionTextBox.BackColor = Color.Red;
+            }
+        }
+        private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(ItemsListBox.SelectedIndex != -1)
+            {
+                _items[ItemsListBox.SelectedIndex].Category = (Category)CategoryComboBox.SelectedIndex;
             }
         }
     }

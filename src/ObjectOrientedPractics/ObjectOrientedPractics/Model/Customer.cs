@@ -9,7 +9,7 @@ namespace ObjectOrientedPractics.Model
     /// <summary>
     /// Покупатель.
     /// </summary>
-    class Customer
+    public class Customer
     {
         private static int _counter = 0;
         //Уникальный номер покупателя.
@@ -17,7 +17,7 @@ namespace ObjectOrientedPractics.Model
         //Полное имя покупателя.
         private string _fullname;
         //Адрес доставки товара покупателю.
-        private string _address;
+        public Address Address;
         /// <summary>
         /// Возвращает уникальный номер покупателя.
         /// </summary>
@@ -49,32 +49,34 @@ namespace ObjectOrientedPractics.Model
             }
         }
         /// <summary>
-        /// Возвращает и присваивает адрес для доставки покупателю. Значение должно быть строковым с количеством символов меньше 500.
+        /// Заполняет поля с полным именем и адресом доставки товара покупателя случайными значениями.
         /// </summary>
-        public string Address
+        public Customer()
         {
-            get
-            {
-                return _address;
-            }
-            set
-            {
-                Services.ValueValidator.AssertStringOnLength(value, 500);
-                Services.ValueValidator.CheckingString(value, Services.ValueValidator.Alphobet + " /,.0123456789");
-                _address = value;
-            }
+            _counter++;
+            ID = _counter;
+            string name = Enum.GetName(typeof(NamesOfCustomers), new Random().Next(0, Enum.GetNames(typeof(NamesOfCustomers)).Length));
+            string secondName = Enum.GetNames(typeof(SecondNamesOfCustomers))[new Random().Next(0, Enum.GetNames(typeof(SecondNamesOfCustomers)).Length)];
+            string patronymic = Enum.GetNames(typeof(PatronymicsOfCustomers))[new Random().Next(0, Enum.GetNames(typeof(PatronymicsOfCustomers)).Length)];
+            FullName = name + " " + secondName + " " + patronymic;
+            Address = new Address(new Random().Next(100000, 999999), "Россия", "Томск", "Ленина", "40", "1000");
         }
         /// <summary>
         /// Заполняет поля с полным именем и адресом доставки товара покупателя.
         /// </summary>
-        /// <param name="_fullname">Значение должно быть строковым с количеством символов меньше 200.</param>
-        /// <param name="_address">Значение должно быть строковым с количеством символов меньше 500.</param>
-        public Customer(string fullname, string address)
+        /// <param name="fullname">Значение должно быть строковым с количеством символов меньше 200.</param>
+        /// <param name="index">Почтовый индекс.</param>
+        /// <param name="country">Страна.</param>
+        /// <param name="city">Город.</param>
+        /// <param name="street">Улица.</param>
+        /// <param name="building">Номер улицы.</param>
+        /// <param name="apartment">Номер квартиры.</param>
+        public Customer(string fullname, int index, string country, string city, string street, string building, string apartment)
         {
             _counter++;
             ID = _counter;
             FullName = fullname;
-            Address = address;
+            Address = new Address(index, country, city, street, building, apartment);
         }
     }
 }

@@ -40,9 +40,10 @@ namespace ObjectOrientedPractics.View.Tabs
             this.NameLabel = new System.Windows.Forms.Label();
             this.DescriptionLabel = new System.Windows.Forms.Label();
             this.SelectedItemGroupBox = new System.Windows.Forms.GroupBox();
+            this.CategoryComboBox = new System.Windows.Forms.ComboBox();
+            this.CategoryLabel = new System.Windows.Forms.Label();
             this.DescriptionTextBox = new System.Windows.Forms.TextBox();
             this.NameTextBox = new System.Windows.Forms.TextBox();
-            this.RandomItemButton = new System.Windows.Forms.Button();
             this.SelectedItemGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -116,7 +117,7 @@ namespace ObjectOrientedPractics.View.Tabs
             // NameLabel
             // 
             this.NameLabel.AutoSize = true;
-            this.NameLabel.Location = new System.Drawing.Point(6, 92);
+            this.NameLabel.Location = new System.Drawing.Point(6, 129);
             this.NameLabel.Name = "NameLabel";
             this.NameLabel.Size = new System.Drawing.Size(38, 13);
             this.NameLabel.TabIndex = 7;
@@ -125,7 +126,7 @@ namespace ObjectOrientedPractics.View.Tabs
             // DescriptionLabel
             // 
             this.DescriptionLabel.AutoSize = true;
-            this.DescriptionLabel.Location = new System.Drawing.Point(4, 223);
+            this.DescriptionLabel.Location = new System.Drawing.Point(4, 260);
             this.DescriptionLabel.Name = "DescriptionLabel";
             this.DescriptionLabel.Size = new System.Drawing.Size(63, 13);
             this.DescriptionLabel.TabIndex = 8;
@@ -133,6 +134,8 @@ namespace ObjectOrientedPractics.View.Tabs
             // 
             // SelectedItemGroupBox
             // 
+            this.SelectedItemGroupBox.Controls.Add(this.CategoryComboBox);
+            this.SelectedItemGroupBox.Controls.Add(this.CategoryLabel);
             this.SelectedItemGroupBox.Controls.Add(this.DescriptionTextBox);
             this.SelectedItemGroupBox.Controls.Add(this.NameTextBox);
             this.SelectedItemGroupBox.Controls.Add(this.IDLabel);
@@ -148,9 +151,26 @@ namespace ObjectOrientedPractics.View.Tabs
             this.SelectedItemGroupBox.TabStop = false;
             this.SelectedItemGroupBox.Text = "Selected Item";
             // 
+            // CategoryComboBox
+            // 
+            this.CategoryComboBox.FormattingEnabled = true;
+            this.CategoryComboBox.Location = new System.Drawing.Point(66, 92);
+            this.CategoryComboBox.Name = "CategoryComboBox";
+            this.CategoryComboBox.Size = new System.Drawing.Size(121, 21);
+            this.CategoryComboBox.TabIndex = 13;
+            // 
+            // CategoryLabel
+            // 
+            this.CategoryLabel.AutoSize = true;
+            this.CategoryLabel.Location = new System.Drawing.Point(7, 95);
+            this.CategoryLabel.Name = "CategoryLabel";
+            this.CategoryLabel.Size = new System.Drawing.Size(52, 13);
+            this.CategoryLabel.TabIndex = 12;
+            this.CategoryLabel.Text = "Category:";
+            // 
             // DescriptionTextBox
             // 
-            this.DescriptionTextBox.Location = new System.Drawing.Point(6, 239);
+            this.DescriptionTextBox.Location = new System.Drawing.Point(6, 276);
             this.DescriptionTextBox.Multiline = true;
             this.DescriptionTextBox.Name = "DescriptionTextBox";
             this.DescriptionTextBox.Size = new System.Drawing.Size(375, 177);
@@ -158,26 +178,16 @@ namespace ObjectOrientedPractics.View.Tabs
             // 
             // NameTextBox
             // 
-            this.NameTextBox.Location = new System.Drawing.Point(6, 108);
+            this.NameTextBox.Location = new System.Drawing.Point(6, 145);
             this.NameTextBox.Multiline = true;
             this.NameTextBox.Name = "NameTextBox";
             this.NameTextBox.Size = new System.Drawing.Size(375, 112);
             this.NameTextBox.TabIndex = 10;
             // 
-            // RandomItemButton
-            // 
-            this.RandomItemButton.Location = new System.Drawing.Point(246, 595);
-            this.RandomItemButton.Name = "RandomItemButton";
-            this.RandomItemButton.Size = new System.Drawing.Size(108, 46);
-            this.RandomItemButton.TabIndex = 10;
-            this.RandomItemButton.Text = "Random";
-            this.RandomItemButton.UseVisualStyleBackColor = true;
-            // 
             // ItemsTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.RandomItemButton);
             this.Controls.Add(this.SelectedItemGroupBox);
             this.Controls.Add(this.ItemsLabel);
             this.Controls.Add(this.RemoveItemButton);
@@ -205,7 +215,8 @@ namespace ObjectOrientedPractics.View.Tabs
         private System.Windows.Forms.Label NameLabel;
         private System.Windows.Forms.GroupBox SelectedItemGroupBox;
         private System.Windows.Forms.TextBox DescriptionTextBox;
+        private System.Windows.Forms.ComboBox CategoryComboBox;
+        private System.Windows.Forms.Label CategoryLabel;
         private System.Windows.Forms.TextBox NameTextBox;
-        private System.Windows.Forms.Button RandomItemButton;
     }
 }

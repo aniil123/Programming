@@ -9,8 +9,12 @@ namespace ObjectOrientedPractics.Model
     /// <summary>
     /// Товар.
     /// </summary>
-    class Item
+    public class Item
     {
+        /// <summary>
+        /// Категория товара.
+        /// </summary>
+        public Category Category { get; set; }
         private static int _counter = 0;
         //Уникальный номер товара.
         private int _id;
@@ -84,18 +88,36 @@ namespace ObjectOrientedPractics.Model
             }
         }
         /// <summary>
+        /// Присваивает случайные значения полням с названием, информацией, и ценой товара.
+        /// </summary>
+        public Item()
+        {
+            _counter++;
+            ID = _counter;
+            Type[] TypesOfEnums = { typeof(NamesForAutoParts), typeof(NamesForChemistry), typeof(NamesForClothes), typeof(NamesForElectronics), typeof(NamesForFood), typeof(NamesForFurniture), typeof(NamesForPetSupplies) };
+            int numCategory = new Random().Next(0, Enum.GetValues(typeof(Category)).Length);
+            string[] infoOfItems = Enum.GetNames(typeof(InfoOfItems));
+            string[] namesForItems = Enum.GetNames(TypesOfEnums[numCategory]);
+            Name = namesForItems[new Random().Next(0, namesForItems.Length)];
+            Info = infoOfItems[new Random().Next(0, infoOfItems.Length)];
+            Cost = new Random().Next(234, 21355);
+            Category = (Category)numCategory;
+        }
+        /// <summary>
         /// Присваивает значения полям с названием, информацией и ценой товара.
         /// </summary>
-        /// <param name="_name">Значение должно быть строковым с количеством символов меньше 200.</param>
-        /// <param name="_info">Значение должно быть строковым с количеством символов меньше 1000.</param>
-        /// <param name="_cost">Значение должно быть вещественным не меньше 0 и не больше 100000.</param>
-        public Item(string name, string info, double cost)
+        /// <param name="name">Значение должно быть строковым с количеством символов меньше 200.</param>
+        /// <param name="info">Значение должно быть строковым с количеством символов меньше 1000.</param>
+        /// <param name="cost">Значение должно быть вещественным не меньше 0 и не больше 100000.</param>
+        /// <param name="category">Категория товара.</param>
+        public Item(string name, string info, double cost, Category category)
         {
             _counter++;
             ID = _counter;
             Name = name;
             Info = info;
             Cost = cost;
+            Category = category;
         }
     }
 }
