@@ -58,6 +58,7 @@
     <Compile Include="Enums\ForItems\Names\NamesForClothes.cs" />
     <Compile Include="Enums\ForItems\Names\NamesForFood.cs" />
     <Compile Include="Model\Address.cs" />
+    <Compile Include="Model\Cart.cs" />
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\Item.cs" />
     <Compile Include="Enums\ForCustomers\NamesOfCustomers.cs" />

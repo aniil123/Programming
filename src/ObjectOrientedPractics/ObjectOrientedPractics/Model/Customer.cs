@@ -18,6 +18,8 @@ namespace ObjectOrientedPractics.Model
         private string _fullname;
         //Адрес доставки товара покупателю.
         public Address Address;
+        //Корзина покупателя.
+        private Cart _cart;
         /// <summary>
         /// Возвращает уникальный номер покупателя.
         /// </summary>
@@ -49,6 +51,20 @@ namespace ObjectOrientedPractics.Model
             }
         }
         /// <summary>
+        /// Возвращает и заполняет корзину покупателя.
+        /// </summary>
+        public Cart Cart
+        {
+            get
+            {
+                return _cart;
+            }
+            set
+            {
+                _cart = value;
+            }
+        }
+        /// <summary>
         /// Заполняет поля с полным именем и адресом доставки товара покупателя случайными значениями.
         /// </summary>
         public Customer()
@@ -60,6 +76,7 @@ namespace ObjectOrientedPractics.Model
             string patronymic = Enum.GetNames(typeof(PatronymicsOfCustomers))[new Random().Next(0, Enum.GetNames(typeof(PatronymicsOfCustomers)).Length)];
             FullName = name + " " + secondName + " " + patronymic;
             Address = new Address(new Random().Next(100000, 999999), "Россия", "Томск", "Ленина", "40", "1000");
+            Cart = new Cart();
         }
         /// <summary>
         /// Заполняет поля с полным именем и адресом доставки товара покупателя.
@@ -71,12 +88,14 @@ namespace ObjectOrientedPractics.Model
         /// <param name="street">Улица.</param>
         /// <param name="building">Номер улицы.</param>
         /// <param name="apartment">Номер квартиры.</param>
-        public Customer(string fullname, int index, string country, string city, string street, string building, string apartment)
+        /// <param name="items">Список товаров в корзине.</param>
+        public Customer(string fullname, int index, string country, string city, string street, string building, string apartment, List<Item> items)
         {
             _counter++;
             ID = _counter;
             FullName = fullname;
             Address = new Address(index, country, city, street, building, apartment);
+            Cart = new Cart(items);
         }
     }
 }
