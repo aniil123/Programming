@@ -51,13 +51,14 @@ namespace ObjectOrientedPractics.View.Tabs
                 _customers.RemoveAt(index);
                 FullNameTextBox.BackColor = IDTextBox.BackColor;
                 AddressControl.Address = new Model.Address();
-                AddressControl.Enabled = false;
+                AddressControl.ReadOnlyOn();
             }
         }
         private void CustomersListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if(CustomersListBox.SelectedIndex != -1)
             {
+                AddressControl.ReadOnlyOff();
                 FullNameTextBox.ReadOnly = false;
                 AddressControl.Enabled = true;
                 IDTextBox.Text = _customers[CustomersListBox.SelectedIndex].ID.ToString();

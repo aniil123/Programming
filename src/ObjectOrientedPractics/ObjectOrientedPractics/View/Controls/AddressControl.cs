@@ -47,6 +47,30 @@ namespace ObjectOrientedPractics.View.Controls
             BuildingTextBox.TextChanged += BuildingTextBox_TextChanged;
             ApartmentTextBox.TextChanged += ApartmentTextBox_TextChanged;
         }
+        /// <summary>
+        /// Устанавливает свойства ReadOnly в значение true для всех текстовых полей пользовательского элемента управления.
+        /// </summary>
+        public void ReadOnlyOn()
+        {
+            PostIndexTextBox.ReadOnly = true;
+            CountryTextBox.ReadOnly = true;
+            CityTextBox.ReadOnly = true;
+            StreetTextBox.ReadOnly = true;
+            BuildingTextBox.ReadOnly = true;
+            ApartmentTextBox.ReadOnly = true;
+        }
+        /// <summary>
+        /// Устанавливает свойство ReadOnly в значение false для всех текстовых полей пользовательского элемента управления.
+        /// </summary>
+        public void ReadOnlyOff()
+        {
+            PostIndexTextBox.ReadOnly = false;
+            CountryTextBox.ReadOnly = false;
+            CityTextBox.ReadOnly = false;
+            StreetTextBox.ReadOnly = false;
+            BuildingTextBox.ReadOnly = false;
+            ApartmentTextBox.ReadOnly = false;
+        }
         private void PostIndexTextBox_TextChanged(object sender, EventArgs e)
         {
             try

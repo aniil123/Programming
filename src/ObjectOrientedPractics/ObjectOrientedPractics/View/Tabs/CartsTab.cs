@@ -14,7 +14,6 @@ namespace ObjectOrientedPractics.View.Tabs
     {
         List<Model.Item> _items;
         List<Model.Customer> _customers;
-        int saveSelectedIndex = -1;
         public List<Model.Item> Items
         {
             get
@@ -78,30 +77,27 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 ItemsListBox.Items.Add(i.Name);
             }
+            CustomerComboBox.SelectedIndex = -1;
             CustomerComboBox.Items.Clear();
             foreach (var i in Customers)
             {
                 CustomerComboBox.Items.Add(i.FullName);
-            }
-            CustomerComboBox.SelectedIndex = saveSelectedIndex;
-            if (CustomerComboBox.SelectedIndex != -1)
-            {
-                CartListBox.Items.Clear();
-                foreach (var i in CurrentCustomer.Cart.Items)
-                {
-                    CartListBox.Items.Add(i.Name);
-                }
             }
         }
         private void CustomerComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (CustomerComboBox.SelectedIndex != -1)
             {
-                saveSelectedIndex = CustomerComboBox.SelectedIndex;
                 CartListBox.Items.Clear();
-                foreach (var i in CurrentCustomer.Cart.Items)
+                for (int i = 0;i < CurrentCustomer.Cart.Items.Count;i++)
                 {
-                    CartListBox.Items.Add(i.Name);
+                    if (!CurrentCustomer.Cart.Items[i].Active)
+                    {
+                        CurrentCustomer.Cart.Items.RemoveAt(i);
+                        i--;
+                        continue;
+                    }
+                    CartListBox.Items.Add(CurrentCustomer.Cart.Items[i].Name);
                 }
                 CostUpdate();
             }

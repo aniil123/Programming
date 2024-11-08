@@ -58,6 +58,7 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 int index = ItemsListBox.SelectedIndex;
                 ItemsListBox.Items.RemoveAt(ItemsListBox.SelectedIndex);
+                _items[index].Active = false;
                 _items.RemoveAt(index);
                 CostTextBox.BackColor = IDTextBox.BackColor;
                 NameTextBox.BackColor = IDTextBox.BackColor;

@@ -24,6 +24,7 @@ namespace ObjectOrientedPractics.Model
         private string _info;
         //Цена товара.
         private double _cost;
+        private bool _active = true;
         /// <summary>
         /// Возвращает уникальный номер товара.
         /// </summary>
@@ -85,6 +86,17 @@ namespace ObjectOrientedPractics.Model
                 {
                     _cost = value;
                 }
+            }
+        }
+        public bool Active
+        {
+            get
+            {
+                return _active;
+            }
+            set
+            {
+                _active = value;
             }
         }
         /// <summary>
