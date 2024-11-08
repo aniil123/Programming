@@ -14,6 +14,7 @@ namespace ObjectOrientedPractics.View.Tabs
     {
         List<Model.Item> _items;
         List<Model.Customer> _customers;
+        int saveSelectedIndex = -1;
         public List<Model.Item> Items
         {
             get
@@ -68,11 +69,35 @@ namespace ObjectOrientedPractics.View.Tabs
             RemoveItemButton.Click += RemoveItemButton_Click;
             ClearCartButton.Click += ClearCartButton_Click;
             TotalCostLabel.SizeChanged += TotalCostLabel_SizeChanged;
+            CreateOrderButton.Click += CreateOrderButton_Click;
+        }
+        public void RefreshData()
+        {
+            ItemsListBox.Items.Clear();
+            foreach(var i in Items)
+            {
+                ItemsListBox.Items.Add(i.Name);
+            }
+            CustomerComboBox.Items.Clear();
+            foreach (var i in Customers)
+            {
+                CustomerComboBox.Items.Add(i.FullName);
+            }
+            CustomerComboBox.SelectedIndex = saveSelectedIndex;
+            if (CustomerComboBox.SelectedIndex != -1)
+            {
+                CartListBox.Items.Clear();
+                foreach (var i in CurrentCustomer.Cart.Items)
+                {
+                    CartListBox.Items.Add(i.Name);
+                }
+            }
         }
         private void CustomerComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (CustomerComboBox.SelectedIndex != -1)
             {
+                saveSelectedIndex = CustomerComboBox.SelectedIndex;
                 CartListBox.Items.Clear();
                 foreach (var i in CurrentCustomer.Cart.Items)
                 {
@@ -114,14 +139,26 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             TotalCostLabel.Left = 743 - TotalCostLabel.Width;
         }
+        private void CreateOrderButton_Click(object sender, EventArgs e)
+        {
+            if (CartListBox.Items.Count != 0)
+            {
+                int index = CurrentCustomer.Address.Index;
+                string country = CurrentCustomer.Address.Country;
+                string city = CurrentCustomer.Address.City;
+                string street = CurrentCustomer.Address.Street;
+                string building = CurrentCustomer.Address.Building;
+                string apartment = CurrentCustomer.Address.Apartment;
+                string date = new Random().Next(1, 9).ToString() + "." + new Random().Next(1, 12).ToString() + "." + new Random().Next(2001, 2025).ToString();
+                CurrentCustomer.Orders.Add(new Model.Order(index, country, city, street, building, apartment, date, CurrentCustomer.Cart.Items, OrderStatus.New));
+                CurrentCustomer.Cart.Items.Clear();
+                CartListBox.Items.Clear();
+                CostUpdate();
+            }
+        }
         private void CostUpdate()
         {
-            double totalCost = 0;
-            foreach(var i in CurrentCustomer.Cart.Items)
-            {
-                totalCost += i.Cost;
-            }
-            TotalCostLabel.Text = totalCost.ToString();
+            TotalCostLabel.Text = CurrentCustomer.Cart.Amount.ToString();
         }
     }
 }

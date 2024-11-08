@@ -23,6 +23,7 @@ namespace ObjectOrientedPractics.Model
         {
             get
             {
+                flagAmountChange = true;
                 return _items;
             }
             set
@@ -34,30 +35,23 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Возвращает суммарную стоимость товаров в корзине.
         /// </summary>
-        public double Amound
+        public double Amount
         {
             get
             {
-                if (Items != null)
+                if (flagAmountChange)
                 {
-                    if (flagAmountChange)
+                    _amount = 0;
+                    foreach (var i in _items)
                     {
-                        _amount = 0;
-                        foreach (var i in _items)
-                        {
-                            _amount += i.Cost;
-                        }
-                        flagAmountChange = false;
-                        return _amount;
+                        _amount += i.Cost;
                     }
-                    else
-                    {
-                        return _amount;
-                    }
+                    flagAmountChange = false;
+                    return _amount;
                 }
                 else
                 {
-                    return 0;
+                    return _amount;
                 }
             }
         }

@@ -44,11 +44,6 @@ namespace ObjectOrientedPractics.Model
         {
             _items = new List<Model.Item>();
             _customers = new List<Model.Customer>();
-            for(int i = 0;i < 3;i++)
-            {
-                _items.Add(new Item());
-                _customers.Add(new Customer());
-            }
         }
     }
 }

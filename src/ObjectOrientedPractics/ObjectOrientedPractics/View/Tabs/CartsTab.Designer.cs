@@ -113,9 +113,8 @@
             this.TotalCostLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.TotalCostLabel.Location = new System.Drawing.Point(689, 265);
             this.TotalCostLabel.Name = "TotalCostLabel";
-            this.TotalCostLabel.Size = new System.Drawing.Size(54, 24);
+            this.TotalCostLabel.Size = new System.Drawing.Size(0, 24);
             this.TotalCostLabel.TabIndex = 8;
-            this.TotalCostLabel.Text = "1234";
             this.TotalCostLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // CreateOrderButton

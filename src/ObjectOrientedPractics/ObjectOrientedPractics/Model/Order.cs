@@ -12,6 +12,7 @@ namespace ObjectOrientedPractics.Model
     public class Order
     {
         private static int counter = 0;
+        //Статус заказа.
         public OrderStatus OrderStatus { get; set; }
         //Адрес доставки товаров.
         public Address Address;
@@ -59,6 +60,7 @@ namespace ObjectOrientedPractics.Model
         {
             get
             {
+                flagCostChange = true;
                 return _items;
             }
             set
@@ -110,8 +112,12 @@ namespace ObjectOrientedPractics.Model
             ID = counter;
             Address = new Address(index, country, city, street, building, apartment);
             Date = date;
-            Items = items;
             OrderStatus = orderStatus;
+            Items = new List<Item>();
+            foreach (var i in items)
+            {
+                Items.Add(new Model.Item(i.Name, i.Info, i.Cost, i.Category));
+            }
         }
     }
 }
