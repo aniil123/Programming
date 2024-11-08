@@ -47,7 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\Category.cs" />
-    <Compile Include="Enums\Class1.cs" />
     <Compile Include="Enums\ForCustomers\PatronymicsOfCustomers.cs" />
     <Compile Include="Enums\ForCustomers\SecondNamesOfCustomers.cs" />
     <Compile Include="Enums\ForItems\InfoOfItems.cs" />
