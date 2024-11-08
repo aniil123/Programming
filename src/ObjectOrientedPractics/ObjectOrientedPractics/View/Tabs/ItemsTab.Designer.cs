@@ -89,7 +89,7 @@ namespace ObjectOrientedPractics.View.Tabs
             // 
             // AddItemButton
             // 
-            this.AddItemButton.Location = new System.Drawing.Point(4, 595);
+            this.AddItemButton.Location = new System.Drawing.Point(4, 596);
             this.AddItemButton.Name = "AddItemButton";
             this.AddItemButton.Size = new System.Drawing.Size(115, 46);
             this.AddItemButton.TabIndex = 3;
@@ -98,7 +98,7 @@ namespace ObjectOrientedPractics.View.Tabs
             // 
             // RemoveItemButton
             // 
-            this.RemoveItemButton.Location = new System.Drawing.Point(124, 595);
+            this.RemoveItemButton.Location = new System.Drawing.Point(124, 596);
             this.RemoveItemButton.Name = "RemoveItemButton";
             this.RemoveItemButton.Size = new System.Drawing.Size(115, 46);
             this.RemoveItemButton.TabIndex = 4;

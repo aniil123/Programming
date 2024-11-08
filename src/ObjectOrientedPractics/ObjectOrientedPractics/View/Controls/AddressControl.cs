@@ -22,7 +22,14 @@ namespace ObjectOrientedPractics.View.Controls
             set
             {
                 _address = value;
-                PostIndexTextBox.Text = _address.Index.ToString();
+                if (_address.Index != 0)
+                {
+                    PostIndexTextBox.Text = _address.Index.ToString();
+                }
+                else
+                {
+                    PostIndexTextBox.Text = "";
+                }
                 CountryTextBox.Text = _address.Country;
                 CityTextBox.Text = _address.City;
                 StreetTextBox.Text = _address.Street;
@@ -39,6 +46,30 @@ namespace ObjectOrientedPractics.View.Controls
             StreetTextBox.TextChanged += StreetTextBox_TextChanged;
             BuildingTextBox.TextChanged += BuildingTextBox_TextChanged;
             ApartmentTextBox.TextChanged += ApartmentTextBox_TextChanged;
+        }
+        /// <summary>
+        /// Устанавливает свойства ReadOnly в значение true для всех текстовых полей пользовательского элемента управления.
+        /// </summary>
+        public void ReadOnlyOn()
+        {
+            PostIndexTextBox.ReadOnly = true;
+            CountryTextBox.ReadOnly = true;
+            CityTextBox.ReadOnly = true;
+            StreetTextBox.ReadOnly = true;
+            BuildingTextBox.ReadOnly = true;
+            ApartmentTextBox.ReadOnly = true;
+        }
+        /// <summary>
+        /// Устанавливает свойство ReadOnly в значение false для всех текстовых полей пользовательского элемента управления.
+        /// </summary>
+        public void ReadOnlyOff()
+        {
+            PostIndexTextBox.ReadOnly = false;
+            CountryTextBox.ReadOnly = false;
+            CityTextBox.ReadOnly = false;
+            StreetTextBox.ReadOnly = false;
+            BuildingTextBox.ReadOnly = false;
+            ApartmentTextBox.ReadOnly = false;
         }
         private void PostIndexTextBox_TextChanged(object sender, EventArgs e)
         {

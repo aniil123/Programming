@@ -49,7 +49,7 @@ namespace ObjectOrientedPractics.View.Tabs
             this.SelectedCustomerGroupBox.Controls.Add(this.FullNameLabel);
             this.SelectedCustomerGroupBox.Controls.Add(this.IDTextBox);
             this.SelectedCustomerGroupBox.Controls.Add(this.FullNameTextBox);
-            this.SelectedCustomerGroupBox.Location = new System.Drawing.Point(360, 5);
+            this.SelectedCustomerGroupBox.Location = new System.Drawing.Point(360, 4);
             this.SelectedCustomerGroupBox.Name = "SelectedCustomerGroupBox";
             this.SelectedCustomerGroupBox.Size = new System.Drawing.Size(387, 637);
             this.SelectedCustomerGroupBox.TabIndex = 14;
@@ -99,7 +99,7 @@ namespace ObjectOrientedPractics.View.Tabs
             // ItemsLabel
             // 
             this.ItemsLabel.AutoSize = true;
-            this.ItemsLabel.Location = new System.Drawing.Point(4, 5);
+            this.ItemsLabel.Location = new System.Drawing.Point(4, 4);
             this.ItemsLabel.Name = "ItemsLabel";
             this.ItemsLabel.Size = new System.Drawing.Size(56, 13);
             this.ItemsLabel.TabIndex = 13;
@@ -126,7 +126,7 @@ namespace ObjectOrientedPractics.View.Tabs
             // CustomersListBox
             // 
             this.CustomersListBox.FormattingEnabled = true;
-            this.CustomersListBox.Location = new System.Drawing.Point(4, 26);
+            this.CustomersListBox.Location = new System.Drawing.Point(4, 25);
             this.CustomersListBox.Name = "CustomersListBox";
             this.CustomersListBox.Size = new System.Drawing.Size(350, 563);
             this.CustomersListBox.TabIndex = 10;
