@@ -91,7 +91,7 @@ namespace ObjectOrientedPractics
             // 
             // CustomersTab
             // 
-            //this.CustomersTab.Customers = null;
+            this.CustomersTab.Customers = null;
             this.CustomersTab.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CustomersTab.Location = new System.Drawing.Point(0, 0);
             this.CustomersTab.Name = "CustomersTab";
@@ -110,8 +110,8 @@ namespace ObjectOrientedPractics
             // 
             // CartsTab
             // 
-            //this.CartsTab.Customers = null;
-            //this.CartsTab.Items = null;
+            this.CartsTab.Customers = null;
+            this.CartsTab.Items = null;
             this.CartsTab.Location = new System.Drawing.Point(4, 4);
             this.CartsTab.Name = "CartsTab";
             this.CartsTab.Size = new System.Drawing.Size(750, 647);
@@ -129,7 +129,7 @@ namespace ObjectOrientedPractics
             // 
             // OrdersTab
             // 
-            //this.OrdersTab.Customers = null;
+            this.OrdersTab.Customers = null;
             this.OrdersTab.Location = new System.Drawing.Point(9, 4);
             this.OrdersTab.Name = "OrdersTab";
             this.OrdersTab.Size = new System.Drawing.Size(750, 647);

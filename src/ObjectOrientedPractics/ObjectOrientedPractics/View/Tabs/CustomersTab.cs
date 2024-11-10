@@ -32,10 +32,12 @@ namespace ObjectOrientedPractics.View.Tabs
             InitializeComponent();
             IDTextBox.ReadOnly = true;
             FullNameTextBox.ReadOnly = true;
+            IsPriorityCheckBox.Enabled = false;
             AddCustomerButton.Click += AddCustomerButton_Click;
             RemoveCustomerButton.Click += RemoveCustomerButton_Click;
             CustomersListBox.SelectedIndexChanged += CustomersListBox_SelectedIndexChanged;
             FullNameTextBox.TextChanged += FullNameTextBox_TextChanged;
+            IsPriorityCheckBox.CheckedChanged += IsPriorityCheckBox_CheckedChanged;
         }
         private void AddCustomerButton_Click(object sender, EventArgs e)
         {
@@ -61,15 +63,19 @@ namespace ObjectOrientedPractics.View.Tabs
                 AddressControl.ReadOnlyOff();
                 FullNameTextBox.ReadOnly = false;
                 AddressControl.Enabled = true;
+                IsPriorityCheckBox.Enabled = true;
                 IDTextBox.Text = _customers[CustomersListBox.SelectedIndex].ID.ToString();
                 FullNameTextBox.Text = _customers[CustomersListBox.SelectedIndex].FullName;
                 AddressControl.Address = _customers[CustomersListBox.SelectedIndex].Address;
+                IsPriorityCheckBox.Checked = _customers[CustomersListBox.SelectedIndex].IsPriority;
             }
             else
             {
                 FullNameTextBox.ReadOnly = true;
+                IsPriorityCheckBox.Enabled = false;
                 IDTextBox.Text = "";
                 FullNameTextBox.Text = "";
+                IsPriorityCheckBox.Checked = false;
             }
         }
         private void FullNameTextBox_TextChanged(object sender, EventArgs e)
@@ -105,6 +111,13 @@ namespace ObjectOrientedPractics.View.Tabs
             catch
             {
                 FullNameTextBox.BackColor = Color.Red;
+            }
+        }
+        private void IsPriorityCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if(CustomersListBox.SelectedIndex != -1)
+            {
+                _customers[CustomersListBox.SelectedIndex].IsPriority = Convert.ToBoolean(IsPriorityCheckBox.CheckState);
             }
         }
     }

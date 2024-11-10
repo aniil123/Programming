@@ -22,11 +22,14 @@ namespace ObjectOrientedPractics.View.Tabs
             }
             set
             {
-                _items = value;
-                ItemsListBox.Items.Clear();
-                foreach(var i in _items)
+                if (value != null)
                 {
-                    ItemsListBox.Items.Add(i.Name);
+                    _items = value;
+                    ItemsListBox.Items.Clear();
+                    foreach (var i in _items)
+                    {
+                        ItemsListBox.Items.Add(i.Name);
+                    }
                 }
             }
         }
@@ -38,11 +41,14 @@ namespace ObjectOrientedPractics.View.Tabs
             }
             set
             {
-                _customers = value;
-                CustomerComboBox.Items.Clear();
-                foreach(var i in _customers)
+                if (value != null)
                 {
-                    CustomerComboBox.Items.Add(i.FullName);
+                    _customers = value;
+                    CustomerComboBox.Items.Clear();
+                    foreach (var i in _customers)
+                    {
+                        CustomerComboBox.Items.Add(i.FullName);
+                    }
                 }
             }
         }
@@ -146,7 +152,14 @@ namespace ObjectOrientedPractics.View.Tabs
                 string building = CurrentCustomer.Address.Building;
                 string apartment = CurrentCustomer.Address.Apartment;
                 string date = new Random().Next(1, 9).ToString() + "." + new Random().Next(1, 12).ToString() + "." + new Random().Next(2001, 2025).ToString();
-                CurrentCustomer.Orders.Add(new Model.Order(index, country, city, street, building, apartment, date, CurrentCustomer.Cart.Items, OrderStatus.New));
+                if (CurrentCustomer.IsPriority)
+                {
+                    CurrentCustomer.Orders.Add(new Model.PriorityOrder(index, country, city, street, building, apartment, date, CurrentCustomer.Cart.Items, OrderStatus.New));
+                }
+                else
+                {
+                    CurrentCustomer.Orders.Add(new Model.Order(index, country, city, street, building, apartment, date, CurrentCustomer.Cart.Items, OrderStatus.New));
+                }
                 CurrentCustomer.Cart.Items.Clear();
                 CartListBox.Items.Clear();
                 CostUpdate();

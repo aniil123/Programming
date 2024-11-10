@@ -22,6 +22,8 @@ namespace ObjectOrientedPractics.Model
         private Cart _cart;
         //Список заказов покупателя.
         private List<Order> _orders;
+        //Указывает является ли покупатель приоритетным.
+        private bool _isPriority = false;
         /// <summary>
         /// Возвращает уникальный номер покупателя.
         /// </summary>
@@ -78,6 +80,17 @@ namespace ObjectOrientedPractics.Model
             set
             {
                 _orders = value;
+            }
+        }
+        public bool IsPriority
+        {
+            get
+            {
+                return _isPriority;
+            }
+            set
+            {
+                _isPriority = value;
             }
         }
         /// <summary>

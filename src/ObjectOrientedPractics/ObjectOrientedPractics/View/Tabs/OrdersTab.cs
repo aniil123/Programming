@@ -23,8 +23,11 @@ namespace ObjectOrientedPractics.View.Tabs
             }
             set
             {
-                _customers = value;
-                UpdateOrders();
+                if (value != null)
+                {
+                    _customers = value;
+                    UpdateOrders();
+                }
             }
         }
         private Model.Order CurrentOrder
@@ -49,6 +52,11 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 StatusComboBox.Items.Add(i);
             }
+            string[] times = { "9:00 - 11:00", "11:00 - 13:00", "13:00 - 15:00", "15:00 - 17:00", "17:00 - 19:00", "19:00 - 21:00" };
+            foreach (var i in times)
+            {
+                DeliveryTimeComboBox.Items.Add(i);
+            }
         }
         public void UpdateOrders()
         {
@@ -72,6 +80,14 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 if (DataGridView.SelectedRows.Count != 0)
                 {
+                    if(CurrentOrder.GetType() == typeof(Model.PriorityOrder))
+                    {
+                        PriorityOptionsPanel.Visible = true;
+                    }
+                    else
+                    {
+                        PriorityOptionsPanel.Visible = false;
+                    }
                     IDTextBox.Text = CurrentOrder.ID.ToString();
                     CreatedTextBox.Text = CurrentOrder.Date;
                     StatusComboBox.SelectedItem = CurrentOrder.OrderStatus;
@@ -91,6 +107,7 @@ namespace ObjectOrientedPractics.View.Tabs
                     AddressControl.Address = new Model.Address();
                     OrderItemsListBox.Items.Clear();
                     TotalCostLabel.Text = "";
+                    PriorityOptionsPanel.Visible = false;
                 }
             }
             flag = true;
@@ -100,6 +117,15 @@ namespace ObjectOrientedPractics.View.Tabs
             if(DataGridView.SelectedRows.Count != 0)
             {
                 CurrentOrder.OrderStatus = (OrderStatus)StatusComboBox.SelectedIndex;
+                DataGridView.SelectedRows[0].Cells[3].Value = (OrderStatus)StatusComboBox.SelectedIndex;
+            }
+        }
+        private void DeliveryTimeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(CurrentOrder.GetType() == typeof(Model.PriorityOrder))
+            {
+                Model.PriorityOrder priorityOrder = (Model.PriorityOrder)CurrentOrder;
+                priorityOrder.PriorityTime = DeliveryTimeComboBox.SelectedItem.ToString();
             }
         }
         private void TotalCostLabel_SizeChanged(object sender, EventArgs e)

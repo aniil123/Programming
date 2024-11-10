@@ -21,20 +21,23 @@ namespace ObjectOrientedPractics.View.Controls
             }
             set
             {
-                _address = value;
-                if (_address.Index != 0)
+                if (value != null)
                 {
-                    PostIndexTextBox.Text = _address.Index.ToString();
+                    _address = value;
+                    if (_address.Index != 0)
+                    {
+                        PostIndexTextBox.Text = _address.Index.ToString();
+                    }
+                    else
+                    {
+                        PostIndexTextBox.Text = "";
+                    }
+                    CountryTextBox.Text = _address.Country;
+                    CityTextBox.Text = _address.City;
+                    StreetTextBox.Text = _address.Street;
+                    BuildingTextBox.Text = _address.Building;
+                    ApartmentTextBox.Text = _address.Apartment;
                 }
-                else
-                {
-                    PostIndexTextBox.Text = "";
-                }
-                CountryTextBox.Text = _address.Country;
-                CityTextBox.Text = _address.City;
-                StreetTextBox.Text = _address.Street;
-                BuildingTextBox.Text = _address.Building;
-                ApartmentTextBox.Text = _address.Apartment;
             }
         }
         public AddressControl()
