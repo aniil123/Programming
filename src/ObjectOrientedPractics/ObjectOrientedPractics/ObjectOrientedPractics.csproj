@@ -64,6 +64,8 @@
     <Compile Include="Model\Item.cs" />
     <Compile Include="Enums\ForCustomers\NamesOfCustomers.cs" />
     <Compile Include="Model\Order.cs" />
+    <Compile Include="Model\PointsDiscount.cs" />
+    <Compile Include="Model\PresentDiscount.cs" />
     <Compile Include="Model\PriorityOrder.cs" />
     <Compile Include="Model\Store.cs" />
     <Compile Include="Services\ValueValidator.cs" />
@@ -92,6 +94,12 @@
     </Compile>
     <Compile Include="View\Tabs\CustomersTab.Designer.cs">
       <DependentUpon>CustomersTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Tabs\DiscountsTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\Tabs\DiscountsTab.Designer.cs">
+      <DependentUpon>DiscountsTab.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Tabs\ItemsTab.cs">
       <SubType>UserControl</SubType>
@@ -131,6 +139,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\Tabs\CustomersTab.resx">
       <DependentUpon>CustomersTab.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Tabs\DiscountsTab.resx">
+      <DependentUpon>DiscountsTab.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Tabs\ItemsTab.resx">
       <DependentUpon>ItemsTab.cs</DependentUpon>

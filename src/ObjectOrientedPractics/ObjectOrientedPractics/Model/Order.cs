@@ -63,7 +63,7 @@ namespace ObjectOrientedPractics.Model
                 flagCostChange = true;
                 return _items;
             }
-            set
+            private set
             {
                 _items = value;
                 flagCostChange = true;
@@ -91,6 +91,10 @@ namespace ObjectOrientedPractics.Model
                 {
                     return _totalCost;
                 }
+
+            }
+            set
+            {
 
             }
         }
