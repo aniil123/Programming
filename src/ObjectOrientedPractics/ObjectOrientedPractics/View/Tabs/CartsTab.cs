@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ObjectOrientedPractics.Model.Orders;
 
 namespace ObjectOrientedPractics.View.Tabs
 {
@@ -154,11 +155,11 @@ namespace ObjectOrientedPractics.View.Tabs
                 string date = new Random().Next(1, 9).ToString() + "." + new Random().Next(1, 12).ToString() + "." + new Random().Next(2001, 2025).ToString();
                 if (CurrentCustomer.IsPriority)
                 {
-                    CurrentCustomer.Orders.Add(new Model.PriorityOrder(index, country, city, street, building, apartment, date, CurrentCustomer.Cart.Items, OrderStatus.New));
+                    CurrentCustomer.Orders.Add(new PriorityOrder(index, country, city, street, building, apartment, date, CurrentCustomer.Cart.Items, OrderStatus.New));
                 }
                 else
                 {
-                    CurrentCustomer.Orders.Add(new Model.Order(index, country, city, street, building, apartment, date, CurrentCustomer.Cart.Items, OrderStatus.New));
+                    CurrentCustomer.Orders.Add(new Order(index, country, city, street, building, apartment, date, CurrentCustomer.Cart.Items, OrderStatus.New));
                 }
                 CurrentCustomer.Cart.Items.Clear();
                 CartListBox.Items.Clear();

@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ObjectOrientedPractics.Model.Orders;
 
 namespace ObjectOrientedPractics.View.Tabs
 {
     public partial class PriorityOrdersTab : UserControl
     {
-        Model.PriorityOrder _priorityOrder;
+        PriorityOrder _priorityOrder;
         public PriorityOrdersTab()
         {
             InitializeComponent();
@@ -80,7 +81,7 @@ namespace ObjectOrientedPractics.View.Tabs
             TotalCostLabel.Text = _priorityOrder.TotalCost.ToString();
             DeliveryTimeComboBox.SelectedIndex = -1;
         }
-        private Model.PriorityOrder NewPriorityOrder()
+        private PriorityOrder NewPriorityOrder()
         {
             int index = new Random().Next(100000, 1000000);
             string country = "Россия";
@@ -96,7 +97,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 items.Add(new Model.Item());
             }
             OrderStatus orderStatus = (OrderStatus)new Random().Next(0, Enum.GetValues(typeof(OrderStatus)).Length);
-            return new Model.PriorityOrder(index, country, city, street, building, apartment, date, items, orderStatus);
+            return new PriorityOrder(index, country, city, street, building, apartment, date, items, orderStatus);
         }
     }
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ObjectOrientedPractics.Model.Orders;
+using ObjectOrientedPractics.Model.Discounts;
 
 namespace ObjectOrientedPractics.Model
 {
@@ -12,18 +14,30 @@ namespace ObjectOrientedPractics.Model
     public class Customer
     {
         private static int _counter = 0;
+        //Адрес доставки товара покупателю.
+        public Address Address;
+        private List<IDiscount> _idiscounts;
         //Уникальный номер покупателя.
         private int _id;
         //Полное имя покупателя.
         private string _fullname;
-        //Адрес доставки товара покупателю.
-        public Address Address;
         //Корзина покупателя.
         private Cart _cart;
         //Список заказов покупателя.
         private List<Order> _orders;
         //Указывает является ли покупатель приоритетным.
         private bool _isPriority = false;
+        public List<IDiscount> Discounts
+        {
+            get
+            {
+                return _idiscounts;
+            }
+            set
+            {
+                _idiscounts = value;
+            }
+        }
         /// <summary>
         /// Возвращает уникальный номер покупателя.
         /// </summary>
@@ -107,6 +121,8 @@ namespace ObjectOrientedPractics.Model
             Address = new Address(new Random().Next(100000, 999999), "Россия", "Томск", "Ленина", "40", "1000");
             Cart = new Cart();
             Orders = new List<Order>();
+            Discounts = new List<IDiscount>();
+            Discounts.Add(new PointsDiscount());
         }
         /// <summary>
         /// Заполняет поля с полным именем и адресом доставки товара покупателя.
@@ -119,7 +135,8 @@ namespace ObjectOrientedPractics.Model
         /// <param name="building">Номер улицы.</param>
         /// <param name="apartment">Номер квартиры.</param>
         /// <param name="items">Список товаров в корзине.</param>
-        public Customer(string fullname, int index, string country, string city, string street, string building, string apartment, List<Item> items)
+        /// <param name="categories">Список категорий, на товары которых есть скидка.</param>"
+        public Customer(string fullname, int index, string country, string city, string street, string building, string apartment, List<Item> items, List<Category> categories)
         {
             _counter++;
             ID = _counter;
@@ -127,6 +144,12 @@ namespace ObjectOrientedPractics.Model
             Address = new Address(index, country, city, street, building, apartment);
             Cart = new Cart(items);
             Orders = new List<Order>();
+            Discounts = new List<IDiscount>();
+            Discounts.Add(new PointsDiscount());
+            foreach(var i in categories)
+            {
+                Discounts.Add(new PresentDiscount(i));
+            }
         }
     }
 }

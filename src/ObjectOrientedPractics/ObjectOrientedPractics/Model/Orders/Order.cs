@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ObjectOrientedPractics.Model
+namespace ObjectOrientedPractics.Model.Orders
 {
     /// <summary>
     /// Заказ покупателя.
@@ -24,6 +24,7 @@ namespace ObjectOrientedPractics.Model
         private List<Item> _items;
         //Стоимость заказа.
         private double _totalCost;
+        private double _discountAmount;
         private bool flagCostChange = true;
         /// <summary>
         /// Возвращает ID заказа.
@@ -96,6 +97,27 @@ namespace ObjectOrientedPractics.Model
             set
             {
 
+            }
+        }
+        /// <summary>
+        /// Возвращает и задает размер скидки применяемой к заказу.
+        /// </summary>
+        public double DiscountAmount
+        {
+            get
+            {
+                return _discountAmount;
+            }
+            set
+            {
+                _discountAmount = value;
+            }
+        }
+        public double Total
+        {
+            get
+            {
+                return TotalCost - DiscountAmount;
             }
         }
         /// <summary>

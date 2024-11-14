@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ObjectOrientedPractics.Model
+namespace ObjectOrientedPractics.Model.Discounts
 {
-    class PresentDiscount
+    /// <summary>
+    /// Скидка в процентах.
+    /// </summary>
+    public class PresentDiscount : IDiscount
     {
         //Категория, на товарам которой есть скидка.
         public Category Category { get; set; }
@@ -63,7 +66,7 @@ namespace ObjectOrientedPractics.Model
         /// На основе полученного списка товаров определяет сумму скидки.
         /// </summary>
         /// <param name="items">Список товаров.</param>
-        /// <returns></returns>
+        /// <returns>Сумма скидки.</returns>
         public double Calculate(List<Model.Item> items)
         {
             double amount = 0;
@@ -80,7 +83,7 @@ namespace ObjectOrientedPractics.Model
         /// На основе полученного списка товаров определяет сумму скидки и применяет ее к товарам выбранной категории.
         /// </summary>
         /// <param name="items">Список товаров.</param>
-        /// <returns></returns>
+        /// <returns>Сумма скидки.</returns>
         public double Apply(List<Model.Item> items)
         {
             double amount = 0;

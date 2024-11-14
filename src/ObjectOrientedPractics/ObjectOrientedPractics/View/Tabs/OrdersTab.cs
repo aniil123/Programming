@@ -7,15 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ObjectOrientedPractics.Model;
+using ObjectOrientedPractics.Model.Orders;
 
 namespace ObjectOrientedPractics.View.Tabs
 {
     public partial class OrdersTab : UserControl
     {
-        List<Model.Customer> _customers;
-        List<Model.Order> _orders = new List<Model.Order>();
+        List<Customer> _customers;
+        List<Order> _orders = new List<Order>();
         bool flag = true;
-        public List<Model.Customer> Customers
+        public List<Customer> Customers
         {
             get
             {
@@ -30,7 +32,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 }
             }
         }
-        private Model.Order CurrentOrder
+        private Order CurrentOrder
         {
             get
             {
@@ -80,7 +82,7 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 if (DataGridView.SelectedRows.Count != 0)
                 {
-                    if(CurrentOrder.GetType() == typeof(Model.PriorityOrder))
+                    if(CurrentOrder.GetType() == typeof(PriorityOrder))
                     {
                         PriorityOptionsPanel.Visible = true;
                     }
@@ -122,9 +124,9 @@ namespace ObjectOrientedPractics.View.Tabs
         }
         private void DeliveryTimeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(CurrentOrder.GetType() == typeof(Model.PriorityOrder))
+            if(CurrentOrder.GetType() == typeof(PriorityOrder))
             {
-                Model.PriorityOrder priorityOrder = (Model.PriorityOrder)CurrentOrder;
+                PriorityOrder priorityOrder = (PriorityOrder)CurrentOrder;
                 priorityOrder.PriorityTime = DeliveryTimeComboBox.SelectedItem.ToString();
             }
         }

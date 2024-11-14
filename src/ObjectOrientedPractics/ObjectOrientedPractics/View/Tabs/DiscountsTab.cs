@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ObjectOrientedPractics.Model.Discounts;
 
 namespace ObjectOrientedPractics.View.Tabs
 {
     public partial class DiscountsTab : UserControl
     {
-        Model.PointsDiscount pointsDiscount = new Model.PointsDiscount();
+        PointsDiscount pointsDiscount = new PointsDiscount();
         List<Model.Item> items = new List<Model.Item>();
         public DiscountsTab()
         {

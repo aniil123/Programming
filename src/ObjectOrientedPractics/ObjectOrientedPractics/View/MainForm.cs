@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ObjectOrientedPractics.Model.Discounts;
 
 namespace ObjectOrientedPractics
 {
@@ -16,7 +17,7 @@ namespace ObjectOrientedPractics
         {
             InitializeComponent();
             TabControl.SelectedIndexChanged += TabControl_SelectedIndexChanged;
-            Model.PointsDiscount di = new Model.PointsDiscount();
+            PointsDiscount di = new PointsDiscount();
             List<Model.Item> items = new List<Model.Item>();
             for(int i = 0;i< 3;i++)
             {
