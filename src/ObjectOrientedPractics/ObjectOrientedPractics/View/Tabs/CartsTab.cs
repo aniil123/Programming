@@ -74,8 +74,11 @@ namespace ObjectOrientedPractics.View.Tabs
             AddToCartButton.Click += AddToCartButton_Click;
             RemoveItemButton.Click += RemoveItemButton_Click;
             ClearCartButton.Click += ClearCartButton_Click;
+            CostLabel.SizeChanged += CostLabel_SizeChanged;
+            DiscountLabel.SizeChanged += DiscountLabel_SizeChanged;
             TotalCostLabel.SizeChanged += TotalCostLabel_SizeChanged;
             CreateOrderButton.Click += CreateOrderButton_Click;
+            DiscountsCheckedListBox.SelectedIndexChanged += DiscountsCheckedListBox_SelectedIndexChanged;
         }
         public void RefreshData()
         {
@@ -106,12 +109,24 @@ namespace ObjectOrientedPractics.View.Tabs
                     }
                     CartListBox.Items.Add(CurrentCustomer.Cart.Items[i].Name);
                 }
-                CostUpdate();
+                DiscountsCheckedListBox.Items.Clear();
+                foreach(var i in CurrentCustomer.Discounts)
+                {
+                    DiscountsCheckedListBox.Items.Add(i.Info);
+                }
+                for(int i = 0;i < DiscountsCheckedListBox.Items.Count;i++)
+                {
+                    DiscountsCheckedListBox.SetItemChecked(i, true);
+                }
+                Update();
             }
             else
             {
                 CartListBox.Items.Clear();
-                TotalCostLabel.Text = "";
+                CostLabel.Text = "0";
+                DiscountsCheckedListBox.Items.Clear();
+                DiscountLabel.Text = "0";
+                TotalCostLabel.Text = "0";
             }
         }
         private void AddToCartButton_Click(object sender, EventArgs e)
@@ -120,7 +135,7 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 CurrentCustomer.Cart.Items.Add(CurrentItem);
                 CartListBox.Items.Add(CurrentItem.Name);
-                CostUpdate();
+                Update();
             }
         }
         private void RemoveItemButton_Click(object sender, EventArgs e)
@@ -129,14 +144,22 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 CurrentCustomer.Cart.Items.RemoveAt(CartListBox.SelectedIndex);
                 CartListBox.Items.RemoveAt(CartListBox.SelectedIndex);
-                CostUpdate();
+                Update();
             }
         }
         private void ClearCartButton_Click(object sender, EventArgs e)
         {
             CurrentCustomer.Cart.Items.Clear();
             CartListBox.Items.Clear();
-            CostUpdate();
+            Update();
+        }
+        private void CostLabel_SizeChanged(object sender, EventArgs e)
+        {
+            CostLabel.Left = 743 - CostLabel.Width;
+        }
+        private void DiscountLabel_SizeChanged(object sender, EventArgs e)
+        {
+            DiscountLabel.Left = 743 - DiscountLabel.Width;
         }
         private void TotalCostLabel_SizeChanged(object sender, EventArgs e)
         {
@@ -161,14 +184,50 @@ namespace ObjectOrientedPractics.View.Tabs
                 {
                     CurrentCustomer.Orders.Add(new Order(index, country, city, street, building, apartment, date, CurrentCustomer.Cart.Items, OrderStatus.New));
                 }
+                for (int i = 0;i < CurrentCustomer.Discounts.Count;i++)
+                {
+                    if (DiscountsCheckedListBox.GetItemChecked(i))
+                    {
+                        CurrentCustomer.Discounts[i].Apply(CurrentCustomer.Orders[CurrentCustomer.Orders.Count - 1].Items);
+                    }
+                    CurrentCustomer.Discounts[i].Update(CurrentCustomer.Orders[CurrentCustomer.Orders.Count - 1].Items);
+                }
+                bool[] statusOfDiscounts = new bool[DiscountsCheckedListBox.Items.Count];
+                for(int i = 0;i < DiscountsCheckedListBox.Items.Count;i++)
+                {
+                    statusOfDiscounts[i] = DiscountsCheckedListBox.GetItemChecked(i);
+                }
+                DiscountsCheckedListBox.Items.Clear();
+                foreach (var i in CurrentCustomer.Discounts)
+                {
+                    DiscountsCheckedListBox.Items.Add(i.Info);
+                }
+                for (int i = 0; i < DiscountsCheckedListBox.Items.Count; i++)
+                {
+                    DiscountsCheckedListBox.SetItemChecked(i, statusOfDiscounts[i]);
+                }
                 CurrentCustomer.Cart.Items.Clear();
                 CartListBox.Items.Clear();
-                CostUpdate();
+                Update();
             }
         }
-        private void CostUpdate()
+        private void DiscountsCheckedListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TotalCostLabel.Text = CurrentCustomer.Cart.Amount.ToString();
+            Update();
+        }
+        private void Update()
+        {
+            CostLabel.Text = CurrentCustomer.Cart.Amount.ToString();
+            double amount = 0;
+            for (int i = 0; i < CurrentCustomer.Discounts.Count; i++)
+            {
+                if (DiscountsCheckedListBox.GetItemChecked(i))
+                {
+                    amount += CurrentCustomer.Discounts[i].Calculate(CurrentCustomer.Cart.Items);
+                }
+            }
+            DiscountLabel.Text = amount.ToString();
+            TotalCostLabel.Text = (Convert.ToDouble(CostLabel.Text) - Convert.ToDouble(DiscountLabel.Text)).ToString();
         }
     }
 }

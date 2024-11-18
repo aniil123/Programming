@@ -94,10 +94,6 @@ namespace ObjectOrientedPractics.Model.Orders
                 }
 
             }
-            set
-            {
-
-            }
         }
         /// <summary>
         /// Возвращает и задает размер скидки применяемой к заказу.

@@ -96,13 +96,16 @@ namespace ObjectOrientedPractics.Model.Discounts
                     amount += i.Cost;
                 }
             }
-            double discount = (int)(amount * Discount * 0.01 / necessaryItems.Count * 100) / 100;
-            foreach(var i in necessaryItems)
+            if (necessaryItems.Count != 0)
             {
-                i.Cost -= discount;
+                double discount = (int)(amount * Discount * 0.01 / necessaryItems.Count * 100) / 100;
+                foreach (var i in necessaryItems)
+                {
+                    i.Cost -= discount;
+                }
+                Discount = 0;
+                TotalCosts = 0;
             }
-            Discount = 0;
-            TotalCosts = 0;
             return amount * Discount * 0.01;
         }
         /// <summary>

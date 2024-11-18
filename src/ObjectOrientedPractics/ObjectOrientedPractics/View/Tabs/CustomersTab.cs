@@ -7,16 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ObjectOrientedPractics.Model;
 
 namespace ObjectOrientedPractics.View.Tabs
 {
     public partial class CustomersTab : UserControl
     {
-        List<Model.Customer> _customers;
+        List<Customer> _customers;
         /// <summary>
         /// Возвращает и присваивает список покупателей.
         /// </summary>
-        public List<Model.Customer> Customers
+        public List<Customer> Customers
         {
             get
             {
@@ -25,6 +26,13 @@ namespace ObjectOrientedPractics.View.Tabs
             set
             {
                 _customers = value;
+            }
+        }
+        private Customer CurrentCustomer
+        {
+            get
+            {
+                return _customers[CustomersListBox.SelectedIndex];
             }
         }
         public CustomersTab()
@@ -38,6 +46,8 @@ namespace ObjectOrientedPractics.View.Tabs
             CustomersListBox.SelectedIndexChanged += CustomersListBox_SelectedIndexChanged;
             FullNameTextBox.TextChanged += FullNameTextBox_TextChanged;
             IsPriorityCheckBox.CheckedChanged += IsPriorityCheckBox_CheckedChanged;
+            AddDiscountButton.Click += AddDiscountButton_Click;
+            RemoveDiscountButton.Click += RemoveDiscountButton_Click;
         }
         private void AddCustomerButton_Click(object sender, EventArgs e)
         {
@@ -64,10 +74,15 @@ namespace ObjectOrientedPractics.View.Tabs
                 FullNameTextBox.ReadOnly = false;
                 AddressControl.Enabled = true;
                 IsPriorityCheckBox.Enabled = true;
-                IDTextBox.Text = _customers[CustomersListBox.SelectedIndex].ID.ToString();
-                FullNameTextBox.Text = _customers[CustomersListBox.SelectedIndex].FullName;
-                AddressControl.Address = _customers[CustomersListBox.SelectedIndex].Address;
-                IsPriorityCheckBox.Checked = _customers[CustomersListBox.SelectedIndex].IsPriority;
+                IDTextBox.Text = CurrentCustomer.ID.ToString();
+                FullNameTextBox.Text = CurrentCustomer.FullName;
+                AddressControl.Address = CurrentCustomer.Address;
+                IsPriorityCheckBox.Checked = CurrentCustomer.IsPriority;
+                DiscountsListBox.Items.Clear();
+                foreach (var i in CurrentCustomer.Discounts)
+                {
+                    DiscountsListBox.Items.Add(i.Info);
+                }
             }
             else
             {
@@ -76,6 +91,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 IDTextBox.Text = "";
                 FullNameTextBox.Text = "";
                 IsPriorityCheckBox.Checked = false;
+                DiscountsListBox.Items.Clear();
             }
         }
         private void FullNameTextBox_TextChanged(object sender, EventArgs e)
@@ -103,7 +119,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 {
                     throw new Exception();
                 }
-                _customers[CustomersListBox.SelectedIndex].FullName = FullNameTextBox.Text;
+                CurrentCustomer.FullName = FullNameTextBox.Text;
                 CustomersListBox.Items[CustomersListBox.SelectedIndex] = _customers[CustomersListBox.SelectedIndex].FullName;
                 FullNameTextBox.SelectionStart = FullNameTextBox.Text.Length;
                 FullNameTextBox.BackColor = Color.White;
@@ -117,7 +133,36 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             if(CustomersListBox.SelectedIndex != -1)
             {
-                _customers[CustomersListBox.SelectedIndex].IsPriority = Convert.ToBoolean(IsPriorityCheckBox.CheckState);
+                CurrentCustomer.IsPriority = Convert.ToBoolean(IsPriorityCheckBox.CheckState);
+            }
+        }
+        private void AddDiscountButton_Click(object sender, EventArgs e)
+        {
+            if (CustomersListBox.SelectedIndex != -1)
+            {
+                AddDiscount addDiscountForm = new AddDiscount(_customers[CustomersListBox.SelectedIndex]);
+                int countOfDiscounts = CurrentCustomer.Discounts.Count;
+                addDiscountForm.ShowDialog();
+                if(CurrentCustomer.Discounts.Count != countOfDiscounts)
+                {
+                    UpdateListDiscounts();
+                }
+            }
+        }
+        private void RemoveDiscountButton_Click(object sender, EventArgs e)
+        {
+            if(CustomersListBox.SelectedIndex != -1 && DiscountsListBox.SelectedIndex != -1 && DiscountsListBox.SelectedIndex != 0)
+            {
+                CurrentCustomer.Discounts.RemoveAt(DiscountsListBox.SelectedIndex);
+                UpdateListDiscounts();
+            }
+        }
+        private void UpdateListDiscounts()
+        {
+            DiscountsListBox.Items.Clear();
+            foreach (var i in CurrentCustomer.Discounts)
+            {
+                DiscountsListBox.Items.Add(i.Info);
             }
         }
     }

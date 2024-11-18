@@ -30,6 +30,7 @@ namespace ObjectOrientedPractics.View.Tabs
         private void InitializeComponent()
         {
             this.SelectedCustomerGroupBox = new System.Windows.Forms.GroupBox();
+            this.IsPriorityCheckBox = new System.Windows.Forms.CheckBox();
             this.AddressControl = new ObjectOrientedPractics.View.Controls.AddressControl();
             this.IDLabel = new System.Windows.Forms.Label();
             this.FullNameLabel = new System.Windows.Forms.Label();
@@ -39,12 +40,19 @@ namespace ObjectOrientedPractics.View.Tabs
             this.RemoveCustomerButton = new System.Windows.Forms.Button();
             this.AddCustomerButton = new System.Windows.Forms.Button();
             this.CustomersListBox = new System.Windows.Forms.ListBox();
-            this.IsPriorityCheckBox = new System.Windows.Forms.CheckBox();
+            this.DiscountsListBox = new System.Windows.Forms.ListBox();
+            this.DiscountsLabel = new System.Windows.Forms.Label();
+            this.AddDiscountButton = new System.Windows.Forms.Button();
+            this.RemoveDiscountButton = new System.Windows.Forms.Button();
             this.SelectedCustomerGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // SelectedCustomerGroupBox
             // 
+            this.SelectedCustomerGroupBox.Controls.Add(this.RemoveDiscountButton);
+            this.SelectedCustomerGroupBox.Controls.Add(this.AddDiscountButton);
+            this.SelectedCustomerGroupBox.Controls.Add(this.DiscountsLabel);
+            this.SelectedCustomerGroupBox.Controls.Add(this.DiscountsListBox);
             this.SelectedCustomerGroupBox.Controls.Add(this.IsPriorityCheckBox);
             this.SelectedCustomerGroupBox.Controls.Add(this.AddressControl);
             this.SelectedCustomerGroupBox.Controls.Add(this.IDLabel);
@@ -57,6 +65,16 @@ namespace ObjectOrientedPractics.View.Tabs
             this.SelectedCustomerGroupBox.TabIndex = 14;
             this.SelectedCustomerGroupBox.TabStop = false;
             this.SelectedCustomerGroupBox.Text = "Selected Customer";
+            // 
+            // IsPriorityCheckBox
+            // 
+            this.IsPriorityCheckBox.AutoSize = true;
+            this.IsPriorityCheckBox.Location = new System.Drawing.Point(66, 92);
+            this.IsPriorityCheckBox.Name = "IsPriorityCheckBox";
+            this.IsPriorityCheckBox.Size = new System.Drawing.Size(68, 17);
+            this.IsPriorityCheckBox.TabIndex = 6;
+            this.IsPriorityCheckBox.Text = "Is Priority";
+            this.IsPriorityCheckBox.UseVisualStyleBackColor = true;
             // 
             // AddressControl
             // 
@@ -133,15 +151,41 @@ namespace ObjectOrientedPractics.View.Tabs
             this.CustomersListBox.Size = new System.Drawing.Size(350, 563);
             this.CustomersListBox.TabIndex = 10;
             // 
-            // IsPriorityCheckBox
+            // DiscountsListBox
             // 
-            this.IsPriorityCheckBox.AutoSize = true;
-            this.IsPriorityCheckBox.Location = new System.Drawing.Point(66, 92);
-            this.IsPriorityCheckBox.Name = "IsPriorityCheckBox";
-            this.IsPriorityCheckBox.Size = new System.Drawing.Size(68, 17);
-            this.IsPriorityCheckBox.TabIndex = 6;
-            this.IsPriorityCheckBox.Text = "Is Priority";
-            this.IsPriorityCheckBox.UseVisualStyleBackColor = true;
+            this.DiscountsListBox.FormattingEnabled = true;
+            this.DiscountsListBox.Location = new System.Drawing.Point(10, 303);
+            this.DiscountsListBox.Name = "DiscountsListBox";
+            this.DiscountsListBox.Size = new System.Drawing.Size(256, 134);
+            this.DiscountsListBox.TabIndex = 7;
+            // 
+            // DiscountsLabel
+            // 
+            this.DiscountsLabel.AutoSize = true;
+            this.DiscountsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.DiscountsLabel.Location = new System.Drawing.Point(10, 283);
+            this.DiscountsLabel.Name = "DiscountsLabel";
+            this.DiscountsLabel.Size = new System.Drawing.Size(70, 15);
+            this.DiscountsLabel.TabIndex = 8;
+            this.DiscountsLabel.Text = "Discounts";
+            // 
+            // AddDiscountButton
+            // 
+            this.AddDiscountButton.Location = new System.Drawing.Point(272, 303);
+            this.AddDiscountButton.Name = "AddDiscountButton";
+            this.AddDiscountButton.Size = new System.Drawing.Size(115, 46);
+            this.AddDiscountButton.TabIndex = 12;
+            this.AddDiscountButton.Text = "Add";
+            this.AddDiscountButton.UseVisualStyleBackColor = true;
+            // 
+            // RemoveDiscountButton
+            // 
+            this.RemoveDiscountButton.Location = new System.Drawing.Point(272, 355);
+            this.RemoveDiscountButton.Name = "RemoveDiscountButton";
+            this.RemoveDiscountButton.Size = new System.Drawing.Size(115, 46);
+            this.RemoveDiscountButton.TabIndex = 13;
+            this.RemoveDiscountButton.Text = "Remove";
+            this.RemoveDiscountButton.UseVisualStyleBackColor = true;
             // 
             // CustomersTab
             // 
@@ -174,5 +218,9 @@ namespace ObjectOrientedPractics.View.Tabs
         private System.Windows.Forms.ListBox CustomersListBox;
         private Controls.AddressControl AddressControl;
         private System.Windows.Forms.CheckBox IsPriorityCheckBox;
+        private System.Windows.Forms.Button RemoveDiscountButton;
+        private System.Windows.Forms.Button AddDiscountButton;
+        private System.Windows.Forms.Label DiscountsLabel;
+        private System.Windows.Forms.ListBox DiscountsListBox;
     }
 }

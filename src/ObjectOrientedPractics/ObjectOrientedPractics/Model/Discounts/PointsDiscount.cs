@@ -34,7 +34,7 @@ namespace ObjectOrientedPractics.Model.Discounts
         {
             get
             {
-                return $"Накопительная - {_points} баллов";
+                return $"Накопительная - {Points} баллов";
             }
         }
         /// <summary>
