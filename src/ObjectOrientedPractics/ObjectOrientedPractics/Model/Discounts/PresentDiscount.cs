@@ -9,7 +9,7 @@ namespace ObjectOrientedPractics.Model.Discounts
     /// <summary>
     /// Скидка в процентах.
     /// </summary>
-    public class PresentDiscount : IDiscount
+    public class PresentDiscount : IDiscount, IComparable<PresentDiscount>
     {
         //Категория, на товарам которой есть скидка.
         public Category Category { get; set; }
@@ -124,6 +124,21 @@ namespace ObjectOrientedPractics.Model.Discounts
             }
             TotalCosts += amount;
             Discount = (int)TotalCosts / 1000;
+        }
+        public int CompareTo(PresentDiscount other)
+        {
+            if(Discount > other.Discount)
+            {
+                return 1;
+            }
+            else if(Discount == other.Discount)
+            {
+                return 0;
+            }
+            else
+            {
+                return -1;
+            }
         }
         public PresentDiscount(Category category)
         {

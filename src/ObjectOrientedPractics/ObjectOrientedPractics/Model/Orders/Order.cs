@@ -9,7 +9,7 @@ namespace ObjectOrientedPractics.Model.Orders
     /// <summary>
     /// Заказ покупателя.
     /// </summary>
-    public class Order
+    public class Order : IEquatable<Order>
     {
         private static int counter = 0;
         //Статус заказа.
@@ -24,7 +24,6 @@ namespace ObjectOrientedPractics.Model.Orders
         private List<Item> _items;
         //Стоимость заказа.
         private double _totalCost;
-        private double _discountAmount;
         private bool flagCostChange = true;
         /// <summary>
         /// Возвращает ID заказа.
@@ -95,26 +94,29 @@ namespace ObjectOrientedPractics.Model.Orders
 
             }
         }
-        /// <summary>
-        /// Возвращает и задает размер скидки применяемой к заказу.
-        /// </summary>
-        public double DiscountAmount
+        public bool Equals(Order other)
         {
-            get
+            bool flagOrderStatus = (OrderStatus == other.OrderStatus);
+            bool flagAddress = Address.Equals(other);
+            bool flagDate = (Date == other.Date);
+            bool flagItems = true;
+            if(Items.Count != other.Items.Count)
             {
-                return _discountAmount;
+                flagItems = false;
             }
-            set
+            else
             {
-                _discountAmount = value;
+                for(int i = 0;i<Items.Count;i++)
+                {
+                    if(!Items[i].Equals(other.Items[i]))
+                    {
+                        flagItems = false;
+                        break;
+                    }
+                }
             }
-        }
-        public double Total
-        {
-            get
-            {
-                return TotalCost - DiscountAmount;
-            }
+            bool flagTotalCost = (TotalCost == other.TotalCost);
+            return (flagOrderStatus && flagAddress && flagDate && flagItems && flagTotalCost);
         }
         /// <summary>
         /// Заполняет поля класса полученными значениями.

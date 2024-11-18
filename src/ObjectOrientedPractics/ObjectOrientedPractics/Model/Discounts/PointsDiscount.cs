@@ -9,7 +9,7 @@ namespace ObjectOrientedPractics.Model.Discounts
     /// <summary>
     /// Скидка на товары в баллах.
     /// </summary>
-    public class PointsDiscount : IDiscount
+    public class PointsDiscount : IDiscount, IComparable<PointsDiscount>
     {
         //Скидка в баллах.
         private int _points;
@@ -100,6 +100,21 @@ namespace ObjectOrientedPractics.Model.Discounts
                 amount += i.Cost;
             }
             Points += (int)Math.Ceiling(amount*0.1);
+        }
+        public int CompareTo(PointsDiscount other)
+        {
+            if(Points > other.Points)
+            {
+                return 1;
+            }
+            else if(Points == other.Points)
+            {
+                return 0;
+            }
+            else
+            {
+                return -1;
+            }
         }
     }
 }

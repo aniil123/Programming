@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ObjectOrientedPractics.Model
 {
-    public class Address
+    public class Address : ICloneable, IEquatable<Address>
     {
         //Почтовый индекс.
         private int _index;
@@ -150,6 +150,14 @@ namespace ObjectOrientedPractics.Model
                     throw new Exception("Длина номера квартиры должна быть не больше 10-и.");
                 }
             }
+        }
+        public object Clone()
+        {
+            return new Address(Index, Country, City, Street, Building, Apartment);
+        }
+        public bool Equals(Address other)
+        {
+            return (Index == other.Index && Country == other.Country && City == other.City && Street == other.Street && Building == other.Building && Apartment == other.Apartment);
         }
         /// <summary>
         /// Заполняет поля с почтовым индексом, страной, городом, улицей, номером улицы, номером квартиры константами.

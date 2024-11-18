@@ -9,7 +9,7 @@ namespace ObjectOrientedPractics.Model
     /// <summary>
     /// Товар.
     /// </summary>
-    public class Item
+    public class Item : ICloneable, IEquatable<Item>, IComparable<Item>
     {
         /// <summary>
         /// Категория товара.
@@ -97,6 +97,29 @@ namespace ObjectOrientedPractics.Model
             set
             {
                 _active = value;
+            }
+        }
+        public object Clone()
+        {
+            return new Item(Name, Info, Cost, Category);
+        }
+        public bool Equals(Item other)
+        {
+            return (Name == other.Name && Info == other.Info && Cost == other.Cost && Category == other.Category);
+        }
+        public int CompareTo(Item other)
+        {
+            if(Cost > other.Cost)
+            {
+                return 1;
+            }
+            else if(Cost == other.Cost)
+            {
+                return 0;
+            }
+            else
+            {
+                return -1;
             }
         }
         /// <summary>
