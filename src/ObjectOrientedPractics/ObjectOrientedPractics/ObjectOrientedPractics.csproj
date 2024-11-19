@@ -69,6 +69,7 @@
     <Compile Include="Model\Discounts\PresentDiscount.cs" />
     <Compile Include="Model\Orders\PriorityOrder.cs" />
     <Compile Include="Model\Store.cs" />
+    <Compile Include="Services\DataTools.cs" />
     <Compile Include="Services\ValueValidator.cs" />
     <Compile Include="View\AddDiscount.cs">
       <SubType>Form</SubType>

@@ -7,12 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ObjectOrientedPractics.Model;
+using ObjectOrientedPractics.Services;
 
 namespace ObjectOrientedPractics.View.Tabs
 {
     public partial class ItemsTab : UserControl
     {
-        List<Model.Item> _items;
+        DataTools.SortingCriteria sortingCriteria;
+        List<Item> _items;
+        List<Item> _displayedItems = new List<Item>();
         /// <summary>
         /// Возвращает и присваивает список товаров.
         /// </summary>
@@ -41,22 +45,32 @@ namespace ObjectOrientedPractics.View.Tabs
             NameTextBox.TextChanged += NameTextBox_TextChanged;
             DescriptionTextBox.TextChanged += DescriptionTextBox_TextChanged;
             CategoryComboBox.SelectedIndexChanged += CategoryComboBox_SelectedIndexChanged;
+            FindTextBox.TextChanged += FindTextBox_TextChanged;
+            SortingComboBox.SelectedIndexChanged += SortingComboBox_SelectedIndexChanged;
             foreach (var i in Enum.GetValues(typeof(Category)))
             {
                 CategoryComboBox.Items.Add(i);
             }
+            SortingComboBox.Items.Add("Name");
+            SortingComboBox.Items.Add("Cost (Ascending)");
+            SortingComboBox.Items.Add("Cost (Descending)");
+            SortingComboBox.SelectedIndex = 0;
+            sortingCriteria = DataTools.SortingName;
         }
         private void AddItemButton_Click(object sender, EventArgs e)
         {
             
-            _items.Add(new Model.Item());
+            _items.Add(new Item());
+            _displayedItems.Add(_items[_items.Count - 1]);
             ItemsListBox.Items.Add(_items[_items.Count - 1].Name);
+            SortingItems();
         }
         private void RemoveItemButton_Click(object sender, EventArgs e)
         {
             if (ItemsListBox.SelectedIndex != -1)
             {
-                int index = ItemsListBox.SelectedIndex;
+                int index = _items.IndexOf(_displayedItems[ItemsListBox.SelectedIndex]);
+                _displayedItems.RemoveAt(ItemsListBox.SelectedIndex);
                 ItemsListBox.Items.RemoveAt(ItemsListBox.SelectedIndex);
                 _items[index].Active = false;
                 _items.RemoveAt(index);
@@ -72,11 +86,11 @@ namespace ObjectOrientedPractics.View.Tabs
                 CostTextBox.ReadOnly = false;
                 NameTextBox.ReadOnly = false;
                 DescriptionTextBox.ReadOnly = false;
-                IDTextBox.Text = _items[ItemsListBox.SelectedIndex].ID.ToString();
-                CostTextBox.Text = _items[ItemsListBox.SelectedIndex].Cost.ToString();
-                NameTextBox.Text = _items[ItemsListBox.SelectedIndex].Name;
-                DescriptionTextBox.Text = _items[ItemsListBox.SelectedIndex].Info;
-                CategoryComboBox.SelectedItem = _items[ItemsListBox.SelectedIndex].Category;
+                IDTextBox.Text = _displayedItems[ItemsListBox.SelectedIndex].ID.ToString();
+                CostTextBox.Text = _displayedItems[ItemsListBox.SelectedIndex].Cost.ToString();
+                NameTextBox.Text = _displayedItems[ItemsListBox.SelectedIndex].Name;
+                DescriptionTextBox.Text = _displayedItems[ItemsListBox.SelectedIndex].Info;
+                CategoryComboBox.SelectedItem = _displayedItems[ItemsListBox.SelectedIndex].Category;
             }
             else
             {
@@ -84,6 +98,9 @@ namespace ObjectOrientedPractics.View.Tabs
                 CostTextBox.Text = "";
                 NameTextBox.Text = "";
                 DescriptionTextBox.Text = "";
+                CostTextBox.BackColor = IDTextBox.BackColor;
+                NameTextBox.BackColor = IDTextBox.BackColor;
+                DescriptionTextBox.BackColor = IDTextBox.BackColor;
                 CategoryComboBox.SelectedIndex = -1;
                 CostTextBox.ReadOnly = true;
                 NameTextBox.ReadOnly = true;
@@ -98,7 +115,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 {
                     throw new Exception();
                 }
-                _items[ItemsListBox.SelectedIndex].Cost = Convert.ToInt32(CostTextBox.Text);
+                _displayedItems[ItemsListBox.SelectedIndex].Cost = Convert.ToInt32(CostTextBox.Text);
                 CostTextBox.BackColor = Color.White;
             }
             catch
@@ -114,8 +131,8 @@ namespace ObjectOrientedPractics.View.Tabs
                 {
                     throw new Exception();
                 }
-                _items[ItemsListBox.SelectedIndex].Name = NameTextBox.Text;
-                ItemsListBox.Items[ItemsListBox.SelectedIndex] = _items[ItemsListBox.SelectedIndex].Name;
+                _displayedItems[ItemsListBox.SelectedIndex].Name = NameTextBox.Text;
+                ItemsListBox.Items[ItemsListBox.SelectedIndex] = _displayedItems[ItemsListBox.SelectedIndex].Name;
                 NameTextBox.SelectionStart = NameTextBox.Text.Length;
                 NameTextBox.BackColor = Color.White;
             }
@@ -132,7 +149,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 {
                     throw new Exception();
                 }
-                _items[ItemsListBox.SelectedIndex].Info = DescriptionTextBox.Text;
+                _displayedItems[ItemsListBox.SelectedIndex].Info = DescriptionTextBox.Text;
                 DescriptionTextBox.BackColor = Color.White;
             }
             catch
@@ -144,7 +161,65 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             if(ItemsListBox.SelectedIndex != -1)
             {
-                _items[ItemsListBox.SelectedIndex].Category = (Category)CategoryComboBox.SelectedIndex;
+                _displayedItems[ItemsListBox.SelectedIndex].Category = (Category)CategoryComboBox.SelectedIndex;
+            }
+        }
+        private void FindTextBox_TextChanged(object sender, EventArgs e)
+        {
+            ItemsListBox.SelectedIndex = -1;
+            if(FindTextBox.Text == "")
+            {
+                ItemsListBox.Items.Clear();
+                _displayedItems.Clear();
+                foreach(var i in _items)
+                {
+                    ItemsListBox.Items.Add(i.Name);
+                    _displayedItems.Add(i);
+                }
+            }
+            else
+            {
+                ItemsListBox.Items.Clear();
+                _displayedItems.Clear();
+                foreach(var i in _items)
+                {
+                    if(Services.DataTools.PresenceOfSubstring(i, FindTextBox.Text))
+                    {
+                        ItemsListBox.Items.Add(i.Name);
+                        _displayedItems.Add(i);
+                    }
+                }
+            }
+            SortingItems();
+        }
+        private void SortingComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (SortingComboBox.SelectedIndex)
+            {
+                case 0:
+                    sortingCriteria = DataTools.SortingName;
+                    break;
+                case 1:
+                    sortingCriteria = DataTools.CostAscending;
+                    break;
+                case 2:
+                    sortingCriteria = DataTools.CostDescending;
+                    break;
+            }
+            SortingItems();
+        }
+        private void SortingItems()
+        {
+            if (SortingComboBox.SelectedIndex != -1)
+            {
+                IDTextBox.Text = SortingComboBox.SelectedIndex.ToString();
+                ItemsListBox.Items.Clear();
+                DataTools.SortingData(_displayedItems, sortingCriteria);
+                foreach (var i in _displayedItems)
+                {
+                    ItemsListBox.Items.Add(i.Name);
+                }
+                ItemsListBox.SelectedIndex = -1;
             }
         }
     }

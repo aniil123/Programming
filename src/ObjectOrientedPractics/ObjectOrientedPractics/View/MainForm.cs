@@ -17,13 +17,6 @@ namespace ObjectOrientedPractics
         {
             InitializeComponent();
             TabControl.SelectedIndexChanged += TabControl_SelectedIndexChanged;
-            PointsDiscount di = new PointsDiscount();
-            List<Model.Item> items = new List<Model.Item>();
-            for(int i = 0;i< 3;i++)
-            {
-                items.Add(new Model.Item());
-            }
-            di.Update(items);
             Model.Store _store = new Model.Store();
             ItemsTab.Items = _store.Items;
             CustomersTab.Customers = _store.Customers;

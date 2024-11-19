@@ -44,6 +44,10 @@ namespace ObjectOrientedPractics.View.Tabs
             this.CategoryLabel = new System.Windows.Forms.Label();
             this.DescriptionTextBox = new System.Windows.Forms.TextBox();
             this.NameTextBox = new System.Windows.Forms.TextBox();
+            this.FindLabel = new System.Windows.Forms.Label();
+            this.FindTextBox = new System.Windows.Forms.TextBox();
+            this.OrderByLabel = new System.Windows.Forms.Label();
+            this.SortingComboBox = new System.Windows.Forms.ComboBox();
             this.SelectedItemGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -82,9 +86,9 @@ namespace ObjectOrientedPractics.View.Tabs
             // ItemsListBox
             // 
             this.ItemsListBox.FormattingEnabled = true;
-            this.ItemsListBox.Location = new System.Drawing.Point(4, 25);
+            this.ItemsListBox.Location = new System.Drawing.Point(4, 51);
             this.ItemsListBox.Name = "ItemsListBox";
-            this.ItemsListBox.Size = new System.Drawing.Size(350, 563);
+            this.ItemsListBox.Size = new System.Drawing.Size(350, 511);
             this.ItemsListBox.TabIndex = 2;
             // 
             // AddItemButton
@@ -184,10 +188,47 @@ namespace ObjectOrientedPractics.View.Tabs
             this.NameTextBox.Size = new System.Drawing.Size(375, 112);
             this.NameTextBox.TabIndex = 10;
             // 
+            // FindLabel
+            // 
+            this.FindLabel.AutoSize = true;
+            this.FindLabel.Location = new System.Drawing.Point(5, 23);
+            this.FindLabel.Name = "FindLabel";
+            this.FindLabel.Size = new System.Drawing.Size(30, 13);
+            this.FindLabel.TabIndex = 10;
+            this.FindLabel.Text = "Find:";
+            // 
+            // FindTextBox
+            // 
+            this.FindTextBox.Location = new System.Drawing.Point(41, 20);
+            this.FindTextBox.Name = "FindTextBox";
+            this.FindTextBox.Size = new System.Drawing.Size(198, 20);
+            this.FindTextBox.TabIndex = 11;
+            // 
+            // OrderByLabel
+            // 
+            this.OrderByLabel.AutoSize = true;
+            this.OrderByLabel.Location = new System.Drawing.Point(5, 572);
+            this.OrderByLabel.Name = "OrderByLabel";
+            this.OrderByLabel.Size = new System.Drawing.Size(50, 13);
+            this.OrderByLabel.TabIndex = 13;
+            this.OrderByLabel.Text = "Order by:";
+            // 
+            // SortingComboBox
+            // 
+            this.SortingComboBox.FormattingEnabled = true;
+            this.SortingComboBox.Location = new System.Drawing.Point(61, 569);
+            this.SortingComboBox.Name = "SortingComboBox";
+            this.SortingComboBox.Size = new System.Drawing.Size(138, 21);
+            this.SortingComboBox.TabIndex = 14;
+            // 
             // ItemsTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.SortingComboBox);
+            this.Controls.Add(this.OrderByLabel);
+            this.Controls.Add(this.FindTextBox);
+            this.Controls.Add(this.FindLabel);
             this.Controls.Add(this.SelectedItemGroupBox);
             this.Controls.Add(this.ItemsLabel);
             this.Controls.Add(this.RemoveItemButton);
@@ -218,5 +259,9 @@ namespace ObjectOrientedPractics.View.Tabs
         private System.Windows.Forms.ComboBox CategoryComboBox;
         private System.Windows.Forms.Label CategoryLabel;
         private System.Windows.Forms.TextBox NameTextBox;
+        private System.Windows.Forms.Label FindLabel;
+        private System.Windows.Forms.TextBox FindTextBox;
+        private System.Windows.Forms.Label OrderByLabel;
+        private System.Windows.Forms.ComboBox SortingComboBox;
     }
 }

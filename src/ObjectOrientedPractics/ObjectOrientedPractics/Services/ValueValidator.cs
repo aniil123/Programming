@@ -12,7 +12,7 @@ namespace ObjectOrientedPractics.Services
     static class ValueValidator
     {
         //Строка, содержащая символы русского алфавита.
-        private static string _alphobet = "йцукенгшщзхъфывапролджэячсмитьбюёЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮЁ";
+        private static string _alphobet = "АаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯя";
         /// <summary>
         /// Возвращаяет строку, содержащую символы русского алфавита.
         /// </summary>
