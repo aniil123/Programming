@@ -11,6 +11,9 @@ namespace ObjectOrientedPractics.Model
     /// </summary>
     public class Item : ICloneable, IEquatable<Item>, IComparable<Item>
     {
+        public event EventHandler<EventArgs> NameChanged;
+        public event EventHandler<EventArgs> CostChanged;
+        public event EventHandler<EventArgs> InfoChanged;
         /// <summary>
         /// Категория товара.
         /// </summary>
@@ -50,9 +53,13 @@ namespace ObjectOrientedPractics.Model
             }
             set
             {
-                Services.ValueValidator.AssertStringOnLength(value, 200);
-                Services.ValueValidator.CheckingString(value, Services.ValueValidator.Alphobet + " ");
-                _name = value;
+                if (_name != value)
+                {
+                    Services.ValueValidator.AssertStringOnLength(value, 200);
+                    Services.ValueValidator.CheckingString(value, Services.ValueValidator.Alphobet + " ");
+                    _name = value;
+                    NameChanged?.Invoke(this, new EventArgs());
+                }
             }
         }
         /// <summary>
@@ -66,9 +73,13 @@ namespace ObjectOrientedPractics.Model
             }
             set
             {
-                Services.ValueValidator.AssertStringOnLength(value, 1000);
-                Services.ValueValidator.CheckingString(value, Services.ValueValidator.Alphobet + " .,()-");
-                _info = value;
+                if (_info != value)
+                {
+                    Services.ValueValidator.AssertStringOnLength(value, 1000);
+                    Services.ValueValidator.CheckingString(value, Services.ValueValidator.Alphobet + " .,()-");
+                    _info = value;
+                    InfoChanged?.Invoke(this, new EventArgs());
+                }
             }
         }
         /// <summary>
@@ -82,9 +93,13 @@ namespace ObjectOrientedPractics.Model
             }
             set
             {
-                if(value >= 0 && value <= 100000)
+                if (_cost != value)
                 {
-                    _cost = value;
+                    if (value >= 0 && value <= 100000)
+                    {
+                        _cost = value;
+                        CostChanged?.Invoke(this, new EventArgs());
+                    }
                 }
             }
         }

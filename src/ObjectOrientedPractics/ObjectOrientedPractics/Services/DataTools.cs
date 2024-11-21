@@ -13,13 +13,13 @@ namespace ObjectOrientedPractics.Services
     public static class DataTools
     {
         public delegate bool SortingCriteria(Item item1, Item item2);
-        public static bool NumberIsGreater(Item item1)
+        public static bool NumberIsGreater(Item item)
         {
-            return item1.Cost > 5000;
+            return item.Cost > 5000;
         }
-        public static bool OneCategoryItems(Item item1)
+        public static bool OneCategoryItems(Item item)
         {
-            return item1.Category == (Category)0;
+            return item.Category == (Category)0;
         }
         public static bool PresenceOfSubstring(Item item, string subString)
         {

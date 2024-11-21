@@ -14,6 +14,7 @@ namespace ObjectOrientedPractics.View.Tabs
 {
     public partial class ItemsTab : UserControl
     {
+        public event EventHandler<EventArgs> ItemsChanged;
         DataTools.SortingCriteria sortingCriteria;
         List<Item> _items;
         List<Item> _displayedItems = new List<Item>();
@@ -64,6 +65,7 @@ namespace ObjectOrientedPractics.View.Tabs
             _displayedItems.Add(_items[_items.Count - 1]);
             ItemsListBox.Items.Add(_items[_items.Count - 1].Name);
             SortingItems();
+            ItemsChanged?.Invoke(this, new EventArgs());
         }
         private void RemoveItemButton_Click(object sender, EventArgs e)
         {
@@ -77,6 +79,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 CostTextBox.BackColor = IDTextBox.BackColor;
                 NameTextBox.BackColor = IDTextBox.BackColor;
                 DescriptionTextBox.BackColor = IDTextBox.BackColor;
+                ItemsChanged?.Invoke(this, new EventArgs());
             }
         }
         private void ItemsListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -117,6 +120,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 }
                 _displayedItems[ItemsListBox.SelectedIndex].Cost = Convert.ToInt32(CostTextBox.Text);
                 CostTextBox.BackColor = Color.White;
+                ItemsChanged?.Invoke(this, new EventArgs());
             }
             catch
             {
@@ -135,6 +139,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 ItemsListBox.Items[ItemsListBox.SelectedIndex] = _displayedItems[ItemsListBox.SelectedIndex].Name;
                 NameTextBox.SelectionStart = NameTextBox.Text.Length;
                 NameTextBox.BackColor = Color.White;
+                ItemsChanged?.Invoke(this, new EventArgs());
             }
             catch
             {
@@ -151,6 +156,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 }
                 _displayedItems[ItemsListBox.SelectedIndex].Info = DescriptionTextBox.Text;
                 DescriptionTextBox.BackColor = Color.White;
+                ItemsChanged?.Invoke(this, new EventArgs());
             }
             catch
             {
@@ -162,6 +168,7 @@ namespace ObjectOrientedPractics.View.Tabs
             if(ItemsListBox.SelectedIndex != -1)
             {
                 _displayedItems[ItemsListBox.SelectedIndex].Category = (Category)CategoryComboBox.SelectedIndex;
+                ItemsChanged?.Invoke(this, new EventArgs());
             }
         }
         private void FindTextBox_TextChanged(object sender, EventArgs e)

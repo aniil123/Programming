@@ -8,6 +8,7 @@ namespace ObjectOrientedPractics.Model
 {
     public class Address : ICloneable, IEquatable<Address>
     {
+        public event EventHandler<EventArgs> AddressChanged;
         //Почтовый индекс.
         private int _index;
         //Страна/регион.
@@ -31,13 +32,18 @@ namespace ObjectOrientedPractics.Model
             }
             set
             {
-                if((value.ToString().ToCharArray().Length == 6 && value > 0) || value == 0)
+                if (_index != value)
                 {
-                    _index = value;
-                }
-                else
-                {
-                    throw new Exception("Индекс должен состоять из 6-и цифр");
+
+                    if ((value.ToString().ToCharArray().Length == 6 && value > 0) || value == 0)
+                    {
+                        _index = value;
+                        AddressChanged?.Invoke(this, new EventArgs());
+                    }
+                    else
+                    {
+                        throw new Exception("Индекс должен состоять из 6-и цифр");
+                    }
                 }
             }
         }
@@ -52,14 +58,18 @@ namespace ObjectOrientedPractics.Model
             }
             set
             {
-                if(value.Length <= 50)
+                if (_country != value)
                 {
-                    Services.ValueValidator.CheckingString(value, Services.ValueValidator.Alphobet + " ");
-                    _country = value;
-                }
-                else
-                {
-                    throw new Exception("В названии страны должно быть не больше 50-и символов");
+                    if (value.Length <= 50)
+                    {
+                        Services.ValueValidator.CheckingString(value, Services.ValueValidator.Alphobet + " ");
+                        _country = value;
+                        AddressChanged?.Invoke(this, new EventArgs());
+                    }
+                    else
+                    {
+                        throw new Exception("В названии страны должно быть не больше 50-и символов");
+                    }
                 }
             }
         }
@@ -74,14 +84,18 @@ namespace ObjectOrientedPractics.Model
             }
             set
             {
-                if(value.Length <= 50)
+                if (_city != value)
                 {
-                    Services.ValueValidator.CheckingString(value, Services.ValueValidator.Alphobet + " ");
-                    _city = value;
-                }
-                else
-                {
-                    throw new Exception("В названии города должно быть не больше 50-и символов");
+                    if (value.Length <= 50)
+                    {
+                        Services.ValueValidator.CheckingString(value, Services.ValueValidator.Alphobet + " ");
+                        _city = value;
+                        AddressChanged?.Invoke(this, new EventArgs());
+                    }
+                    else
+                    {
+                        throw new Exception("В названии города должно быть не больше 50-и символов");
+                    }
                 }
             }
         }
@@ -96,14 +110,18 @@ namespace ObjectOrientedPractics.Model
             }
             set
             {
-                if(value.Length <= 100)
+                if (_street != value)
                 {
-                    Services.ValueValidator.CheckingString(value, Services.ValueValidator.Alphobet + " ");
-                    _street = value;
-                }
-                else
-                {
-                    throw new Exception("В названии улицы должно быть не больше 100-а символов");
+                    if (value.Length <= 100)
+                    {
+                        Services.ValueValidator.CheckingString(value, Services.ValueValidator.Alphobet + " ");
+                        _street = value;
+                        AddressChanged?.Invoke(this, new EventArgs());
+                    }
+                    else
+                    {
+                        throw new Exception("В названии улицы должно быть не больше 100-а символов");
+                    }
                 }
             }
         }
@@ -118,14 +136,18 @@ namespace ObjectOrientedPractics.Model
             }
             set
             {
-                if(value.Length <= 10)
+                if (_building != value)
                 {
-                    Services.ValueValidator.CheckingString(value, Services.ValueValidator.Alphobet + " 1234567890.,/");
-                    _building = value;
-                }
-                else
-                {
-                    throw new Exception("");
+                    if (value.Length <= 10)
+                    {
+                        Services.ValueValidator.CheckingString(value, Services.ValueValidator.Alphobet + " 1234567890.,/");
+                        _building = value;
+                        AddressChanged?.Invoke(this, new EventArgs());
+                    }
+                    else
+                    {
+                        throw new Exception("");
+                    }
                 }
             }
         }
@@ -140,14 +162,18 @@ namespace ObjectOrientedPractics.Model
             }
             set
             {
-                if(value.Length <= 10)
+                if (_apartment != value)
                 {
-                    Services.ValueValidator.CheckingString(value, Services.ValueValidator.Alphobet + " 1234567890,./");
-                    _apartment = value;
-                }
-                else
-                {
-                    throw new Exception("Длина номера квартиры должна быть не больше 10-и.");
+                    if (value.Length <= 10)
+                    {
+                        Services.ValueValidator.CheckingString(value, Services.ValueValidator.Alphobet + " 1234567890,./");
+                        _apartment = value;
+                        AddressChanged?.Invoke(this, new EventArgs());
+                    }
+                    else
+                    {
+                        throw new Exception("Длина номера квартиры должна быть не больше 10-и.");
+                    }
                 }
             }
         }
