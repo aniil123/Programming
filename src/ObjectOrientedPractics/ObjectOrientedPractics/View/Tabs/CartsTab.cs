@@ -13,6 +13,7 @@ namespace ObjectOrientedPractics.View.Tabs
 {
     public partial class CartsTab : UserControl
     {
+        public event EventHandler<EventArgs> OrdersChanged;
         List<Model.Item> _items;
         List<Model.Customer> _customers;
         public List<Model.Item> Items
@@ -209,6 +210,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 CurrentCustomer.Cart.Items.Clear();
                 CartListBox.Items.Clear();
                 Update();
+                OrdersChanged?.Invoke(this, new EventArgs());
             }
         }
         private void DiscountsCheckedListBox_SelectedIndexChanged(object sender, EventArgs e)

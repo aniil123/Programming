@@ -17,6 +17,8 @@ namespace ObjectOrientedPractics
         {
             InitializeComponent();
             ItemsTab.ItemsChanged += ItemsChanged;
+            CustomersTab.CustomersChanged += CustomersChanged;
+            CartsTab.OrdersChanged += OrdersChanged;
             Model.Store _store = new Model.Store();
             ItemsTab.Items = _store.Items;
             CustomersTab.Customers = _store.Customers;
@@ -27,6 +29,14 @@ namespace ObjectOrientedPractics
         private void ItemsChanged(object sender, EventArgs e)
         {
             CartsTab.RefreshData();
+        }
+        private void CustomersChanged(object sender, EventArgs e)
+        {
+            CartsTab.RefreshData();
+        }
+        private void OrdersChanged(object sender, EventArgs e)
+        {
+            OrdersTab.UpdateOrders();
         }
     }
 }

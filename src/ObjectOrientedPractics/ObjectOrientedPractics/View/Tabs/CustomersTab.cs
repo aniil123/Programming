@@ -13,6 +13,7 @@ namespace ObjectOrientedPractics.View.Tabs
 {
     public partial class CustomersTab : UserControl
     {
+        public event EventHandler<EventArgs> CustomersChanged;
         List<Customer> _customers;
         /// <summary>
         /// Возвращает и присваивает список покупателей.
@@ -53,6 +54,7 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             _customers.Add(new Model.Customer());
             CustomersListBox.Items.Add(_customers[_customers.Count - 1].FullName);
+            CustomersChanged?.Invoke(this, new EventArgs());
         }
         private void RemoveCustomerButton_Click(object sender, EventArgs e)
         {
@@ -64,6 +66,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 FullNameTextBox.BackColor = IDTextBox.BackColor;
                 AddressControl.Address = new Model.Address();
                 AddressControl.ReadOnlyOn();
+                CustomersChanged?.Invoke(this, new EventArgs());
             }
         }
         private void CustomersListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -123,6 +126,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 CustomersListBox.Items[CustomersListBox.SelectedIndex] = _customers[CustomersListBox.SelectedIndex].FullName;
                 FullNameTextBox.SelectionStart = FullNameTextBox.Text.Length;
                 FullNameTextBox.BackColor = Color.White;
+                CustomersChanged?.Invoke(this, new EventArgs());
             }
             catch
             {
@@ -134,6 +138,7 @@ namespace ObjectOrientedPractics.View.Tabs
             if(CustomersListBox.SelectedIndex != -1)
             {
                 CurrentCustomer.IsPriority = Convert.ToBoolean(IsPriorityCheckBox.CheckState);
+                CustomersChanged?.Invoke(this, new EventArgs());
             }
         }
         private void AddDiscountButton_Click(object sender, EventArgs e)
@@ -147,6 +152,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 {
                     UpdateListDiscounts();
                 }
+                CustomersChanged?.Invoke(this, new EventArgs());
             }
         }
         private void RemoveDiscountButton_Click(object sender, EventArgs e)
@@ -155,6 +161,7 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 CurrentCustomer.Discounts.RemoveAt(DiscountsListBox.SelectedIndex);
                 UpdateListDiscounts();
+                CustomersChanged?.Invoke(this, new EventArgs());
             }
         }
         private void UpdateListDiscounts()
