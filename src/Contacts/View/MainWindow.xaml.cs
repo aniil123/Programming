@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using View.ViewModel;
 
 namespace View
 {
@@ -21,11 +22,11 @@ namespace View
     /// </summary>
     public partial class MainWindow : Window
     {
-        public ViewModel.MainVM mainVM { get; set; }
+        public MainVM mainVM { get; set; }
         public MainWindow()
         {
             InitializeComponent();
-            mainVM = new ViewModel.MainVM();
+            mainVM = new MainVM();
             DataContext = mainVM;
         }
     }

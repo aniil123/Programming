@@ -24,7 +24,8 @@
             <RowDefinition Height="351*"/>
             <RowDefinition Height="35"/>
         </Grid.RowDefinitions>
-        <Button x:Name="LoadButton" Grid.Column="5" Grid.Row="3" MaxWidth="100" MinWidth="50" Height="25" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="15 0 1 0" Content="Load"/>
+        <Button x:Name="LoadButton" Grid.Column="5" Grid.Row="3" MaxWidth="100" MinWidth="50" Height="25" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="15 0 1 0" Content="Load">
+        </Button>
         <Button x:Name="SaveButton" Grid.Column="4" Grid.Row="3" MaxWidth="100" MinWidth="50" Height="25" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="15 0 1 0" Content="Save"/>
         <GroupBox Grid.Column="1" Grid.Row="1" Header="Edit Contact">
             <Grid>
