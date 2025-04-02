@@ -7,15 +7,13 @@ using System.Threading.Tasks;
 
 namespace View.ViewModel
 {
-    class MainVM : INotifyPropertyChanged
+    public class MainVM : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        //Контактные данные человека.
+        public Model.Contact Contact{ get; set; }
         /// <summary>
-        /// Контактные данные человека.
-        /// </summary>
-        private Model.Contact Contact;
-        /// <summary>
-        /// Возвращает и задает имя. Должно быть строковым и размером не больше 50-и.
+        /// Возвращает и задает имя.
         /// </summary>
         public string Name
         {
@@ -26,11 +24,11 @@ namespace View.ViewModel
             set
             {
                 Contact.Name = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Name"));
             }
         }
         /// <summary>
         /// Возвращает и задает номер телефона. 
-        /// Должно быть строковым с размером 11 символов.
         /// </summary>
         public string PhoneNumber
         {
@@ -41,10 +39,11 @@ namespace View.ViewModel
             set
             {
                 Contact.PhoneNumber = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PhoneNumber"));
             }
         }
         /// <summary>
-        /// Возвращает и задает почту. Должно быть строковым.
+        /// Возвращает и задает почту.
         /// </summary>
         public string Email
         {
@@ -55,7 +54,20 @@ namespace View.ViewModel
             set
             {
                 Contact.Email = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Email"));
             }
+        }
+        public void NameChanged(string name)
+        {
+            Name = name;
+        }
+        public void PhoneNumberChanged(string phoneNumber)
+        {
+            PhoneNumber = phoneNumber;
+        }
+        public void EmailChanged(string email)
+        {
+            Email = email;
         }
         public MainVM()
         {

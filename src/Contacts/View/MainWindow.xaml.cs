@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +21,12 @@ namespace View
     /// </summary>
     public partial class MainWindow : Window
     {
+        public ViewModel.MainVM mainVM { get; set; }
         public MainWindow()
         {
             InitializeComponent();
+            mainVM = new ViewModel.MainVM();
+            DataContext = mainVM;
         }
     }
 }

@@ -18,8 +18,11 @@ namespace View.ViewModel
         /// <param name="parameter">Десериализуемый объект.</param>
         public void Execute(object parameter)
         {
-            string serializedContact = File.ReadAllText("MyDocuments\\Contacts\\contacts.json");
-            parameter = JsonConvert.DeserializeObject<Model.Contact>(serializedContact);
+            Model.Contact wantedContact = Model.Services.ContactSerializer.LoadContact();
+            Model.Contact conParameter = (Model.Contact)parameter;
+            conParameter.Name = wantedContact.Name;
+            conParameter.PhoneNumber = wantedContact.PhoneNumber;
+            conParameter.Email = wantedContact.Email;
         }
         public bool CanExecute(object parameter)
         {

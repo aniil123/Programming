@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace View.ViewModel
 {
-    class SaveCommand : ICommand
+    public class SaveCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
         /// <summary>
@@ -18,8 +18,7 @@ namespace View.ViewModel
         /// <param name="parameter">Объект, над которым проводится сериализация.</param>
         public void Execute(object parameter)
         {
-            string serializedContact = JsonConvert.SerializeObject((Model.Contact)parameter);
-            File.WriteAllText("MyDocuments\\Contact\\contact.json", serializedContact);
+            Model.Services.ContactSerializer.SaveContact((Model.Contact)parameter);
         }
         public bool CanExecute(object parameter)
         {

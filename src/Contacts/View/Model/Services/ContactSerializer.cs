@@ -14,13 +14,23 @@ namespace View.Model.Services
     public static class ContactSerializer
     {
         /// <summary>
+        /// Возвращает путь до файла с сериализованным объектом класса Contact.
+        /// </summary>
+        private static string Path
+        {
+            get
+            {
+                return "MyDocuments\\Contacts\\contacts.json";
+            }
+        }
+        /// <summary>
         /// Сериализует экземпляр класса <see cref="Model.Contact"/>.
         /// </summary>
         /// <param name="Contact">Экземпляр класса <see cref="Model.Contact"/>.</param>
         public static void SaveContact(Model.Contact Contact)
         {
             string serializedContact = JsonConvert.SerializeObject(Contact);
-            File.WriteAllText("MyDocuments\\Contacts\\contacts.json", serializedContact);
+            File.WriteAllText(Path, serializedContact);
         }
         /// <summary>
         /// Десериализует экземпляр класса <see cref="Model.Contact"/>.
@@ -28,7 +38,7 @@ namespace View.Model.Services
         /// <returns>Экземпляр класса <see cref="Model.Contact"/>.</returns>
         public static Model.Contact LoadContact()
         {
-            string serializedContact = File.ReadAllText("MyDocuments\\Contacts\\contacts.json");
+            string serializedContact = File.ReadAllText(Path);
             return JsonConvert.DeserializeObject<Model.Contact>(serializedContact);
         }
     }

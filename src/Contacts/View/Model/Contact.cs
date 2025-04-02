@@ -18,7 +18,7 @@ namespace View.Model
         //Почта
         private string _email;
         /// <summary>
-        /// Возвращает и задает имя. Должно быть строковым и размером не больше 50-и.
+        /// Возвращает и задает имя.
         /// </summary>
         public string Name
         {
@@ -28,19 +28,11 @@ namespace View.Model
             }
             set
             {
-                if(value.Length < 50)
-                {
-                    _name = value;
-                }
-                else
-                {
-                    throw new Exception("Размер имени больше 50-и");
-                }
+                _name = value;
             }
         }
         /// <summary>
         /// Возвращает и задает номер телефона. 
-        /// Должно быть строковым с размером 11 символов.
         /// </summary>
         public string PhoneNumber
         {
@@ -54,7 +46,7 @@ namespace View.Model
             }
         }
         /// <summary>
-        /// Возвращает и задает почту. Должно быть строковым.
+        /// Возвращает и задает почту.
         /// </summary>
         public string Email
         {
@@ -64,17 +56,9 @@ namespace View.Model
             }
             set
             {
-                Email = value;
+                _email = value;
             }
         }
-        /// <summary>
-        /// Заполняет поля класса значениями по умолчанию.
-        /// </summary>
-        public Contact()
-        {
-            Name = "Игорь";
-            PhoneNumber = "89992223334";
-            Email = "standart_email@gmail.com";
-        }
+        public Contact(){}
     }
 }
