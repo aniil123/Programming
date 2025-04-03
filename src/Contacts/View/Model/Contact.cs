@@ -11,13 +11,21 @@ namespace View.Model
     /// </summary>
     public class Contact
     {
-        //Имя
+        /// <summary>
+        /// Имя
+        /// </summary>
         private string _name;
 
-        //Телефонный номер
+        /// <summary>
+        /// Телефонный номер
+        /// </summary>
         private string _phoneNumber;
-        //Почта
+
+        /// <summary>
+        /// Почта
+        /// </summary>
         private string _email;
+
         /// <summary>
         /// Возвращает и задает имя.
         /// </summary>
@@ -32,6 +40,7 @@ namespace View.Model
                 _name = value;
             }
         }
+
         /// <summary>
         /// Возвращает и задает номер телефона. 
         /// </summary>
@@ -46,6 +55,7 @@ namespace View.Model
                 _phoneNumber = value;
             }
         }
+
         /// <summary>
         /// Возвращает и задает почту.
         /// </summary>
@@ -60,11 +70,7 @@ namespace View.Model
                 _email = value;
             }
         }
-        public Contact()
-        {
-            Name = "Igor";
-            PhoneNumber = "123124";
-            Email = "asddweqwereq";
-        }
+
+        public Contact(){}
     }
 }

@@ -18,7 +18,7 @@ namespace View.ViewModel
         public void Execute(object parameter)
         {
             Model.Contact wantedContact = Model.Services.ContactSerializer.LoadContact();
-            Model.Contact conParameter = (Model.Contact)parameter;
+            MainVM conParameter = (MainVM)parameter;
             conParameter.Name = wantedContact.Name;
             conParameter.PhoneNumber = wantedContact.PhoneNumber;
             conParameter.Email = wantedContact.Email;

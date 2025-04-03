@@ -7,9 +7,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="650" MinWidth="570" MinHeight="380" MaxWidth="820" MaxHeight="700">
     <Grid>
-        <Grid.CommandBindings>
-            <CommandBinding/>
-        </Grid.CommandBindings>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="296*"/>
@@ -26,7 +23,6 @@
         </Grid.RowDefinitions>
         <Button x:Name="loadButton" Grid.Column="5" Grid.Row="3" MaxWidth="100" MinWidth="50" Height="25" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="15 0 1 0" Content="Load"/>
         <Button x:Name="saveButton" Grid.Column="4" Grid.Row="3" MaxWidth="100" MinWidth="50" Height="25" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="15 0 1 0" Content="Save"/>
-        <Button x:Name="button" Grid.Column="0" Grid.Row="0"/>
         <GroupBox Grid.Column="1" Grid.Row="1" Header="Edit Contact">
             <Grid>
                 <Grid.RowDefinitions>

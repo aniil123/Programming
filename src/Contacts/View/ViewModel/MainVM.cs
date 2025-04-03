@@ -7,11 +7,18 @@ using System.Threading.Tasks;
 
 namespace View.ViewModel
 {
+    /// <summary>
+    ///  Главный класс слоя ViewModel.
+    /// </summary>
     public class MainVM : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        //Контактные данные человека.
+
+        /// <summary>
+        /// Контактные данные человека.
+        /// </summary>
         public Model.Contact Contact{ get; set; }
+
         /// <summary>
         /// Возвращает и задает имя.
         /// </summary>
@@ -26,10 +33,11 @@ namespace View.ViewModel
                 Contact.Name = value;
                 if(PropertyChanged != null)
                 {
-                    PropertyChanged(this, new PropertyChangedEventArgs("Name"));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(Name)));
                 }
             }
         }
+
         /// <summary>
         /// Возвращает и задает номер телефона. 
         /// </summary>
@@ -44,10 +52,11 @@ namespace View.ViewModel
                 Contact.PhoneNumber = value;
                 if (PropertyChanged != null)
                 {
-                    PropertyChanged(this, new PropertyChangedEventArgs("PhoneNumber"));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(PhoneNumber)));
                 }
             }
         }
+
         /// <summary>
         /// Возвращает и задает почту.
         /// </summary>
@@ -62,10 +71,14 @@ namespace View.ViewModel
                 Contact.Email = value;
                 if(PropertyChanged != null)
                 {
-                    PropertyChanged(this, new PropertyChangedEventArgs("Email"));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(Email)));
                 }
             }
         }
+
+        /// <summary>
+        /// Присваивание переменной Contact типа <see cref="Model.Contact"/> объекта типа <see cref="Model.Contact"/>.
+        /// </summary>
         public MainVM()
         {
             Contact = new Model.Contact();
