@@ -20,7 +20,7 @@ namespace View.Model.Services
         {
             get
             {
-                return "MyDocuments\\Contacts\\contacts.json";
+                return @"MyDocuments\Contacts\contacts.json";
             }
         }
         /// <summary>
@@ -30,7 +30,10 @@ namespace View.Model.Services
         public static void SaveContact(Model.Contact Contact)
         {
             string serializedContact = JsonConvert.SerializeObject(Contact);
-            File.WriteAllText(Path, serializedContact);
+            using(StreamWriter streamWriter = new StreamWriter(Path, false))
+            {
+                streamWriter.Write(serializedContact);
+            }
         }
         /// <summary>
         /// Десериализует экземпляр класса <see cref="Model.Contact"/>.
@@ -38,7 +41,11 @@ namespace View.Model.Services
         /// <returns>Экземпляр класса <see cref="Model.Contact"/>.</returns>
         public static Model.Contact LoadContact()
         {
-            string serializedContact = File.ReadAllText(Path);
+            string serializedContact;
+            using (StreamReader streamReader = new StreamReader(Path))
+            {
+                serializedContact = streamReader.ReadToEnd();
+            }
             return JsonConvert.DeserializeObject<Model.Contact>(serializedContact);
         }
     }
