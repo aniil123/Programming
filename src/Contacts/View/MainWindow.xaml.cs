@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using View.ViewModel;
+using Newtonsoft.Json;
 
 namespace View
 {
@@ -26,8 +27,17 @@ namespace View
         public MainWindow()
         {
             InitializeComponent();
+            button.Click += button_Click;
             mainVM = new MainVM();
             DataContext = mainVM;
+            saveButton.Command = new ViewModel.SaveCommand();
+            saveButton.CommandParameter = mainVM.Contact;
+            loadButton.Command = new ViewModel.LoadCommand();
+            loadButton.CommandParameter = mainVM.Contact;
+        }
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            mainVM.Name = ";;;sadsa;d;";
         }
     }
 }

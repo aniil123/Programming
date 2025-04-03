@@ -24,7 +24,10 @@ namespace View.ViewModel
             set
             {
                 Contact.Name = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Name"));
+                if(PropertyChanged != null)
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs("Name"));
+                }
             }
         }
         /// <summary>
@@ -39,7 +42,10 @@ namespace View.ViewModel
             set
             {
                 Contact.PhoneNumber = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PhoneNumber"));
+                if (PropertyChanged != null)
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs("PhoneNumber"));
+                }
             }
         }
         /// <summary>
@@ -54,20 +60,11 @@ namespace View.ViewModel
             set
             {
                 Contact.Email = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Email"));
+                if(PropertyChanged != null)
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs("Email"));
+                }
             }
-        }
-        public void NameChanged(string name)
-        {
-            Name = name;
-        }
-        public void PhoneNumberChanged(string phoneNumber)
-        {
-            PhoneNumber = phoneNumber;
-        }
-        public void EmailChanged(string email)
-        {
-            Email = email;
         }
         public MainVM()
         {

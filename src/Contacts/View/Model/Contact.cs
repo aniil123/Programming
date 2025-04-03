@@ -13,6 +13,7 @@ namespace View.Model
     {
         //Имя
         private string _name;
+
         //Телефонный номер
         private string _phoneNumber;
         //Почта
@@ -59,6 +60,11 @@ namespace View.Model
                 _email = value;
             }
         }
-        public Contact(){}
+        public Contact()
+        {
+            Name = "Igor";
+            PhoneNumber = "123124";
+            Email = "asddweqwereq";
+        }
     }
 }

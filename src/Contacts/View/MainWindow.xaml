@@ -24,9 +24,9 @@
             <RowDefinition Height="351*"/>
             <RowDefinition Height="35"/>
         </Grid.RowDefinitions>
-        <Button x:Name="LoadButton" Grid.Column="5" Grid.Row="3" MaxWidth="100" MinWidth="50" Height="25" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="15 0 1 0" Content="Load">
-        </Button>
-        <Button x:Name="SaveButton" Grid.Column="4" Grid.Row="3" MaxWidth="100" MinWidth="50" Height="25" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="15 0 1 0" Content="Save"/>
+        <Button x:Name="loadButton" Grid.Column="5" Grid.Row="3" MaxWidth="100" MinWidth="50" Height="25" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="15 0 1 0" Content="Load"/>
+        <Button x:Name="saveButton" Grid.Column="4" Grid.Row="3" MaxWidth="100" MinWidth="50" Height="25" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="15 0 1 0" Content="Save"/>
+        <Button x:Name="button" Grid.Column="0" Grid.Row="0"/>
         <GroupBox Grid.Column="1" Grid.Row="1" Header="Edit Contact">
             <Grid>
                 <Grid.RowDefinitions>
@@ -44,12 +44,12 @@
                     <ColumnDefinition Width="89*"/>
                     <ColumnDefinition Width="10"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock x:Name="EditNameTextBlock" Grid.Row="0" Grid.Column="1" Text="Name:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <TextBox x:Name="EditNameTextBox" Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Height="20" VerticalAlignment="Center"/>
-                <TextBlock x:Name="EditPhoneNumberTextBlock" Grid.Row="2" Grid.Column="1" Text="Phone Number:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <TextBox x:Name="EditPhoneNumberTextBox" Text="{Binding Path=PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Height="20" VerticalAlignment="Center"/>
-                <TextBlock x:Name="EditEmailTextBlock" Grid.Row="4" Grid.Column="1" Text="Email:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <TextBox x:Name="EditEmailTextBox" Text="{Binding Path=Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Height="20" VerticalAlignment="Center"/>
+                <TextBlock x:Name="editNameTextBlock" Grid.Row="0" Grid.Column="1" Text="Name:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBox x:Name="editNameTextBox" Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Height="20" VerticalAlignment="Center"/>
+                <TextBlock x:Name="editPhoneNumberTextBlock" Grid.Row="2" Grid.Column="1" Text="Phone Number:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBox x:Name="editPhoneNumberTextBox" Text="{Binding Path=PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Height="20" VerticalAlignment="Center"/>
+                <TextBlock x:Name="editEmailTextBlock" Grid.Row="4" Grid.Column="1" Text="Email:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBox x:Name="editEmailTextBox" Text="{Binding Path=Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Height="20" VerticalAlignment="Center"/>
             </Grid>
         </GroupBox>
         <GroupBox Grid.ColumnSpan="3" Grid.Column="3" Grid.Row="1" Header="Read Contact">
@@ -68,12 +68,12 @@
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock x:Name="ReadNameTextBlock" Grid.Row="0" Grid.Column="1" Text="Name:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <TextBlock x:Name="ReadNameTextBlockOutput" Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <TextBlock x:Name="ReadPhoneNumberTextBlock" Grid.Row="2" Grid.Column="1" Text="Phone Number:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <TextBlock x:Name="ReadPhoneNumberTextBlockOutput" Text="{Binding Path=PhoneNumber, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <TextBlock x:Name="ReadEmailTextBlock" Grid.Row="4" Grid.Column="1" Text="Email:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <TextBlock x:Name="ReadEmailTextBlockOutput" Text="{Binding Path=Email, UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="1" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock x:Name="readNameTextBlock" Grid.Row="0" Grid.Column="1" Text="Name:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock x:Name="readNameTextBlockOutput" Text="{Binding Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock x:Name="readPhoneNumberTextBlock" Grid.Row="2" Grid.Column="1" Text="Phone Number:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock x:Name="readPhoneNumberTextBlockOutput" Text="{Binding Path=PhoneNumber, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock x:Name="readEmailTextBlock" Grid.Row="4" Grid.Column="1" Text="Email:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock x:Name="readEmailTextBlockOutput" Text="{Binding Path=Email, UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="1" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </Grid>
         </GroupBox>
     </Grid>
