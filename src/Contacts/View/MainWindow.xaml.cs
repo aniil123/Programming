@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using View.ViewModel;
+using Newtonsoft.Json;
 
 namespace View
 {
@@ -20,13 +23,16 @@ namespace View
     /// </summary>
     public partial class MainWindow : Window
     {
+        public MainVM mainVM { get; set; }
         public MainWindow()
         {
             InitializeComponent();
-        }
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("asdqwe123");
+            mainVM = new MainVM();
+            DataContext = mainVM;
+            saveButton.Command = new ViewModel.SaveCommand();
+            saveButton.CommandParameter = mainVM.Contact;
+            loadButton.Command = new ViewModel.LoadCommand();
+            loadButton.CommandParameter = mainVM;
         }
     }
 }
