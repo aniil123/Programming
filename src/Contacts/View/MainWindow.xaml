@@ -8,36 +8,27 @@
         Title="Contacts" Height="450" Width="650" MinWidth="570" MinHeight="380" MaxWidth="820" MaxHeight="700" Icon="/contacts_96x96.ico">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3.5*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="6.5*"/>
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
-        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" FlowDirection="RightToLeft">
-            <Button x:Name="loadButton" Grid.Column="1" Grid.Row="1" Width="75" Height="25" Margin="15 0 15 10" Content="Load"/>
-            <Button x:Name="saveButton" Grid.Column="1" Grid.Row="1" Width="75" Height="25" Margin="0 0 0 10" Content="Save"/>
-        </StackPanel>
-        <GroupBox Grid.Column="0" Grid.Row="0" Header="Edit Contact" Margin="15">
-            <StackPanel>
-                <TextBlock x:Name="editNameTextBlock" Text="Name:" HorizontalAlignment="Left" Margin="5 15 0 5"/>
-                <TextBox x:Name="editNameTextBox" Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="20" Margin="5 5 5 10"/>
-                <TextBlock x:Name="editPhoneNumberTextBlock" Text="Phone Number:" HorizontalAlignment="Left" Margin="5 5 0 5"/>
-                <TextBox x:Name="editPhoneNumberTextBox" Text="{Binding Path=PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="20" Margin="5 5 5 10"/>
-                <TextBlock x:Name="editEmailTextBlock" Text="Email:" HorizontalAlignment="Left" Margin="5 5 0 5"/>
-                <TextBox x:Name="editEmailTextBox" Text="{Binding Path=Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="20" Margin="5 5 5 0"/>
-            </StackPanel>
-        </GroupBox>
-        <GroupBox Grid.Column="1" Grid.Row="0" Header="Read Contact" Margin="15">
-            <StackPanel>
-                <TextBlock x:Name="readNameTextBlock" Text="Name:" Margin="5 15 0 5"/>
-                <TextBlock x:Name="readNameTextBlockOutput" Text="{Binding Path=Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Height="20" FontWeight="Bold" Margin="5 5 0 10"/>
-                <TextBlock x:Name="readPhoneNumberTextBlock" Text="Phone Number:" Margin="5 5 0 5"/>
-                <TextBlock x:Name="readPhoneNumberTextBlockOutput" Text="{Binding Path=PhoneNumber, UpdateSourceTrigger=PropertyChanged}" Height="20" FontWeight="Bold" Margin="5 5 0 10"/>
-                <TextBlock x:Name="readEmailTextBlock" Text="Email:" Margin="5 5 0 5"/>
-                <TextBlock x:Name="readEmailTextBlockOutput" Text="{Binding Path=Email, UpdateSourceTrigger=PropertyChanged}" Height="20" FontWeight="Bold" Margin="5 5 0 0"/>
-            </StackPanel>
-        </GroupBox>
+        <Border Grid.Column="0" Background="#f8f8f8">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.75*"/>
+                    <RowDefinition Height="8.5*"/>
+                    <RowDefinition Height="0.75*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="8*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="FindTextBlock" Grid.Column="0" Text="Find:" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="3"/>
+                    <TextBox x:Name="FindTextBox" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="3"/>
+                </Grid>
+                <ListBox x:Name="ContactsListBox" Grid.Row="1" Margin="8 5 8 8"/>
+            </Grid>
+        </Border>
     </Grid>
 </Window>

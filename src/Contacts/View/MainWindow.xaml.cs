@@ -23,16 +23,9 @@ namespace View
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainVM mainVM { get; set; }
         public MainWindow()
         {
             InitializeComponent();
-            mainVM = new MainVM();
-            DataContext = mainVM;
-            saveButton.Command = new ViewModel.SaveCommand();
-            saveButton.CommandParameter = mainVM.Contact;
-            loadButton.Command = new ViewModel.LoadCommand();
-            loadButton.CommandParameter = mainVM;
         }
     }
 }
