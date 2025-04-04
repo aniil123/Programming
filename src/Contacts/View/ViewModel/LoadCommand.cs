@@ -8,9 +8,13 @@ using System.Windows.Input;
 
 namespace View.ViewModel
 {
+    /// <summary>
+    /// Команда, загружающая и десериализующая объект класса <see cref="Model.Contact"/>.
+    /// </summary>
     public class LoadCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
+
         /// <summary>
         /// Десериализует объект, находящийся в файле формата json и присваивает ссылку на него переменной parameter.
         /// </summary>
@@ -23,6 +27,7 @@ namespace View.ViewModel
             conParameter.PhoneNumber = wantedContact.PhoneNumber;
             conParameter.Email = wantedContact.Email;
         }
+
         public bool CanExecute(object parameter)
         {
             return true;

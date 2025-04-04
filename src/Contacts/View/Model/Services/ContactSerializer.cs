@@ -16,13 +16,8 @@ namespace View.Model.Services
         /// <summary>
         /// Возвращает путь до файла с сериализованным объектом класса Contact.
         /// </summary>
-        private static string Path
-        {
-            get
-            {
-                return @"MyDocuments\Contacts\contacts.json";
-            }
-        }
+        private static string Path { get; } = @"MyDocuments\Contacts\contacts.json";
+
         /// <summary>
         /// Сериализует экземпляр класса <see cref="Model.Contact"/>.
         /// </summary>
@@ -35,6 +30,7 @@ namespace View.Model.Services
                 streamWriter.Write(serializedContact);
             }
         }
+
         /// <summary>
         /// Десериализует экземпляр класса <see cref="Model.Contact"/>.
         /// </summary>

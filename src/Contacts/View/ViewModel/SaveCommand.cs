@@ -9,9 +9,13 @@ using System.Windows.Input;
 
 namespace View.ViewModel
 {
+    /// <summary>
+    /// Команда, сериализующая и сохраняющая объект класса <see cref="Model.Contact"/>.
+    /// </summary>
     public class SaveCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
+
         /// <summary>
         /// Сериализует объект parameter и сохраняет его в файл формата json.
         /// </summary>
@@ -20,6 +24,7 @@ namespace View.ViewModel
         {
             Model.Services.ContactSerializer.SaveContact((Model.Contact)parameter);
         }
+
         public bool CanExecute(object parameter)
         {
             return true;
