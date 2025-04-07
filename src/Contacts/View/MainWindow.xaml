@@ -5,17 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:View"
         mc:Ignorable="d"
-        Title="Contacts" Height="450" Width="650" MinWidth="570" MinHeight="380" MaxWidth="820" MaxHeight="700" Icon="/contacts_96x96.ico">
+        Title="Contacts" Height="450" Width="650" MinWidth="630" MinHeight="380" MaxWidth="820" MaxHeight="700" Icon="/contacts_96x96.ico">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3.5*" MinWidth="170" MaxWidth="350"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="6.5*"/>
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="37"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
         <Border Grid.Column="0" Grid.RowSpan="2" Background="#f8f8f8">
             <Grid>
                 <Grid.RowDefinitions>
@@ -45,5 +41,21 @@
             </Grid>
         </Border>
         <GridSplitter Grid.Column="1" Grid.RowSpan="2" Width="5" HorizontalAlignment="Center" Background="White"/>
+        <Grid Grid.Column="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0" Width="100" Height="100"  Margin="8 35 8 8" VerticalAlignment="Top" Source="/contacts_96x96.ico"/>
+            <StackPanel Grid.Column="1">
+                <TextBlock x:Name="NameTextBlock" Text="Name:" Margin="8 8 0 3"/>
+                <TextBox x:Name="NameTextBox" Margin="8"/>
+                <TextBlock x:Name="PhoneNumberTextBlock" Text="PhoneNumber:" Margin="8 8 0 3"/>
+                <TextBox x:Name="PhoneNumberTextBox" Margin="8"/>
+                <TextBlock x:Name="EmailTextBlock" Text="Email" Margin="8 8 0 3"/>
+                <TextBox x:Name="EmailTextBox" Margin="8"/>
+                <Button x:Name="ApplyButton" Content="Aplly" Width="75" Height="25" Margin="8 50 0 0" HorizontalAlignment="Left"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>
