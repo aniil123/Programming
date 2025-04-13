@@ -18,6 +18,9 @@
         <con:SelectedIndexToCurrentContactConverter x:Key="IndexToContactConverter"/>
         <con:ModeToReadOnlyConverter x:Key="ModeToReadOnlyConverter"/>
         <con:AvailabilityToVisibilityConverter x:Key="AvailabilityToVisibilityConverter"/>
+        <con:CurrentContactToNameConverter x:Key="CurrentContactToNameConverter"/>
+        <con:CurrentContactToPhoneNumberConverter x:Key="CurrentContactToPhoneNumberConverter"/>
+        <con:CurrentContactToEmailConverter x:Key="CurrentContactToEmailConverter"/>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -45,8 +48,8 @@
                          Grid.Row="1" 
                          Margin="8 5 8 5"
                          DataContext="{StaticResource mainVM}" 
-                         ItemsSource="{Binding Contacts}" 
-                         SelectedIndex="{Binding Path=Contacts, Converter={StaticResource IndexToContactConverter}, ConverterParameter={StaticResource mainVM}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         ItemsSource="{Binding Path=Contacts}" 
+                         SelectedIndex="{Binding Path=CurrentContactVM, Converter={StaticResource IndexToContactConverter}, ConverterParameter={StaticResource mainVM}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          DisplayMemberPath="Name"/>
                 <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
@@ -69,11 +72,11 @@
             <Image Grid.Column="0" Width="100" Height="100"  Margin="8 35 8 8" VerticalAlignment="Top" Source="/Resources/Person.png"/>
             <StackPanel Grid.Column="1">
                 <TextBlock x:Name="NameTextBlock" Text="Name:" Margin="8 8 0 3"/>
-                <TextBox x:Name="NameTextBox" Margin="8" IsReadOnly="{Binding Source={StaticResource mainVM}, Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}" Text="{Binding Source={StaticResource mainVM}, Path=Name, Mode=OneWay}"/>
+                <TextBox x:Name="NameTextBox" Margin="8" IsReadOnly="{Binding Source={StaticResource mainVM}, Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}" Text="{Binding Source={StaticResource mainVM}, Path=CurrentContactVM, Converter={StaticResource CurrentContactToNameConverter}, Mode=OneWay}"/>
                 <TextBlock x:Name="PhoneNumberTextBlock" Text="PhoneNumber:" Margin="8 8 0 3"/>
-                <TextBox x:Name="PhoneNumberTextBox" Margin="8" IsReadOnly="{Binding Source={StaticResource mainVM}, Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}" Text="{Binding Source={StaticResource mainVM}, Path=PhoneNumber, Mode=OneWay}"/>
+                <TextBox x:Name="PhoneNumberTextBox" Margin="8" IsReadOnly="{Binding Source={StaticResource mainVM}, Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}" Text="{Binding Source={StaticResource mainVM}, Path=CurrentContactVM, Converter={StaticResource CurrentContactToPhoneNumberConverter}, Mode=OneWay}"/>
                 <TextBlock x:Name="EmailTextBlock" Text="Email" Margin="8 8 0 3"/>
-                <TextBox x:Name="EmailTextBox" Margin="8" IsReadOnly="{Binding Source={StaticResource mainVM}, Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}" Text="{Binding Source={StaticResource mainVM}, Path=Email, Mode=OneWay}"/>
+                <TextBox x:Name="EmailTextBox" Margin="8" IsReadOnly="{Binding Source={StaticResource mainVM}, Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}" Text="{Binding Source={StaticResource mainVM}, Path=CurrentContactVM, Converter={StaticResource CurrentContactToEmailConverter}, Mode=OneWay}"/>
                 <Button x:Name="ApplyButton" Content="Aplly" Width="75" Height="25" Margin="8 50 0 0" HorizontalAlignment="Left" Visibility="{Binding Source={StaticResource applyCommand}, Path=Availability, Mode=OneWay, Converter={StaticResource AvailabilityToVisibilityConverter}}"/>
             </StackPanel>
         </Grid>

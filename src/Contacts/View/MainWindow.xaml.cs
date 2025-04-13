@@ -35,18 +35,5 @@ namespace View
             ApplyButton.CommandParameter = new List<object>() { NameTextBox, PhoneNumberTextBox, EmailTextBox };
             
         }
-        //private void AddButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    ContactsListBox.SelectedIndex = -1;
-        //    ApplyButton.Visibility = Visibility.Visible;
-        //    EditButton.Visibility = Visibility.Hidden;
-        //    RemoveButton.Visibility = Visibility.Hidden;
-        //    NameTextBox.IsReadOnly = false;
-        //    PhoneNumberTextBox.IsReadOnly = false;
-        //    EmailTextBox.IsReadOnly = false;
-        //    NameTextBox.Text = "";
-        //    PhoneNumberTextBox.Text = "";
-        //    EmailTextBox.Text = "";
-        //}
     }
 }

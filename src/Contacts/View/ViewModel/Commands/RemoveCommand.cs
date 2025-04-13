@@ -48,7 +48,7 @@ namespace View.ViewModel.Commands
 
         private void Availability_Changed(object sender, PropertyChangedEventArgs e)
         {
-            if(PropertyChanged != null && e.PropertyName == "Mode")
+            if(PropertyChanged != null && (e.PropertyName == "Mode" || e.PropertyName == "CurrentContactVM"))
             {
                 PropertyChanged(this, new PropertyChangedEventArgs("Availability"));
                 CanExecuteChanged(this, new EventArgs());
@@ -57,7 +57,18 @@ namespace View.ViewModel.Commands
 
         public void Execute(object parameter)
         {
+            int currentIndex = mainVM.Contacts.IndexOf(mainVM.CurrentContactVM);
             mainVM.Contacts.Remove(mainVM.CurrentContactVM);
+            int contactsCount = mainVM.Contacts.Count;
+            if (contactsCount > currentIndex)
+            {
+                mainVM.CurrentContactVM = mainVM.Contacts[currentIndex];
+            }
+            else if(contactsCount <= currentIndex && contactsCount > 0)
+            {
+                mainVM.CurrentContactVM = mainVM.Contacts[currentIndex - 1];
+            }
+            mainVM.OnPropertyChanged("Contacts");
         }
 
         private void Current_Exit(object sender, ExitEventArgs e)

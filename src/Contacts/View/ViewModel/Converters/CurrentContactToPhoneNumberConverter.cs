@@ -5,33 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Globalization;
-using System.Collections.ObjectModel;
 
 namespace View.ViewModel.Converters
 {
-    public class SelectedIndexToCurrentContactConverter : IValueConverter
+    class CurrentContactToPhoneNumberConverter : IValueConverter
     {
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if(value == null)
             {
-                return -1;
+                return "";
             }
-            MainVM mainVM = (MainVM)parameter;
-            return mainVM.Contacts.IndexOf((ContactVM)value);
+            ContactVM contactVM = (ContactVM)value;
+            return contactVM.PhoneNumber;
         }
+
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            MainVM mainVM = (MainVM)parameter;
-            mainVM.Mode = Modes.Nothing;
-            if ((int)value == -1)
-            {
-                return null;
-            }
-            else
-            {
-                return mainVM.Contacts[(int)value];
-            }
+            return null;
         }
+
     }
 }

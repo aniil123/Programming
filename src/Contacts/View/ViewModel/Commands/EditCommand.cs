@@ -46,7 +46,7 @@ namespace View.ViewModel.Commands
 
         private void Availability_Changed(object sender, PropertyChangedEventArgs e)
         {
-            if(PropertyChanged != null && e.PropertyName == "Mode")
+            if (PropertyChanged != null && (e.PropertyName == "Mode" || e.PropertyName == "CurrentContactVM"))
             {
                 PropertyChanged(this, new PropertyChangedEventArgs("Availability"));
                 CanExecuteChanged(this, new EventArgs());
