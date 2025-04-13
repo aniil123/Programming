@@ -66,7 +66,7 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" Width="100" Height="100"  Margin="8 35 8 8" VerticalAlignment="Top" Source="/contacts_96x96.ico"/>
+            <Image Grid.Column="0" Width="100" Height="100"  Margin="8 35 8 8" VerticalAlignment="Top" Source="/Resources/Person.png"/>
             <StackPanel Grid.Column="1">
                 <TextBlock x:Name="NameTextBlock" Text="Name:" Margin="8 8 0 3"/>
                 <TextBox x:Name="NameTextBox" Margin="8" IsReadOnly="{Binding Source={StaticResource mainVM}, Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}" Text="{Binding Source={StaticResource mainVM}, Path=Name, Mode=OneWay}"/>
