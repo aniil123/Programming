@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace View.ViewModel.Commands
@@ -57,6 +58,11 @@ namespace View.ViewModel.Commands
         public void Execute(object parameter)
         {
             mainVM.Contacts.Remove(mainVM.CurrentContactVM);
+        }
+
+        private void Current_Exit(object sender, ExitEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         public bool CanExecute(object parameter)

@@ -14,7 +14,7 @@ namespace View.ViewModel
         /// <summary>
         /// Контактные данные.
         /// </summary>
-        Model.Contact Contact { get; set; }
+        public Model.Contact Contact { get; set; }
 
         /// <summary>
         /// Возвращает и задает значение свойства Name объекта Contact типа <see cref="Model.Contact"/>. Должно быть типа string.
@@ -79,6 +79,14 @@ namespace View.ViewModel
         public ContactVM()
         {
             Contact = new Model.Contact();
+        }
+
+        /// <summary>
+        /// Присваивает переменной Contact объект типа <see cref="Model.Contact"/>.
+        /// </summary>
+        public ContactVM(Model.Contact contact)
+        {
+            Contact = contact;
         }
 
     }

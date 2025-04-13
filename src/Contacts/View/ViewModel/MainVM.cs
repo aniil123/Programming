@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace View.ViewModel
 {
@@ -142,12 +143,28 @@ namespace View.ViewModel
             }
         }
 
+        private void SaveContacts(object sender, ExitEventArgs e)
+        {
+            List<Model.Contact> contacts = new List<Model.Contact>();
+            foreach(ContactVM contact in Contacts)
+            {
+                contacts.Add(contact.Contact);
+            }
+            Model.Services.ContactSerializer.SaveContacts(contacts);
+        }
+
         /// <summary>
         /// Присваивание переменной Contact объекта типа <see cref="ContactVM"/>.
         /// </summary>
         public MainVM()
         {
             Contacts = new ObservableCollection<ContactVM>();
+            Application.Current.Exit += SaveContacts;
+            List<Model.Contact> contacts = Model.Services.ContactSerializer.LoadContacts();
+            foreach (Model.Contact contact in contacts)
+            {
+                Contacts.Add(new ContactVM(contact));
+            }
         }
 
     }
