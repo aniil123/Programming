@@ -6,26 +6,12 @@ using System.Threading.Tasks;
 
 namespace View.Model
 {
+
     /// <summary>
-    /// Контактные данные человека
+    /// Контактные данные.
     /// </summary>
     public class Contact
     {
-        /// <summary>
-        /// Имя
-        /// </summary>
-        private string _name;
-
-        /// <summary>
-        /// Телефонный номер
-        /// </summary>
-        private string _phoneNumber;
-
-        /// <summary>
-        /// Почта
-        /// </summary>
-        private string _email;
-
         /// <summary>
         /// Возвращает и задает имя.
         /// </summary>
@@ -42,5 +28,6 @@ namespace View.Model
         public string Email { get; set; }
 
         public Contact(){}
+
     }
 }

@@ -59,10 +59,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Modes.cs" />
     <Compile Include="Model\Services\ContactSerializer.cs" />
-    <Compile Include="ViewModel\LoadCommand.cs" />
+    <Compile Include="ViewModel\Commands\AddCommand.cs" />
+    <Compile Include="ViewModel\Commands\ApplyCommand.cs" />
+    <Compile Include="ViewModel\Commands\EditCommand.cs" />
+    <Compile Include="ViewModel\Commands\LoadCommand.cs" />
+    <Compile Include="ViewModel\Commands\RemoveCommand.cs" />
+    <Compile Include="ViewModel\ContactVM.cs" />
+    <Compile Include="ViewModel\Converters\AvailabilityToVisibilityConverter.cs" />
+    <Compile Include="ViewModel\Converters\ModeToReadOnlyConverter.cs" />
+    <Compile Include="ViewModel\Converters\SelectedIndexToCurrentContactConverter.cs" />
     <Compile Include="ViewModel\MainVM.cs" />
-    <Compile Include="ViewModel\SaveCommand.cs" />
+    <Compile Include="ViewModel\Commands\SaveCommand.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -110,8 +119,6 @@
   <ItemGroup>
     <Resource Include="contacts_96x96.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Person.png" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
