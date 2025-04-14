@@ -21,7 +21,7 @@ namespace View.Model.Services
         private static string Path { get; } = @"MyDocuments\Contacts\contacts.json";
 
         /// <summary>
-        /// Сериализует экземпляр класса <see cref="Contact"/>.
+        /// Сериализует и сохраняет список экземпляров класса <see cref="Contact"/>.
         /// </summary>
         /// <param name="Contact">Экземпляр класса <see cref="Contact"/>.</param>
         public static void SaveContacts(List<Contact> contacts)
@@ -34,7 +34,7 @@ namespace View.Model.Services
         }
 
         /// <summary>
-        /// Десериализует экземпляр класса <see cref="Contact"/>.
+        /// Загружает и десериализует список экземпляров класса <see cref="Contact"/>.
         /// </summary>
         /// <returns>Экземпляр класса <see cref="Contact"/>.</returns>
         public static List<Contact> LoadContacts()
