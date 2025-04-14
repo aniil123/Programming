@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Windows;
+using View.ViewModel.Commands;
 
 namespace View.ViewModel
 {
@@ -18,6 +19,11 @@ namespace View.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
+        /// Состояние приложения.
+        /// </summary>
+        private Modes _mode = Modes.Nothing;
+
+        /// <summary>
         /// Список объектов типа <see cref="ContactVM"/>.
         /// </summary>
         public ObservableCollection<ContactVM> Contacts { get; set; }
@@ -28,25 +34,24 @@ namespace View.ViewModel
         private ContactVM _currentContactVM;
 
         /// <summary>
-        /// Состояние приложения.
+        /// Команда <see cref="AddCommand"/>.
         /// </summary>
-        private Modes _mode = Modes.Nothing;
+        public AddCommand AddCommand { get; set; }
 
         /// <summary>
-        /// Возвращает и задает CurrentContactVM.
+        /// Команда <see cref="EditCommand"/>.
         /// </summary>
-        public ContactVM CurrentContactVM
-        {
-            get
-            {
-                return _currentContactVM;
-            }
-            set
-            {
-                _currentContactVM = value;
-                OnPropertyChanged();
-            }
-        }
+        public EditCommand EditCommand { get; set; }
+
+        /// <summary>
+        /// Команда <see cref="RemoveCommand"/>.
+        /// </summary>
+        public RemoveCommand RemoveCommand { get; set; }
+
+        /// <summary>
+        /// Команда <see cref="ApplyCommand"/>.
+        /// </summary>
+        public ApplyCommand ApplyCommand { get; set; }
 
         /// <summary>
         /// Возвращает и задает состояние приложения. Должно быть типа <see cref="Modes"/>.
@@ -60,7 +65,73 @@ namespace View.ViewModel
             set
             {
                 _mode = value;
+                OnPropertyChanged(new List<string>() { "Mode", "AddCommandAvailability", "EditCommandAvailability", "RemoveCommandAvailability", "ApplyCommandAvailability"});
+            }
+        }
+
+        /// <summary>
+        /// Возвращает и задает CurrentContactVM.
+        /// </summary>
+        public ContactVM CurrentContactVM
+        {
+            get
+            {
+                return _currentContactVM;
+            }
+            set
+            {
+                _currentContactVM = value;
+                Mode = Modes.Nothing;
                 OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Возвращает true, если Mode содержит значение Nothing,
+        /// false - если содержит любые другие возможные значения для типа <see cref="Modes"/>.
+        /// </summary>
+        public bool AddCommandAvailability
+        {
+            get
+            {
+                return Mode == Modes.Nothing;
+            }
+        }
+
+        /// <summary>
+        /// Возвращает true, если Mode содержит значение Nothing и выбран элемент в ListBox,
+        /// false - если Mode содержит любые другие возможные значения для типа <see cref="Modes"/>
+        /// или в ListBox не выбран ни один элемент.
+        /// </summary>
+        public bool EditCommandAvailability
+        {
+            get
+            {
+                return Mode == Modes.Nothing && CurrentContactVM != null;
+            }
+        }
+
+        /// <summary>
+        /// Возвращает true, если Mode содержит значение Nothing и выбран элемент в ListBox,
+        /// false - если Mode содержит любые другие возможные значения для типа <see cref="Modes"/>
+        /// или в ListBox не выбран ни один элемент.
+        /// </summary>
+        public bool RemoveCommandAvailability
+        {
+            get
+            {
+                return Mode == Modes.Nothing && CurrentContactVM != null;
+            }
+        }
+
+        /// <summary>
+        /// Возвращает true, если Mode содержит Add или Edit.
+        /// </summary>
+        public bool ApplyCommandAvailability
+        {
+            get
+            {
+                return Mode != Modes.Nothing;
             }
         }
 

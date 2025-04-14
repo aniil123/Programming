@@ -71,7 +71,6 @@
     <Compile Include="ViewModel\Converters\CurrentContactToNameConverter.cs" />
     <Compile Include="ViewModel\Converters\CurrentContactToPhoneNumberConverter.cs" />
     <Compile Include="ViewModel\Converters\ModeToReadOnlyConverter.cs" />
-    <Compile Include="ViewModel\Converters\SelectedIndexToCurrentContactConverter.cs" />
     <Compile Include="ViewModel\MainVM.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -11,11 +11,6 @@
         Title="Contacts" Height="450" Width="650" MinWidth="630" MinHeight="380" MaxWidth="820" MaxHeight="700" Icon="/contacts_96x96.ico">
     <Window.Resources>
         <vm:MainVM x:Key="mainVM"/>
-        <vm:AddCommand x:Key="addCommand" mainVM="{StaticResource mainVM}"/>
-        <com:EditCommand x:Key="editCommand" mainVM="{StaticResource mainVM}"/>
-        <com:RemoveCommand x:Key="removeCommand" mainVM="{StaticResource mainVM}"/>
-        <com:ApplyCommand x:Key="applyCommand" mainVM="{StaticResource mainVM}"/>
-        <con:SelectedIndexToCurrentContactConverter x:Key="IndexToContactConverter"/>
         <con:ModeToReadOnlyConverter x:Key="ModeToReadOnlyConverter"/>
         <con:AvailabilityToVisibilityConverter x:Key="AvailabilityToVisibilityConverter"/>
         <con:CurrentContactToNameConverter x:Key="CurrentContactToNameConverter"/>
@@ -49,7 +44,7 @@
                          Margin="8 5 8 5"
                          DataContext="{StaticResource mainVM}" 
                          ItemsSource="{Binding Path=Contacts}" 
-                         SelectedIndex="{Binding Path=CurrentContactVM, Converter={StaticResource IndexToContactConverter}, ConverterParameter={StaticResource mainVM}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         SelectedItem="{Binding Path=CurrentContactVM, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          DisplayMemberPath="Name"/>
                 <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
@@ -57,9 +52,9 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Button x:Name="AddButton" Content="Add"  Grid.Column="0" Height="25" Margin="8 0 3 3" VerticalAlignment="Center" IsEnabled="{Binding Source={StaticResource addCommand}, Path=Availability, Mode=OneWay}"/>
-                    <Button x:Name="EditButton" Content="Edit" Grid.Column="1" Height="25" Margin="3 0 3 3"  VerticalAlignment="Center" IsEnabled="{Binding Source={StaticResource editCommand}, Path=Availability, Mode=OneWay}"/>
-                    <Button x:Name="RemoveButton" Content="Remove" Grid.Column="2" Height="25" Margin="3 0 8 3" VerticalAlignment="Center" IsEnabled="{Binding Source={StaticResource removeCommand}, Path=Availability, Mode=OneWay}"/>
+                    <Button x:Name="AddButton" Content="Add"  Grid.Column="0" Height="25" Margin="8 0 3 3" VerticalAlignment="Center" IsEnabled="{Binding Source={StaticResource mainVM}, Path=AddCommandAvailability}"/>
+                    <Button x:Name="EditButton" Content="Edit" Grid.Column="1" Height="25" Margin="3 0 3 3"  VerticalAlignment="Center" IsEnabled="{Binding Source={StaticResource mainVM}, Path=EditCommandAvailability}"/>
+                    <Button x:Name="RemoveButton" Content="Remove" Grid.Column="2" Height="25" Margin="3 0 8 3" VerticalAlignment="Center" IsEnabled="{Binding Source={StaticResource mainVM}, Path=RemoveCommandAvailability}"/>
                 </Grid>
             </Grid>
         </Border>
@@ -77,7 +72,7 @@
                 <TextBox x:Name="PhoneNumberTextBox" Margin="8" IsReadOnly="{Binding Source={StaticResource mainVM}, Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}" Text="{Binding Source={StaticResource mainVM}, Path=CurrentContactVM, Converter={StaticResource CurrentContactToPhoneNumberConverter}, Mode=OneWay}"/>
                 <TextBlock x:Name="EmailTextBlock" Text="Email" Margin="8 8 0 3"/>
                 <TextBox x:Name="EmailTextBox" Margin="8" IsReadOnly="{Binding Source={StaticResource mainVM}, Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}" Text="{Binding Source={StaticResource mainVM}, Path=CurrentContactVM, Converter={StaticResource CurrentContactToEmailConverter}, Mode=OneWay}"/>
-                <Button x:Name="ApplyButton" Content="Aplly" Width="75" Height="25" Margin="8 50 0 0" HorizontalAlignment="Left" Visibility="{Binding Source={StaticResource applyCommand}, Path=Availability, Mode=OneWay, Converter={StaticResource AvailabilityToVisibilityConverter}}"/>
+                <Button x:Name="ApplyButton" Content="Aplly" Width="75" Height="25" Margin="8 50 0 0" HorizontalAlignment="Left" Visibility="{Binding Source={StaticResource mainVM}, Path=ApplyCommandAvailability, Converter={StaticResource AvailabilityToVisibilityConverter}}"/>
             </StackPanel>
         </Grid>
     </Grid>

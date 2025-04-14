@@ -27,12 +27,14 @@ namespace View
         public MainWindow()
         {
             InitializeComponent();
+            AddButton.Command = new AddCommand();
             AddButton.CommandParameter = Resources["mainVM"];
-            AddButton.Command = (AddCommand)Resources["addCommand"];
-            EditButton.Command = (EditCommand)Resources["editCommand"];
-            RemoveButton.Command = (RemoveCommand)Resources["removeCommand"];
-            ApplyButton.Command = (ApplyCommand)Resources["applyCommand"];
-            ApplyButton.CommandParameter = new List<object>() { NameTextBox, PhoneNumberTextBox, EmailTextBox };
+            EditButton.Command = new EditCommand();
+            EditButton.CommandParameter = Resources["mainVM"];
+            RemoveButton.Command = new RemoveCommand();
+            RemoveButton.CommandParameter = Resources["mainVM"];
+            ApplyButton.Command = new ApplyCommand();
+            ApplyButton.CommandParameter = new List<object>() { Resources["mainVM"], NameTextBox, PhoneNumberTextBox, EmailTextBox };
             
         }
     }
