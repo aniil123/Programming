@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.IO;
 using Newtonsoft.Json;
 
@@ -13,36 +14,38 @@ namespace View.Model.Services
     /// </summary>
     public static class ContactSerializer
     {
+
         /// <summary>
         /// Возвращает путь до файла с сериализованным объектом класса Contact.
         /// </summary>
         private static string Path { get; } = @"MyDocuments\Contacts\contacts.json";
 
         /// <summary>
-        /// Сериализует экземпляр класса <see cref="Model.Contact"/>.
+        /// Сериализует и сохраняет список экземпляров класса <see cref="Contact"/>.
         /// </summary>
-        /// <param name="Contact">Экземпляр класса <see cref="Model.Contact"/>.</param>
-        public static void SaveContact(Model.Contact Contact)
+        /// <param name="Contact">Экземпляр класса <see cref="Contact"/>.</param>
+        public static void SaveContacts(List<Contact> contacts)
         {
-            string serializedContact = JsonConvert.SerializeObject(Contact);
+            string serializedContacts = JsonConvert.SerializeObject(contacts);
             using(StreamWriter streamWriter = new StreamWriter(Path, false))
             {
-                streamWriter.Write(serializedContact);
+                streamWriter.Write(serializedContacts);
             }
         }
 
         /// <summary>
-        /// Десериализует экземпляр класса <see cref="Model.Contact"/>.
+        /// Загружает и десериализует список экземпляров класса <see cref="Contact"/>.
         /// </summary>
-        /// <returns>Экземпляр класса <see cref="Model.Contact"/>.</returns>
-        public static Model.Contact LoadContact()
+        /// <returns>Экземпляр класса <see cref="Contact"/>.</returns>
+        public static List<Contact> LoadContacts()
         {
-            string serializedContact;
+            string serializedContacts;
             using (StreamReader streamReader = new StreamReader(Path))
             {
-                serializedContact = streamReader.ReadToEnd();
+                serializedContacts = streamReader.ReadToEnd();
             }
-            return JsonConvert.DeserializeObject<Model.Contact>(serializedContact);
+            return JsonConvert.DeserializeObject<List<Contact>>(serializedContacts);
         }
+
     }
 }

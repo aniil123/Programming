@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
+using System.Collections.ObjectModel;
+using System.Windows;
+using View.ViewModel.Commands;
 
 namespace View.ViewModel
 {
@@ -12,76 +15,214 @@ namespace View.ViewModel
     /// </summary>
     public class MainVM : INotifyPropertyChanged
     {
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
-        /// Контактные данные человека.
+        /// Состояние приложения.
         /// </summary>
-        public Model.Contact Contact{ get; set; }
+        private Modes _mode = Modes.Nothing;
 
         /// <summary>
-        /// Возвращает и задает имя.
+        /// Список объектов типа <see cref="ContactVM"/>.
+        /// </summary>
+        public ObservableCollection<ContactVM> Contacts { get; set; }
+
+        /// <summary>
+        /// Объект типа <see cref="ContactVM"/>, выбранный из колекции Contacts.
+        /// </summary>
+        private ContactVM _currentContactVM;
+
+        /// <summary>
+        /// Команда <see cref="AddCommand"/>.
+        /// </summary>
+        public AddCommand AddCommand { get; set; }
+
+        /// <summary>
+        /// Команда <see cref="EditCommand"/>.
+        /// </summary>
+        public EditCommand EditCommand { get; set; }
+
+        /// <summary>
+        /// Команда <see cref="RemoveCommand"/>.
+        /// </summary>
+        public RemoveCommand RemoveCommand { get; set; }
+
+        /// <summary>
+        /// Команда <see cref="ApplyCommand"/>.
+        /// </summary>
+        public ApplyCommand ApplyCommand { get; set; }
+
+        /// <summary>
+        /// Возвращает и задает состояние приложения. Должно быть типа <see cref="Modes"/>.
+        /// </summary>
+        public Modes Mode
+        {
+            get
+            {
+                return _mode;
+            }
+            set
+            {
+                _mode = value;
+                OnPropertyChanged(new List<string>() { "Mode", "AddCommandAvailability", "EditCommandAvailability", "RemoveCommandAvailability", "ApplyCommandAvailability"});
+            }
+        }
+
+        /// <summary>
+        /// Возвращает и задает CurrentContactVM.
+        /// </summary>
+        public ContactVM CurrentContactVM
+        {
+            get
+            {
+                return _currentContactVM;
+            }
+            set
+            {
+                _currentContactVM = value;
+                Mode = Modes.Nothing;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Возвращает true, если Mode содержит значение Nothing,
+        /// false - если содержит любые другие возможные значения для типа <see cref="Modes"/>.
+        /// </summary>
+        public bool AddCommandAvailability
+        {
+            get
+            {
+                return Mode == Modes.Nothing;
+            }
+        }
+
+        /// <summary>
+        /// Возвращает true, если Mode содержит значение Nothing и выбран элемент в ListBox,
+        /// false - если Mode содержит любые другие возможные значения для типа <see cref="Modes"/>
+        /// или в ListBox не выбран ни один элемент.
+        /// </summary>
+        public bool EditCommandAvailability
+        {
+            get
+            {
+                return Mode == Modes.Nothing && CurrentContactVM != null;
+            }
+        }
+
+        /// <summary>
+        /// Возвращает true, если Mode содержит значение Nothing и выбран элемент в ListBox,
+        /// false - если Mode содержит любые другие возможные значения для типа <see cref="Modes"/>
+        /// или в ListBox не выбран ни один элемент.
+        /// </summary>
+        public bool RemoveCommandAvailability
+        {
+            get
+            {
+                return Mode == Modes.Nothing && CurrentContactVM != null;
+            }
+        }
+
+        /// <summary>
+        /// Возвращает true, если Mode содержит Add или Edit.
+        /// </summary>
+        public bool ApplyCommandAvailability
+        {
+            get
+            {
+                return Mode != Modes.Nothing;
+            }
+        }
+
+        /// <summary>
+        /// Возвращает и задает значение свойства Name объекта Contact типа <see cref="ContactVM"/>. Должно быть типа string.
         /// </summary>
         public string Name
         {
             get
             {
-                return Contact.Name;
+                if(CurrentContactVM == null)
+                {
+                    return "";
+                }
+                return CurrentContactVM.Name;
             }
             set
             {
-                Contact.Name = value;
-                if(PropertyChanged != null)
-                {
-                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(Name)));
-                }
+                CurrentContactVM.Name = value;
+                OnPropertyChanged();
             }
         }
 
         /// <summary>
-        /// Возвращает и задает номер телефона. 
+        /// Возвращает и задает значение свойства PhoneNumber объекта Contact типа <see cref="ContactVM"/>. Должно быть типа string.
         /// </summary>
         public string PhoneNumber
         {
             get
             {
-                return Contact.PhoneNumber;
+                if(CurrentContactVM == null)
+                {
+                    return "";
+                }
+                return CurrentContactVM.PhoneNumber;
             }
             set
             {
-                Contact.PhoneNumber = value;
-                if (PropertyChanged != null)
-                {
-                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(PhoneNumber)));
-                }
+                CurrentContactVM.PhoneNumber = value;
+                OnPropertyChanged();
             }
         }
 
         /// <summary>
-        /// Возвращает и задает почту.
+        /// Возвращает и задает значение свойства Email объекта Contact типа <see cref="ContactVM"/>. Должно быть типа string.
         /// </summary>
         public string Email
         {
             get
             {
-                return Contact.Email;
+                if (CurrentContactVM == null)
+                {
+                    return "";
+                }
+                return CurrentContactVM.Email;
             }
             set
             {
-                Contact.Email = value;
-                if(PropertyChanged != null)
+                CurrentContactVM.Email = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName]string propName = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            }
+        }
+
+        public void OnPropertyChanged(List<string> propNames)
+        {
+            if(PropertyChanged != null)
+            {
+                foreach(string propName in propNames)
                 {
-                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(Email)));
+                    PropertyChanged(this, new PropertyChangedEventArgs(propName));
                 }
             }
         }
 
         /// <summary>
-        /// Присваивание переменной Contact типа <see cref="Model.Contact"/> объекта типа <see cref="Model.Contact"/>.
+        /// Присваивание переменной Contact объект типа <see cref="ContactVM"/>
+        /// и загружает в коллекцию Contacts объекты типа <see cref="ContactVM"/>.
         /// </summary>
         public MainVM()
         {
-            Contact = new Model.Contact();
+            Contacts = new ObservableCollection<ContactVM>();
+            new Services.SaveLoadContacts(Contacts);
         }
+
     }
 }
