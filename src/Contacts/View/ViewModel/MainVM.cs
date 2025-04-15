@@ -215,33 +215,13 @@ namespace View.ViewModel
         }
 
         /// <summary>
-        /// Обработчик события Exit у Application.Current, который сохраняет обекты, находящиеся в коллекции Contacts.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SaveContacts(object sender, ExitEventArgs e)
-        {
-            List<Model.Contact> contacts = new List<Model.Contact>();
-            foreach(ContactVM contact in Contacts)
-            {
-                contacts.Add(contact.Contact);
-            }
-            Model.Services.ContactSerializer.SaveContacts(contacts);
-        }
-
-        /// <summary>
         /// Присваивание переменной Contact объект типа <see cref="ContactVM"/>
         /// и загружает в коллекцию Contacts объекты типа <see cref="ContactVM"/>.
         /// </summary>
         public MainVM()
         {
             Contacts = new ObservableCollection<ContactVM>();
-            Application.Current.Exit += SaveContacts;
-            List<Model.Contact> contacts = Model.Services.ContactSerializer.LoadContacts();
-            foreach (Model.Contact contact in contacts)
-            {
-                Contacts.Add(new ContactVM(contact));
-            }
+            new Services.SaveLoadContacts(Contacts);
         }
 
     }
