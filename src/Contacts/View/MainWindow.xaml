@@ -13,11 +13,8 @@
         <vm:MainVM x:Key="mainVM"/>
         <con:ModeToReadOnlyConverter x:Key="ModeToReadOnlyConverter"/>
         <con:AvailabilityToVisibilityConverter x:Key="AvailabilityToVisibilityConverter"/>
-        <con:CurrentContactToNameConverter x:Key="CurrentContactToNameConverter"/>
-        <con:CurrentContactToPhoneNumberConverter x:Key="CurrentContactToPhoneNumberConverter"/>
-        <con:CurrentContactToEmailConverter x:Key="CurrentContactToEmailConverter"/>
     </Window.Resources>
-    <Grid>
+    <Grid DataContext="{StaticResource mainVM}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3.5*" MinWidth="170" MaxWidth="350"/>
             <ColumnDefinition Width="auto"/>
@@ -39,22 +36,21 @@
                     <TextBox x:Name="FindTextBox" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="3 3 8 3"/>
                 </Grid>
                 <ListBox x:Name="ContactsListBox" 
-                         Grid.Column="0" 
-                         Grid.Row="1" 
-                         Margin="8 5 8 5"
-                         DataContext="{StaticResource mainVM}" 
-                         ItemsSource="{Binding Path=Contacts}" 
-                         SelectedItem="{Binding Path=CurrentContactVM, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                         DisplayMemberPath="Name"/>
+                     Grid.Column="0" 
+                     Grid.Row="1" 
+                     Margin="8 5 8 5"
+                     ItemsSource="{Binding Path=Contacts}" 
+                     SelectedItem="{Binding Path=CurrentContactVM, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     DisplayMemberPath="Name"/>
                 <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Button x:Name="AddButton" Content="Add"  Grid.Column="0" Height="25" Margin="8 0 3 3" VerticalAlignment="Center" IsEnabled="{Binding Source={StaticResource mainVM}, Path=AddCommandAvailability}"/>
-                    <Button x:Name="EditButton" Content="Edit" Grid.Column="1" Height="25" Margin="3 0 3 3"  VerticalAlignment="Center" IsEnabled="{Binding Source={StaticResource mainVM}, Path=EditCommandAvailability}"/>
-                    <Button x:Name="RemoveButton" Content="Remove" Grid.Column="2" Height="25" Margin="3 0 8 3" VerticalAlignment="Center" IsEnabled="{Binding Source={StaticResource mainVM}, Path=RemoveCommandAvailability}"/>
+                    <Button x:Name="AddButton" Content="Add"  Grid.Column="0" Height="25" Margin="8 0 3 3" VerticalAlignment="Center" IsEnabled="{Binding Path=AddCommandAvailability}"/>
+                    <Button x:Name="EditButton" Content="Edit" Grid.Column="1" Height="25" Margin="3 0 3 3"  VerticalAlignment="Center" IsEnabled="{Binding Path=EditCommandAvailability}"/>
+                    <Button x:Name="RemoveButton" Content="Remove" Grid.Column="2" Height="25" Margin="3 0 8 3" VerticalAlignment="Center" IsEnabled="{Binding Path=RemoveCommandAvailability}"/>
                 </Grid>
             </Grid>
         </Border>
@@ -67,12 +63,12 @@
             <Image Grid.Column="0" Width="100" Height="100"  Margin="8 35 8 8" VerticalAlignment="Top" Source="/Resources/Person.png"/>
             <StackPanel Grid.Column="1">
                 <TextBlock x:Name="NameTextBlock" Text="Name:" Margin="8 8 0 3"/>
-                <TextBox x:Name="NameTextBox" Margin="8" IsReadOnly="{Binding Source={StaticResource mainVM}, Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}" Text="{Binding Source={StaticResource mainVM}, Path=CurrentContactVM, Converter={StaticResource CurrentContactToNameConverter}, Mode=OneWay}"/>
+                <TextBox x:Name="NameTextBox" Margin="8" IsReadOnly="{Binding Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}" Text="{Binding Path=Name, Mode=OneWay}"/>
                 <TextBlock x:Name="PhoneNumberTextBlock" Text="PhoneNumber:" Margin="8 8 0 3"/>
-                <TextBox x:Name="PhoneNumberTextBox" Margin="8" IsReadOnly="{Binding Source={StaticResource mainVM}, Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}" Text="{Binding Source={StaticResource mainVM}, Path=CurrentContactVM, Converter={StaticResource CurrentContactToPhoneNumberConverter}, Mode=OneWay}"/>
+                <TextBox x:Name="PhoneNumberTextBox" Margin="8" IsReadOnly="{Binding Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}" Text="{Binding Path=PhoneNumber, Mode=OneWay}"/>
                 <TextBlock x:Name="EmailTextBlock" Text="Email" Margin="8 8 0 3"/>
-                <TextBox x:Name="EmailTextBox" Margin="8" IsReadOnly="{Binding Source={StaticResource mainVM}, Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}" Text="{Binding Source={StaticResource mainVM}, Path=CurrentContactVM, Converter={StaticResource CurrentContactToEmailConverter}, Mode=OneWay}"/>
-                <Button x:Name="ApplyButton" Content="Aplly" Width="75" Height="25" Margin="8 50 0 0" HorizontalAlignment="Left" Visibility="{Binding Source={StaticResource mainVM}, Path=ApplyCommandAvailability, Converter={StaticResource AvailabilityToVisibilityConverter}}"/>
+                <TextBox x:Name="EmailTextBox" Margin="8" IsReadOnly="{Binding Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}" Text="{Binding Path=Email, Mode=OneWay}"/>
+                <Button x:Name="ApplyButton" Content="Aplly" Width="75" Height="25" Margin="8 50 0 0" HorizontalAlignment="Left" Visibility="{Binding Path=ApplyCommandAvailability, Converter={StaticResource AvailabilityToVisibilityConverter}}"/>
             </StackPanel>
         </Grid>
     </Grid>
