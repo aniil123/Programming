@@ -13,7 +13,7 @@ namespace View.ViewModel
     /// <summary>
     ///  Главный класс слоя ViewModel.
     /// </summary>
-    public class MainVM : INotifyPropertyChanged
+    public class MainVM : INotifyPropertyChanged, IDataErrorInfo
     {
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -32,26 +32,6 @@ namespace View.ViewModel
         /// Объект типа <see cref="ContactVM"/>, выбранный из колекции Contacts.
         /// </summary>
         private ContactVM _currentContactVM;
-
-        /// <summary>
-        /// Команда <see cref="AddCommand"/>.
-        /// </summary>
-        public AddCommand AddCommand { get; set; }
-
-        /// <summary>
-        /// Команда <see cref="EditCommand"/>.
-        /// </summary>
-        public EditCommand EditCommand { get; set; }
-
-        /// <summary>
-        /// Команда <see cref="RemoveCommand"/>.
-        /// </summary>
-        public RemoveCommand RemoveCommand { get; set; }
-
-        /// <summary>
-        /// Команда <see cref="ApplyCommand"/>.
-        /// </summary>
-        public ApplyCommand ApplyCommand { get; set; }
 
         /// <summary>
         /// Возвращает и задает состояние приложения. Должно быть типа <see cref="Modes"/>.
@@ -82,7 +62,7 @@ namespace View.ViewModel
             {
                 _currentContactVM = value;
                 Mode = Modes.Nothing;
-                OnPropertyChanged();
+                OnPropertyChanged(new List<string>() { "CurrentContactVM", "Name", "PhoneNumber", "Email"});
             }
         }
 
@@ -192,6 +172,97 @@ namespace View.ViewModel
             {
                 CurrentContactVM.Email = value;
                 OnPropertyChanged();
+            }
+        }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                string error = String.Empty;
+                if (Mode != Modes.Nothing)
+                {
+                    switch (columnName)
+                    {
+                        case "Name":
+                            if(Name == "")
+                            {
+                                error = "Имя не должно быть пустым.";
+                            }
+                            else if (Name.Length > 100)
+                            {
+                                error = "Имя не должно быть больше 100 символов.";
+                            }
+                            break;
+                        case "PhoneNumber":
+                            if(PhoneNumber == "")
+                            {
+                                error = "Номер телефона не должен быть пустым.";
+                                break;
+                            }
+                            if (PhoneNumber.Length > 100)
+                            {
+                                error = "Номер телефона больше 100 символов.";
+                                break;
+                            }
+                            string acceptableCharacters = "01234567890+-()";
+                            foreach (char phoneSim in PhoneNumber)
+                            {
+                                bool acceptable = false;
+                                foreach (char ch in acceptableCharacters)
+                                {
+                                    if (phoneSim == ch)
+                                    {
+                                        acceptable = true;
+                                        break;
+                                    }
+                                }
+                                if (!acceptable)
+                                {
+                                    error = "В номере телефона недопустимые символы (могут быть только цифры и +-()).";
+                                    break;
+                                }
+                            }
+                            break;
+                        case "Email":
+                            if(Email == "")
+                            {
+                                error = "Почта не должна быть пустой.";
+                                break;
+                            }
+                            if (Email.Length > 100)
+                            {
+                                error = "Почта больше 100 символов.";
+                                break;
+                            }
+                            bool acceptable2 = false;
+                            foreach (char emailSim in Email)
+                            {
+                                if (emailSim == '@')
+                                {
+                                    if (acceptable2)
+                                    {
+                                        error = "Должен быть только 1 символ @.";
+                                        break;
+                                    }
+                                    acceptable2 = true;
+                                }
+                            }
+                            if (!acceptable2)
+                            {
+                                error = "В почте должен быть символ @.";
+                            }
+                            break;
+                    }
+                }
+                return error;
+            }
+        }
+        public string Error
+        {
+            get
+            {
+                throw new NotImplementedException();
             }
         }
 

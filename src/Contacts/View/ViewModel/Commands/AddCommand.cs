@@ -17,7 +17,7 @@ namespace View.ViewModel
         {
             MainVM mainVM = (MainVM)parameter;
             mainVM.CurrentContactVM = new ContactVM();
-            mainVM.Mode = Modes.Add;   
+            mainVM.Mode = Modes.Add;
         }
 
         public bool CanExecute(object parameter)

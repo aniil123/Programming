@@ -41,6 +41,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -59,6 +60,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\ContactControl.xaml.cs">
+      <DependentUpon>ContactControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\Modes.cs" />
     <Compile Include="Model\Services\ContactSerializer.cs" />
     <Compile Include="ViewModel\Commands\AddCommand.cs" />
@@ -67,12 +71,13 @@
     <Compile Include="ViewModel\Commands\RemoveCommand.cs" />
     <Compile Include="ViewModel\ContactVM.cs" />
     <Compile Include="ViewModel\Converters\AvailabilityToVisibilityConverter.cs" />
-    <Compile Include="ViewModel\Converters\CurrentContactToEmailConverter.cs" />
-    <Compile Include="ViewModel\Converters\CurrentContactToNameConverter.cs" />
-    <Compile Include="ViewModel\Converters\CurrentContactToPhoneNumberConverter.cs" />
     <Compile Include="ViewModel\Converters\ModeToReadOnlyConverter.cs" />
     <Compile Include="ViewModel\MainVM.cs" />
     <Compile Include="ViewModel\Services\SaveLoadContacts.cs" />
+    <Page Include="Controls\ContactControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
