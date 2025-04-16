@@ -34,26 +34,6 @@ namespace View.ViewModel
         private ContactVM _currentContactVM;
 
         /// <summary>
-        /// Команда <see cref="AddCommand"/>.
-        /// </summary>
-        public AddCommand AddCommand { get; set; }
-
-        /// <summary>
-        /// Команда <see cref="EditCommand"/>.
-        /// </summary>
-        public EditCommand EditCommand { get; set; }
-
-        /// <summary>
-        /// Команда <see cref="RemoveCommand"/>.
-        /// </summary>
-        public RemoveCommand RemoveCommand { get; set; }
-
-        /// <summary>
-        /// Команда <see cref="ApplyCommand"/>.
-        /// </summary>
-        public ApplyCommand ApplyCommand { get; set; }
-
-        /// <summary>
         /// Возвращает и задает состояние приложения. Должно быть типа <see cref="Modes"/>.
         /// </summary>
         public Modes Mode
@@ -82,7 +62,7 @@ namespace View.ViewModel
             {
                 _currentContactVM = value;
                 Mode = Modes.Nothing;
-                OnPropertyChanged();
+                OnPropertyChanged(new List<string>() { "CurrentContactVM", "Name", "PhoneNumber", "Email" });
             }
         }
 

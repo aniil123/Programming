@@ -16,6 +16,7 @@ namespace View.ViewModel
         public void Execute(object parameter)
         {
             MainVM mainVM = (MainVM)parameter;
+            mainVM.CurrentContactVM = null;//Присвоение null, чтобы в ListBox пропал выбор элемента.
             mainVM.CurrentContactVM = new ContactVM();
             mainVM.Mode = Modes.Add;   
         }
