@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,23 +8,23 @@ using System.Globalization;
 
 namespace View.ViewModel.Converters
 {
-    class CurrentContactToEmailConverter : IValueConverter
+    public class CurrentContactToSelectedContactConverter : IValueConverter
     {
-
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if(value == null)
+            MainVM mainVM = (MainVM)parameter;
+            ContactVM currentContactVM = (ContactVM)value;
+            if(mainVM.Contacts.IndexOf(currentContactVM) == -1)
             {
-                return "";
+                return null;
             }
-            ContactVM contactVM = (ContactVM)value;
-            return contactVM.Email;
+            mainVM.Mode = Modes.Viewing;
+            return value;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return null;
+            return value;
         }
-
     }
 }
