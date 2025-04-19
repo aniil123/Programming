@@ -14,11 +14,16 @@ namespace View.Model.Services
     /// </summary>
     public static class ContactSerializer
     {
-
         /// <summary>
         /// Возвращает путь до файла с сериализованным объектом класса Contact.
         /// </summary>
-        private static string Path { get; } = @"MyDocuments\Contacts\contacts.json";
+        private static string Path
+        {
+            get
+            {
+                return Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Contacts";
+            }
+        }
 
         /// <summary>
         /// Сериализует и сохраняет список экземпляров класса <see cref="Contact"/>.
@@ -27,7 +32,11 @@ namespace View.Model.Services
         public static void SaveContacts(List<Contact> contacts)
         {
             string serializedContacts = JsonConvert.SerializeObject(contacts);
-            using(StreamWriter streamWriter = new StreamWriter(Path, false))
+            if(!Directory.Exists(Path))
+            {
+                Directory.CreateDirectory(Path);
+            }
+            using(StreamWriter streamWriter = new StreamWriter(Path + @"\contacts.json", false))
             {
                 streamWriter.Write(serializedContacts);
             }
@@ -40,12 +49,18 @@ namespace View.Model.Services
         public static List<Contact> LoadContacts()
         {
             string serializedContacts;
-            using (StreamReader streamReader = new StreamReader(Path))
+            if (Directory.Exists(Path))
             {
-                serializedContacts = streamReader.ReadToEnd();
+                if (File.Exists(Path + @"\contacts.json"))
+                {
+                    using (StreamReader streamReader = new StreamReader(Path + @"\contacts.json"))
+                    {
+                        serializedContacts = streamReader.ReadToEnd();
+                    }
+                    return JsonConvert.DeserializeObject<List<Contact>>(serializedContacts);
+                }
             }
-            return JsonConvert.DeserializeObject<List<Contact>>(serializedContacts);
+            return new List<Contact>();
         }
-
     }
 }

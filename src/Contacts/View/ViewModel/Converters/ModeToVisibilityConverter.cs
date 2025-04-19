@@ -5,24 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Globalization;
+using System.Runtime.InteropServices;
+using System.Windows;
 
 namespace View.ViewModel.Converters
 {
-    class AvailabilityToVisibilityConverter : IValueConverter
+    public class ModeToVisibilityConverter : IValueConverter
     {
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if((bool)value)
+            if((Modes)value != Modes.Viewing)
             {
-                return "Visible";
+                return Visibility.Visible;
             }
-            return "Hidden";
+            return Visibility.Hidden;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return null;
+            throw new NotImplementedException();
         }
     }
 }
