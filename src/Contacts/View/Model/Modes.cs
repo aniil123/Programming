@@ -1,6 +1,6 @@
 ﻿public enum Modes
 {
-    Nothing,
-    Add,
-    Edit
+    Viewing,
+    Adding,
+    Editing
 }

@@ -9,8 +9,11 @@ namespace View.ViewModel
 {
     public class ContactVM : INotifyPropertyChanged
     {
-
+        /// <summary>
+        /// Событие, которое вызывается при изминении свойств класса.
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
+
         /// <summary>
         /// Контактные данные.
         /// </summary>
@@ -88,6 +91,5 @@ namespace View.ViewModel
         {
             Contact = contact;
         }
-
     }
 }

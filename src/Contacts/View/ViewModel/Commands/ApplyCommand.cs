@@ -10,24 +10,28 @@ namespace View.ViewModel.Commands
 {
     public class ApplyCommand : ICommand
     {
-
+        /// <summary>
+        /// Событие, которое вызывается при изменении возвращаемого значения метода CanExecute.
+        /// </summary>
         public event EventHandler CanExecuteChanged;
 
         public void Execute(object parameter)
         {
             List<object> parameterList = (List<object>)parameter;
             MainVM mainVM = (MainVM)parameterList[0];
-            TextBox name = (TextBox)parameterList[1];
-            TextBox phoneNumber = (TextBox)parameterList[2];
-            TextBox email = (TextBox)parameterList[3];
-            mainVM.Name = name.Text;
-            mainVM.PhoneNumber = phoneNumber.Text;
-            mainVM.Email = email.Text;
-            if (mainVM.Mode == Modes.Add)
+            string name = (string)parameterList[1];
+            string phoneNumber = (string)parameterList[2];
+            string email = (string)parameterList[3];
+            mainVM.Name = name;
+            mainVM.PhoneNumber = phoneNumber;
+            mainVM.Email = email;
+            if (mainVM.Mode == Modes.Adding)
             {
                 mainVM.Contacts.Add(mainVM.CurrentContactVM);
             }
-            mainVM.Mode = Modes.Nothing;
+            mainVM.Mode = Modes.Viewing;
+            mainVM.CurrentContactVM = mainVM.CurrentContactVM;
+            Model.Services.ContactSerializer.SaveContacts(mainVM.Contacts.Select(contactVM => contactVM.Contact).ToList());
         }
 
         public bool CanExecute(object parameter)

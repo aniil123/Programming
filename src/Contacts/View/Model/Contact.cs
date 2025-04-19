@@ -29,6 +29,5 @@ namespace View.Model
         public string Email { get; set; }
 
         public Contact(){}
-
     }
 }
