@@ -47,9 +47,15 @@
         <DataTemplate x:Key="ContactTemplate">
             <contrl:ContactControl x:Name="ContactControl"/>
         </DataTemplate>
+        <ControlTemplate x:Key="validationFailed">
+            <AdornedElementPlaceholder/>
+        </ControlTemplate>
         <Style x:Key="ValidationFailed" TargetType="{x:Type TextBox}">
             <Style.Triggers>
-                <Trigger Property="Validation.HasError" Value="true">
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter 
+                        Property="ToolTip" 
+                        Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
                     <Setter Property="Background" Value="Red"/>
                 </Trigger>
             </Style.Triggers>
@@ -153,6 +159,7 @@
                 <TextBox
                     Margin="8"
                     IsReadOnly="{Binding Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}"
+                    Validation.ErrorTemplate="{StaticResource validationFailed}"
                     Style="{StaticResource ValidationFailed}">
                     <TextBox.Text>
                         <Binding Path="Name" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
