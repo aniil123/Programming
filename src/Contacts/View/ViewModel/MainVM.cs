@@ -63,7 +63,7 @@ namespace View.ViewModel
             set 
             { 
                 _currentContactVM = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new List<string>() { "CurrentContactVM", "Name", "PhoneNumber", "Email" });
             }
         }
 
