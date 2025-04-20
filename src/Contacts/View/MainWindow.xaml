@@ -113,8 +113,7 @@
                         Margin="3 0 8 3"
                         VerticalAlignment="Center"
                         Command="{StaticResource RemoveCommand}"
-                        CommandParameter="{StaticResource MainVM}"
-                        IsEnabled="{Binding Source={StaticResource RemoveCommand}, Path=Enabled}"/>
+                        CommandParameter="{StaticResource MainVM}"/>
                 </Grid>
             </Grid>
         </Border>
