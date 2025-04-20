@@ -73,7 +73,6 @@
     <Compile Include="ViewModel\Converters\Mode_CurrentContactToCanExecuteMultiConverter.cs" />
     <Compile Include="ViewModel\Converters\ModeToVisibilityConverter.cs" />
     <Compile Include="ViewModel\Converters\CurrentContactToSelectedContactConverter.cs" />
-    <Compile Include="ViewModel\Converters\ListParametersConverter.cs" />
     <Compile Include="ViewModel\Converters\ModeToCanExecuteConverter.cs" />
     <Compile Include="ViewModel\Converters\ModeToReadOnlyConverter.cs" />
     <Compile Include="ViewModel\MainVM.cs" />

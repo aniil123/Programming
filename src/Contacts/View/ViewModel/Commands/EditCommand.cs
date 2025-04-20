@@ -21,7 +21,7 @@ namespace View.ViewModel.Commands
         public event EventHandler CanExecuteChanged;
 
         /// <summary>
-        /// Возвращает и задает значение объекта EnabledProperty типа <see cref="DependencyProperty"/>.
+        /// Возвращает и задает значение свойства зависимости EnabledProperty.
         /// </summary>
         public bool Enabled
         {
@@ -55,7 +55,7 @@ namespace View.ViewModel.Commands
         }
 
         /// <summary>
-        /// Регистрирует объект EnabledProperty типа <see cref="DependencyProperty"/>.
+        /// Регистрирует свойство зависимости EnabledProperty.
         /// </summary>
         static EditCommand()
         {

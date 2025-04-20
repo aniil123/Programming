@@ -16,17 +16,17 @@ namespace View.Model
         /// <summary>
         /// Возвращает и задает имя.
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
 
         /// <summary>
         /// Возвращает и задает номер телефона. 
         /// </summary>
-        public string PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; } = "";
 
         /// <summary>
         /// Возвращает и задает почту.
         /// </summary>
-        public string Email { get; set; }
+        public string Email { get; set; } = "";
 
         public Contact(){}
     }

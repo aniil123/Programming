@@ -38,14 +38,18 @@
                 </MultiBinding>
             </com:RemoveCommand.Enabled>
         </com:RemoveCommand>
-        <com:ApplyCommand x:Key="ApplyCommand"/>
+        <com:ApplyCommand
+            x:Key="ApplyCommand"
+            Enabled="{Binding Source={StaticResource MainVM}, Path=AcceptableValues, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
         <con:CurrentContactToSelectedContactConverter x:Key="CurrentContactToSelectedContactConverter"/>
         <con:ModeToVisibilityConverter x:Key="ModeToVisibilityConverter"/>
         <con:ModeToReadOnlyConverter x:Key="ModeToReadOnlyConverter"/>
-        <con:ListParametersConverter x:Key="ListParametersConverter"/>
         <DataTemplate x:Key="ContactTemplate">
             <contrl:ContactControl x:Name="ContactControl"/>
         </DataTemplate>
+        <ControlTemplate x:Key="ValidationFailed">
+            <AdornedElementPlaceholder />
+        </ControlTemplate>
     </Window.Resources>
     
     <Grid DataContext="{StaticResource MainVM}">
@@ -143,24 +147,40 @@
                     Text="Name:"
                     Margin="8 8 0 3"/>
                 <TextBox
-                    x:Name="NameTextBox"
                     Margin="8"
-                    IsReadOnly="{Binding Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}"
-                    Text="{Binding Path=Name, Mode=OneWay}"/>
+                    IsReadOnly="{Binding Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}">
+                    <TextBox.Text>
+                        <Binding Path="Name" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
                 <TextBlock Text="PhoneNumber:" Margin="8 8 0 3"/>
                 <TextBox
-                    x:Name="PhoneNumberTextBox"
                     Margin="8"
-                    IsReadOnly="{Binding Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}"
-                    Text="{Binding Path=PhoneNumber, Mode=OneWay}"/>
+                    IsReadOnly="{Binding Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}">
+                    <TextBox.Text>
+                        <Binding Path="PhoneNumber" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
                 <TextBlock
                     Text="Email:"
                     Margin="8 8 0 3"/>
                 <TextBox
-                    x:Name="EmailTextBox"
                     Margin="8"
-                    IsReadOnly="{Binding Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}"
-                    Text="{Binding Path=Email, Mode=OneWay}"/>
+                    IsReadOnly="{Binding Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}">
+                    <Binding Path="Email" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <DataErrorValidationRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
                 <Button
                     Content="Aplly"
                     Width="75"
@@ -168,15 +188,8 @@
                     Margin="8 50 0 0"
                     HorizontalAlignment="Left"
                     Visibility="{Binding Path=Mode, Converter={StaticResource ModeToVisibilityConverter}}"
-                    Command="{StaticResource ApplyCommand}">
-                    <Button.CommandParameter>
-                        <MultiBinding Converter="{StaticResource ListParametersConverter}">
-                            <Binding Source="{StaticResource MainVM}"/>
-                            <Binding ElementName="NameTextBox" Path="Text"/>
-                            <Binding ElementName="PhoneNumberTextBox" Path="Text"/>
-                            <Binding ElementName="EmailTextBox" Path="Text"/>
-                        </MultiBinding>
-                    </Button.CommandParameter>
+                    Command="{StaticResource ApplyCommand}"
+                    CommandParameter="{StaticResource MainVM}">
                 </Button>
             </StackPanel>
         </Grid>
