@@ -47,9 +47,13 @@
         <DataTemplate x:Key="ContactTemplate">
             <contrl:ContactControl x:Name="ContactControl"/>
         </DataTemplate>
-        <ControlTemplate x:Key="ValidationFailed">
-            <AdornedElementPlaceholder />
-        </ControlTemplate>
+        <Style x:Key="ValidationFailed" TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="Background" Value="Red"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
     
     <Grid DataContext="{StaticResource MainVM}">
@@ -148,7 +152,8 @@
                     Margin="8 8 0 3"/>
                 <TextBox
                     Margin="8"
-                    IsReadOnly="{Binding Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}">
+                    IsReadOnly="{Binding Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}"
+                    Style="{StaticResource ValidationFailed}">
                     <TextBox.Text>
                         <Binding Path="Name" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
@@ -160,7 +165,8 @@
                 <TextBlock Text="PhoneNumber:" Margin="8 8 0 3"/>
                 <TextBox
                     Margin="8"
-                    IsReadOnly="{Binding Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}">
+                    IsReadOnly="{Binding Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}"
+                    Style="{StaticResource ValidationFailed}">
                     <TextBox.Text>
                         <Binding Path="PhoneNumber" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
@@ -174,7 +180,8 @@
                     Margin="8 8 0 3"/>
                 <TextBox
                     Margin="8"
-                    IsReadOnly="{Binding Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}">
+                    IsReadOnly="{Binding Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}"
+                    Style="{StaticResource ValidationFailed}">
                     <Binding Path="Email" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <DataErrorValidationRule/>
