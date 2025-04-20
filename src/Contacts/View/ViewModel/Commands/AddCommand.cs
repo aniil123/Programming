@@ -50,7 +50,7 @@ namespace View.ViewModel
         {
             MainVM mainVM = (MainVM)parameter;
             mainVM.CurrentContactVM = new ContactVM();
-            mainVM.Mode = Modes.Adding;   
+            mainVM.Mode = Modes.Adding;
         }
 
         public bool CanExecute(object parameter)

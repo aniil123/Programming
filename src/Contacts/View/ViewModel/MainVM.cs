@@ -21,9 +21,20 @@ namespace View.ViewModel
         private Modes _mode = Modes.Viewing;
 
         /// <summary>
+        /// Коллекция объектов <see cref="ContactVM"/>.
+        /// </summary>
+        public ObservableCollection<ContactVM> Contacts { get; set; }
+
+        /// <summary>
         /// Объект класса <see cref="ContactVM"/>, выбранный в данный момент в ListBox.
         /// </summary>
         private ContactVM _currentContactVM;
+
+        /// <summary>
+        /// Событие, которое вызывается при изменении свойств класса.
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
         /// <summary>
         /// Возвращает и задает состояние приложения. Должно быть типа <see cref="Modes"/>.
         /// </summary>
@@ -121,7 +132,7 @@ namespace View.ViewModel
             get
             {
                 string error = String.Empty;
-                if (Mode != Modes.Nothing)
+                if (Mode != Modes.Viewing)
                 {
                     switch (columnName)
                     {

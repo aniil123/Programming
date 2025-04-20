@@ -39,8 +39,11 @@
             </com:RemoveCommand.Enabled>
         </com:RemoveCommand>
         <com:ApplyCommand x:Key="ApplyCommand"/>
+        <con:CurrentContactToSelectedContactConverter x:Key="CurrentContactToSelectedContactConverter"/>
+        <con:ModeToVisibilityConverter x:Key="ModeToVisibilityConverter"/>
         <con:ModeToReadOnlyConverter x:Key="ModeToReadOnlyConverter"/>
-        <DataTemplate x:Key="ContactTemplate"/>
+        <con:ListParametersConverter x:Key="ListParametersConverter"/>
+        <DataTemplate x:Key="ContactTemplate">
             <contrl:ContactControl x:Name="ContactControl"/>
         </DataTemplate>
     </Window.Resources>
@@ -78,12 +81,19 @@
                         VerticalAlignment="Center"
                         Margin="3 3 8 3"/>
                 </Grid>
+                <ListBox
+                    Grid.Row="1"
+                    Margin="8"
+                    ItemsSource="{Binding Path=Contacts}"
+                    SelectedItem="{Binding Path=CurreentContactVM, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource CurrentContactToSelectedContactConverter}, ConverterParameter={StaticResource MainVM}}"
+                    ItemTemplate="{StaticResource ContactTemplate}"/>
                 <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
+                    
                 </Grid>
             </Grid>
         </Border>

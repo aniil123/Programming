@@ -77,6 +77,10 @@
     <Compile Include="ViewModel\Converters\ModeToCanExecuteConverter.cs" />
     <Compile Include="ViewModel\Converters\ModeToReadOnlyConverter.cs" />
     <Compile Include="ViewModel\MainVM.cs" />
+    <Page Include="Controls\ContactControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
