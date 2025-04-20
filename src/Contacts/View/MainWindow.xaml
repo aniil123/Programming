@@ -40,10 +40,7 @@
         </com:RemoveCommand>
         <com:ApplyCommand x:Key="ApplyCommand"/>
         <con:ModeToReadOnlyConverter x:Key="ModeToReadOnlyConverter"/>
-        <con:ModeToVisibilityConverter x:Key="ModeToVisibilityConverter"/>
-        <con:CurrentContactToSelectedContactConverter x:Key="CurrentContactToSelectedContactConverter"/>
-        <con:ListParametersConverter x:Key="ListParametersConverter"/>
-        <DataTemplate x:Key="ContactTemplate">
+        <DataTemplate x:Key="ContactTemplate"/>
             <contrl:ContactControl x:Name="ContactControl"/>
         </DataTemplate>
     </Window.Resources>
@@ -81,43 +78,12 @@
                         VerticalAlignment="Center"
                         Margin="3 3 8 3"/>
                 </Grid>
-                <ListBox
-                         Grid.Column="0" 
-                         Grid.Row="1" 
-                         Margin="8 5 8 5" 
-                         ItemsSource="{Binding Path=Contacts}" 
-                         SelectedItem="{Binding Path=CurrentContactVM, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                         ItemTemplate="{StaticResource ContactTemplate}"/>
                 <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Button
-                        Content="Add"
-                        Grid.Column="0"
-                        Height="25"
-                        Margin="8 0 3 3"
-                        VerticalAlignment="Center"
-                        Command="{StaticResource AddCommand}"
-                        CommandParameter="{StaticResource MainVM}"/>
-                    <Button
-                        Content="Edit"
-                        Grid.Column="1"
-                        Height="25"
-                        Margin="3 0 3 3"
-                        VerticalAlignment="Center"
-                        Command="{StaticResource EditCommand}"
-                        CommandParameter="{StaticResource MainVM}"/>
-                    <Button
-                        Content="Remove"
-                        Grid.Column="2"
-                        Height="25"
-                        Margin="3 0 8 3"
-                        VerticalAlignment="Center"
-                        Command="{StaticResource RemoveCommand}"
-                        CommandParameter="{StaticResource MainVM}"/>
                 </Grid>
             </Grid>
         </Border>
@@ -140,36 +106,28 @@
                 VerticalAlignment="Top"
                 Source="/Resources/Person.png"/>
             <StackPanel Grid.Column="1">
-                <TextBlock Text="Name:" Margin="8 8 0 3"/>
-                <TextBox x:Name="NameTextBox" Margin="8" IsReadOnly="{Binding Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}">
-                    <TextBox.Text>
-                        <Binding Path="Name" Mode="OneWay">
-                            <Binding.ValidationRules>
-                                <DataErrorValidationRule/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
+                <TextBlock
+                    Text="Name:"
+                    Margin="8 8 0 3"/>
+                <TextBox
+                    x:Name="NameTextBox"
+                    Margin="8"
+                    IsReadOnly="{Binding Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}"
+                    Text="{Binding Path=Name, Mode=OneWay}"/>
                 <TextBlock Text="PhoneNumber:" Margin="8 8 0 3"/>
-                <TextBox x:Name="PhoneNumberTextBox" Margin="8" IsReadOnly="{Binding Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}">
-                    <TextBox.Text>
-                        <Binding Path="PhoneNumber" Mode="OneWay">
-                            <Binding.ValidationRules>
-                                <DataErrorValidationRule/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
-                <TextBlock Text="Email" Margin="8 8 0 3"/>
-                <TextBox x:Name="EmailTextBox" Margin="8" IsReadOnly="{Binding Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}">
-                    <TextBox.Text>
-                        <Binding Path="Email" Mode="OneWay">
-                            <Binding.ValidationRules>
-                                <DataErrorValidationRule/>
-                            </Binding.ValidationRules>    
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
+                <TextBox
+                    x:Name="PhoneNumberTextBox"
+                    Margin="8"
+                    IsReadOnly="{Binding Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}"
+                    Text="{Binding Path=PhoneNumber, Mode=OneWay}"/>
+                <TextBlock
+                    Text="Email:"
+                    Margin="8 8 0 3"/>
+                <TextBox
+                    x:Name="EmailTextBox"
+                    Margin="8"
+                    IsReadOnly="{Binding Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}"
+                    Text="{Binding Path=Email, Mode=OneWay}"/>
                 <Button
                     Content="Aplly"
                     Width="75"

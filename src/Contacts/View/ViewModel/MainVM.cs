@@ -15,24 +15,15 @@ namespace View.ViewModel
     /// </summary>
     public class MainVM : INotifyPropertyChanged, IDataErrorInfo
     {
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
         /// <summary>
         /// Состояние приложения.
         /// </summary>
-        private Modes _mode = Modes.Nothing;
+        private Modes _mode = Modes.Viewing;
 
         /// <summary>
-        /// Список объектов типа <see cref="ContactVM"/>.
-        /// </summary>
-        public ObservableCollection<ContactVM> Contacts { get; set; }
-
-        /// <summary>
-        /// Объект типа <see cref="ContactVM"/>, выбранный из колекции Contacts.
+        /// Объект класса <see cref="ContactVM"/>, выбранный в данный момент в ListBox.
         /// </summary>
         private ContactVM _currentContactVM;
-
         /// <summary>
         /// Возвращает и задает состояние приложения. Должно быть типа <see cref="Modes"/>.
         /// </summary>
@@ -45,73 +36,23 @@ namespace View.ViewModel
             set
             {
                 _mode = value;
-                OnPropertyChanged(new List<string>() { "Mode", "AddCommandAvailability", "EditCommandAvailability", "RemoveCommandAvailability", "ApplyCommandAvailability"});
+                OnPropertyChanged();
             }
         }
 
         /// <summary>
-        /// Возвращает и задает CurrentContactVM.
+        /// Возвращает и задает выбранный в данный момент в ListBox объект <see cref="ContactVM"/>.
         /// </summary>
         public ContactVM CurrentContactVM
         {
-            get
+            get 
             {
-                return _currentContactVM;
+                return _currentContactVM; 
             }
-            set
-            {
+            set 
+            { 
                 _currentContactVM = value;
-                Mode = Modes.Nothing;
-                OnPropertyChanged(new List<string>() { "CurrentContactVM", "Name", "PhoneNumber", "Email"});
-            }
-        }
-
-        /// <summary>
-        /// Возвращает true, если Mode содержит значение Nothing,
-        /// false - если содержит любые другие возможные значения для типа <see cref="Modes"/>.
-        /// </summary>
-        public bool AddCommandAvailability
-        {
-            get
-            {
-                return Mode == Modes.Nothing;
-            }
-        }
-
-        /// <summary>
-        /// Возвращает true, если Mode содержит значение Nothing и выбран элемент в ListBox,
-        /// false - если Mode содержит любые другие возможные значения для типа <see cref="Modes"/>
-        /// или в ListBox не выбран ни один элемент.
-        /// </summary>
-        public bool EditCommandAvailability
-        {
-            get
-            {
-                return Mode == Modes.Nothing && CurrentContactVM != null;
-            }
-        }
-
-        /// <summary>
-        /// Возвращает true, если Mode содержит значение Nothing и выбран элемент в ListBox,
-        /// false - если Mode содержит любые другие возможные значения для типа <see cref="Modes"/>
-        /// или в ListBox не выбран ни один элемент.
-        /// </summary>
-        public bool RemoveCommandAvailability
-        {
-            get
-            {
-                return Mode == Modes.Nothing && CurrentContactVM != null;
-            }
-        }
-
-        /// <summary>
-        /// Возвращает true, если Mode содержит Add или Edit.
-        /// </summary>
-        public bool ApplyCommandAvailability
-        {
-            get
-            {
-                return Mode != Modes.Nothing;
+                OnPropertyChanged();
             }
         }
 
@@ -287,13 +228,15 @@ namespace View.ViewModel
 
         /// <summary>
         /// Присваивание переменной Contact объект типа <see cref="ContactVM"/>
-        /// и загружает в коллекцию Contacts объекты типа <see cref="ContactVM"/>.
+        /// и загружает нее объекты типа <see cref="ContactVM"/>.
         /// </summary>
         public MainVM()
         {
             Contacts = new ObservableCollection<ContactVM>();
-            new Services.SaveLoadContacts(Contacts);
+            foreach(Model.Contact contact in Model.Services.ContactSerializer.LoadContacts())
+            {
+                Contacts.Add(new ContactVM(contact));
+            }
         }
-
     }
 }
