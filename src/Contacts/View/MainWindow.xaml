@@ -188,9 +188,7 @@
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
-                <TextBlock
-                    Text="Email:"
-                    Margin="8 8 0 3"/>
+                <TextBlock Text="Email:" Margin="8 8 0 3"/>
                 <TextBox
                     Margin="8"
                     IsReadOnly="{Binding Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}"

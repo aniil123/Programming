@@ -8,6 +8,8 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using View.ViewModel.Commands;
 using System.Windows.Navigation;
+using System.Windows.Input;
+using System.Windows.Forms;
 
 namespace View.ViewModel
 {
@@ -189,7 +191,24 @@ namespace View.ViewModel
             }
             set
             {
-                InputContactVM.PhoneNumber = value;
+                bool acceptableValue = true;
+                string acceptableCharacters = "0123456789-+()";
+                foreach(char valueChar in value)
+                {
+                    acceptableValue = false;
+                    foreach (char acceptableCharacter in acceptableCharacters)
+                    {
+                        if(valueChar == acceptableCharacter)
+                        {
+                            acceptableValue = true;
+                            break;
+                        }
+                    }
+                    if (!acceptableValue)
+                        break;
+                }
+                if (acceptableValue)
+                    InputContactVM.PhoneNumber = value;
             }
         }
 
@@ -246,24 +265,6 @@ namespace View.ViewModel
                                 error = "Номер телефона не должен содержать больше 100 символов.";
                                 break;
                             }
-                            string acceptableCharacters = "01234567890+-()";
-                            foreach (char phoneSim in PhoneNumber)
-                            {
-                                bool acceptable = false;
-                                foreach (char ch in acceptableCharacters)
-                                {
-                                    if (phoneSim == ch)
-                                    {
-                                        acceptable = true;
-                                        break;
-                                    }
-                                }
-                                if (!acceptable)
-                                {
-                                    error = "В номере телефона недопустимые символы (могут быть только цифры и +-()).";
-                                    break;
-                                }
-                            }
                             break;
                         case "Email":
                             if(Email == "")
@@ -276,20 +277,20 @@ namespace View.ViewModel
                                 error = "Почта не должна содержать больше 100 символов.";
                                 break;
                             }
-                            bool acceptable2 = false;
+                            bool acceptable = false;
                             foreach (char emailSim in Email)
                             {
                                 if (emailSim == '@')
                                 {
-                                    if (acceptable2)
+                                    if (acceptable)
                                     {
                                         error = "Должен быть только 1 символ @.";
                                         break;
                                     }
-                                    acceptable2 = true;
+                                    acceptable = true;
                                 }
                             }
-                            if (!acceptable2)
+                            if (!acceptable)
                             {
                                 error = "В почте должен быть символ @.";
                             }
