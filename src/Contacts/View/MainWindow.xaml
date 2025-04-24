@@ -47,19 +47,6 @@
         <DataTemplate x:Key="ContactTemplate">
             <contrl:ContactControl x:Name="ContactControl"/>
         </DataTemplate>
-        <ControlTemplate x:Key="ValidationFailedTemplate">
-            <StackPanel>
-                <AdornedElementPlaceholder/>
-                <Border
-                    BorderThickness="2"
-                    HorizontalAlignment="Left">
-                    <TextBlock
-                        Background="LightPink"
-                        Foreground="DarkRed"
-                        Text="qweqw"/>
-                </Border>
-            </StackPanel>
-        </ControlTemplate>
         <Style x:Key="ValidationFailedStyle" TargetType="{x:Type TextBox}">
             <Style.Triggers>
                 <Trigger Property="Validation.HasError" Value="True">
