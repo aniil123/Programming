@@ -47,6 +47,9 @@ namespace View.ViewModel.Commands
         {
             MainVM mainVM = (MainVM)parameter;
             mainVM.Mode = Modes.Editing;
+            mainVM.InputContactVM.Name = mainVM.CurrentContactVM.Name;
+            mainVM.InputContactVM.PhoneNumber = mainVM.CurrentContactVM.PhoneNumber;
+            mainVM.InputContactVM.Email = mainVM.CurrentContactVM.Email;
         }
 
         public bool CanExecute(object parameter)
