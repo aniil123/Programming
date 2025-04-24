@@ -15,11 +15,7 @@ namespace View.ViewModel.Converters
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if((Modes)value != Modes.Viewing)
-            {
-                return Visibility.Visible;
-            }
-            return Visibility.Hidden;
+            return (Modes)value == Modes.Viewing ? Visibility.Hidden : Visibility.Visible; 
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -7,13 +7,16 @@ using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Windows;
 using View.ViewModel.Commands;
+using System.Windows.Navigation;
+using System.Windows.Input;
+using System.Windows.Forms;
 
 namespace View.ViewModel
 {
     /// <summary>
     ///  Главный класс слоя ViewModel.
     /// </summary>
-    public class MainVM : DependencyObject, INotifyPropertyChanged
+    public class MainVM : INotifyPropertyChanged, IDataErrorInfo
     {
         /// <summary>
         /// Состояние приложения.
@@ -26,14 +29,34 @@ namespace View.ViewModel
         private ContactVM _currentContactVM;
 
         /// <summary>
+        /// Содержит значение true, если свойство Name объекта InputContactVM содержит допустимое значение, false - если нет.
+        /// </summary>
+        private bool _acceptableName;
+
+        /// <summary>
+        /// Содержит true, если свойство PhoneNumber объекта InputContactVM содержит допустимое значение, false - если нет.
+        /// </summary>
+        private bool _acceptablePhoneNumber;
+
+        /// <summary>
+        /// Содержит true, если свойство Email объекта InputContactVM содержит допустимое значение, false - если нет.
+        /// </summary>
+        private bool _acceptableEmail;
+
+        /// <summary>
+        /// Коллекция объектов <see cref="ContactVM"/>.
+        /// </summary>
+        public ObservableCollection<ContactVM> Contacts { get; set; }
+
+        /// <summary>
+        /// Возвращает объект <see cref="ContactVM"/> для заполнения через текстовые поля.
+        /// </summary>
+        public ContactVM InputContactVM { get; } = new ContactVM();
+
+        /// <summary>
         /// Событие, которое вызывается при изменении свойств класса.
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
-        /// Возвращает и задает коллекцию объектов <see cref="ContactVM"/>.
-        /// </summary>
-        public ObservableCollection<ContactVM> Contacts { get; set; }
 
         /// <summary>
         /// Возвращает и задает состояние приложения. Должно быть типа <see cref="Modes"/>.
@@ -56,14 +79,73 @@ namespace View.ViewModel
         /// </summary>
         public ContactVM CurrentContactVM
         {
-            get 
+            get
             {
-                return _currentContactVM; 
+                return _currentContactVM;
             }
-            set 
-            { 
+            set
+            {
                 _currentContactVM = value;
                 OnPropertyChanged(new List<string>() { "CurrentContactVM", "Name", "PhoneNumber", "Email" });
+            }
+        }
+
+        /// <summary>
+        /// Возвращает и задает значение определяющее, является ли свойство Name объекта InputContactVM допустимым.
+        /// </summary>
+        private bool AcceptableName
+        {
+            get
+            {
+                return _acceptableName;
+            }
+            set
+            {
+                _acceptableName = value;
+                OnPropertyChanged("AcceptableValues");
+            }
+        }
+
+        /// <summary>
+        /// Возвращает и задает значение определяющее, является ли свойство PhoneNumber объекта InputContactVM допустимым.
+        /// </summary>
+        private bool AcceptablePhoneNumber
+        {
+            get
+            {
+                return _acceptablePhoneNumber;
+            }
+            set
+            {
+                _acceptablePhoneNumber = value;
+                OnPropertyChanged("AcceptableValues");
+            }
+        }
+
+        /// <summary>
+        /// Возвращает и задает значение определяющее, является ли свойство Email объекта InputContactVM допустимым.
+        /// </summary>
+        private bool AcceptableEmail
+        {
+            get
+            {
+                return _acceptableEmail;
+            }
+            set
+            {
+                _acceptableEmail = value;
+                OnPropertyChanged("AcceptableValues");
+            }
+        }
+
+        /// <summary>
+        /// Возвращает true, если свойства объекта InputContactVM содержат допустимые значения, false - если нет.
+        /// </summary>
+        public bool AcceptableValues
+        {
+            get
+            {
+                return AcceptableName == AcceptablePhoneNumber && AcceptablePhoneNumber == AcceptableEmail && AcceptableEmail == true;
             }
         }
 
@@ -74,16 +156,19 @@ namespace View.ViewModel
         {
             get
             {
-                if(CurrentContactVM == null)
+                if (Mode == Modes.Viewing)
                 {
-                    return "";
+                    if (CurrentContactVM == null)
+                    {
+                        return "";
+                    }
+                    return CurrentContactVM.Name;
                 }
-                return CurrentContactVM.Name;
+                return InputContactVM.Name;
             }
             set
             {
-                CurrentContactVM.Name = value;
-                OnPropertyChanged();
+                InputContactVM.Name = value;
             }
         }
 
@@ -94,16 +179,36 @@ namespace View.ViewModel
         {
             get
             {
-                if(CurrentContactVM == null)
+                if (Mode == Modes.Viewing)
                 {
-                    return "";
+                    if (CurrentContactVM == null)
+                    {
+                        return "";
+                    }
+                    return CurrentContactVM.PhoneNumber;
                 }
-                return CurrentContactVM.PhoneNumber;
+                return InputContactVM.PhoneNumber;
             }
             set
             {
-                CurrentContactVM.PhoneNumber = value;
-                OnPropertyChanged();
+                bool acceptableValue = true;
+                string acceptableCharacters = "0123456789-+()";
+                foreach(char valueChar in value)
+                {
+                    acceptableValue = false;
+                    foreach (char acceptableCharacter in acceptableCharacters)
+                    {
+                        if(valueChar == acceptableCharacter)
+                        {
+                            acceptableValue = true;
+                            break;
+                        }
+                    }
+                    if (!acceptableValue)
+                        break;
+                }
+                if (acceptableValue)
+                    InputContactVM.PhoneNumber = value;
             }
         }
 
@@ -114,16 +219,104 @@ namespace View.ViewModel
         {
             get
             {
-                if (CurrentContactVM == null)
+                if (Mode == Modes.Viewing)
                 {
-                    return "";
+                    if (CurrentContactVM == null)
+                    {
+                        return "";
+                    }
+                    return CurrentContactVM.Email;
                 }
-                return CurrentContactVM.Email;
+                return InputContactVM.Email;
             }
             set
             {
-                CurrentContactVM.Email = value;
-                OnPropertyChanged();
+                InputContactVM.Email = value;
+            }
+        }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                string error = String.Empty;
+                if (Mode != Modes.Viewing)
+                {
+                    switch (columnName)
+                    {
+                        case "Name":
+                            if(Name == "")
+                            {
+                                error = "Имя не должно быть пустым.";
+                            }
+                            else if (Name.Length > 100)
+                            {
+                                error = "Имя не должно содержать больше 100 символов.";
+                            }
+                            break;
+                        case "PhoneNumber":
+                            if(PhoneNumber == "")
+                            {
+                                error = "Номер телефона не должен быть пустым.";
+                                break;
+                            }
+                            if (PhoneNumber.Length > 100)
+                            {
+                                error = "Номер телефона не должен содержать больше 100 символов.";
+                                break;
+                            }
+                            break;
+                        case "Email":
+                            if(Email == "")
+                            {
+                                error = "Почта не должна быть пустой.";
+                                break;
+                            }
+                            if (Email.Length > 100)
+                            {
+                                error = "Почта не должна содержать больше 100 символов.";
+                                break;
+                            }
+                            bool acceptable = false;
+                            foreach (char emailSim in Email)
+                            {
+                                if (emailSim == '@')
+                                {
+                                    if (acceptable)
+                                    {
+                                        error = "Должен быть только 1 символ @.";
+                                        break;
+                                    }
+                                    acceptable = true;
+                                }
+                            }
+                            if (!acceptable)
+                            {
+                                error = "В почте должен быть символ @.";
+                            }
+                            break;
+                    }
+                }
+                if(columnName == "Name")
+                {
+                    AcceptableName = error == String.Empty;
+                }
+                else if(columnName == "PhoneNumber")
+                {
+                    AcceptablePhoneNumber = error == String.Empty;
+                }
+                else
+                {
+                    AcceptableEmail = error == String.Empty;
+                }
+                return error;
+            }
+        }
+        public string Error
+        {
+            get
+            {
+                throw new NotImplementedException();
             }
         }
 

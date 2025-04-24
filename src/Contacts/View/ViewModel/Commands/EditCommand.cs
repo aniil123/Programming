@@ -21,7 +21,7 @@ namespace View.ViewModel.Commands
         public event EventHandler CanExecuteChanged;
 
         /// <summary>
-        /// Возвращает и задает значение объекта EnabledProperty типа <see cref="DependencyProperty"/>.
+        /// Возвращает и задает значение свойства зависимости EnabledProperty.
         /// </summary>
         public bool Enabled
         {
@@ -47,6 +47,9 @@ namespace View.ViewModel.Commands
         {
             MainVM mainVM = (MainVM)parameter;
             mainVM.Mode = Modes.Editing;
+            mainVM.InputContactVM.Name = mainVM.CurrentContactVM.Name;
+            mainVM.InputContactVM.PhoneNumber = mainVM.CurrentContactVM.PhoneNumber;
+            mainVM.InputContactVM.Email = mainVM.CurrentContactVM.Email;
         }
 
         public bool CanExecute(object parameter)
@@ -55,7 +58,7 @@ namespace View.ViewModel.Commands
         }
 
         /// <summary>
-        /// Регистрирует объект EnabledProperty типа <see cref="DependencyProperty"/>.
+        /// Регистрирует свойство зависимости EnabledProperty.
         /// </summary>
         static EditCommand()
         {

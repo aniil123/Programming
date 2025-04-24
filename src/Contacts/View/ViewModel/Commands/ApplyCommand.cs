@@ -5,26 +5,46 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Controls;
+using System.Windows;
 
 namespace View.ViewModel.Commands
 {
-    public class ApplyCommand : ICommand
+    public class ApplyCommand : DependencyObject, ICommand
     {
+        /// <summary>
+        /// Свойство зависимости, хранящее значение, определяющее, может ли быть использована эта команда.
+        /// </summary>
+        public static readonly DependencyProperty EnabledProperty;
+
         /// <summary>
         /// Событие, которое вызывается при изменении возвращаемого значения метода CanExecute.
         /// </summary>
         public event EventHandler CanExecuteChanged;
 
+        /// <summary>
+        /// Возвращает и задает значение свойства зависимости EnabledProperty.
+        /// </summary>
+        public bool Enabled
+        {
+            get { return (bool)GetValue(EnabledProperty); }
+            set { SetValue(EnabledProperty, value); }
+        }
+
+        private static void Enabled_Changed(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
+        {
+            ApplyCommand applyCommand = (ApplyCommand)dependencyObject;
+            if(applyCommand.CanExecuteChanged != null)
+            {
+                applyCommand.CanExecuteChanged(applyCommand, new EventArgs());
+            }
+        }
+
         public void Execute(object parameter)
         {
-            List<object> parameterList = (List<object>)parameter;
-            MainVM mainVM = (MainVM)parameterList[0];
-            string name = (string)parameterList[1];
-            string phoneNumber = (string)parameterList[2];
-            string email = (string)parameterList[3];
-            mainVM.Name = name;
-            mainVM.PhoneNumber = phoneNumber;
-            mainVM.Email = email;
+            MainVM mainVM = (MainVM)parameter;
+            mainVM.CurrentContactVM.Name = mainVM.InputContactVM.Name;
+            mainVM.CurrentContactVM.PhoneNumber = mainVM.InputContactVM.PhoneNumber;
+            mainVM.CurrentContactVM.Email = mainVM.InputContactVM.Email;
             if (mainVM.Mode == Modes.Adding)
             {
                 mainVM.Contacts.Add(mainVM.CurrentContactVM);
@@ -36,8 +56,15 @@ namespace View.ViewModel.Commands
 
         public bool CanExecute(object parameter)
         {
-            return true;
+            return Enabled;
         }
 
+        /// <summary>
+        /// Регистрирует свойство зависимости EnabledProperty.
+        /// </summary>
+        static ApplyCommand()
+        {
+            EnabledProperty = DependencyProperty.Register("Enabled", typeof(bool), typeof(ApplyCommand), new PropertyMetadata(Enabled_Changed));
+        }
     }
 }

@@ -18,12 +18,13 @@ namespace View.ViewModel.Converters
             {
                 return null;
             }
-            mainVM.Mode = Modes.Viewing;
             return value;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            MainVM mainVM = (MainVM)parameter;
+            mainVM.Mode = Modes.Viewing;
             return value;
         }
     }

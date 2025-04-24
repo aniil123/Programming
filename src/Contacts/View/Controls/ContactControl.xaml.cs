@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Markup;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -14,18 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using View.ViewModel;
-using Newtonsoft.Json;
-using View.ViewModel.Commands;
 
-namespace View
+namespace View.Controls
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для ContactControl.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ContactControl : UserControl
     {
-        public MainWindow()
+        public ContactControl()
         {
             InitializeComponent();
         }

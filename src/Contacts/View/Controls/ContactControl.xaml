@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="View.Controls.ContactControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:View.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="47.123" d:DesignWidth="142.674">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Ellipse Grid.Column="0" Width="30" Height="30" Margin="5 0 5 0">
+            <Ellipse.Fill>
+                <ImageBrush ImageSource="/Resources/Person.png" Stretch="UniformToFill"/>
+            </Ellipse.Fill>
+        </Ellipse>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock 
+                Grid.Row="0" 
+                VerticalAlignment="Center" 
+                FontSize="14" 
+                FontWeight="semiBold" 
+                Text="{Binding Path=Name}"/>
+            <TextBlock 
+                Grid.Row="1" 
+                VerticalAlignment="Center" 
+                FontSize="12" 
+                Text="{Binding Path=PhoneNumber}"/>
+        </Grid>
+    </Grid>
+</UserControl>
