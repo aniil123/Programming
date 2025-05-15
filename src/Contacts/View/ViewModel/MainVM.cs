@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Windows;
-using View.ViewModel.Commands;
 using System.Windows.Navigation;
 using System.Windows.Input;
-using System.Windows.Forms;
 
 namespace View.ViewModel
 {
@@ -230,24 +228,7 @@ namespace View.ViewModel
             }
             set
             {
-                bool acceptableValue = true;
-                string acceptableCharacters = "0123456789-+()";
-                foreach(char valueChar in value)
-                {
-                    acceptableValue = false;
-                    foreach (char acceptableCharacter in acceptableCharacters)
-                    {
-                        if(valueChar == acceptableCharacter)
-                        {
-                            acceptableValue = true;
-                            break;
-                        }
-                    }
-                    if (!acceptableValue)
-                        break;
-                }
-                if (acceptableValue)
-                    InputContactVM.PhoneNumber = value;
+                InputContactVM.PhoneNumber = value;
             }
         }
 
@@ -278,79 +259,21 @@ namespace View.ViewModel
         {
             get
             {
-                string error = String.Empty;
+                string error = "";
                 if (Mode != Modes.Viewing)
                 {
-                    switch (columnName)
-                    {
-                        case "Name":
-                            if(Name == "")
-                            {
-                                error = "Имя не должно быть пустым.";
-                            }
-                            else if (Name.Length > 100)
-                            {
-                                error = "Имя не должно содержать больше 100 символов.";
-                            }
-                            break;
-                        case "PhoneNumber":
-                            if(PhoneNumber == "")
-                            {
-                                error = "Номер телефона не должен быть пустым.";
-                                break;
-                            }
-                            if (PhoneNumber.Length > 100)
-                            {
-                                error = "Номер телефона не должен содержать больше 100 символов.";
-                                break;
-                            }
-                            break;
-                        case "Email":
-                            if(Email == "")
-                            {
-                                error = "Почта не должна быть пустой.";
-                                break;
-                            }
-                            if (Email.Length > 100)
-                            {
-                                error = "Почта не должна содержать больше 100 символов.";
-                                break;
-                            }
-                            bool acceptable = false;
-                            foreach (char emailSim in Email)
-                            {
-                                if (emailSim == '@')
-                                {
-                                    if (acceptable)
-                                    {
-                                        error = "Должен быть только 1 символ @.";
-                                        break;
-                                    }
-                                    acceptable = true;
-                                }
-                            }
-                            if (!acceptable)
-                            {
-                                error = "В почте должен быть символ @.";
-                            }
-                            break;
-                    }
-                }
-                if(columnName == "Name")
-                {
-                    AcceptableName = error == String.Empty;
-                }
-                else if(columnName == "PhoneNumber")
-                {
-                    AcceptablePhoneNumber = error == String.Empty;
-                }
-                else
-                {
-                    AcceptableEmail = error == String.Empty;
+                    error = InputContactVM[columnName];
+                    if (columnName == "Name")
+                        AcceptableName = error == "";
+                    else if (columnName == "PhoneNumber")
+                        AcceptablePhoneNumber = error == "";
+                    else if (columnName == "Email")
+                        AcceptableEmail = error == "";
                 }
                 return error;
             }
         }
+
         public string Error
         {
             get
