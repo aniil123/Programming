@@ -7,7 +7,7 @@ using System.ComponentModel;
 
 namespace View.ViewModel
 {
-    public class ContactVM : INotifyPropertyChanged
+    public class ContactVM : INotifyPropertyChanged, IDataErrorInfo
     {
         /// <summary>
         /// Событие, которое вызывается при изминении свойств класса.
@@ -73,6 +73,77 @@ namespace View.ViewModel
                 {
                     PropertyChanged(this, new PropertyChangedEventArgs("Email"));
                 }
+            }
+        }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                string error = String.Empty;
+                switch (columnName)
+                {
+                    case "Name":
+                        if (Name == "")
+                        {
+                            error = "Имя не должно быть пустым.";
+                        }
+                        else if (Name.Length > 100)
+                        {
+                            error = "Имя не должно содержать больше 100 символов.";
+                        }
+                        break;
+                    case "PhoneNumber":
+                        if (PhoneNumber == "")
+                        {
+                            error = "Номер телефона не должен быть пустым.";
+                            break;
+                        }
+                        if (PhoneNumber.Length > 100)
+                        {
+                            error = "Номер телефона не должен содержать больше 100 символов.";
+                            break;
+                        }
+                        break;
+                    case "Email":
+                        if (Email == "")
+                        {
+                            error = "Почта не должна быть пустой.";
+                            break;
+                        }
+                        if (Email.Length > 100)
+                        {
+                            error = "Почта не должна содержать больше 100 символов.";
+                            break;
+                        }
+                        bool acceptable = false;
+                        foreach (char emailSim in Email)
+                        {
+                            if (emailSim == '@')
+                            {
+                                if (acceptable)
+                                {
+                                    error = "Должен быть только 1 символ @.";
+                                    break;
+                                }
+                                acceptable = true;
+                            }
+                        }
+                        if (!acceptable)
+                        {
+                            error = "В почте должен быть символ @.";
+                        }
+                        break;
+                }
+                return error;
+            }
+        }
+
+        public string Error
+        {
+            get
+            {
+                throw new NotImplementedException();
             }
         }
 
