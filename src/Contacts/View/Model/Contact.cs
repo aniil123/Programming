@@ -26,7 +26,7 @@ namespace View.Model
         /// <summary>
         /// Почта.
         /// </summary>
-        private string _email;
+        private string _email = "";
 
         /// <summary>
         /// Возвращает и задает имя.
