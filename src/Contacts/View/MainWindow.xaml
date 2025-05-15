@@ -165,7 +165,7 @@
                     </Binding>
                 </TextBox>
                 <Button
-                    Content="Aplly"
+                    Content="Apply"
                     Width="75"
                     Height="25"
                     Margin="8 50 0 0"
