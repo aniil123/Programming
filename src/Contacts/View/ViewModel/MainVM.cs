@@ -29,6 +29,11 @@ namespace View.ViewModel
         private ContactVM _currentContactVM;
 
         /// <summary>
+        /// Объект класса <see cref="ContactVM"/> для заполнения через текстовые поля.
+        /// </summary>
+        private ContactVM _inputContactVM = new ContactVM();
+
+        /// <summary>
         /// Содержит значение true, если свойство Name объекта InputContactVM содержит допустимое значение, false - если нет.
         /// </summary>
         private bool _acceptableName;
@@ -47,11 +52,6 @@ namespace View.ViewModel
         /// Коллекция объектов <see cref="ContactVM"/>.
         /// </summary>
         public ObservableCollection<ContactVM> Contacts { get; set; }
-
-        /// <summary>
-        /// Возвращает объект <see cref="ContactVM"/> для заполнения через текстовые поля.
-        /// </summary>
-        public ContactVM InputContactVM { get; } = new ContactVM();
 
         /// <summary>
         /// Событие, которое вызывается при изменении свойств класса.
@@ -86,7 +86,21 @@ namespace View.ViewModel
             set
             {
                 _currentContactVM = value;
-                OnPropertyChanged(new List<string>() { "CurrentContactVM", "Name", "PhoneNumber", "Email" });
+                OnPropertyChanged();
+                OnPropertyChanged("Name");
+                OnPropertyChanged("PhoneNumber");
+                OnPropertyChanged("Email");
+            }
+        }
+
+        /// <summary>
+        /// Возвращает объект <see cref="ContactVM"/> для заполнения через текстовые поля.
+        /// </summary>
+        public ContactVM InputContactVM
+        {
+            get
+            {
+                return _inputContactVM;
             }
         }
 
@@ -320,25 +334,6 @@ namespace View.ViewModel
             }
         }
 
-        public void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName]string propName = "")
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propName));
-            }
-        }
-
-        public void OnPropertyChanged(List<string> propNames)
-        {
-            if(PropertyChanged != null)
-            {
-                foreach(string propName in propNames)
-                {
-                    PropertyChanged(this, new PropertyChangedEventArgs(propName));
-                }
-            }
-        }
-
         /// <summary>
         /// Присваивание переменной Contact объект типа <see cref="ContactVM"/>
         /// и загружает нее объекты типа <see cref="ContactVM"/>.
@@ -349,6 +344,14 @@ namespace View.ViewModel
             foreach(Model.Contact contact in Model.Services.ContactSerializer.LoadContacts())
             {
                 Contacts.Add(new ContactVM(contact));
+            }
+        }
+
+        public void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName]string propName = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
         }
     }
