@@ -12,38 +12,13 @@
         Title="Contacts" Height="450" Width="650" MinWidth="630" MinHeight="380" MaxWidth="820" MaxHeight="700" Icon="/contacts_96x96.ico">
 
     <Window.Resources>
-        <con:ModeToCanExecuteConverter x:Key="ModeToCanExecuteConverter"/>
-        <con:Mode_CurrentContactToCanExecuteMultiConverter x:Key="Mode_CurrentContactToCanExecuteMultiConverter"/>
         <vm:MainVM x:Key="MainVM"/>
-        <vm:AddCommand x:Key="AddCommand" Enabled="{Binding Source={StaticResource MainVM}, Path=Mode, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ModeToCanExecuteConverter}}"/>
-        <com:EditCommand x:Key="EditCommand">
-            <com:EditCommand.Enabled>
-                <MultiBinding 
-                    Mode="OneWay"
-                    Converter="{StaticResource Mode_CurrentContactToCanExecuteMultiConverter}"
-                    ConverterParameter="{StaticResource MainVM}">
-                    <Binding Source="{StaticResource MainVM}" Path="Mode" UpdateSourceTrigger="PropertyChanged"/>
-                    <Binding Source="{StaticResource MainVM}" Path="CurrentContactVM" UpdateSourceTrigger="PropertyChanged"/>
-                </MultiBinding>
-            </com:EditCommand.Enabled>
-        </com:EditCommand>
-        <com:RemoveCommand x:Key="RemoveCommand">
-            <com:RemoveCommand.Enabled>
-                <MultiBinding 
-                    Mode="OneWay" 
-                    Converter="{StaticResource Mode_CurrentContactToCanExecuteMultiConverter}"
-                    ConverterParameter="{StaticResource MainVM}">
-                    <Binding Source="{StaticResource MainVM}" Path="Mode"/>
-                    <Binding Source="{StaticResource MainVM}" Path="CurrentContactVM"/>
-                </MultiBinding>
-            </com:RemoveCommand.Enabled>
-        </com:RemoveCommand>
-        <com:ApplyCommand
-            x:Key="ApplyCommand"
-            Enabled="{Binding Source={StaticResource MainVM}, Path=AcceptableValues, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <vm:AddCommand x:Key="AddCommand"/>
+        <com:EditCommand x:Key="EditCommand"/>
+        <com:RemoveCommand x:Key="RemoveCommand"/>
+        <com:ApplyCommand x:Key="ApplyCommand"/>
         <con:CurrentContactToSelectedContactConverter x:Key="CurrentContactToSelectedContactConverter"/>
-        <con:ModeToVisibilityConverter x:Key="ModeToVisibilityConverter"/>
-        <con:ModeToReadOnlyConverter x:Key="ModeToReadOnlyConverter"/>
+        <con:ModeConverter x:Key="ModeConverter"/>
         <DataTemplate x:Key="ContactTemplate">
             <contrl:ContactControl x:Name="ContactControl"/>
         </DataTemplate>

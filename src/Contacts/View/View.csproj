@@ -75,6 +75,7 @@
     <Compile Include="ViewModel\Commands\RemoveCommand.cs" />
     <Compile Include="ViewModel\ContactVM.cs" />
     <Compile Include="ViewModel\Converters\CurrentContactToSelectedContactConverter.cs" />
+    <Compile Include="ViewModel\Converters\ModeConverter.cs" />
     <Compile Include="ViewModel\MainVM.cs" />
     <Page Include="Controls\ContactControl.xaml">
       <SubType>Designer</SubType>
