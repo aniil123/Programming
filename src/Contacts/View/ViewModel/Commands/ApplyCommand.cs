@@ -9,35 +9,12 @@ using System.Windows;
 
 namespace View.ViewModel.Commands
 {
-    public class ApplyCommand : DependencyObject, ICommand
+    public class ApplyCommand : ICommand
     {
-        /// <summary>
-        /// Свойство зависимости, хранящее значение, определяющее, может ли быть использована эта команда.
-        /// </summary>
-        public static readonly DependencyProperty EnabledProperty;
-
         /// <summary>
         /// Событие, которое вызывается при изменении возвращаемого значения метода CanExecute.
         /// </summary>
         public event EventHandler CanExecuteChanged;
-
-        /// <summary>
-        /// Возвращает и задает значение свойства зависимости EnabledProperty.
-        /// </summary>
-        public bool Enabled
-        {
-            get { return (bool)GetValue(EnabledProperty); }
-            set { SetValue(EnabledProperty, value); }
-        }
-
-        private static void Enabled_Changed(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
-        {
-            ApplyCommand applyCommand = (ApplyCommand)dependencyObject;
-            if(applyCommand.CanExecuteChanged != null)
-            {
-                applyCommand.CanExecuteChanged(applyCommand, new EventArgs());
-            }
-        }
 
         public void Execute(object parameter)
         {
@@ -56,15 +33,7 @@ namespace View.ViewModel.Commands
 
         public bool CanExecute(object parameter)
         {
-            return Enabled;
-        }
-
-        /// <summary>
-        /// Регистрирует свойство зависимости EnabledProperty.
-        /// </summary>
-        static ApplyCommand()
-        {
-            EnabledProperty = DependencyProperty.Register("Enabled", typeof(bool), typeof(ApplyCommand), new PropertyMetadata(Enabled_Changed));
+            return true;
         }
     }
 }

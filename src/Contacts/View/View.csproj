@@ -74,11 +74,7 @@
     <Compile Include="ViewModel\Commands\EditCommand.cs" />
     <Compile Include="ViewModel\Commands\RemoveCommand.cs" />
     <Compile Include="ViewModel\ContactVM.cs" />
-    <Compile Include="ViewModel\Converters\Mode_CurrentContactToCanExecuteMultiConverter.cs" />
-    <Compile Include="ViewModel\Converters\ModeToVisibilityConverter.cs" />
     <Compile Include="ViewModel\Converters\CurrentContactToSelectedContactConverter.cs" />
-    <Compile Include="ViewModel\Converters\ModeToCanExecuteConverter.cs" />
-    <Compile Include="ViewModel\Converters\ModeToReadOnlyConverter.cs" />
     <Compile Include="ViewModel\MainVM.cs" />
     <Page Include="Controls\ContactControl.xaml">
       <SubType>Designer</SubType>
