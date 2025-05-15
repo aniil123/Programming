@@ -5,15 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Globalization;
+using System.Windows;
 
 namespace View.ViewModel.Converters
 {
-    public class ModeToReadOnlyConverter : IValueConverter
+    class ModeConverter : IValueConverter
     {
-
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (Modes)value == Modes.Viewing;
+            if(targetType == typeof(bool))
+            {
+                return (Modes)value == Modes.Viewing;
+            }
+            return (Modes)value != Modes.Viewing ? Visibility.Visible : Visibility.Hidden;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

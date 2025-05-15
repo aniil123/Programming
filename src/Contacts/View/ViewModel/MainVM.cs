@@ -13,7 +13,7 @@ namespace View.ViewModel
     /// <summary>
     ///  Главный класс слоя ViewModel.
     /// </summary>
-    public class MainVM : DependencyObject, INotifyPropertyChanged
+    public class MainVM : INotifyPropertyChanged
     {
         /// <summary>
         /// Состояние приложения.
@@ -24,6 +24,11 @@ namespace View.ViewModel
         /// Объект класса <see cref="ContactVM"/>, выбранный в данный момент в ListBox.
         /// </summary>
         private ContactVM _currentContactVM;
+
+        /// <summary>
+        /// Объект класса <see cref="ContactVM"/>, для заполнения через текстовые поля.
+        /// </summary>
+        private ContactVM _inputContactVM = new ContactVM();
 
         /// <summary>
         /// Событие, которое вызывается при изменении свойств класса.
@@ -48,6 +53,8 @@ namespace View.ViewModel
             {
                 _mode = value;
                 OnPropertyChanged();
+                OnPropertyChanged("CanAdd");
+                OnPropertyChanged("CanEditAndRemove");
             }
         }
 
@@ -60,10 +67,47 @@ namespace View.ViewModel
             {
                 return _currentContactVM; 
             }
-            set 
-            { 
+            set
+            {
                 _currentContactVM = value;
-                OnPropertyChanged(new List<string>() { "CurrentContactVM", "Name", "PhoneNumber", "Email" });
+                OnPropertyChanged();
+                OnPropertyChanged("Name");
+                OnPropertyChanged("PhoneNumber");
+                OnPropertyChanged("Email");
+                OnPropertyChanged("CanEditAndRemove");
+            }
+        }
+
+        /// <summary>
+        /// Возвращает объект <see cref="ContactVM"/> для заполнения через текстовые поля.
+        /// </summary>
+        public ContactVM InputContactVM
+        {
+            get
+            {
+                return _inputContactVM;
+            }
+        }
+
+        /// <summary>
+        /// Возвращает true, если в списке контактов выбран объект, или false - если нет.
+        /// </summary>
+        public bool CanAdd
+        {
+            get
+            {
+                return Mode == Modes.Viewing;
+            }
+        }
+
+        /// <summary>
+        /// Возвращает true, если приложение находится в режиме просмотра и в списке контактов выбран объект, или false - если нет.
+        /// </summary>
+        public bool CanEditAndRemove
+        {
+            get
+            {
+                return CurrentContactVM != null && Mode == Modes.Viewing;
             }
         }
 
@@ -74,16 +118,19 @@ namespace View.ViewModel
         {
             get
             {
-                if(CurrentContactVM == null)
+                if (Mode == Modes.Viewing)
                 {
-                    return "";
+                    if (CurrentContactVM == null)
+                    {
+                        return "";
+                    }
+                    return CurrentContactVM.Name;
                 }
-                return CurrentContactVM.Name;
+                return InputContactVM.Name;
             }
             set
             {
-                CurrentContactVM.Name = value;
-                OnPropertyChanged();
+                InputContactVM.Name = value;
             }
         }
 
@@ -94,16 +141,19 @@ namespace View.ViewModel
         {
             get
             {
-                if(CurrentContactVM == null)
+                if (Mode == Modes.Viewing)
                 {
-                    return "";
+                    if (CurrentContactVM == null)
+                    {
+                        return "";
+                    }
+                    return CurrentContactVM.PhoneNumber;
                 }
-                return CurrentContactVM.PhoneNumber;
+                return InputContactVM.PhoneNumber;
             }
             set
             {
-                CurrentContactVM.PhoneNumber = value;
-                OnPropertyChanged();
+                InputContactVM.PhoneNumber = value;
             }
         }
 
@@ -114,35 +164,19 @@ namespace View.ViewModel
         {
             get
             {
-                if (CurrentContactVM == null)
+                if (Mode == Modes.Viewing)
                 {
-                    return "";
+                    if (CurrentContactVM == null)
+                    {
+                        return "";
+                    }
+                    return CurrentContactVM.Email;
                 }
-                return CurrentContactVM.Email;
+                return InputContactVM.Email;
             }
             set
             {
-                CurrentContactVM.Email = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName]string propName = "")
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propName));
-            }
-        }
-
-        public void OnPropertyChanged(List<string> propNames)
-        {
-            if(PropertyChanged != null)
-            {
-                foreach(string propName in propNames)
-                {
-                    PropertyChanged(this, new PropertyChangedEventArgs(propName));
-                }
+                InputContactVM.Email = value;
             }
         }
 
@@ -156,6 +190,14 @@ namespace View.ViewModel
             foreach(Model.Contact contact in Model.Services.ContactSerializer.LoadContacts())
             {
                 Contacts.Add(new ContactVM(contact));
+            }
+        }
+
+        private void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName]string propName = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
         }
     }

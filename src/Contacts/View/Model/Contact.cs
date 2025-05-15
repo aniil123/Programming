@@ -27,6 +27,9 @@ namespace View.Model
         /// </summary>
         public string Email { get; set; }
 
+        /// <summary>
+        /// Создает объект класса <see cref="Contact"/>.
+        /// </summary>
         public Contact(){}
     }
 }

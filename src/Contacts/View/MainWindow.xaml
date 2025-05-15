@@ -11,37 +11,13 @@
         Title="Contacts" Height="450" Width="650" MinWidth="630" MinHeight="380" MaxWidth="820" MaxHeight="700" Icon="/contacts_96x96.ico">
 
     <Window.Resources>
-        <con:ModeToCanExecuteConverter x:Key="ModeToCanExecuteConverter"/>
-        <con:Mode_CurrentContactToCanExecuteMultiConverter x:Key="Mode_CurrentContactToCanExecuteMultiConverter"/>
+        <con:ModeConverter x:Key="ModeConverter"/>
         <vm:MainVM x:Key="MainVM"/>
-        <vm:AddCommand x:Key="AddCommand" Enabled="{Binding Source={StaticResource MainVM}, Path=Mode, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ModeToCanExecuteConverter}}"/>
-        <com:EditCommand x:Key="EditCommand">
-            <com:EditCommand.Enabled>
-                <MultiBinding 
-                    Mode="OneWay"
-                    Converter="{StaticResource Mode_CurrentContactToCanExecuteMultiConverter}"
-                    ConverterParameter="{StaticResource MainVM}">
-                    <Binding Source="{StaticResource MainVM}" Path="Mode" UpdateSourceTrigger="PropertyChanged"/>
-                    <Binding Source="{StaticResource MainVM}" Path="CurrentContactVM" UpdateSourceTrigger="PropertyChanged"/>
-                </MultiBinding>
-            </com:EditCommand.Enabled>
-        </com:EditCommand>
-        <com:RemoveCommand x:Key="RemoveCommand">
-            <com:RemoveCommand.Enabled>
-                <MultiBinding 
-                    Mode="OneWay" 
-                    Converter="{StaticResource Mode_CurrentContactToCanExecuteMultiConverter}"
-                    ConverterParameter="{StaticResource MainVM}">
-                    <Binding Source="{StaticResource MainVM}" Path="Mode"/>
-                    <Binding Source="{StaticResource MainVM}" Path="CurrentContactVM"/>
-                </MultiBinding>
-            </com:RemoveCommand.Enabled>
-        </com:RemoveCommand>
+        <vm:AddCommand x:Key="AddCommand"/>
+        <com:EditCommand x:Key="EditCommand"/>
+        <com:RemoveCommand x:Key="RemoveCommand"/>
         <com:ApplyCommand x:Key="ApplyCommand"/>
-        <con:ModeToReadOnlyConverter x:Key="ModeToReadOnlyConverter"/>
-        <con:ModeToVisibilityConverter x:Key="ModeToVisibilityConverter"/>
         <con:CurrentContactToSelectedContactConverter x:Key="CurrentContactToSelectedContactConverter"/>
-        <con:ListParametersConverter x:Key="ListParametersConverter"/>
     </Window.Resources>
     
     <Grid DataContext="{StaticResource MainVM}">
@@ -96,6 +72,7 @@
                         Height="25"
                         Margin="8 0 3 3"
                         VerticalAlignment="Center"
+                        IsEnabled="{Binding Source={StaticResource MainVM}, Path=CanAdd}"
                         Command="{StaticResource AddCommand}"
                         CommandParameter="{StaticResource MainVM}"/>
                     <Button
@@ -104,6 +81,7 @@
                         Height="25"
                         Margin="3 0 3 3"
                         VerticalAlignment="Center"
+                        IsEnabled="{Binding Source={StaticResource MainVM}, Path=CanEditAndRemove, Mode=OneWay}"
                         Command="{StaticResource EditCommand}"
                         CommandParameter="{StaticResource MainVM}"/>
                     <Button
@@ -112,9 +90,9 @@
                         Height="25"
                         Margin="3 0 8 3"
                         VerticalAlignment="Center"
+                        IsEnabled="{Binding Source={StaticResource MainVM}, Path=CanEditAndRemove, Mode=OneWay}"
                         Command="{StaticResource RemoveCommand}"
-                        CommandParameter="{StaticResource MainVM}"
-                        IsEnabled="{Binding Source={StaticResource RemoveCommand}, Path=Enabled}"/>
+                        CommandParameter="{StaticResource MainVM}"/>
                 </Grid>
             </Grid>
         </Border>
@@ -137,44 +115,33 @@
                 VerticalAlignment="Top"
                 Source="/Resources/Person.png"/>
             <StackPanel Grid.Column="1">
-                <TextBlock
-                    Text="Name:"
-                    Margin="8 8 0 3"/>
+                <TextBlock Text="Name:" Margin="8 8 0 3"/>
                 <TextBox
                     x:Name="NameTextBox"
                     Margin="8"
-                    IsReadOnly="{Binding Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}"
-                    Text="{Binding Path=Name, Mode=OneWay}"/>
+                    IsReadOnly="{Binding Path=Mode, Mode=OneWay, Converter={StaticResource ModeConverter}}"
+                    Text="{Binding Path=Name, Mode=TwoWay}"/>
                 <TextBlock Text="PhoneNumber:" Margin="8 8 0 3"/>
                 <TextBox
                     x:Name="PhoneNumberTextBox"
                     Margin="8"
-                    IsReadOnly="{Binding Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}"
-                    Text="{Binding Path=PhoneNumber, Mode=OneWay}"/>
-                <TextBlock
-                    Text="Email:"
-                    Margin="8 8 0 3"/>
+                    IsReadOnly="{Binding Path=Mode, Mode=OneWay, Converter={StaticResource ModeConverter}}"
+                    Text="{Binding Path=PhoneNumber, Mode=TwoWay}"/>
+                <TextBlock Text="Email:" Margin="8 8 0 3"/>
                 <TextBox
                     x:Name="EmailTextBox"
                     Margin="8"
-                    IsReadOnly="{Binding Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}"
-                    Text="{Binding Path=Email, Mode=OneWay}"/>
+                    IsReadOnly="{Binding Path=Mode, Mode=OneWay, Converter={StaticResource ModeConverter}}"
+                    Text="{Binding Path=Email, Mode=TwoWay}"/>
                 <Button
-                    Content="Aplly"
+                    Content="Apply"
                     Width="75"
                     Height="25"
                     Margin="8 50 0 0"
                     HorizontalAlignment="Left"
-                    Visibility="{Binding Path=Mode, Converter={StaticResource ModeToVisibilityConverter}}"
-                    Command="{StaticResource ApplyCommand}">
-                    <Button.CommandParameter>
-                        <MultiBinding Converter="{StaticResource ListParametersConverter}">
-                            <Binding Source="{StaticResource MainVM}"/>
-                            <Binding ElementName="NameTextBox" Path="Text"/>
-                            <Binding ElementName="PhoneNumberTextBox" Path="Text"/>
-                            <Binding ElementName="EmailTextBox" Path="Text"/>
-                        </MultiBinding>
-                    </Button.CommandParameter>
+                    Visibility="{Binding Path=Mode, Converter={StaticResource ModeConverter}}"
+                    Command="{StaticResource ApplyCommand}"
+                    CommandParameter="{StaticResource MainVM}">
                 </Button>
             </StackPanel>
         </Grid>

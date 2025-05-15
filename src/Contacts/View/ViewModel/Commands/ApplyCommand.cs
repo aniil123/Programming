@@ -17,20 +17,17 @@ namespace View.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-            List<object> parameterList = (List<object>)parameter;
-            MainVM mainVM = (MainVM)parameterList[0];
-            string name = (string)parameterList[1];
-            string phoneNumber = (string)parameterList[2];
-            string email = (string)parameterList[3];
-            mainVM.Name = name;
-            mainVM.PhoneNumber = phoneNumber;
-            mainVM.Email = email;
+            MainVM mainVM = (MainVM)parameter;
+            ContactVM newContactVM = new ContactVM();
+            newContactVM.Name = mainVM.InputContactVM.Name;
+            newContactVM.PhoneNumber = mainVM.InputContactVM.PhoneNumber;
+            newContactVM.Email = mainVM.InputContactVM.Email;
             if (mainVM.Mode == Modes.Adding)
             {
-                mainVM.Contacts.Add(mainVM.CurrentContactVM);
+                mainVM.Contacts.Add(newContactVM);
+                mainVM.CurrentContactVM = newContactVM;
             }
             mainVM.Mode = Modes.Viewing;
-            mainVM.CurrentContactVM = mainVM.CurrentContactVM;
             Model.Services.ContactSerializer.SaveContacts(mainVM.Contacts.Select(contactVM => contactVM.Contact).ToList());
         }
 
