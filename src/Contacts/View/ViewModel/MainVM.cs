@@ -14,7 +14,7 @@ namespace View.ViewModel
     /// <summary>
     ///  Главный класс слоя ViewModel.
     /// </summary>
-    public class MainVM : INotifyPropertyChanged
+    public class MainVM : INotifyPropertyChanged, IDataErrorInfo
     {
         /// <summary>
         /// Состояние приложения.
@@ -228,24 +228,7 @@ namespace View.ViewModel
             }
             set
             {
-                bool acceptableValue = true;
-                string acceptableCharacters = "0123456789-+()";
-                foreach(char valueChar in value)
-                {
-                    acceptableValue = false;
-                    foreach (char acceptableCharacter in acceptableCharacters)
-                    {
-                        if(valueChar == acceptableCharacter)
-                        {
-                            acceptableValue = true;
-                            break;
-                        }
-                    }
-                    if (!acceptableValue)
-                        break;
-                }
-                if (acceptableValue)
-                    InputContactVM.PhoneNumber = value;
+                InputContactVM.PhoneNumber = value;
             }
         }
 
@@ -269,6 +252,33 @@ namespace View.ViewModel
             set
             {
                 InputContactVM.Email = value;
+            }
+        }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                string error = "";
+                if (Mode != Modes.Viewing)
+                {
+                    error = InputContactVM[columnName];
+                    if (columnName == "Name")
+                        AcceptableName = error == "";
+                    else if (columnName == "PhoneNumber")
+                        AcceptablePhoneNumber = error == "";
+                    else if (columnName == "Email")
+                        AcceptableEmail = error == "";
+                }
+                return error;
+            }
+        }
+
+        public string Error
+        {
+            get
+            {
+                throw new NotImplementedException();
             }
         }
 

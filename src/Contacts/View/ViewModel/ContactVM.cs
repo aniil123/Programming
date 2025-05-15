@@ -32,9 +32,7 @@ namespace View.ViewModel
             {
                 Contact.Name = value;
                 if (PropertyChanged != null)
-                {
                     PropertyChanged(this, new PropertyChangedEventArgs("Name"));
-                }
             }
         }
 
@@ -49,10 +47,27 @@ namespace View.ViewModel
             }
             set
             {
-                Contact.PhoneNumber = value;
-                if(PropertyChanged != null)
+                bool acceptableValue = true;
+                string acceptableCharacters = "0123456789-+()";
+                foreach (char valueChar in value)
                 {
-                    PropertyChanged(this, new PropertyChangedEventArgs("PhoneNumber"));
+                    acceptableValue = false;
+                    foreach (char acceptableCharacter in acceptableCharacters)
+                    {
+                        if (valueChar == acceptableCharacter)
+                        {
+                            acceptableValue = true;
+                            break;
+                        }
+                    }
+                    if (!acceptableValue)
+                        break;
+                }
+                if (acceptableValue)
+                {
+                    Contact.PhoneNumber = value;
+                    if (PropertyChanged != null)
+                        PropertyChanged(this, new PropertyChangedEventArgs("PhoneNumber"));
                 }
             }
         }
@@ -70,9 +85,7 @@ namespace View.ViewModel
             {
                 Contact.Email = value;
                 if(PropertyChanged != null)
-                {
                     PropertyChanged(this, new PropertyChangedEventArgs("Email"));
-                }
             }
         }
 
