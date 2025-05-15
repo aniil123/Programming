@@ -22,10 +22,7 @@ namespace View.ViewModel
         {
             MainVM mainVM = (MainVM)parameter;
             mainVM.Mode = Modes.Adding;
-            mainVM.InputContactVM.Name = "";
-            mainVM.InputContactVM.PhoneNumber = "";
-            mainVM.InputContactVM.Email = "";
-            mainVM.CurrentContactVM = new ContactVM();
+            mainVM.CurrentContactVM = null;
         }
 
         public bool CanExecute(object parameter)

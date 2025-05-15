@@ -14,11 +14,7 @@ namespace View.ViewModel.Converters
         {
             MainVM mainVM = (MainVM)parameter;
             ContactVM currentContactVM = (ContactVM)value;
-            if(mainVM.Contacts.IndexOf(currentContactVM) == -1)
-            {
-                return null;
-            }
-            return value;
+            return mainVM.Contacts.IndexOf(currentContactVM) != -1 ? value : null;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

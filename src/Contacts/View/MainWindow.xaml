@@ -84,6 +84,7 @@
                         Height="25"
                         Margin="8 0 3 3"
                         VerticalAlignment="Center"
+                        IsEnabled="{Binding Path=CanAdd}"
                         Command="{StaticResource AddCommand}"
                         CommandParameter="{StaticResource MainVM}"/>
                     <Button
@@ -92,6 +93,7 @@
                         Height="25"
                         Margin="3 0 3 3"
                         VerticalAlignment="Center"
+                        IsEnabled="{Binding Path=CanEditAndRemove}"
                         Command="{StaticResource EditCommand}"
                         CommandParameter="{StaticResource MainVM}"/>
                     <Button
@@ -100,6 +102,7 @@
                         Height="25"
                         Margin="3 0 8 3"
                         VerticalAlignment="Center"
+                        IsEnabled="{Binding Path=CanEditAndRemove}"
                         Command="{StaticResource RemoveCommand}"
                         CommandParameter="{StaticResource MainVM}"/>
                 </Grid>
@@ -127,7 +130,7 @@
                 <TextBlock Text="Name:" Margin="8 8 0 3"/>
                 <TextBox
                     Margin="8"
-                    IsReadOnly="{Binding Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}"
+                    IsReadOnly="{Binding Path=Mode, Mode=OneWay, Converter={StaticResource ModeConverter}}"
                     Style="{StaticResource ValidationFailedStyle}">
                     <TextBox.Text>
                         <Binding Path="Name" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
@@ -140,7 +143,7 @@
                 <TextBlock Text="PhoneNumber:" Margin="8 8 0 3"/>
                 <TextBox
                     Margin="8"
-                    IsReadOnly="{Binding Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}"
+                    IsReadOnly="{Binding Path=Mode, Mode=OneWay, Converter={StaticResource ModeConverter}}"
                     Style="{StaticResource ValidationFailedStyle}">
                     <TextBox.Text>
                         <Binding Path="PhoneNumber" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
@@ -153,7 +156,7 @@
                 <TextBlock Text="Email:" Margin="8 8 0 3"/>
                 <TextBox
                     Margin="8"
-                    IsReadOnly="{Binding Path=Mode, Mode=OneWay, Converter={StaticResource ModeToReadOnlyConverter}}"
+                    IsReadOnly="{Binding Path=Mode, Mode=OneWay, Converter={StaticResource ModeConverter}}"
                     Style="{StaticResource ValidationFailedStyle}">
                     <Binding Path="Email" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
@@ -167,7 +170,8 @@
                     Height="25"
                     Margin="8 50 0 0"
                     HorizontalAlignment="Left"
-                    Visibility="{Binding Path=Mode, Converter={StaticResource ModeToVisibilityConverter}}"
+                    Visibility="{Binding Path=Mode, Converter={StaticResource ModeConverter}}"
+                    IsEnabled="{Binding Path=AcceptableValues}"
                     Command="{StaticResource ApplyCommand}"
                     CommandParameter="{StaticResource MainVM}">
                 </Button>

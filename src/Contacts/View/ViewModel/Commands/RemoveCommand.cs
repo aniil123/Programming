@@ -22,13 +22,9 @@ namespace View.ViewModel.Commands
             mainVM.Contacts.Remove(mainVM.CurrentContactVM);
             int contactsCount = mainVM.Contacts.Count;
             if (contactsCount > currentIndex)
-            {
                 mainVM.CurrentContactVM = mainVM.Contacts[currentIndex];
-            }
             else if(contactsCount <= currentIndex && contactsCount > 0)
-            {
                 mainVM.CurrentContactVM = mainVM.Contacts[currentIndex - 1];
-            }
             Model.Services.ContactSerializer.SaveContacts(mainVM.Contacts.Select(contactVM => contactVM.Contact).ToList());
         }
 
