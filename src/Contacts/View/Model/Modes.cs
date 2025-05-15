@@ -1,4 +1,7 @@
-﻿public enum Modes
+﻿/// <summary>
+/// Режимы приложения.
+/// </summary>
+public enum Modes
 {
     Viewing,
     Adding,

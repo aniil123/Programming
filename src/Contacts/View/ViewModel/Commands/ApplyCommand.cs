@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace View.ViewModel.Commands
 {
-    public class ApplyCommand : DependencyObject, ICommand
+    public class ApplyCommand : ICommand
     {
         /// <summary>
         /// Событие, которое вызывается при изменении возвращаемого значения метода CanExecute.
@@ -19,15 +19,16 @@ namespace View.ViewModel.Commands
         public void Execute(object parameter)
         {
             MainVM mainVM = (MainVM)parameter;
-            mainVM.CurrentContactVM.Name = mainVM.InputContactVM.Name;
-            mainVM.CurrentContactVM.PhoneNumber = mainVM.InputContactVM.PhoneNumber;
-            mainVM.CurrentContactVM.Email = mainVM.InputContactVM.Email;
+            ContactVM newContactVM = new ContactVM();
+            newContactVM.Name = mainVM.InputContactVM.Name;
+            newContactVM.PhoneNumber = mainVM.InputContactVM.PhoneNumber;
+            newContactVM.Email = mainVM.InputContactVM.Email;
             if (mainVM.Mode == Modes.Adding)
             {
-                mainVM.Contacts.Add(mainVM.CurrentContactVM);
+                mainVM.Contacts.Add(newContactVM);
+                mainVM.CurrentContactVM = newContactVM;
             }
             mainVM.Mode = Modes.Viewing;
-            mainVM.CurrentContactVM = mainVM.CurrentContactVM;
             Model.Services.ContactSerializer.SaveContacts(mainVM.Contacts.Select(contactVM => contactVM.Contact).ToList());
         }
 

@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace View.ViewModel.Commands
 {
-    public class EditCommand : DependencyObject, ICommand
+    public class EditCommand : ICommand
     {
         /// <summary>
         /// Событие, которое вызывается при изменении возращаемого значения метода CanExecute.

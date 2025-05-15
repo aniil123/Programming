@@ -71,6 +71,8 @@ namespace View.ViewModel
             {
                 _mode = value;
                 OnPropertyChanged();
+                OnPropertyChanged("CanAdd");
+                OnPropertyChanged("CanEditAndRemove");
             }
         }
 
@@ -90,6 +92,7 @@ namespace View.ViewModel
                 OnPropertyChanged("Name");
                 OnPropertyChanged("PhoneNumber");
                 OnPropertyChanged("Email");
+                OnPropertyChanged("CanEditAndRemove");
             }
         }
 
@@ -101,6 +104,28 @@ namespace View.ViewModel
             get
             {
                 return _inputContactVM;
+            }
+        }
+
+        /// <summary>
+        /// Возвращает true, если в списке контактов выбран объект, или false - если нет.
+        /// </summary>
+        public bool CanAdd
+        {
+            get
+            {
+                return Mode == Modes.Viewing;
+            }
+        }
+
+        /// <summary>
+        /// Возвращает true, если приложение находится в режиме просмотра и в списке контактов выбран объект, или false - если нет.
+        /// </summary>
+        public bool CanEditAndRemove
+        {
+            get
+            {
+                return CurrentContactVM != null && Mode == Modes.Viewing;
             }
         }
 
