@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Windows;
-using View.ViewModel.Commands;
 using System.Windows.Navigation;
 using System.Windows.Input;
-using System.Windows.Forms;
 
 namespace View.ViewModel
 {
@@ -27,6 +25,11 @@ namespace View.ViewModel
         /// Объект класса <see cref="ContactVM"/>, выбранный в данный момент в ListBox.
         /// </summary>
         private ContactVM _currentContactVM;
+
+        /// <summary>
+        /// Объект класса <see cref="ContactVM"/> для заполнения через текстовые поля.
+        /// </summary>
+        private ContactVM _inputContactVM = new ContactVM();
 
         /// <summary>
         /// Содержит значение true, если свойство Name объекта InputContactVM содержит допустимое значение, false - если нет.
@@ -49,11 +52,6 @@ namespace View.ViewModel
         public ObservableCollection<ContactVM> Contacts { get; set; }
 
         /// <summary>
-        /// Возвращает объект <see cref="ContactVM"/> для заполнения через текстовые поля.
-        /// </summary>
-        public ContactVM InputContactVM { get; } = new ContactVM();
-
-        /// <summary>
         /// Событие, которое вызывается при изменении свойств класса.
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
@@ -71,6 +69,8 @@ namespace View.ViewModel
             {
                 _mode = value;
                 OnPropertyChanged();
+                OnPropertyChanged("CanAdd");
+                OnPropertyChanged("CanEditAndRemove");
             }
         }
 
@@ -86,7 +86,44 @@ namespace View.ViewModel
             set
             {
                 _currentContactVM = value;
-                OnPropertyChanged(new List<string>() { "CurrentContactVM", "Name", "PhoneNumber", "Email" });
+                OnPropertyChanged();
+                OnPropertyChanged("Name");
+                OnPropertyChanged("PhoneNumber");
+                OnPropertyChanged("Email");
+                OnPropertyChanged("CanEditAndRemove");
+            }
+        }
+
+        /// <summary>
+        /// Возвращает объект <see cref="ContactVM"/> для заполнения через текстовые поля.
+        /// </summary>
+        public ContactVM InputContactVM
+        {
+            get
+            {
+                return _inputContactVM;
+            }
+        }
+
+        /// <summary>
+        /// Возвращает true, если в списке контактов выбран объект, или false - если нет.
+        /// </summary>
+        public bool CanAdd
+        {
+            get
+            {
+                return Mode == Modes.Viewing;
+            }
+        }
+
+        /// <summary>
+        /// Возвращает true, если приложение находится в режиме просмотра и в списке контактов выбран объект, или false - если нет.
+        /// </summary>
+        public bool CanEditAndRemove
+        {
+            get
+            {
+                return CurrentContactVM != null && Mode == Modes.Viewing;
             }
         }
 
@@ -191,24 +228,7 @@ namespace View.ViewModel
             }
             set
             {
-                bool acceptableValue = true;
-                string acceptableCharacters = "0123456789-+()";
-                foreach(char valueChar in value)
-                {
-                    acceptableValue = false;
-                    foreach (char acceptableCharacter in acceptableCharacters)
-                    {
-                        if(valueChar == acceptableCharacter)
-                        {
-                            acceptableValue = true;
-                            break;
-                        }
-                    }
-                    if (!acceptableValue)
-                        break;
-                }
-                if (acceptableValue)
-                    InputContactVM.PhoneNumber = value;
+                InputContactVM.PhoneNumber = value;
             }
         }
 
@@ -239,103 +259,26 @@ namespace View.ViewModel
         {
             get
             {
-                string error = String.Empty;
+                string error = "";
                 if (Mode != Modes.Viewing)
                 {
-                    switch (columnName)
-                    {
-                        case "Name":
-                            if(Name == "")
-                            {
-                                error = "Имя не должно быть пустым.";
-                            }
-                            else if (Name.Length > 100)
-                            {
-                                error = "Имя не должно содержать больше 100 символов.";
-                            }
-                            break;
-                        case "PhoneNumber":
-                            if(PhoneNumber == "")
-                            {
-                                error = "Номер телефона не должен быть пустым.";
-                                break;
-                            }
-                            if (PhoneNumber.Length > 100)
-                            {
-                                error = "Номер телефона не должен содержать больше 100 символов.";
-                                break;
-                            }
-                            break;
-                        case "Email":
-                            if(Email == "")
-                            {
-                                error = "Почта не должна быть пустой.";
-                                break;
-                            }
-                            if (Email.Length > 100)
-                            {
-                                error = "Почта не должна содержать больше 100 символов.";
-                                break;
-                            }
-                            bool acceptable = false;
-                            foreach (char emailSim in Email)
-                            {
-                                if (emailSim == '@')
-                                {
-                                    if (acceptable)
-                                    {
-                                        error = "Должен быть только 1 символ @.";
-                                        break;
-                                    }
-                                    acceptable = true;
-                                }
-                            }
-                            if (!acceptable)
-                            {
-                                error = "В почте должен быть символ @.";
-                            }
-                            break;
-                    }
-                }
-                if(columnName == "Name")
-                {
-                    AcceptableName = error == String.Empty;
-                }
-                else if(columnName == "PhoneNumber")
-                {
-                    AcceptablePhoneNumber = error == String.Empty;
-                }
-                else
-                {
-                    AcceptableEmail = error == String.Empty;
+                    error = InputContactVM[columnName];
+                    if (columnName == "Name")
+                        AcceptableName = error == "";
+                    else if (columnName == "PhoneNumber")
+                        AcceptablePhoneNumber = error == "";
+                    else if (columnName == "Email")
+                        AcceptableEmail = error == "";
                 }
                 return error;
             }
         }
+
         public string Error
         {
             get
             {
                 throw new NotImplementedException();
-            }
-        }
-
-        public void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName]string propName = "")
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propName));
-            }
-        }
-
-        public void OnPropertyChanged(List<string> propNames)
-        {
-            if(PropertyChanged != null)
-            {
-                foreach(string propName in propNames)
-                {
-                    PropertyChanged(this, new PropertyChangedEventArgs(propName));
-                }
             }
         }
 
@@ -349,6 +292,14 @@ namespace View.ViewModel
             foreach(Model.Contact contact in Model.Services.ContactSerializer.LoadContacts())
             {
                 Contacts.Add(new ContactVM(contact));
+            }
+        }
+
+        public void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName]string propName = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
         }
     }
