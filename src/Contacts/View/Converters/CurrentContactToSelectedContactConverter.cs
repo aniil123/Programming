@@ -3,23 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Data;
 using System.Globalization;
+using ViewModel;
 
-namespace View.ViewModel.Converters
+namespace View.Converters
 {
-    class ModeConverter : IValueConverter
+    public class CurrentContactToSelectedContactConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if(targetType == typeof(bool))
-                return (Modes)value == Modes.Viewing;
-            return (Modes)value == Modes.Viewing ? Visibility.Hidden : Visibility.Visible;
+            MainVM mainVM = (MainVM)parameter;
+            ContactVM currentContactVM = (ContactVM)value;
+            return mainVM.Contacts.IndexOf(currentContactVM) != -1 ? value : null;
         }
+
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            MainVM mainVM = (MainVM)parameter;
+            mainVM.Mode = Modes.Viewing;
+            return value;
         }
     }
 }

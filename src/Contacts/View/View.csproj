@@ -37,9 +37,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -67,16 +64,8 @@
     <Compile Include="Controls\ContactControl.xaml.cs">
       <DependentUpon>ContactControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\Modes.cs" />
-    <Compile Include="Model\Services\ContactSerializer.cs" />
-    <Compile Include="ViewModel\Commands\AddCommand.cs" />
-    <Compile Include="ViewModel\Commands\ApplyCommand.cs" />
-    <Compile Include="ViewModel\Commands\EditCommand.cs" />
-    <Compile Include="ViewModel\Commands\RemoveCommand.cs" />
-    <Compile Include="ViewModel\ContactVM.cs" />
-    <Compile Include="ViewModel\Converters\CurrentContactToSelectedContactConverter.cs" />
-    <Compile Include="ViewModel\Converters\ModeConverter.cs" />
-    <Compile Include="ViewModel\MainVM.cs" />
+    <Compile Include="Converters\CurrentContactToSelectedContactConverter.cs" />
+    <Compile Include="Converters\ModeConverter.cs" />
     <Page Include="Controls\ContactControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -95,7 +84,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Contact.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -113,7 +101,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -131,6 +118,15 @@
   <ItemGroup>
     <Resource Include="Resources\Person.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{131383bf-84fc-40a6-b5a0-42ba508d1ccd}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ViewModel\ViewModel.csproj">
+      <Project>{1eb6e041-edc1-475b-861d-09bdbf3e35dd}</Project>
+      <Name>ViewModel</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
