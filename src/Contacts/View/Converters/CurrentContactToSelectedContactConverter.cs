@@ -21,6 +21,8 @@ namespace View.Converters
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             MainVM mainVM = (MainVM)parameter;
+            if (mainVM.Mode == Modes.Editing)
+                mainVM.UseClone();
             mainVM.Mode = Modes.Viewing;
             return value;
         }

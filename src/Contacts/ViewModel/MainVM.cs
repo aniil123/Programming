@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ViewModel
 {
-    public class MainVM : INotifyPropertyChanged, IDataErrorInfo
+    public class MainVM : INotifyPropertyChanged
     {
         /// <summary>
         /// Состояние приложения.
@@ -23,24 +23,9 @@ namespace ViewModel
         private ContactVM _currentContactVM;
 
         /// <summary>
-        /// Объект класса <see cref="ContactVM"/> для заполнения через текстовые поля.
+        /// Объект класса <see cref="ContactVM"/> хранящий корректную копию объекта _currentContactVM.
         /// </summary>
-        private ContactVM _inputContactVM = new ContactVM();
-
-        /// <summary>
-        /// Содержит значение true, если свойство Name объекта InputContactVM содержит допустимое значение, false - если нет.
-        /// </summary>
-        private bool _acceptableName;
-
-        /// <summary>
-        /// Содержит true, если свойство PhoneNumber объекта InputContactVM содержит допустимое значение, false - если нет.
-        /// </summary>
-        private bool _acceptablePhoneNumber;
-
-        /// <summary>
-        /// Содержит true, если свойство Email объекта InputContactVM содержит допустимое значение, false - если нет.
-        /// </summary>
-        private bool _acceptableEmail;
+        private ContactVM _cloneContactVM = new ContactVM();
 
         /// <summary>
         /// Коллекция объектов <see cref="ContactVM"/>.
@@ -83,26 +68,12 @@ namespace ViewModel
             {
                 _currentContactVM = value;
                 OnPropertyChanged();
-                OnPropertyChanged("Name");
-                OnPropertyChanged("PhoneNumber");
-                OnPropertyChanged("Email");
                 OnPropertyChanged("CanEditAndRemove");
             }
         }
 
         /// <summary>
-        /// Возвращает объект <see cref="ContactVM"/> для заполнения через текстовые поля.
-        /// </summary>
-        public ContactVM InputContactVM
-        {
-            get
-            {
-                return _inputContactVM;
-            }
-        }
-
-        /// <summary>
-        /// Возвращает true, если в списке контактов выбран объект, или false - если нет.
+        /// Возвращает true, если доступно добавление, или false - если нет.
         /// </summary>
         public bool CanAdd
         {
@@ -113,168 +84,13 @@ namespace ViewModel
         }
 
         /// <summary>
-        /// Возвращает true, если приложение находится в режиме просмотра и в списке контактов выбран объект, или false - если нет.
+        /// Возвращает true, если доступно редактирование и удаление, или false - если нет.
         /// </summary>
         public bool CanEditAndRemove
         {
             get
             {
-                return CurrentContactVM != null && Mode == Modes.Viewing;
-            }
-        }
-
-        /// <summary>
-        /// Возвращает и задает значение определяющее, является ли свойство Name объекта InputContactVM допустимым.
-        /// </summary>
-        private bool AcceptableName
-        {
-            get
-            {
-                return _acceptableName;
-            }
-            set
-            {
-                _acceptableName = value;
-                OnPropertyChanged("AcceptableValues");
-            }
-        }
-
-        /// <summary>
-        /// Возвращает и задает значение определяющее, является ли свойство PhoneNumber объекта InputContactVM допустимым.
-        /// </summary>
-        private bool AcceptablePhoneNumber
-        {
-            get
-            {
-                return _acceptablePhoneNumber;
-            }
-            set
-            {
-                _acceptablePhoneNumber = value;
-                OnPropertyChanged("AcceptableValues");
-            }
-        }
-
-        /// <summary>
-        /// Возвращает и задает значение определяющее, является ли свойство Email объекта InputContactVM допустимым.
-        /// </summary>
-        private bool AcceptableEmail
-        {
-            get
-            {
-                return _acceptableEmail;
-            }
-            set
-            {
-                _acceptableEmail = value;
-                OnPropertyChanged("AcceptableValues");
-            }
-        }
-
-        /// <summary>
-        /// Возвращает true, если свойства объекта InputContactVM содержат допустимые значения, false - если нет.
-        /// </summary>
-        public bool AcceptableValues
-        {
-            get
-            {
-                return AcceptableName == AcceptablePhoneNumber && AcceptablePhoneNumber == AcceptableEmail && AcceptableEmail == true;
-            }
-        }
-
-        /// <summary>
-        /// Возвращает и задает значение свойства Name объекта Contact типа <see cref="ContactVM"/>. Должно быть типа string.
-        /// </summary>
-        public string Name
-        {
-            get
-            {
-                if (Mode == Modes.Viewing)
-                {
-                    if (CurrentContactVM == null)
-                    {
-                        return "";
-                    }
-                    return CurrentContactVM.Name;
-                }
-                return InputContactVM.Name;
-            }
-            set
-            {
-                InputContactVM.Name = value;
-            }
-        }
-
-        /// <summary>
-        /// Возвращает и задает значение свойства PhoneNumber объекта Contact типа <see cref="ContactVM"/>. Должно быть типа string.
-        /// </summary>
-        public string PhoneNumber
-        {
-            get
-            {
-                if (Mode == Modes.Viewing)
-                {
-                    if (CurrentContactVM == null)
-                    {
-                        return "";
-                    }
-                    return CurrentContactVM.PhoneNumber;
-                }
-                return InputContactVM.PhoneNumber;
-            }
-            set
-            {
-                InputContactVM.PhoneNumber = value;
-            }
-        }
-
-        /// <summary>
-        /// Возвращает и задает значение свойства Email объекта Contact типа <see cref="ContactVM"/>. Должно быть типа string.
-        /// </summary>
-        public string Email
-        {
-            get
-            {
-                if (Mode == Modes.Viewing)
-                {
-                    if (CurrentContactVM == null)
-                    {
-                        return "";
-                    }
-                    return CurrentContactVM.Email;
-                }
-                return InputContactVM.Email;
-            }
-            set
-            {
-                InputContactVM.Email = value;
-            }
-        }
-
-        public string this[string columnName]
-        {
-            get
-            {
-                string error = "";
-                if (Mode != Modes.Viewing)
-                {
-                    error = InputContactVM[columnName];
-                    if (columnName == "Name")
-                        AcceptableName = error == "";
-                    else if (columnName == "PhoneNumber")
-                        AcceptablePhoneNumber = error == "";
-                    else if (columnName == "Email")
-                        AcceptableEmail = error == "";
-                }
-                return error;
-            }
-        }
-
-        public string Error
-        {
-            get
-            {
-                throw new NotImplementedException();
+                return Mode == Modes.Viewing && CurrentContactVM != null;
             }
         }
 
@@ -296,6 +112,32 @@ namespace ViewModel
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            }
+        }
+
+        /// <summary>
+        /// Делает копию текущего выбранного контакта.
+        /// </summary>
+        public void MakeClone()
+        {
+            if (CurrentContactVM != null)
+            {
+                _cloneContactVM.Name = CurrentContactVM.Name;
+                _cloneContactVM.PhoneNumber = CurrentContactVM.PhoneNumber;
+                _cloneContactVM.Email = CurrentContactVM.Email;
+            }
+        }
+
+        /// <summary>
+        /// Присваивает всем полям CurrentContactVM значения соответсвующих полей объекта _copyContactVM.
+        /// </summary>
+        public void UseClone()
+        {
+            if (CurrentContactVM != null)
+            {
+                CurrentContactVM.Name = _cloneContactVM.Name;
+                CurrentContactVM.PhoneNumber = _cloneContactVM.PhoneNumber;
+                CurrentContactVM.Email = _cloneContactVM.Email;
             }
         }
     }

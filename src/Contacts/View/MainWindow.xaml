@@ -133,7 +133,7 @@
                     IsReadOnly="{Binding Path=Mode, Mode=OneWay, Converter={StaticResource ModeConverter}}"
                     Style="{StaticResource ValidationFailedStyle}">
                     <TextBox.Text>
-                        <Binding Path="Name" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding Path="CurrentContactVM.Name" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <DataErrorValidationRule/>
                             </Binding.ValidationRules>
@@ -146,7 +146,7 @@
                     IsReadOnly="{Binding Path=Mode, Mode=OneWay, Converter={StaticResource ModeConverter}}"
                     Style="{StaticResource ValidationFailedStyle}">
                     <TextBox.Text>
-                        <Binding Path="PhoneNumber" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding Path="CurrentContactVM.PhoneNumber" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <DataErrorValidationRule/>
                             </Binding.ValidationRules>
@@ -158,7 +158,7 @@
                     Margin="8"
                     IsReadOnly="{Binding Path=Mode, Mode=OneWay, Converter={StaticResource ModeConverter}}"
                     Style="{StaticResource ValidationFailedStyle}">
-                    <Binding Path="Email" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding Path="CurrentContactVM.Email" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <DataErrorValidationRule/>
                         </Binding.ValidationRules>
@@ -171,7 +171,7 @@
                     Margin="8 50 0 0"
                     HorizontalAlignment="Left"
                     Visibility="{Binding Path=Mode, Converter={StaticResource ModeConverter}}"
-                    IsEnabled="{Binding Path=AcceptableValues}"
+                    IsEnabled="{Binding Path=CurrentContactVM.HaveError}"
                     Command="{StaticResource ApplyCommand}"
                     CommandParameter="{StaticResource MainVM}">
                 </Button>

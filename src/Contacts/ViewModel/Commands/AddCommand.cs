@@ -19,10 +19,7 @@ namespace ViewModel.Commands
         {
             MainVM mainVM = (MainVM)parameter;
             mainVM.Mode = Modes.Adding;
-            mainVM.InputContactVM.Name = "";
-            mainVM.InputContactVM.PhoneNumber = "";
-            mainVM.InputContactVM.Email = "";
-            mainVM.CurrentContactVM = null;
+            mainVM.CurrentContactVM = new ContactVM();
         }
 
         public bool CanExecute(object parameter)

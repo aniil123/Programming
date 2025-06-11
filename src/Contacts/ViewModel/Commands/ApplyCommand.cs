@@ -19,14 +19,10 @@ namespace ViewModel.Commands
         public void Execute(object parameter)
         {
             MainVM mainVM = (MainVM)parameter;
-            ContactVM newContactVM = new ContactVM();
-            newContactVM.Name = mainVM.InputContactVM.Name;
-            newContactVM.PhoneNumber = mainVM.InputContactVM.PhoneNumber;
-            newContactVM.Email = mainVM.InputContactVM.Email;
             if (mainVM.Mode == Modes.Adding)
             {
-                mainVM.Contacts.Add(newContactVM);
-                mainVM.CurrentContactVM = newContactVM;
+                mainVM.Contacts.Add(mainVM.CurrentContactVM);
+                mainVM.CurrentContactVM = mainVM.CurrentContactVM;
             }
             mainVM.Mode = Modes.Viewing;
             Model.Services.ContactSerializer.SaveContacts(mainVM.Contacts.Select(contactVM => contactVM.Contact).ToList());
