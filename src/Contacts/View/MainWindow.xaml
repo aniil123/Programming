@@ -4,16 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:View"
-        xmlns:vm="clr-namespace:View.ViewModel"
-        xmlns:com="clr-namespace:View.ViewModel.Commands"
-        xmlns:con="clr-namespace:View.ViewModel.Converters"
+        xmlns:con="clr-namespace:View.Converters"
         xmlns:contrl="clr-namespace:View.Controls"
+        xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel" 
+        xmlns:com="clr-namespace:ViewModel.Commands;assembly=ViewModel"
         mc:Ignorable="d"
         Title="Contacts" Height="450" Width="650" MinWidth="630" MinHeight="380" MaxWidth="820" MaxHeight="700" Icon="/contacts_96x96.ico">
 
     <Window.Resources>
         <vm:MainVM x:Key="MainVM"/>
-        <vm:AddCommand x:Key="AddCommand"/>
+        <com:AddCommand x:Key="AddCommand"/>
         <com:EditCommand x:Key="EditCommand"/>
         <com:RemoveCommand x:Key="RemoveCommand"/>
         <com:ApplyCommand x:Key="ApplyCommand"/>
