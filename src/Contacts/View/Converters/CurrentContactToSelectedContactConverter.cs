@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
-using System.Globalization;
 using ViewModel;
 
 namespace View.Converters
 {
-    public class CurrentContactToSelectedContactConverter : IValueConverter
+    internal class CurrentContactToSelectedContactConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -21,6 +21,8 @@ namespace View.Converters
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             MainVM mainVM = (MainVM)parameter;
+            if (mainVM.Mode == Modes.Editing)
+                mainVM.UseClone();
             mainVM.Mode = Modes.Viewing;
             return value;
         }

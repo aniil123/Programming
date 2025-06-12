@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace ViewModel
 {
-    public class ContactVM : INotifyPropertyChanged, IDataErrorInfo
+    public class ContactVM : ObservableObject, IDataErrorInfo
     {
-        /// <summary>
-        /// Событие, которое вызывается при изминении свойств класса.
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-
         /// <summary>
         /// Контактные данные.
         /// </summary>
@@ -31,8 +28,7 @@ namespace ViewModel
             set
             {
                 Contact.Name = value;
-                if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("Name"));
+                OnPropertyChanged();
             }
         }
 
@@ -66,8 +62,7 @@ namespace ViewModel
                 if (acceptableValue)
                 {
                     Contact.PhoneNumber = value;
-                    if (PropertyChanged != null)
-                        PropertyChanged(this, new PropertyChangedEventArgs("PhoneNumber"));
+                    OnPropertyChanged();
                 }
             }
         }
@@ -84,51 +79,52 @@ namespace ViewModel
             set
             {
                 Contact.Email = value;
-                if(PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("Email"));
+                OnPropertyChanged();
             }
         }
 
+        /// <summary>
+        /// Возвращает не пустую строку, если поле с названием columnName содержит некорректное значение, или пустую - если нет.
+        /// </summary>
         public string this[string columnName]
         {
             get
             {
                 string error = String.Empty;
-                switch (columnName)
+                if (columnName == null || columnName == "Name")
                 {
-                    case "Name":
-                        if (Name == "")
-                        {
-                            error = "Имя не должно быть пустым.";
-                        }
-                        else if (Name.Length > 100)
-                        {
-                            error = "Имя не должно содержать больше 100 символов.";
-                        }
-                        break;
-                    case "PhoneNumber":
-                        if (PhoneNumber == "")
-                        {
-                            error = "Номер телефона не должен быть пустым.";
-                            break;
-                        }
-                        if (PhoneNumber.Length > 100)
-                        {
-                            error = "Номер телефона не должен содержать больше 100 символов.";
-                            break;
-                        }
-                        break;
-                    case "Email":
-                        if (Email == "")
-                        {
-                            error = "Почта не должна быть пустой.";
-                            break;
-                        }
-                        if (Email.Length > 100)
-                        {
-                            error = "Почта не должна содержать больше 100 символов.";
-                            break;
-                        }
+                    if (Name == "")
+                    {
+                        error = "Имя не должно быть пустым.";
+                    }
+                    else if (Name.Length > 100)
+                    {
+                        error = "Имя не должно содержать больше 100 символов.";
+                    }
+                }
+                if (columnName == null || columnName == "PhoneNumber")
+                {
+                    if (PhoneNumber == "")
+                    {
+                        error = "Номер телефона не должен быть пустым.";
+                    }
+                    else if (PhoneNumber.Length > 100)
+                    {
+                        error = "Номер телефона не должен содержать больше 100 символов.";
+                    }
+                }
+                if (columnName == null || columnName == "Email")
+                {
+                    if (Email == "")
+                    {
+                        error = "Почта не должна быть пустой.";
+                    }
+                    else if (Email.Length > 100)
+                    {
+                        error = "Почта не должна содержать больше 100 символов.";
+                    }
+                    else
+                    {
                         bool acceptable = false;
                         foreach (char emailSim in Email)
                         {
@@ -146,17 +142,33 @@ namespace ViewModel
                         {
                             error = "В почте должен быть символ @.";
                         }
-                        break;
+                    }
                 }
+                if (columnName != null)
+                    OnPropertyChanged("HaveError");
                 return error;
             }
         }
 
+        /// <summary>
+        /// Возвращает не пустую строку, если в полях объекта есть некорректные значения, или пустую - если их нет.
+        /// </summary>
         public string Error
         {
             get
             {
-                throw new NotImplementedException();
+                return this[null];
+            }
+        }
+
+        /// <summary>
+        /// Возвращает true, если в полях этого объекта нет некорректных значений, или false - если есть.
+        /// </summary>
+        public bool HaveError
+        {
+            get
+            {
+                return Error == "";
             }
         }
 

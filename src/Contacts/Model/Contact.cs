@@ -3,14 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.CodeDom;
 
 namespace Model
 {
-
-    /// <summary>
-    /// Контактные данные.
-    /// </summary>
     public class Contact
     {
         /// <summary>
@@ -31,8 +26,8 @@ namespace Model
         /// <summary>
         /// Возвращает и задает имя.
         /// </summary>
-        public string Name 
-        { 
+        public string Name
+        {
             get
             {
                 return _name;
@@ -76,6 +71,6 @@ namespace Model
         /// <summary>
         /// Создает объект класса <see cref="Contact"/>.
         /// </summary>
-        public Contact(){}
+        public Contact() { }
     }
 }

@@ -25,7 +25,7 @@
             <TextBlock 
                 Grid.Row="0" 
                 VerticalAlignment="Center" 
-                FontSize="14" 
+                FontSize="14"
                 FontWeight="semiBold" 
                 Text="{Binding Path=Name}"/>
             <TextBlock 

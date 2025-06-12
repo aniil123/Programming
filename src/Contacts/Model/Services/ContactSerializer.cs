@@ -1,12 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.IO;
-using Newtonsoft.Json;
-using Model;
 
 namespace Model.Services
 {
@@ -33,11 +31,11 @@ namespace Model.Services
         public static void SaveContacts(List<Contact> contacts)
         {
             string serializedContacts = JsonConvert.SerializeObject(contacts);
-            if(!Directory.Exists(Path))
+            if (!Directory.Exists(Path))
             {
                 Directory.CreateDirectory(Path);
             }
-            using(StreamWriter streamWriter = new StreamWriter(Path + @"\contacts.json", false))
+            using (StreamWriter streamWriter = new StreamWriter(Path + @"\contacts.json", false))
             {
                 streamWriter.Write(serializedContacts);
             }
