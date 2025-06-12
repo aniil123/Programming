@@ -89,21 +89,7 @@ namespace ViewModel
             {
                 _currentContactVM = value;
                 OnPropertyChanged();
-                OnPropertyChanged("Name");
-                OnPropertyChanged("PhoneNumber");
-                OnPropertyChanged("Email");
                 OnPropertyChanged("CanEditAndRemove");
-            }
-        }
-
-        /// <summary>
-        /// Возвращает true, если доступно добавление, или false - если нет.
-        /// </summary>
-        public ContactVM InputContactVM
-        {
-            get
-            {
-                return _inputContactVM;
             }
         }
 
@@ -144,7 +130,6 @@ namespace ViewModel
             EditCommand = new RelayCommand(Edit);
             RemoveCommand = new RelayCommand(Remove);
             ApplyCommand = new RelayCommand(Apply);
-            }
         }
 
         /// <summary>
@@ -154,12 +139,6 @@ namespace ViewModel
         {
             Mode = Modes.Adding;
             CurrentContactVM = new ContactVM();
-            }
-            set
-            {
-                _acceptablePhoneNumber = value;
-                OnPropertyChanged("AcceptableValues");
-            }
         }
 
         /// <summary>
@@ -169,12 +148,6 @@ namespace ViewModel
         {
             Mode = Modes.Editing;
             MakeClone();
-            }
-            set
-            {
-                _acceptableEmail = value;
-                OnPropertyChanged("AcceptableValues");
-            }
         }
 
         /// <summary>
