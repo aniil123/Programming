@@ -16,7 +16,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using View.Converters;
 using ViewModel;
-using ViewModel.Commands;
 
 namespace View
 {

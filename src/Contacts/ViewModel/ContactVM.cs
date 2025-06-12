@@ -5,16 +5,12 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace ViewModel
 {
-    public class ContactVM : INotifyPropertyChanged, IDataErrorInfo
+    public class ContactVM : ObservableObject, IDataErrorInfo
     {
-        /// <summary>
-        /// Событие, которое вызывается при изминении свойств класса.
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-
         /// <summary>
         /// Контактные данные.
         /// </summary>
@@ -190,14 +186,6 @@ namespace ViewModel
         public ContactVM(Model.Contact contact)
         {
             Contact = contact;
-        }
-
-        private void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName]string propertyName = "")
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
         }
     }
 }

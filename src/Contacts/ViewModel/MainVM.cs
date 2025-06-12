@@ -7,10 +7,13 @@ using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace ViewModel
 {
-    public class MainVM : INotifyPropertyChanged
+    public partial class MainVM : ObservableObject
     {
         /// <summary>
         /// Состояние приложения.
@@ -33,9 +36,24 @@ namespace ViewModel
         public ObservableCollection<ContactVM> Contacts { get; set; }
 
         /// <summary>
-        /// Событие, которое вызывается при изменении свойств класса.
+        /// Возвращает команду для перехода в режим добавления нового контакта.
         /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
+        public ICommand AddCommand { get; }
+
+        /// <summary>
+        /// Возвращает команду для перехода в режим редактирования выбранного контакта.
+        /// </summary>
+        public ICommand EditCommand { get; }
+
+        /// <summary>
+        /// Возвращает команду для удаления выбранного контакта.
+        /// </summary>
+        public ICommand RemoveCommand { get; }
+
+        /// <summary>
+        /// Возвращает команду для подтверждения добавления или редактирования контакта.
+        /// </summary>
+        public ICommand ApplyCommand { get; }
 
         /// <summary>
         /// Возвращает и задает состояние приложения. Должно быть типа <see cref="Modes"/>.
@@ -105,14 +123,57 @@ namespace ViewModel
             {
                 Contacts.Add(new ContactVM(contact));
             }
+            AddCommand = new RelayCommand(Add);
+            EditCommand = new RelayCommand(Edit);
+            RemoveCommand = new RelayCommand(Remove);
+            ApplyCommand = new RelayCommand(Apply);
         }
 
-        public void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string propName = "")
+        /// <summary>
+        /// Переводит приложение в режим добавления контакта.
+        /// </summary>
+        private void Add()
         {
-            if (PropertyChanged != null)
+            Mode = Modes.Adding;
+            CurrentContactVM = new ContactVM();
+        }
+
+        /// <summary>
+        /// Переводит приложение в режми редактирования контакта.
+        /// </summary>
+        private void Edit()
+        {
+            Mode = Modes.Editing;
+            MakeClone();
+        }
+
+        /// <summary>
+        /// Удаляет выбранного контакта.
+        /// </summary>
+        private void Remove()
+        {
+            int currentIndex = Contacts.IndexOf(CurrentContactVM);
+            Contacts.Remove(CurrentContactVM);
+            int contactsCount = Contacts.Count;
+            if (contactsCount > currentIndex)
+                CurrentContactVM = Contacts[currentIndex];
+            else if (contactsCount <= currentIndex && contactsCount > 0)
+                CurrentContactVM = Contacts[currentIndex - 1];
+            Model.Services.ContactSerializer.SaveContacts(Contacts.Select(contactVM => contactVM.Contact).ToList());
+        }
+
+        /// <summary>
+        /// Подтверждает добавление или редактирование контакта.
+        /// </summary>
+        private void Apply()
+        {
+            if (Mode == Modes.Adding)
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(propName));
+                Contacts.Add(CurrentContactVM);
+                CurrentContactVM = CurrentContactVM;
             }
+            Mode = Modes.Viewing;
+            Model.Services.ContactSerializer.SaveContacts(Contacts.Select(contactVM => contactVM.Contact).ToList());
         }
 
         /// <summary>

@@ -7,16 +7,11 @@
         xmlns:con="clr-namespace:View.Converters"
         xmlns:contrl="clr-namespace:View.Controls"
         xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel" 
-        xmlns:com="clr-namespace:ViewModel.Commands;assembly=ViewModel"
         mc:Ignorable="d"
         Title="Contacts" Height="450" Width="650" MinWidth="630" MinHeight="380" MaxWidth="820" MaxHeight="700" Icon="/contacts_96x96.ico">
 
     <Window.Resources>
         <vm:MainVM x:Key="MainVM"/>
-        <com:AddCommand x:Key="AddCommand"/>
-        <com:EditCommand x:Key="EditCommand"/>
-        <com:RemoveCommand x:Key="RemoveCommand"/>
-        <com:ApplyCommand x:Key="ApplyCommand"/>
         <con:CurrentContactToSelectedContactConverter x:Key="CurrentContactToSelectedContactConverter"/>
         <con:ModeConverter x:Key="ModeConverter"/>
         <DataTemplate x:Key="ContactTemplate">
@@ -85,7 +80,7 @@
                         Margin="8 0 3 3"
                         VerticalAlignment="Center"
                         IsEnabled="{Binding Path=CanAdd}"
-                        Command="{StaticResource AddCommand}"
+                        Command="{Binding AddCommand}"
                         CommandParameter="{StaticResource MainVM}"/>
                     <Button
                         Content="Edit"
@@ -94,7 +89,7 @@
                         Margin="3 0 3 3"
                         VerticalAlignment="Center"
                         IsEnabled="{Binding Path=CanEditAndRemove}"
-                        Command="{StaticResource EditCommand}"
+                        Command="{Binding EditCommand}"
                         CommandParameter="{StaticResource MainVM}"/>
                     <Button
                         Content="Remove"
@@ -103,7 +98,7 @@
                         Margin="3 0 8 3"
                         VerticalAlignment="Center"
                         IsEnabled="{Binding Path=CanEditAndRemove}"
-                        Command="{StaticResource RemoveCommand}"
+                        Command="{Binding RemoveCommand}"
                         CommandParameter="{StaticResource MainVM}"/>
                 </Grid>
             </Grid>
@@ -172,7 +167,7 @@
                     HorizontalAlignment="Left"
                     Visibility="{Binding Path=Mode, Converter={StaticResource ModeConverter}}"
                     IsEnabled="{Binding Path=CurrentContactVM.HaveError}"
-                    Command="{StaticResource ApplyCommand}"
+                    Command="{Binding ApplyCommand}"
                     CommandParameter="{StaticResource MainVM}">
                 </Button>
             </StackPanel>
