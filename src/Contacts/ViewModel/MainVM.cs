@@ -7,6 +7,9 @@ using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
+using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -86,12 +89,26 @@ namespace ViewModel
             {
                 _currentContactVM = value;
                 OnPropertyChanged();
+                OnPropertyChanged("Name");
+                OnPropertyChanged("PhoneNumber");
+                OnPropertyChanged("Email");
                 OnPropertyChanged("CanEditAndRemove");
             }
         }
 
         /// <summary>
         /// Возвращает true, если доступно добавление, или false - если нет.
+        /// </summary>
+        public ContactVM InputContactVM
+        {
+            get
+            {
+                return _inputContactVM;
+            }
+        }
+
+        /// <summary>
+        /// Возвращает true, если в списке контактов выбран объект, или false - если нет.
         /// </summary>
         public bool CanAdd
         {
@@ -127,6 +144,7 @@ namespace ViewModel
             EditCommand = new RelayCommand(Edit);
             RemoveCommand = new RelayCommand(Remove);
             ApplyCommand = new RelayCommand(Apply);
+            }
         }
 
         /// <summary>
@@ -136,6 +154,12 @@ namespace ViewModel
         {
             Mode = Modes.Adding;
             CurrentContactVM = new ContactVM();
+            }
+            set
+            {
+                _acceptablePhoneNumber = value;
+                OnPropertyChanged("AcceptableValues");
+            }
         }
 
         /// <summary>
@@ -145,6 +169,12 @@ namespace ViewModel
         {
             Mode = Modes.Editing;
             MakeClone();
+            }
+            set
+            {
+                _acceptableEmail = value;
+                OnPropertyChanged("AcceptableValues");
+            }
         }
 
         /// <summary>
@@ -166,7 +196,7 @@ namespace ViewModel
         /// Подтверждает добавление или редактирование контакта.
         /// </summary>
         private void Apply()
-        {
+                    {
             if (Mode == Modes.Adding)
             {
                 Contacts.Add(CurrentContactVM);

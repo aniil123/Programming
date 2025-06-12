@@ -69,6 +69,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\AddCommand.cs" />
+    <Compile Include="Commands\ApplyCommand.cs" />
+    <Compile Include="Commands\EditCommand.cs" />
+    <Compile Include="Commands\RemoveCommand.cs" />
     <Compile Include="ContactVM.cs" />
     <Compile Include="MainVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
